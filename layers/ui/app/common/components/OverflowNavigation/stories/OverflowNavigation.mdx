@@ -1,0 +1,33 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as OverflowNavigationStories from './OverflowNavigation.stories'
+import OverflowNavigationExampleSource from './OverflowNavigationExample.vue?raw'
+
+<Meta of={OverflowNavigationStories} />
+
+# OverflowNavigation
+
+Компонент распределяет пункты навигации между видимой областью и меню переполнения в зависимости от ширины контейнера.
+
+## Когда использовать
+
+- Для горизонтальной навигации, которая должна помещаться в контейнер без переноса строк.
+- `overflowWidth` должен соответствовать ширине кнопки или другого элемента, открывающего скрытые пункты.
+- Слот самостоятельно определяет разметку видимых пунктов и меню переполнения.
+
+Default-слот должен возвращать один корневой список: компонент клонирует его непосредственных дочерних элементов в скрытый список для измерения. Значение `overflowWidth` должно включать полную ширину элемента, открывающего скрытые пункты.
+
+## Базовый пример
+
+Потяните правую границу контейнера, чтобы увидеть изменение `visibleItems`, `overflowItems` и `hasOverflow`.
+
+<Canvas of={OverflowNavigationStories.Base} />
+
+<Canvas of={OverflowNavigationStories.WithoutOverflow} />
+
+<Controls of={OverflowNavigationStories.Base} />
+
+## Пример использования
+
+<Source code={OverflowNavigationExampleSource} language="vue" />
+
+Компонент сохраняет минимум один видимый пункт, даже если доступной ширины недостаточно.

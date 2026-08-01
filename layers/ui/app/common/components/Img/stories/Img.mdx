@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ImgStories from './Img.stories.ts'
+import ImgExampleSource from './ImgExample.vue?raw'
+
+<Meta of={ImgStories} />
+
+# Img
+- Компонент для вывода простых изображений.
+- Задаёт `loading=lazy` и стили `width: 100%`, `height: 100%`, `object-fit: cover`.
+- Используется как fallback внутри компонента `Picture`.
+- Для LCP-изображений не забудь установить `loading`, `fetchPriority`.
+
+<Controls of={ImgStories.Base} />
+
+## Пример использования
+
+<Source code={ImgExampleSource} language="vue" />

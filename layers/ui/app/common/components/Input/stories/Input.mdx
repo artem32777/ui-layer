@@ -1,0 +1,16 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as InputStories from './Input.stories'
+import InputExampleSource from './InputExample.vue?raw'
+
+<Meta of={InputStories} />
+
+# Input
+
+<Canvas of={InputStories.DocsExample} />
+
+<Controls of={InputStories.DocsExample} />
+
+
+## Пример использования
+
+<Source code={InputExampleSource} language="vue" />

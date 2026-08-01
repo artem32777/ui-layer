@@ -1,0 +1,23 @@
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ToastStories from './Toast.stories'
+import ToastExampleSource from './ToastExample.vue?raw'
+
+<Meta of={ToastStories} />
+
+# Toast
+
+Временное уведомление о результате действия. Отображается в правом нижнем углу.
+
+## Когда использовать
+
+- Слот `trigger` передаёт функцию `showToast` для запуска уведомления.
+- Toast подходит для подтверждения завершённого действия, не требующего немедленного ответа.
+- В уведомлении доступно действие отмены.
+
+## Базовый пример
+
+<Canvas of={ToastStories.Base} />
+
+## Пример использования
+
+<Source code={ToastExampleSource} language="vue" />

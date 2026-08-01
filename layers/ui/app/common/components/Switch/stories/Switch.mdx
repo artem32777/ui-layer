@@ -1,0 +1,41 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as SwitchStories from './Switch.stories'
+import SwitchExampleSource from './SwitchExample.vue?raw'
+
+<Meta of={SwitchStories} />
+
+# Switch
+
+Компонент переключателя. Используется для бинарных настроек, когда изменение можно применить сразу без отдельной кнопки сохранения.
+
+## Когда использовать
+
+- `v-model` — управляет состоянием переключателя.
+- `disabled` — отключает переключатель и запрещает изменение значения.
+
+## Базовый пример
+
+<Canvas of={SwitchStories.Unchecked} />
+
+<Controls of={SwitchStories.Unchecked} />
+
+## Варианты
+
+### Включён
+
+```vue
+<Switch v-model="isEnabled" />
+```
+
+### Отключённое состояние
+
+```vue
+<Switch
+	v-model="isEnabled"
+	disabled
+/>
+```
+
+## Пример использования
+
+<Source code={SwitchExampleSource} language="vue" />

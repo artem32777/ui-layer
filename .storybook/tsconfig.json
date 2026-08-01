@@ -1,0 +1,22 @@
+{
+  // Отдельный TypeScript project нужен, потому что корневой Nuxt tsconfig
+  // намеренно включает только runtime-файлы приложения и слоёв.
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"]
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.d.ts"
+  ],
+  "exclude": [
+    "./storybook-static",
+    "./test-results"
+  ]
+}

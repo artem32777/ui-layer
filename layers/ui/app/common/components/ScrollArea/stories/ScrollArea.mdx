@@ -1,0 +1,16 @@
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ScrollAreaStories from './ScrollArea.stories'
+import ScrollAreaExampleSource from './ScrollAreaExample.vue?raw'
+
+<Meta of={ScrollAreaStories} />
+
+# ScrollArea
+- Компонент используется для создания сложных скроллбаров, когда невозможно стилизовать нативный.
+- Для всех остальных ситуаций нужно использовать миксин `app/common/mixins/scrollbar.scss`
+
+## Базовый пример
+
+<Canvas of={ScrollAreaStories.Base} />
+
+## Пример использования
+<Source code={ScrollAreaExampleSource} language="vue" />

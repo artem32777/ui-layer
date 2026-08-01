@@ -1,0 +1,14 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ModalStories from './Modal.stories'
+import ModalExampleSource from './ModalExample.vue?raw'
+
+<Meta of={ModalStories} />
+
+# Modal
+<Canvas of={ModalStories.Closed} />
+
+<Controls of={ModalStories.Closed} />
+
+
+### Компонент-обёртка триггера для вызова модального окна формы обратной связи:
+<Source code={ModalExampleSource} language="vue" />

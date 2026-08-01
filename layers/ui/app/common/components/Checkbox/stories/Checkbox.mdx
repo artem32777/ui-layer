@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as CheckboxStories from './Checkbox.stories'
+import CheckboxExampleSource from './CheckboxExample.vue?raw'
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+- Основан на <font color="blue">[`Checkbox из Reka UI`](https://reka-ui.com/docs/components/checkbox)</font>;
+
+<Canvas of={CheckboxStories.DocsExample} />
+
+<Controls of={CheckboxStories.DocsExample} />
+
+
+## Пример использования
+
+<Source code={CheckboxExampleSource} language="vue" />

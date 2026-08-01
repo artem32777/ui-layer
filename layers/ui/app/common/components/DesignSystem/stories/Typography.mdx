@@ -1,0 +1,31 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as DesignSystemStories from './DesignSystem.stories'
+
+<Meta title="Design System/Типографика" />
+
+# Типографика
+
+Шкала типографики описана в `app/config/styles/shared/font-size.scss`. Для компонентов и страниц используем миксин `font-size($name)`, чтобы размеры менялись по тем же брейкпоинтам.
+
+<Canvas of={DesignSystemStories.TypographyScale} />
+
+## Правила
+
+- `hero`, `h1`, `h2`, `h3` оставляем для страниц и крупных смысловых блоков.
+- В компактных UI-компонентах используем `p1`, `p2`, `p3` и локальные размеры компонента.
+- Letter spacing в токенах равен `0`, не добавляем отрицательный трекинг.
+- Для вторичного текста используем цвет `var(--additional-2)`.
+
+## Пример
+
+```scss
+.section__title {
+	@include font-size(h2);
+	color: var(--headers);
+}
+
+.section__description {
+	@include font-size(p2-regular);
+	color: var(--additional-2);
+}
+```

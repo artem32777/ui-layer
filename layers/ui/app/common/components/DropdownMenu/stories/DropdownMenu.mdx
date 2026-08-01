@@ -1,0 +1,16 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as DropdownMenuStories from './DropdownMenu.stories'
+import DropdownMenuExampleSource from './DropdownMenuExample.vue?raw'
+
+<Meta of={DropdownMenuStories} />
+
+# DropdownMenu
+
+- Основан на <font color="blue">[`DropdownMenu из Reka UI`](https://reka-ui.com/docs/components/dropdown-menu)</font>
+- Принимает либо массив `items`, либо можно сделать кастомный выпадающий список через слот `content`
+
+<Canvas of={DropdownMenuStories.Base} />
+
+<Controls of={DropdownMenuStories.Base} />
+
+<Source code={DropdownMenuExampleSource} language="vue" />

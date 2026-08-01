@@ -1,0 +1,15 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as PictureStories from './Picture.stories'
+import PictureExampleSource from './PictureExample.vue?raw'
+
+<Meta of={PictureStories} />
+
+# Picture
+- Компонент для вывода адаптивных изображений.
+- Для статичных картинок используйте компонент `Img`.
+
+<Controls of={PictureStories.Base} />
+
+## Пример использования
+
+<Source code={PictureExampleSource} language="vue" />

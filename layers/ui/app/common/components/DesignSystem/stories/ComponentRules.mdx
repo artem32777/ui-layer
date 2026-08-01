@@ -1,0 +1,103 @@
+import {Canvas, Meta} from '@storybook/addon-docs/blocks'
+import * as DesignSystemStories from './DesignSystem.stories'
+
+<Meta title="Design System/Правила компонентов"/>
+
+# Ui-layer
+Слой Nuxt-приложения https://nuxt.com/docs/4.x/getting-started/layers
+
+## Фичи:
+- Самописный UI-кит
+- Витрина компонентов storybook
+- 100% покрытие визуальными и юнит-тестами
+- Компонеты форм и валидация
+- Модуль генерации типизированных иконок
+- Дополнительные утилиты типа переключателя тем
+- Правила для агентов
+
+## Структура:
+```text
+project/
+├── .storybook/
+└── layers/
+    └── ui/
+         └── nuxt.config.ts
+         └── app/  - Внутри app используется модульная структура.
+```
+
+## Либы:
+```json
+"dependencies": {
+   "@tanstack/vue-table": "^8.21.3",
+   "@vueuse/nuxt": "^14.3.0",
+   "maska": "^3.2.0",
+   "reka-ui": "^2.10.1",
+   "swiper": "^14.0.6",
+   "vee-validate": "^4.15.1",
+   "vue-sonner": "^2.0.9"
+},
+"devDependencies": {
+   "@playwright/test": "^1.62.0",
+   "@storybook/addon-a11y": "^10.5.5",
+   "@storybook/addon-docs": "^10.5.5",
+   "@storybook/addon-vitest": "^10.5.5",
+   "@storybook/vue3-vite": "^10.5.5",
+   "@vitejs/plugin-vue": "^6.0.8",
+   "@vitest/browser-playwright": "^4.1.10",
+   "playwright": "^1.62.0",
+   "sass-embedded": "^1.100.0",
+   "storybook": "^10.5.5",
+   "vitest": "^4.1.10",
+   "vue-component-type-helpers": "^3.3.8"
+}
+```
+
+## Ui-кит:
+- В некоторых компонентах используются примитивы headless-ui библиотеки <a href="https://reka-ui.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Reka UI</a>.
+- Стили и структура в них задаются внутри компонента, но если вдруг потребуется изменение или добавление логики - лучше сначала обратиться к документации <a href="https://reka-ui.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Reka UI</a>. В каждом компоненте есть ссылка на соответствующую страницу.
+- Также в документации можно найти компоненты, которыее ещё не были добавлены.
+- Для таблиц используются <a href="https://tanstack.com/table/latest" style={{color: '#1ea7fd', textDecoration: 'underline'}}>TanStack Table</a>
+- И <a href="https://swiperjs.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Swiper</a> для каруселей.
+-
+
+## Формы и валидация
+- Логика форм сделана с помощью Vee-validate
+- Валидация с Zod
+- Компоненты расположены в `layers/ui/app/common/components/Form`
+- Стори в http://localhost:6006/?path=/docs/form-form--docs
+
+
+
+
+
+# Правила кнопок, форм и модалок
+
+Эта страница фиксирует базовые правила использования интерактивных компонентов. Детальные props и состояния остаются в документации конкретных компонентов.
+
+## Кнопки
+
+<Canvas of={DesignSystemStories.ButtonsRules}/>
+
+- `base` используем для главного действия в контексте.
+- `outline` используем для вторичного действия рядом с главным.
+- `ghost` используем для спокойных действий в плотном интерфейсе.
+- Иконку передаём через `iconNames`, для icon-only кнопки обязательно задаём `aria-label`.
+- Состояния `hovered`, `focused`, `pressed`, `disabled`, `progress` полезны в историях и визуальных проверках.
+
+## Формы
+
+<Canvas of={DesignSystemStories.FormsRules}/>
+
+- У поля всегда должен быть понятный label рядом с контролом.
+- Ошибку показываем рядом с полем и окрашиваем через `var(--red)`.
+- `aria-invalid="true"` используем для invalid-состояния нативных полей.
+- Disabled-состояние не должно выглядеть как ошибка.
+
+## Модалки
+
+<Canvas of={DesignSystemStories.ModalRules}/>
+
+- Заголовок объясняет объект действия.
+- Description коротко объясняет последствия или контекст.
+- Основное действие ставим последним в группе действий.
+- Закрытие должно быть доступно через стандартный close-контрол и клавиатуру.

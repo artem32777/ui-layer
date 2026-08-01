@@ -1,0 +1,15 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as BreadcrumbStories from './Breadcrumb.stories'
+import BreadcrumbExampleSource from './BreadcrumbExample.vue?raw'
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+<Canvas of={BreadcrumbStories.Base} />
+
+<Controls of={BreadcrumbStories.Base} />
+
+## Пример использования
+
+<Source code={BreadcrumbExampleSource} language="vue" />

@@ -1,0 +1,46 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as FormStories from './Form.stories'
+
+<Meta of={FormStories} />
+
+# Form
+
+Адаптеры компонентов дизайн-системы для `vee-validate`. Они связывают значение, состояние ошибки и сообщение валидации по имени поля.
+
+## FormInput
+
+<Canvas of={FormStories.InputField} />
+
+<Controls of={FormStories.InputField} />
+
+### Состояние ошибки
+
+<Canvas of={FormStories.InvalidInput} />
+
+## FormPhoneInput
+
+<Canvas of={FormStories.PhoneInput} />
+
+## FormSelect
+
+<Canvas of={FormStories.Select} />
+
+## FormRadioGroup
+
+<Canvas of={FormStories.RadioGroup} />
+
+## FormCheckbox
+
+<Canvas of={FormStories.Checkbox} />
+
+## FormField
+
+Базовая обёртка поля. Передаёт в слот `value`, `handleChange`, `errorMessage` и `invalid`.
+
+<Canvas of={FormStories.Field} />
+
+## FormFieldError
+
+Выводит сообщение только при наличии `errorMessage`.
+
+<Canvas of={FormStories.FieldError} />

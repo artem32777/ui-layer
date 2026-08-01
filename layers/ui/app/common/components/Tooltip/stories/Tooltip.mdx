@@ -1,0 +1,43 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as TooltipStories from './Tooltip.stories'
+import TooltipExampleSource from './TooltipExample.vue?raw'
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+Компонент всплывающей подсказки. Показывает дополнительную информацию при наведении курсора или фокусе на элементе.
+
+## Когда использовать
+
+- `text` — для короткой текстовой подсказки.
+- Слот `trigger` — для элемента, который открывает подсказку.
+- Слот `content` — для форматированного или составного содержимого вместо `text`.
+
+Не помещайте в подсказку важную информацию, которая недоступна пользователю без наведения или фокуса.
+
+## Базовый пример
+
+<Canvas of={TooltipStories.Base} />
+
+<Controls of={TooltipStories.Base} />
+
+## Содержимое через слот
+
+<Canvas of={TooltipStories.ContentSlot} />
+
+```vue
+<Tooltip>
+	<template #trigger>
+		<button type="button">Наведите курсор</button>
+	</template>
+
+	<template #content>
+		<strong>Содержимое из слота</strong>
+	</template>
+</Tooltip>
+```
+
+## Пример использования
+
+<Source code={TooltipExampleSource} language="vue" />

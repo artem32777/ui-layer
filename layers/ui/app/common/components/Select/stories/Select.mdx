@@ -1,0 +1,21 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as SelectStories from './Select.stories'
+import SelectExampleSource from './SelectExample.vue?raw'
+
+<Meta of={SelectStories} />
+
+# Select
+
+- Основан на <font color="blue">[`Select из Reka UI`](https://reka-ui.com/docs/components/select)</font>;
+
+<Canvas of={SelectStories.DocsExample} />
+
+<Controls of={SelectStories.DocsExample} />
+
+### Множественный выбор
+
+<Canvas of={SelectStories.DocsMultiple} />
+
+## Пример использования
+
+<Source code={SelectExampleSource} language="vue" />

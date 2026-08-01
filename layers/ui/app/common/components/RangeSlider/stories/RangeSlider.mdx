@@ -1,0 +1,30 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as RangeSliderStories from './RangeSlider.stories'
+import RangeSliderExampleSource from './RangeSliderExample.vue?raw'
+
+<Meta of={RangeSliderStories} />
+
+# RangeSlider
+
+Ползунок для выбора одного значения, диапазона или нескольких непересекающихся диапазонов.
+
+## Когда использовать
+
+- `type="double"` — интервал между двумя значениями.
+- `type="one-range"` — одно значение.
+- `variant="block"` — компактное блочное отображение значений.
+- `MultiRangeSlider` — несколько интервалов на одной шкале; значения передаются парами.
+
+## Базовый пример
+
+<Canvas of={RangeSliderStories.Double} />
+
+<Controls of={RangeSliderStories.Double} />
+
+## Несколько диапазонов
+
+<Canvas of={RangeSliderStories.MultipleRanges} />
+
+## Пример использования
+
+<Source code={RangeSliderExampleSource} language="vue" />

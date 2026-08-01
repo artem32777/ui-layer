@@ -1,0 +1,53 @@
+{
+  "name": "new-nuxt",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "build-storybook": "storybook build --output-dir .storybook/storybook-static",
+    "dev": "nuxt dev --host=192.168.1.125 -o",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "storybook": "storybook dev -p 6006",
+    "test:stories": "vitest run --project=storybook",
+    "test:stories:watch": "vitest --project=storybook",
+    "test:visual": "playwright test --config .storybook/playwright.config.ts",
+    "test:visual:update": "playwright test --config .storybook/playwright.config.ts --update-snapshots"
+  },
+  "dependencies": {
+    "@nuxtjs/device": "^4.0.0",
+    "@pinia/nuxt": "^1.0.1",
+    "@tanstack/vue-table": "^8.21.3",
+    "@vueuse/nuxt": "^14.3.0",
+    "maska": "^3.2.0",
+    "nuxt": "^4.5.0",
+    "nuxt-typed-router": "^4.0.10",
+    "pinia": "^4.0.2",
+    "prettier": "^3.9.6",
+    "reka-ui": "^2.10.1",
+    "swiper": "^14.0.6",
+    "vee-validate": "^4.15.1",
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0",
+    "vue-sonner": "^2.0.9"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.16.0",
+    "@nuxt/hints": "^1.1.4",
+    "@playwright/test": "^1.62.0",
+    "@storybook/addon-a11y": "^10.5.5",
+    "@storybook/addon-docs": "^10.5.5",
+    "@storybook/addon-vitest": "^10.5.5",
+    "@storybook/vue3-vite": "^10.5.5",
+    "@types/node": "^26.1.1",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitest/browser-playwright": "^4.1.10",
+    "eslint": "^10.8.0",
+    "playwright": "^1.62.0",
+    "sass-embedded": "^1.100.0",
+    "storybook": "^10.5.5",
+    "vitest": "^4.1.10",
+    "vue-component-type-helpers": "^3.3.8"
+  }
+}

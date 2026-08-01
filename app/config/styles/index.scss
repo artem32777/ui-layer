@@ -1,0 +1,23 @@
+@use "null";
+@use "fonts";
+@use "colors";
+
+html {
+  @include scrollbar(0.5rem, transparent, var(--brand), 0.5rem);
+}
+
+body * {
+  @include scrollbar();
+}
+
+body {
+  font-family: "PtRoot", monospace;
+  color: var(--text);
+  background-color: var(--background);
+  line-height: 1.5;
+}
+
+* {
+  border-color: var(--grey);
+  outline-color: color-mix(in srgb, var(--brand) 50%, transparent);
+}

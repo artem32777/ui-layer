@@ -1,0 +1,35 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as DesignSystemStories from './DesignSystem.stories'
+
+<Meta title="Design System/Цвета" />
+
+# Цвета
+
+Палитра строится на CSS-переменных из `app/config/styles/colors.scss`. В компонентах используем переменные, а не прямые hex-значения: так светлая и тёмная темы остаются синхронными.
+
+<Canvas of={DesignSystemStories.ColorPalette} />
+
+## Правила
+
+- `--brand` используем для основного действия и выбранных элементов.
+- `--brand-dark` используем для hover, pressed и усиленного акцента.
+- `--brand-light` используем для мягких подсветок и focus-состояний.
+- `--text` и `--headers` используем для основного контента.
+- `--additional-2` используем для вторичного текста, подсказок и подписей.
+- `--grey` используем для границ, разделителей и спокойных фонов.
+- `--red` используем только для ошибок, invalid-состояний и опасных действий.
+
+## Пример
+
+```scss
+.component {
+	color: var(--text);
+	background-color: var(--background);
+	border: 1px solid var(--grey);
+	transition: border-color 0.3s ease, background-color 0.3s ease;
+
+	&:focus-visible {
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 35%, transparent);
+	}
+}
+```

@@ -1,0 +1,26 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ToggleStories from './Toggle.stories'
+import ToggleExampleSource from './ToggleExample.vue?raw'
+
+<Meta of={ToggleStories} />
+
+# Toggle
+
+Кнопка с двумя состояниями для включения и выключения отдельной настройки.
+
+## Когда использовать
+
+- `v-model` хранит нажатое состояние.
+- `variant="outline"` добавляет рамку.
+- `size` поддерживает значения `sm` и `lg`.
+- Для кнопки без текстовой подписи задавайте `aria-label`.
+
+## Базовый пример
+
+<Canvas of={ToggleStories.Base} />
+
+<Controls of={ToggleStories.Base} />
+
+## Пример использования
+
+<Source code={ToggleExampleSource} language="vue" />

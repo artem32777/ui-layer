@@ -1,0 +1,76 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as DataTableStories from './DataTable.stories'
+
+<Meta of={DataTableStories} />
+
+# DataTable
+
+`DataTable` поддерживает клиентскую и серверную обработку данных. Клиентская
+фильтрация, сортировка и пагинация подключены по умолчанию.
+
+## Как выбрать режим
+
+**Клиентский режим** — передайте весь массив в `data`. TanStack Table сам
+фильтрует, сортирует и разбивает массив на страницы в браузере. `options`
+нужны только для переопределения стандартного поведения.
+
+**Серверный режим** — передайте в `data` только строки текущей страницы и
+включите ручную обработку. Тогда TanStack Table хранит выбранные фильтр,
+сортировку и страницу, но не изменяет строки самостоятельно:
+
+```ts
+const options = {
+	manualFiltering: true,
+	manualSorting: true,
+	manualPagination: true,
+}
+```
+
+`manualFiltering`, `manualSorting` и `manualPagination` отключают встроенную
+клиентскую обработку для соответствующих операций.
+
+## Серверная таблица
+
+В серверном режиме `useApiFetch` получает с API только текущую страницу:
+
+```ts
+{
+	columns: DataTableColumn<Product>[]
+	items: Product[]
+	pagination: {
+		page: number
+		pageSize: number
+		total: number
+	}
+}
+```
+
+`query` содержит выбранную страницу, строку поиска, колонку сортировки и
+направление `asc` или `desc`. `watch` повторяет запрос при их изменении.
+Колонки, исходная страница, размер страницы и общее количество строк приходят
+из CMS. `manualFiltering`, `manualSorting` и `manualPagination` нужны, чтобы
+таблица не обрабатывала уже подготовленные сервером строки повторно.
+
+Ниже показаны работающая таблица и полный код серверного сценария.
+
+<Canvas of={DataTableStories.Server} sourceState="shown" />
+
+`data.columns` и `data.items` передаются в таблицу, а
+`data.pagination.total` — в пагинацию. `page` и `pageSize` из того же ответа
+задают начальное состояние пагинации.
+
+## Клиентская таблица
+
+В примере ниже `useApiFetch` один раз получает из CMS колонки, настройки
+пагинации и все товары. После загрузки поиск, сортировка по заголовкам и
+переход между страницами выполняются без повторных запросов:
+
+- `useApiFetch` загружает весь набор строк;
+- `DataTableFilter` изменяет global filter;
+- `DataTableSortButton` сортирует локальный массив;
+- `DataTablePagination` переключает страницы локального массива;
+- начальная страница и `pageSize` берутся из ответа CMS.
+
+Ниже показаны работающая таблица и полный код компонента, который её рендерит.
+
+<Canvas of={DataTableStories.Client} sourceState="shown" />

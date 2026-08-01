@@ -1,0 +1,31 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as TextareaStories from './Textarea.stories'
+import TextareaExampleSource from './TextareaExample.vue?raw'
+
+<Meta of={TextareaStories} />
+
+# Textarea
+
+Многострочное текстовое поле для длинных сообщений, описаний и комментариев. Поддерживает `v-model`, количество строк, disabled-состояние и invalid через `aria-invalid`.
+
+## Когда использовать
+
+- `rows` — чтобы задать стартовую высоту поля.
+- `disabled` — если редактирование временно недоступно.
+- `aria-invalid="true"` — если поле связано с ошибкой валидации.
+
+## Базовый пример
+
+<Canvas of={TextareaStories.DocsExample} />
+
+<Controls of={TextareaStories.DocsExample} />
+
+## Варианты
+
+### Filled
+
+<Canvas of={TextareaStories.DocsFilled} />
+
+## Пример использования
+
+<Source code={TextareaExampleSource} language="vue" />

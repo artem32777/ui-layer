@@ -1,0 +1,23 @@
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as DesignSystemStories from './DesignSystem.stories'
+import IconsExampleSource from './IconsExample.vue?raw'
+
+<Meta title="Design System/Иконки" />
+
+# Иконки
+
+Иконки используются через `SvgIcon` и типизированный реестр `IconName`. Имена берём из `iconNames`, а не передаём строками вручную.
+
+<Canvas of={DesignSystemStories.IconsGallery} />
+
+## Правила
+
+- Импортируем `SvgIcon` из `#layers/ui/app/modules/svg-icon/components/SvgIcon.vue`.
+- Импортируем `iconNames` из `#layers/ui/app/modules/svg-icon/runtime/iconNames`.
+- В компонентах передаём имя так: `:name="iconNames.plus"`.
+- Не используем символы, inline-SVG или произвольные строки, если иконка должна жить в системе.
+- Если подходящей иконки нет, сначала добавляем SVG в исходный каталог и регенерируем реестр.
+
+## Пример
+
+<Source code={IconsExampleSource} language="vue" />

@@ -1,0 +1,18 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as PaginationStories from './Pagination.stories'
+import PaginationExampleSource from './PaginationExample.vue?raw'
+
+<Meta of={PaginationStories} />
+
+# Pagination
+- Основан на <font color="blue">[`Pagination из Reka UI`](https://reka-ui.com/docs/components/pagination)</font>;
+
+
+<Canvas of={PaginationStories.Base} />
+
+<Controls of={PaginationStories.Base} />
+
+
+## Пример использования
+
+<Source code={PaginationExampleSource} language="vue" />

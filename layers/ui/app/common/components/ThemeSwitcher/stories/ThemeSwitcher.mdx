@@ -1,0 +1,23 @@
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ThemeSwitcherStories from './ThemeSwitcher.stories.ts'
+import ThemeSwitcherExampleSource from './ThemeSwitcherExample.vue?raw'
+
+<Meta of={ThemeSwitcherStories} />
+
+# ThemeSwitcher
+
+Переключатель цветовой темы приложения. Работает с `useThemeStore`, сохраняет выбранный режим в cookie и применяет тему к корневому элементу страницы.
+
+## Режимы
+
+- Светлая тема применяется независимо от системных настроек.
+- Тёмная тема применяется независимо от системных настроек.
+- Системная тема следует настройке `prefers-color-scheme` и обновляется при её изменении.
+
+## Базовый пример
+
+<Canvas of={ThemeSwitcherStories.Base} />
+
+## Пример использования
+
+<Source code={ThemeSwitcherExampleSource} language="vue" />

@@ -1,0 +1,14 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ButtonStories from './Button.stories'
+import ButtonExampleSource from './ButtonExample.vue?raw'
+
+<Meta of={ButtonStories} />
+
+# Button
+<Canvas of={ButtonStories.DocsExample} />
+
+<Controls of={ButtonStories.DocsExample} />
+
+## Пример использования
+
+<Source code={ButtonExampleSource} language="vue" />

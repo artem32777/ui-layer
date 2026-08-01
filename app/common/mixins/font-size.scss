@@ -1,0 +1,59 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "../../config/styles/shared/font-size" as config;
+
+@mixin font-size($name) {
+  // Получаем набор размеров и дополнительных параметров по имени пресета.
+  $sizes: map.get(config.$font-sizes, $name);
+  $breakpoints: config.$breakpoints;
+
+  // Останавливаем сборку, если запрошенного пресета нет в конфигурации.
+  @if $sizes == null {
+    @error "Размер шрифта #{$name} не найден в $font-sizes.";
+  }
+
+  // Пресет должен содержать по одному размеру на каждый брейкпоинт
+  // и опционально font-weight, line-height и letter-spacing.
+  @if list.length($sizes) != list.length($breakpoints) and list.length($sizes) != list.length($breakpoints) + 3 {
+    @error "Размер шрифта #{$name} должен содержать #{list.length($breakpoints)} или #{list.length($breakpoints) + 3} значения.";
+  }
+
+  // Последний размер используется как базовый для широких экранов.
+  $base-size: list.nth($sizes, list.length($breakpoints));
+
+  // Числа без единиц считаются значениями в пикселях.
+  @if math.is-unitless($base-size) {
+    font-size: $base-size * 1px;
+  } @else {
+    font-size: $base-size;
+  }
+
+  // Если в пресете есть три дополнительных значения, задаём остальные параметры текста.
+  @if list.length($sizes) == list.length($breakpoints) + 3 {
+    font-weight: list.nth($sizes, list.length($breakpoints) + 1);
+    line-height: list.nth($sizes, list.length($breakpoints) + 2);
+
+    $letter-spacing: list.nth($sizes, list.length($breakpoints) + 3);
+
+    @if math.is-unitless($letter-spacing) {
+      letter-spacing: $letter-spacing * 1px;
+    } @else {
+      letter-spacing: $letter-spacing;
+    }
+  }
+
+  // Генерируем адаптивные размеры от большего брейкпоинта к меньшему.
+  @for $index from 2 through list.length($breakpoints) {
+    $size-index: list.length($breakpoints) - $index + 1;
+    $size: list.nth($sizes, $size-index);
+
+    @media (max-width: list.nth($breakpoints, $size-index)) {
+      @if math.is-unitless($size) {
+        font-size: $size * 1px;
+      } @else {
+        font-size: $size;
+      }
+    }
+  }
+}

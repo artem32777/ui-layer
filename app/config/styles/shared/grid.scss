@@ -1,0 +1,18 @@
+@use "sass:math";
+
+$grid-columns: 36;
+
+@function column($number: 1, $of: $grid-columns) {
+  @return math.percentage(math.div($number, $of));
+}
+
+@mixin padding-x($number, $of: $grid-columns) {
+  padding-left: column($number, $of);
+  padding-right: column($number, $of);
+}
+
+@mixin margin-x($number, $of: $grid-columns) {
+  margin-left: column($number, $of);
+  margin-right: column($number, $of);
+}
+

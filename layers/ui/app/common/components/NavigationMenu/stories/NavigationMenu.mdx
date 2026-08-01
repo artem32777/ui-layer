@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as NavigationMenuStories from './NavigationMenu.stories'
+import NavigationMenuExampleSource from './NavigationMenuExample.vue?raw'
+
+<Meta of={NavigationMenuStories} />
+
+# NavigationMenu
+- Основан на <font color="blue">[`Navigation Menu из Reka UI`](https://reka-ui.com/docs/components/navigation-menu)</font>;
+- Поддерживает бесконечное количество вложенных меню.
+
+<Canvas of={NavigationMenuStories.Base} />
+
+<Controls of={NavigationMenuStories.Base} />
+
+## Пример использования
+
+<Source code={NavigationMenuExampleSource} language="vue" />

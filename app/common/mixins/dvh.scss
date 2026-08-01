@@ -1,0 +1,7 @@
+@mixin dvh($property, $value) {
+  #{$property}: #{$value}vh;
+
+  @supports (height: 1dvh) {
+    #{$property}: #{$value}dvh;
+  }
+}

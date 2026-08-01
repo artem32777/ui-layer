@@ -1,0 +1,19 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as AccordionStories from './Accordion.stories'
+import AccordionExampleSource from './AccordionExample.vue?raw'
+
+<Meta of={AccordionStories} />
+
+# Accordion
+- Основан на <font color="blue">[`Accordion из Reka UI`](https://reka-ui.com/docs/components/accordion)</font>;
+- Контент рендерится через v-html, чтобы можно было передавать элементы.
+
+<Canvas of={AccordionStories.Multiple} />
+
+<Controls of={AccordionStories.Multiple} />
+
+## Пример минимального использования
+<Source
+	code={AccordionExampleSource}
+	language="vue"
+/>
