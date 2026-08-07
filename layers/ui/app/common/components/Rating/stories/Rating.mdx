@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as RatingStories from './Rating.stories'
+import RatingExampleSource from './RatingExample.vue?raw'
+
+<Meta of={RatingStories} />
+
+# Rating
+- Основан на <font color="blue">[`Rating из Reka UI`](https://reka-ui.com/docs/components/rating)</font>;
+- Поддерживает целые и дробные значения с шагом `1`, `0.5`, `0.25` или `0.1`.
+
+<Canvas of={RatingStories.DocsExample} />
+
+<Controls of={RatingStories.DocsExample} />
+
+## Пример использования
+
+<Source code={RatingExampleSource} language="vue" />

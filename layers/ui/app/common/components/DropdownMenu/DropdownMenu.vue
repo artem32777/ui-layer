@@ -16,7 +16,7 @@ withDefaults(defineProps<DropdownMenuProps>(), {
 
 defineSlots<{
 	/** Элемент, по клику на который открывается меню. */
-	trigger: () => any
+	default: () => any
 	/** Содержимое меню. По умолчанию отображает пункты из prop `items`. */
 	content?: () => any
 }>()
@@ -25,7 +25,7 @@ defineSlots<{
 <template>
 	<DropdownMenuRoot>
 		<DropdownMenuTrigger as-child>
-			<slot name="trigger" />
+			<slot />
 		</DropdownMenuTrigger>
 
 		<DropdownMenuPortal>
@@ -46,6 +46,7 @@ defineSlots<{
 
 <style lang="scss" scoped>
 :deep([data-reka-menu-content]) {
+  z-index: $z-dropdown;
   min-width: 200px;
   padding: 4px;
   border: 1px solid var(--grey, #e2e2e2);
@@ -53,6 +54,5 @@ defineSlots<{
   color: var(--text, #000000);
   background: var(--background, #ffffff);
   box-shadow: 0 10px 24px color-mix(in srgb, var(--black, #000000) 12%, transparent);
-  z-index: $z-dropdown;
 }
 </style>

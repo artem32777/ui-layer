@@ -1,0 +1,128 @@
+@use '../Calendar/Calendar.scss';
+
+.date-picker__field {
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 280px;
+	min-height: 56px;
+	gap: 8px;
+	padding: 0 12px 0 16px;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	color: var(--text, #000000);
+	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 40%, transparent);
+	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+
+	&:focus-within {
+		border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
+	}
+
+	&[data-disabled] {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	&[data-invalid] {
+		border-color: var(--red, #ff001f);
+	}
+}
+
+.date-picker__field--secondary {
+	border-color: var(--grey, #e2e2e2);
+	background-color: var(--background, #ffffff);
+}
+
+.date-picker__field--sm {
+	min-height: 48px;
+	padding: 0 10px 0 14px;
+	font-size: 14px;
+}
+
+.date-picker__field--lg {
+	min-height: 64px;
+	padding: 0 14px 0 18px;
+}
+
+.date-picker__segments,
+.date-picker__range {
+	display: inline-flex;
+	align-items: center;
+	min-width: 0;
+}
+
+.date-picker__range-separator {
+	margin: 0 8px;
+	color: var(--additional-2, #888888);
+}
+
+.date-picker__segment {
+	border-radius: 3px;
+	font-variant-numeric: tabular-nums;
+	outline: none;
+
+	&:not([data-reka-date-field-segment='literal']) {
+		padding: 2px;
+	}
+
+	&[data-placeholder] {
+		color: color-mix(in srgb, var(--text, #000000) 65%, transparent);
+	}
+
+	&:focus {
+		color: var(--white, #ffffff);
+		background-color: var(--brand, #4149f2);
+	}
+}
+
+.date-picker__trigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	border: 0;
+	border-radius: 6px;
+	color: var(--text, #000000);
+	background-color: transparent;
+	transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+	cursor: pointer;
+
+	&:hover {
+		color: var(--additional-1, #21223c);
+		background-color: var(--grey, #e2e2e2);
+	}
+
+	&:focus-visible {
+		outline: none;
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+	}
+
+	&[data-state='open'] .date-picker__trigger-icon {
+		transform: rotateX(180deg);
+	}
+}
+
+.date-picker__trigger-icon {
+	transition: transform 0.3s ease;
+}
+
+.date-picker__content {
+	animation: date-picker-fade-in 0.2s ease;
+}
+
+@keyframes date-picker-fade-in {
+	from {
+		opacity: 0;
+		transform: scale(0.98);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

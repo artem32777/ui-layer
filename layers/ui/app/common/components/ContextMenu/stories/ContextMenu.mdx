@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ContextMenuStories from './ContextMenu.stories'
+import ContextMenuExampleSource from './ContextMenuExample.vue?raw'
+
+<Meta of={ContextMenuStories} />
+
+# Context Menu
+- Основан на <font color="blue">[`Context Menu из Reka UI`](https://reka-ui.com/docs/components/context-menu)</font>
+- Открывается правой кнопкой мыши, а на сенсорных устройствах — долгим нажатием.
+
+<Canvas of={ContextMenuStories.Base} />
+
+<Controls of={ContextMenuStories.Base} />
+
+## Пример использования
+
+<Source code={ContextMenuExampleSource} language="vue" />

@@ -5,15 +5,9 @@ import TabsExampleSource from './TabsExample.vue?raw'
 <Meta of={TabsStories} />
 
 # Tabs
-
-Вкладки переключают между разделами Account и Password без перехода на другую страницу.
-
-## Когда использовать
-
-- `v-model` хранит значение активной вкладки.
-- Используйте вкладки для равноправных разделов одного контекста.
-
-## Базовый пример
+- Основан на <font color="blue">[`Tabs из Reka UI`](https://reka-ui.com/docs/components/tabs)</font>;
+- Автоматически формирует именнованные слоты для контента из значений value массива заголовков;
+- Массив заголовков нужно типизировать через `as const satisfies TabsItem[]`;
 
 <Canvas of={TabsStories.Account} />
 

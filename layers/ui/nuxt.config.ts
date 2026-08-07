@@ -20,4 +20,6 @@ export default defineNuxtConfig({
 		rootGroupTitle: 'Корень',
 		recursive: true,
 	},
+
+	vueSonner: { css: false },
 })

@@ -8,11 +8,11 @@ import * as DesignSystemStories from './DesignSystem.stories'
 
 ## Фичи:
 - Самописный UI-кит
-- Витрина компонентов storybook
-- 100% покрытие визуальными и юнит-тестами
 - Компонеты форм и валидация
 - Модуль генерации типизированных иконок
 - Дополнительные утилиты типа переключателя тем
+- Витрина компонентов storybook
+- 100% покрытие визуальными и юнит-тестами
 - Правила для агентов
 
 ## Структура:
@@ -22,7 +22,7 @@ project/
 └── layers/
     └── ui/
          └── nuxt.config.ts
-         └── app/  - Внутри app используется модульная структура.
+         └── app/  - Внутри app используется модульная структура директорий.
 ```
 
 ## Либы:
@@ -53,22 +53,20 @@ project/
 ```
 
 ## Ui-кит:
-- В некоторых компонентах используются примитивы headless-ui библиотеки <a href="https://reka-ui.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Reka UI</a>.
-- Стили и структура в них задаются внутри компонента, но если вдруг потребуется изменение или добавление логики - лучше сначала обратиться к документации <a href="https://reka-ui.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Reka UI</a>. В каждом компоненте есть ссылка на соответствующую страницу.
-- Также в документации можно найти компоненты, которыее ещё не были добавлены.
-- Для таблиц используются <a href="https://tanstack.com/table/latest" style={{color: '#1ea7fd', textDecoration: 'underline'}}>TanStack Table</a>
-- И <a href="https://swiperjs.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Swiper</a> для каруселей.
--
+- В некоторых компонентах используются примитивы headless библиотеки <a href="https://reka-ui.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Reka UI</a>.
+- Для таблиц - <a href="https://tanstack.com/table/latest" style={{color: '#1ea7fd', textDecoration: 'underline'}}>TanStack Table</a>.
+- Для каруселей - <a href="https://swiperjs.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Swiper</a>.
+- Для тоста -  <a href="https://vue-sonner.vercel.app/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Vue Sonner</a>
+
 
 ## Формы и валидация
-- Логика форм сделана с помощью Vee-validate
-- Валидация с Zod
-- Компоненты расположены в `layers/ui/app/common/components/Form`
-- Стори в http://localhost:6006/?path=/docs/form-form--docs
+- Логика форм сделана с помощью Vee-validate.
+- Валидация с Zod.
+- Компоненты расположены в `layers/ui/app/common/components/Form`.
+- Отдельная группа в стори http://localhost:6006/?path=/docs/form-form--docs.
 
-
-
-
+## Иконки:
+- Используйте компонент `SvgIcon` и модуль автоматической генерации иконок из svg-файлов - `app/modules/svg-icon`.
 
 # Правила кнопок, форм и модалок
 

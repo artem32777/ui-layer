@@ -1,24 +1,23 @@
 <script setup lang="ts">
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import DropdownMenu, { type DropdownMenuItem } from '../DropdownMenu.vue'
+import DropdownMenu from '../DropdownMenu.vue'
+import type { DropdownMenuItem } from '../DropdownMenu.types'
 
 const items: DropdownMenuItem[] = [
-	{ label: 'Редактировать' },
+	{ label: 'Редактировать', onClick: () => console.log('Редактировать') },
 	{
 		label: 'Дополнительно',
 		children: [
-			{ label: 'Сохранить' },
-			{ label: 'Создать копию' },
+			{ label: 'Сохранить', onClick: () => console.log('Сохранить') },
+			{ label: 'Создать копию', onClick: () => console.log('Создать копию') },
 		],
 	},
-	{ label: 'Удалить' },
+	{ label: 'Удалить', onClick: () => console.log('Удалить') },
 ]
 </script>
 
 <template>
 	<DropdownMenu :items="items">
-		<template #trigger>
-			<Button text="Открыть меню" />
-		</template>
+		<Button text="Открыть меню" />
 	</DropdownMenu>
 </template>

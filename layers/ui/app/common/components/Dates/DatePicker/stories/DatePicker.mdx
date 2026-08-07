@@ -1,0 +1,39 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as DatePickerStories from './DatePicker.stories'
+import DatePickerExampleSource from './DatePickerExample.vue?raw'
+
+<Meta of={DatePickerStories} />
+
+# DatePicker
+
+Поле для ввода и выбора одной даты из календаря. Основано на [`Date Picker` из Reka UI](https://reka-ui.com/docs/components/date-picker) и поддерживает ввод с клавиатуры по отдельным сегментам даты.
+
+## Использование
+
+- `v-model` содержит выбранное значение `DateValue`.
+- `v-model:open` позволяет управлять открытием панели календаря.
+- `v-model:placeholder` управляет месяцем, отображаемым в календаре.
+- `minValue`, `maxValue`, `isDateDisabled` и `isDateUnavailable` ограничивают доступные даты.
+- По клику на заголовок календаря открывается выбор месяца без изменения размера панели.
+
+## Базовый пример
+
+<Canvas of={DatePickerStories.Base} />
+
+<Controls of={DatePickerStories.Base} />
+
+## Поле с границей
+
+<Canvas of={DatePickerStories.Secondary} />
+
+## Два месяца
+
+<Canvas of={DatePickerStories.TwoMonths} />
+
+## Отключённое состояние
+
+<Canvas of={DatePickerStories.Disabled} />
+
+## Пример использования
+
+<Source code={DatePickerExampleSource} language="vue" />

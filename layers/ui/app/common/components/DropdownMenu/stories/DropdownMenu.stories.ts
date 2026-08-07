@@ -4,10 +4,11 @@ import { expect, waitFor, within } from 'storybook/test'
 import Button from '../../Button/Button.vue'
 import DropdownMenu from '../DropdownMenu.vue'
 import dropdownMenuTypesSource from '../DropdownMenu.types.ts?raw'
+import type { DropdownMenuItem } from '../DropdownMenu.types'
 
 type DropdownMenuStoryArgs = ComponentProps<typeof DropdownMenu>
 
-const items = [
+const items: DropdownMenuItem[] = [
 	{ label: 'Edit' },
 	{ label: 'Duplicate' },
 	{
@@ -28,19 +29,12 @@ const meta = {
 	},
 	argTypes: {
 		items: {
-			control: 'object',
-			description: 'Пункты меню для стандартного отображения через DropdownMenuItems.',
 			table: {
 				type: {
 					summary: 'DropdownMenuItem[]',
 					detail: dropdownMenuTypesSource.trim(),
 				},
 			},
-		},
-		offset: {
-			control: { type: 'number', min: 0 },
-			description: 'Расстояние между триггером и выпадающим меню в пикселях.',
-			table: { type: { summary: 'number' } },
 		},
 	},
 	args: {
@@ -52,13 +46,14 @@ const meta = {
 		setup: () => ({ args }),
 		template: `
 			<DropdownMenu v-bind="args">
-				<template #trigger><Button text="Open menu" /></template>
+				<Button text="Open menu" />
 			</DropdownMenu>
 		`,
 	}),
 } satisfies Meta<typeof DropdownMenu>
 
 export default meta
+
 type Story = StoryObj<typeof meta>
 
 export const Base: Story = {}

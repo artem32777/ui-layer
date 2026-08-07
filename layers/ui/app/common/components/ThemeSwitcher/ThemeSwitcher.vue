@@ -17,7 +17,7 @@ const { setTheme } = themeStore
 	>
 		<button
 			class="theme-switcher__button"
-			:class="{ 'theme-switcher__button--active': theme === Theme.light }"
+			:class="{ 'theme-switcher__button_active': theme === Theme.light }"
 			type="button"
 			aria-label="Светлая тема"
 			title="Светлая тема"
@@ -29,8 +29,7 @@ const { setTheme } = themeStore
 
 		<button
 			class="theme-switcher__button"
-			:class="{ 'theme-switcher__button--active': theme === Theme.dark }"
-			type="button"
+			:class="{ 'theme-switcher__button_active': theme === Theme.dark }"
 			aria-label="Тёмная тема"
 			title="Тёмная тема"
 			:aria-pressed="theme === Theme.dark"
@@ -41,8 +40,7 @@ const { setTheme } = themeStore
 
 		<button
 			class="theme-switcher__button"
-			:class="{ 'theme-switcher__button--active': theme === Theme.system }"
-			type="button"
+			:class="{ 'theme-switcher__button_active': theme === Theme.system }"
 			aria-label="Системная тема"
 			title="Системная тема"
 			:aria-pressed="theme === Theme.system"
@@ -68,13 +66,10 @@ const { setTheme } = themeStore
 	justify-content: center;
 	width: 36px;
 	height: 36px;
-	padding: 0;
-	border: 0;
 	border-radius: 6px;
 	color: var(--additional-2, #6b5b72);
 	background-color: transparent;
 	transition: color 0.3s ease, background-color 0.3s ease;
-	cursor: pointer;
 
 	&:hover {
 		color: var(--text, #000000);
@@ -85,15 +80,15 @@ const { setTheme } = themeStore
 		outline: 2px solid var(--brand, #4149f2);
 		outline-offset: -2px;
 	}
-}
 
-.theme-switcher__button--active {
-	color: var(--white, #ffffff);
-	background-color: var(--brand, #4149f2);
+  &_active {
+    color: var(--white, #ffffff);
+    background-color: var(--brand, #4149f2);
 
-	&:hover {
-		color: var(--white, #ffffff);
-		background-color: var(--brand-dark, #292fba);
-	}
+    &:hover {
+      color: var(--white, #ffffff);
+      background-color: var(--brand-dark, #292fba);
+    }
+  }
 }
 </style>

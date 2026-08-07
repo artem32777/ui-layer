@@ -1,25 +1,28 @@
 <script setup lang="ts">
 import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
-import Accordion, { type AccordionPropsItem } from '#layers/ui/app/common/components/Accordion/Accordion.vue'
-import PageBlocks from '../../common/components/page-blocks/PageBlocks.vue'
+import Button from '#layers/ui/app/common/components/Button/Button.vue'
+import { toast } from 'vue-sonner'
+import Tabs from '#layers/ui/app/common/components/Tabs/Tabs.vue'
 
-const items: AccordionPropsItem[] = [
-	{
-		trigger: '1',
-		content: '2',
-	},
-	{
-		trigger: '3',
-		content: '4',
-	},
-]
+const tabItems = [
+	{ value: 'account', label: 'Account test' },
+	{ value: 'password', label: 'Password' },
+] as const
 </script>
 
 <template>
 	<div>
 		<SvgIcon name="download" />
 
-		<Accordion :items="items" />
+		<Button @click="toast.warning('dsds')">
+			toast
+		</Button>
+
+		<Tabs :items="tabItems">
+			<template #account>
+				dsds
+			</template>
+		</Tabs>
 	</div>
 </template>
 

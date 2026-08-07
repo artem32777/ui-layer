@@ -1,47 +1,51 @@
 <script setup lang="ts">
-// https://reka-ui.com/docs/components/toggle
-import { Toggle } from 'reka-ui'
+import { Toggle as ToggleRoot } from 'reka-ui'
 
-interface Props {
+// https://reka-ui.com/docs/components/toggle
+
+export interface ToggleProps {
+	/** Визуальный вариант. */
+	variant?: 'outline' | 'base'
+	/** Размер. */
+	size?: 'sm' | 'md' | 'lg'
+	/** Отключает переключатель и запрещает взаимодействие. */
 	disabled?: boolean
-	variant?: 'outline'
-	size?: 'sm' | 'lg'
 }
 
-const { disabled = false, variant, size } = defineProps<Props>()
+withDefaults(defineProps<ToggleProps>(), {
+	variant: 'base',
+	size: 'md',
+})
+
 const modelValue = defineModel<boolean>({ default: false })
+
+defineSlots<{
+	/** Содержимое переключателя. */
+	default?: any
+}>()
 </script>
 
 <template>
-	<Toggle
+	<ToggleRoot
 		v-model="modelValue"
-		class="ui-toggle"
-		:class="{
-			'ui-toggle--outline': variant === 'outline',
-			'ui-toggle--sm': size === 'sm',
-			'ui-toggle--lg': size === 'lg',
-		}"
+		class="toggle"
+		:class="[
+			`toggle--${size}`,
+			`toggle--${variant}`,
+		]"
 		:disabled="disabled"
 	>
 		<slot />
-	</Toggle>
+	</ToggleRoot>
 </template>
 
 <style scoped lang="scss">
-.ui-toggle {
-	all: unset;
+.toggle {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	box-sizing: border-box;
-	width: 36px;
-	height: 36px;
 	border-radius: 6px;
 	color: var(--text, #000000);
-	background-color: transparent;
-	font-size: 14px;
-	line-height: 1;
-	transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
 
 	&:hover {
@@ -64,20 +68,26 @@ const modelValue = defineModel<boolean>({ default: false })
 		cursor: not-allowed;
 	}
 
-	&.ui-toggle--outline {
-		border: 1px solid var(--grey, #e2e2e2);
-		background-color: transparent;
-	}
+  &--outline {
+    border: 1px solid var(--grey, #e2e2e2);
+    background-color: transparent;
+  }
 
-	&.ui-toggle--sm {
-		width: 32px;
-		height: 32px;
-		font-size: 13px;
-	}
+// SIZES:
+  &--sm {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
 
-	&.ui-toggle--lg {
-		width: 40px;
-		height: 40px;
-	}
+  &--md {
+    width: 36px;
+    height: 36px;
+  }
+
+  &--lg {
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>

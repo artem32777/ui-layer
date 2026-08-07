@@ -4,14 +4,8 @@ import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
 import SliderPagination from './pagination/SliderPagination.vue'
-import {
-	SliderNavClass, type SliderOptions,
-	type SliderProps,
-	type SwiperVueOptions,
-} from './types'
+import { SliderNavClass, type SliderOptions, type SliderProps, type SwiperVueOptions } from './types'
 import SliderNav from './navigation/SliderNav.vue'
-
-import 'swiper/css'
 
 const { slides, swiperOptions, options } = defineProps<SliderProps<T>>()
 

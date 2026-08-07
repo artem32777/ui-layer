@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Footer from '../layouts-parts/footer/Footer.vue'
-import Header from '../layouts-parts/header/Header.vue'
+import Header, { type HeaderProps } from '../layouts-parts/header/Header.vue'
 import PageBlocks, { type PageBlock } from '~/common/components/page-blocks/PageBlocks.vue'
 import type { SerializableHead } from 'unhead/types'
 import { RequestNames } from '~/config/constants'
@@ -11,6 +11,8 @@ import { useApiFetch } from '~/common/composables/useApiFetch'
 
 interface PageData {
 	seo?: SerializableHead
+	header?: HeaderProps
+	footer?: PageBlock
 	blocks?: PageBlock[]
 }
 
@@ -29,7 +31,11 @@ useHead(() => data.value?.seo ?? {})
 
 <template>
 	<div>
-		<Header />
+		<Header
+			v-if="data?.header"
+			:logo-src="data.header.logoSrc"
+			:menu-items="data.header.menuItems"
+		/>
 		<main class="layout">
 			<PageBlocks
 				v-if="data && data.blocks"

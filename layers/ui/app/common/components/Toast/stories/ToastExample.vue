@@ -1,17 +1,12 @@
 <script setup lang="ts">
+import { useNuxtApp } from '#imports'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import Toast from '../Toast.vue'
+
+const { $toast } = useNuxtApp()
 </script>
 
 <template>
-	<Toast>
-		<template #trigger="{ showToast }">
-			<Button
-				variant="outline"
-				@click="showToast"
-			>
-				Показать уведомление
-			</Button>
-		</template>
-	</Toast>
+	<Button @click="$toast('Уведомление отправлено')">
+		Показать уведомление
+	</Button>
 </template>

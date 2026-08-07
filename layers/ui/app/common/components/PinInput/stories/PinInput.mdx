@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as PinInputStories from './PinInput.stories'
+import PinInputExampleSource from './PinInputExample.vue?raw'
+
+<Meta of={PinInputStories} />
+
+# PinInput
+
+- Основан на [`PinInput` из Reka UI](https://reka-ui.com/docs/components/pin-input).
+
+<Canvas of={PinInputStories.DocsExample} />
+
+<Controls of={PinInputStories.DocsExample} />
+
+## Пример использования
+
+<Source code={PinInputExampleSource} language="vue" />

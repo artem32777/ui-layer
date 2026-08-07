@@ -1,0 +1,16 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as PopoverStories from './Popover.stories'
+import PopoverExampleSource from './PopoverExample.vue?raw'
+
+<Meta of={PopoverStories} />
+
+# Popover
+- Основан на <font color="blue">[`Popover из Reka UI`](https://reka-ui.com/docs/components/popover)</font>.
+- Служит для показа дополнительного контента, отличающегося от меню, для меню есть компонент `DropdownMenu`.
+- Если нужно показать простую подсказку, семантически правильнее использовать компонент `Tooltip`.
+
+<Canvas of={PopoverStories.Base} />
+
+<Controls of={PopoverStories.Base} />
+
+<Source code={PopoverExampleSource} language="vue" />

@@ -1,27 +1,9 @@
 <script setup lang="ts">
 import NavigationMenu from '#layers/ui/app/common/components/NavigationMenu/NavigationMenu.vue'
 import OverflowNavigation from '#layers/ui/app/common/components/OverflowNavigation/OverflowNavigation.vue'
-import type {
-	NavigationMenuItem,
-	NavigationMenuProps,
-} from '#layers/ui/app/common/components/NavigationMenu/NavigationMenu.types.ts'
+import type { NavigationMenuProps } from '#layers/ui/app/common/components/NavigationMenu/NavigationMenu.types.ts'
 
 defineProps<NavigationMenuProps>()
-
-function withOverflow(
-	visibleItems: NavigationMenuItem[],
-	overflowItems: NavigationMenuItem[],
-) {
-	return overflowItems.length
-		? [
-				...visibleItems,
-				{
-					label: 'Ещё',
-					children: overflowItems,
-				},
-			]
-		: visibleItems
-}
 </script>
 
 <template>
@@ -34,7 +16,9 @@ function withOverflow(
 		<template #default="{ visibleItems, overflowItems }">
 			<NavigationMenu
 				class="header-menu__navigation"
-				:items="withOverflow(visibleItems, overflowItems)"
+				:items="overflowItems.length
+					? [...visibleItems, { label: 'Ещё', children: overflowItems }]
+					: visibleItems"
 				aria-label="Основная навигация"
 			/>
 		</template>

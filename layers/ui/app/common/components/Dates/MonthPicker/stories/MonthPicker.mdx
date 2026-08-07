@@ -1,0 +1,36 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as MonthPickerStories from './MonthPicker.stories'
+import MonthPickerExampleSource from './MonthPickerExample.vue?raw'
+
+<Meta of={MonthPickerStories} />
+
+# MonthPicker
+
+Компонент для выбора одного или нескольких месяцев. Основан на [`Month Picker` из Reka UI](https://reka-ui.com/docs/components/month-picker) и сохраняет встроенную клавиатурную навигацию и доступные подписи месяцев.
+
+## Когда использовать
+
+- Для выбора одного месяца используйте обычный `v-model` со значением `DateValue`.
+- Для выбора нескольких месяцев включите `multiple`; модель будет содержать `DateValue[]`.
+- `minValue` и `maxValue` ограничивают доступный диапазон.
+- `isMonthDisabled` запрещает выбор подходящих месяцев, а `isMonthUnavailable` дополнительно показывает их как недоступные.
+- `preventDeselect` запрещает снять единственный выбор без выбора другого месяца.
+- По умолчанию используется локаль `ru-RU`.
+
+## Базовый пример
+
+<Canvas of={MonthPickerStories.Base} />
+
+<Controls of={MonthPickerStories.Base} />
+
+## Множественный выбор
+
+<Canvas of={MonthPickerStories.Multiple} />
+
+## Отключённое состояние
+
+<Canvas of={MonthPickerStories.Disabled} />
+
+## Пример использования
+
+<Source code={MonthPickerExampleSource} language="vue" />

@@ -1,55 +1,57 @@
-<script setup lang="ts">
-// https://reka-ui.com/docs/components/tabs
+<script setup lang="ts" generic="const Items extends ReadonlyArray<{ value: string; label: string }>">
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from 'reka-ui'
 
-const modelValue = defineModel<string>({ default: 'account' })
+// https://reka-ui.com/docs/components/tabs
+
+interface TabsProps {
+	/** Заголовки табов */
+	items: Items
+}
+
+defineProps<TabsProps>()
+
+type TabValues = Items[number]['value']
+
+defineSlots<{
+	/** Слоты для контента табов. */
+	[K in TabValues]?: () => any
+}>()
+
+const modelValue = defineModel<TabValues>()
 </script>
 
 <template>
 	<TabsRoot
 		v-model="modelValue"
-		class="ui-tabs"
+		:default-value="items[0]?.value"
 	>
 		<TabsList
-			class="ui-tabs__list"
-			aria-label="Manage account"
+			class="tabs-list"
+			aria-label="Вкладки табов"
 		>
 			<TabsTrigger
-				class="ui-tabs__trigger"
-				value="account"
+				v-for="item in items"
+				:key="item.value"
+				class="tabs-list__trigger"
+				:value="item.value"
 			>
-				Account
-			</TabsTrigger>
-			<TabsTrigger
-				class="ui-tabs__trigger"
-				value="password"
-			>
-				Password
+				{{ item.label }}
 			</TabsTrigger>
 		</TabsList>
+
 		<TabsContent
-			class="ui-tabs__content"
-			value="account"
+			v-for="item in items"
+			:key="item.value"
+			class="tabs-content"
+			:value="item.value"
 		>
-			Make changes to your account here.
-		</TabsContent>
-		<TabsContent
-			class="ui-tabs__content"
-			value="password"
-		>
-			Change your password here.
+			<slot :name="(item.value as TabValues)" />
 		</TabsContent>
 	</TabsRoot>
 </template>
 
 <style scoped lang="scss">
-.ui-tabs {
-	display: flex;
-	flex-direction: column;
-	width: 320px;
-}
-
-.ui-tabs__list {
+.tabs-list {
 	display: inline-flex;
 	align-items: center;
 	align-self: flex-start;
@@ -58,19 +60,16 @@ const modelValue = defineModel<string>({ default: 'account' })
 	background-color: var(--grey, #e2e2e2);
 }
 
-.ui-tabs__trigger {
+.tabs-list__trigger {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 120px;
 	height: 32px;
 	padding: 0 12px;
 	border-radius: 6px;
 	color: var(--additional-2, #6b5b72);
-	font-weight: 500;
 	user-select: none;
 	transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-	cursor: pointer;
 
 	&[data-state="active"] {
 		color: var(--text, #000000);
@@ -78,22 +77,23 @@ const modelValue = defineModel<string>({ default: 'account' })
 		box-shadow: 0 1px 2px color-mix(in srgb, var(--text, #000000) 8%, transparent);
 	}
 
+  &:hover {
+    color: var(--brand, #4149f2);
+  }
+
 	&:focus-visible {
 		outline: none;
 		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
 	}
 }
 
-.ui-tabs__content {
-	flex-grow: 1;
+.tabs-content {
 	margin-top: 12px;
 	padding: 16px;
 	border: 1px solid var(--grey, #e2e2e2);
 	border-radius: 8px;
 	color: var(--additional-2, #6b5b72);
 	background-color: var(--background, #ffffff);
-	font-size: 14px;
-	line-height: 1.5;
 
 	&:focus-visible {
 		outline: none;

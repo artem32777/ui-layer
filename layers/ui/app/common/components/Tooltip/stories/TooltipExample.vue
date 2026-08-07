@@ -4,10 +4,8 @@ import Tooltip from '../Tooltip.vue'
 
 <template>
 	<Tooltip text="Удалить элемент">
-		<template #trigger>
-			<button type="button">
-				Удалить
-			</button>
-		</template>
+		<button type="button">
+			Удалить
+		</button>
 	</Tooltip>
 </template>

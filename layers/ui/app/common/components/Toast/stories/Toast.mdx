@@ -1,23 +1,212 @@
-import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks'
+import {Canvas, Controls, Meta, Source} from '@storybook/addon-docs/blocks'
 import * as ToastStories from './Toast.stories'
 import ToastExampleSource from './ToastExample.vue?raw'
 
 <Meta of={ToastStories} />
 
 # Toast
+- Основан на <font color="blue">[`Vue-sonner`](https://vue-sonner.vercel.app/)</font>;
+- Краткое уведомление о результате действия. Контейнер отображается в правом нижнем углу и монтируется один раз на уровне приложения.
 
-Временное уведомление о результате действия. Отображается в правом нижнем углу.
+## Подключение
 
-## Когда использовать
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+	modules: ['vue-sonner/nuxt'],
+})
+```
+Компонент-контейнер подключается один раз в `app.vue`:
+```vue
+<script setup lang="ts">
+import Toast from '#layers/ui/app/common/components/Toast/Toast.vue'
+</script>
 
-- Слот `trigger` передаёт функцию `showToast` для запуска уведомления.
-- Toast подходит для подтверждения завершённого действия, не требующего немедленного ответа.
-- В уведомлении доступно действие отмены.
+<template>
+	<NuxtPage />
+	<Toast />
+</template>
+```
 
-## Базовый пример
+`$toast` предоставляется клиентским Nuxt-плагином. Вызывайте его из компонентов, обработчиков событий и клиентских хуков, но не из Nitro routes или другого серверного кода.
+
+## Примеры
+
+### Уведомление по клику
+
+<Source code={ToastExampleSource} language="vue" />
 
 <Canvas of={ToastStories.Base} />
 
-## Пример использования
 
-<Source code={ToastExampleSource} language="vue" />
+### Все виды уведомлений
+
+- Пример показывает шесть видов одновременно.
+- Стек сразу раскрыт, а уведомления не закрываются по таймеру.
+
+<Canvas of={ToastStories.Opened} />
+
+## Какой вид выбрать
+
+<table>
+	<thead>
+		<tr>
+			<th>Вид</th>
+			<th>Вызов</th>
+			<th>Назначение</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Без статуса</td>
+			<td><code>$toast('Сообщение')</code></td>
+			<td>Нейтральное уведомление без оценки результата</td>
+		</tr>
+		<tr>
+			<td>Успешное действие</td>
+			<td><code>$toast.success('Готово')</code></td>
+			<td>Действие завершилось успешно</td>
+		</tr>
+		<tr>
+			<td>Информационное сообщение</td>
+			<td><code>$toast.info('Информация')</code></td>
+			<td>Дополнительный контекст или изменение состояния</td>
+		</tr>
+		<tr>
+			<td>Предупреждение</td>
+			<td><code>$toast.warning('Внимание')</code></td>
+			<td>Возможная проблема, которая пока не блокирует работу</td>
+		</tr>
+		<tr>
+			<td>Ошибка</td>
+			<td><code>$toast.error('Ошибка')</code></td>
+			<td>Действие не удалось выполнить</td>
+		</tr>
+		<tr>
+			<td>В процессе</td>
+			<td><code>$toast.loading('Загрузка')</code></td>
+			<td>Операция выполняется, результат ещё неизвестен</td>
+		</tr>
+	</tbody>
+</table>
+
+## Заголовок и описание
+
+Передавайте краткий результат первым аргументом, а пояснение — через `description`:
+
+```ts
+const { $toast } = useNuxtApp()
+
+$toast.success('Файл сохранён', {
+	description: 'Изменения доступны всем участникам проекта',
+})
+```
+
+## Действие
+
+Через `action` можно добавить одну короткую операцию, связанную с уведомлением:
+
+```ts
+$toast('Запись удалена', {
+	action: {
+		label: 'Отменить',
+		onClick: () => restoreRecord(),
+	},
+})
+```
+
+
+## Асинхронная операция
+
+`$toast.promise` автоматически меняет состояние уведомления после завершения асинхронной операции:
+
+```ts
+const request = $fetch('/api/profile', {
+	method: 'POST',
+	body: form,
+})
+
+$toast.promise(request, {
+	loading: 'Сохраняем профиль',
+	success: 'Профиль сохранён',
+	error: 'Не удалось сохранить профиль',
+})
+```
+
+`success` и `error` также принимают функции, которым передаётся результат Promise или ошибка.
+
+## Время отображения
+
+```ts
+$toast.info('Настройки обновлены', { duration: 10_000 })
+$toast.loading('Ожидаем ответ', { duration: Infinity })
+```
+
+- `duration` задаётся в миллисекундах.
+- `Infinity` оставляет уведомление на экране до программного закрытия.
+- Для обычных уведомлений предпочтительна стандартная длительность контейнера.
+
+## Программное закрытие
+
+Каждый вызов возвращает идентификатор уведомления:
+
+```ts
+const toastId = $toast.loading('Загружаем данные', {
+	duration: Infinity,
+})
+
+$toast.dismiss(toastId)
+$toast.dismiss() // закрыть все уведомления
+```
+
+## Обработка закрытия
+
+```ts
+$toast('Сообщение', {
+	onDismiss: toast => trackDismiss(toast.id),
+	onAutoClose: toast => trackAutoClose(toast.id),
+})
+```
+
+- `onDismiss` вызывается после ручного закрытия или свайпа.
+- `onAutoClose` вызывается после автоматического закрытия по таймеру.
+
+## Настройка отдельного уведомления
+
+Для отдельного уведомления доступны `class`, `descriptionClass`, `classes`, `style`, `unstyled`, `icon`, `position`, `closeButton` и `dismissible`:
+
+```ts
+$toast.warning('Проверьте данные', {
+	closeButton: true,
+	position: 'top-center',
+	class: 'profile-warning',
+})
+```
+
+Используйте индивидуальные стили только для отдельного продуктового сценария. Общий внешний вид настраивается централизованно в `Toast.vue`.
+
+## Настройка всех уведомлений
+
+Основные свойства `Toaster`, доступные внутри `Toast.vue`:
+
+<table>
+	<thead>
+		<tr>
+			<th>Свойство</th>
+			<th>Что настраивает</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td><code>position</code></td><td>Положение стека на экране</td></tr>
+		<tr><td><code>richColors</code></td><td>Цвета для успешных, информационных, предупреждающих и ошибочных уведомлений</td></tr>
+		<tr><td><code>theme</code></td><td>Светлую, тёмную или системную тему</td></tr>
+		<tr><td><code>expand</code></td><td>Раскрытие всего стека без наведения</td></tr>
+		<tr><td><code>visibleToasts</code></td><td>Количество видимых уведомлений; по умолчанию — 3</td></tr>
+		<tr><td><code>duration</code></td><td>Общее время отображения</td></tr>
+		<tr><td><code>closeButton</code></td><td>Кнопку ручного закрытия</td></tr>
+		<tr><td><code>closeButtonPosition</code></td><td>Положение кнопки закрытия</td></tr>
+		<tr><td><code>offset</code> / <code>mobileOffset</code></td><td>Отступ стека от краёв экрана</td></tr>
+		<tr><td><code>gap</code></td><td>Расстояние между раскрытыми уведомлениями</td></tr>
+		<tr><td><code>hotkey</code></td><td>Сочетание клавиш для перехода к уведомлениям</td></tr>
+	</tbody>
+</table>

@@ -1,28 +1,61 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import type { ComponentProps } from 'vue-component-type-helpers'
+import type { ConcreteComponent } from 'vue'
 import { expect, waitFor } from 'storybook/test'
 import Tabs from '../Tabs.vue'
+import tabsTypesSource from '../Tabs.types.ts?raw'
+import type { ComponentProps } from 'vue-component-type-helpers'
 
 type TabsStoryArgs = ComponentProps<typeof Tabs>
 
 const meta = {
 	title: 'UI/Tabs',
-	component: Tabs,
+	component: Tabs as unknown as ConcreteComponent<TabsStoryArgs>,
 	parameters: {
 		a11y: { test: 'error' },
 	},
 	argTypes: {
-		modelValue: { control: 'select', options: ['account', 'password'] },
+		modelValue: {
+			control: 'select',
+			options: ['account', 'password'],
+			description: 'Значение активной вкладки. Нужно только если необходимо управление табами из родителя.',
+		},
+		items: {
+			control: 'object',
+			table: {
+				type: {
+					summary: 'TabsTitle[]',
+					detail: tabsTypesSource.trim(),
+				},
+			},
+		},
 	},
 	args: {
 		modelValue: 'account',
+		items: [
+			{ value: 'account', label: 'Account' },
+			{ value: 'password', label: 'Password' },
+		],
 	} satisfies TabsStoryArgs,
 	render: (args: TabsStoryArgs) => ({
 		components: { Tabs },
 		setup() { return { args } },
-		template: '<Tabs v-model="args.modelValue" />',
+		template: `
+			<Tabs
+				v-model="args.modelValue"
+				:items="args.items"
+				:aria-label="args.ariaLabel"
+			>
+				<template #account>
+					Make changes to your account here.
+				</template>
+
+				<template #password>
+					Change your password here.
+				</template>
+			</Tabs>
+		`,
 	}),
-} satisfies Meta<typeof Tabs>
+} satisfies Meta<TabsStoryArgs>
 
 export default meta
 type Story = StoryObj<typeof meta>

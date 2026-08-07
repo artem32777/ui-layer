@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "build-storybook": "storybook build --output-dir .storybook/storybook-static",
-    "dev": "nuxt dev --host=192.168.1.125 -o",
+    "dev": "nuxt dev --host=192.168.1.125 -o --inspect",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

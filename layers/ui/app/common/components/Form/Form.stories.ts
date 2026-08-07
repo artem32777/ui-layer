@@ -7,6 +7,7 @@ import FormCheckbox from './FormCheckbox.vue'
 import FormField from './FormField.vue'
 import FormFieldError from './FormFieldError.vue'
 import FormInput from './FormInput.vue'
+import FormNumberField from './FormNumberField.vue'
 import FormPhoneInput from './FormPhoneInput.vue'
 import FormRadioGroup from './FormRadioGroup.vue'
 import FormSelect from './FormSelect.vue'
@@ -81,6 +82,24 @@ export const PhoneInput: Story = {
 	render: () => ({
 		components: { Form, FormPhoneInput },
 		template: '<Form><FormPhoneInput name="phone" /></Form>',
+	}),
+}
+
+export const NumberField: Story = {
+	parameters: {
+		a11y: { test: 'error' },
+	},
+	render: () => ({
+		components: { Form, FormNumberField },
+		template: `
+			<Form :initial-errors="{ quantity: 'Укажите количество' }">
+				<FormNumberField
+					name="quantity"
+					:min="0"
+					:max="20"
+				/>
+			</Form>
+		`,
 	}),
 }
 

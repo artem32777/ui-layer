@@ -78,6 +78,7 @@ defineProps<{
 }
 
 :deep(.sub-dropdown-menu) {
+  z-index: $z-dropdown;
   min-width: 200px;
   padding: 4px;
   border: 1px solid var(--grey, #e2e2e2);
@@ -85,6 +86,5 @@ defineProps<{
   color: var(--text, #000000);
   background: var(--background, #ffffff);
   box-shadow: 0 10px 24px color-mix(in srgb, var(--black, #000000) 12%, transparent);
-  z-index: $z-dropdown;
 }
 </style>

@@ -1,0 +1,41 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as RangeCalendarStories from './RangeCalendar.stories'
+import RangeCalendarExampleSource from './RangeCalendarExample.vue?raw'
+
+<Meta of={RangeCalendarStories} />
+
+# RangeCalendar
+
+Календарь для выбора непрерывного диапазона дат. Основан на [`Range Calendar` из Reka UI](https://reka-ui.com/docs/components/range-calendar) и использует общие стили с `Calendar`.
+
+## Когда использовать
+
+- `v-model` содержит `DateRange` с полями `start` и `end`.
+- `minValue` и `maxValue` ограничивают доступный диапазон дат.
+- `maximumDays` задаёт максимальную длину диапазона.
+- `fixedDate` фиксирует начало или конец диапазона.
+- `allowNonContiguousRanges` разрешает включать в диапазон недоступные даты.
+- `isDateDisabled`, `isDateUnavailable` и `isDateHighlightable` управляют доступностью и подсветкой дат.
+- `numberOfMonths` задаёт количество одновременно отображаемых месяцев.
+
+## Базовый пример
+
+<Canvas of={RangeCalendarStories.Base} />
+
+<Controls of={RangeCalendarStories.Base} />
+
+## Два месяца
+
+<Canvas of={RangeCalendarStories.TwoMonths} />
+
+## Диапазон до семи дней
+
+<Canvas of={RangeCalendarStories.MaximumSevenDays} />
+
+## Отключённое состояние
+
+<Canvas of={RangeCalendarStories.Disabled} />
+
+## Пример использования
+
+<Source code={RangeCalendarExampleSource} language="vue" />

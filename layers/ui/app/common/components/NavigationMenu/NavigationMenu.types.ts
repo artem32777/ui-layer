@@ -5,13 +5,10 @@ export type NavigationMenuLinkTarget = '_blank' | '_self' | '_parent' | '_top'
 export interface NavigationMenuLinkItem {
 	/** Отображаемый текст ссылки. */
 	label: string
-
 	/** Адрес перехода. */
 	href: string
-
 	/** Значение HTML-атрибута `target`. */
 	target?: NavigationMenuLinkTarget
-
 	/** Значение HTML-атрибута `rel`. */
 	rel?: string
 }
@@ -20,10 +17,8 @@ export interface NavigationMenuLinkItem {
 export interface NavigationMenuGroupItem {
 	/** Отображаемый текст кнопки, открывающей вложенную панель. */
 	label: string
-
 	/** Пункты следующего уровня. Вложенность не ограничена. */
 	children: NavigationMenuItem[]
-
 	/** Минимальная ширина открываемой панели в пикселях. По умолчанию — 150. */
 	width?: number
 }

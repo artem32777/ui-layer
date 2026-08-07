@@ -3,6 +3,8 @@ import AccordionSection from './_components/AccordionSection.vue'
 import BreadcrumbSection from './_components/BreadcrumbSection.vue'
 import ButtonSection from './_components/ButtonSection.vue'
 import CheckboxSection from './_components/CheckboxSection.vue'
+import ColorAreaSection from './_components/ColorAreaSection.vue'
+import ContextMenuSection from './_components/ContextMenuSection.vue'
 import DataTableSection from './_components/DataTableSection.vue'
 import DialogSection from './_components/DialogSection.vue'
 import DropdownMenuSection from './_components/DropdownMenuSection.vue'
@@ -10,6 +12,7 @@ import InputSection from './_components/InputSection.vue'
 import MultiSelectSection from './_components/MultiSelectSection.vue'
 import NavigationMenuSection from './_components/NavigationMenuSection.vue'
 import PaginationSection from './_components/PaginationSection.vue'
+import PopoverSection from './_components/PopoverSection.vue'
 import RadioGroupSection from './_components/RadioGroupSection.vue'
 import ScrollAreaSection from './_components/ScrollAreaSection.vue'
 import SelectSection from './_components/SelectSection.vue'
@@ -61,11 +64,14 @@ const { toggleTheme } = themeStore
 		<DataTableSection />
 		<RadioGroupSection />
 		<RangeSliderSection />
+		<ColorAreaSection />
 		<SwitchSection />
 		<ToggleSection />
 		<AccordionSection />
 		<DialogSection />
 		<DropdownMenuSection />
+		<ContextMenuSection />
+		<PopoverSection />
 		<NavigationMenuSection />
 		<PaginationSection />
 		<ScrollAreaSection />

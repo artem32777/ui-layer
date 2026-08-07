@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as NumberFieldStories from './NumberField.stories'
+import NumberFieldExampleSource from './NumberFieldExample.vue?raw'
+
+<Meta of={NumberFieldStories} />
+
+# NumberField
+
+- Основан на [`Number Field` из Reka UI](https://reka-ui.com/docs/components/number-field).
+
+<Canvas of={NumberFieldStories.DocsExample} />
+
+<Controls of={NumberFieldStories.DocsExample} />
+
+## Пример использования
+
+<Source code={NumberFieldExampleSource} language="vue" />

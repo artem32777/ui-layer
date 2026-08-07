@@ -36,21 +36,16 @@ defineProps<NavigationMenuProps>()
 
 .navigation-menu__viewport {
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;
   left: var(--reka-navigation-menu-viewport-left, 0);
+
+  :deep(> *) {
+    padding-top: 6px;
+  }
 
   &[data-state='open'] {
     opacity: 1;
     animation: navigation-menu-viewport-enter 0.3s ease;
-
-    &::before {
-      content: '';
-      position: absolute;
-      right: 0;
-      bottom: 100%;
-      left: 0;
-      height: 6px;
-    }
   }
 
   &[data-state='closed'] {

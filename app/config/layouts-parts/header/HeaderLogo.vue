@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import Img from '#layers/ui/app/common/components/Img/Img.vue'
+
+defineProps<{
+	src: string
+}>()
 </script>
 
 <template>
-	<div
-		img-fetch-priority="high"
-		img-loading="eager"
+	<Img
+		:src="src"
+		fetch-priority="high"
+		loading="eager"
+		alt="Логотип"
 		class="header-logo"
 	/>
 </template>

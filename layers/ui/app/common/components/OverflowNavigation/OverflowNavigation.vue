@@ -1,18 +1,29 @@
 <script setup lang="ts" generic="T">
 import { useResizeObserver } from '@vueuse/core'
 import { computed, nextTick, ref } from 'vue'
-import type { OverflowNavigationProps } from './OverflowNavigation.types'
 
-export type { OverflowNavigationProps } from './OverflowNavigation.types'
+export interface OverflowNavigationProps<T> {
+	/** Пункты навигации в порядке отображения. */
+	items: T[]
+	/** HTML-тег корневого элемента. */
+	tag?: 'div' | 'nav'
+	/** Ширина элемента, открывающего скрытые пункты, в пикселях. */
+	overflowWidth?: number
+	/** Селектор вложенного списка, непосредственные дети которого измеряются. */
+	listSelector?: string
+}
 
 const props = withDefaults(defineProps<OverflowNavigationProps<T>>(), {
-	tag: 'div',
+	tag: 'nav',
 	overflowWidth: 0,
 })
 
 defineSlots<{
 	/** Содержимое навигации с рассчитанными видимыми и скрытыми пунктами. */
-	default: any
+	default: (props: {
+		visibleItems: T[]
+		overflowItems: T[]
+	}) => any
 }>()
 
 const rootRef = ref<HTMLElement | null>(null)
@@ -23,7 +34,6 @@ let resizeFrame = 0
 
 const visibleItems = computed(() => props.items.slice(0, visibleCount.value))
 const overflowItems = computed(() => props.items.slice(visibleCount.value))
-const hasOverflow = computed(() => overflowItems.value.length > 0)
 
 function getItemWidths() {
 	if (!rootRef.value || !measureListRef.value) {
@@ -100,7 +110,6 @@ useResizeObserver(rootRef, scheduleUpdateVisibleCount)
 		<slot
 			:visible-items="visibleItems"
 			:overflow-items="overflowItems"
-			:has-overflow="hasOverflow"
 		/>
 
 		<ul

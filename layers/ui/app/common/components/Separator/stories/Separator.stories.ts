@@ -54,9 +54,3 @@ export const Vertical: Story = {
 		`,
 	}),
 }
-
-export const Semantic: Story = {
-	args: {
-		decorative: false,
-	},
-}

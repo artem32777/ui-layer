@@ -19,9 +19,7 @@ const meta = {
 		setup() { return { args } },
 		template: `
 			<Tooltip v-bind="args">
-				<template #trigger>
-					<button type="button">Наведите курсор</button>
-				</template>
+				<button type="button">Наведите курсор</button>
 			</Tooltip>
 		`,
 	}),
@@ -39,11 +37,24 @@ export const ContentSlot: Story = {
 		setup() { return { args } },
 		template: `
 			<Tooltip v-bind="args">
-				<template #trigger>
-					<button type="button">Наведите курсор</button>
-				</template>
+				<button type="button">Наведите курсор</button>
 				<template #content>
 					<strong>Содержимое из слота</strong>
+				</template>
+			</Tooltip>
+		`,
+	}),
+}
+
+export const Opened: Story = {
+	render: (args: TooltipStoryArgs) => ({
+		components: { Tooltip },
+		setup() { return { args } },
+		template: `
+			<Tooltip :open="true" v-bind="args">
+				<button type="button">Триггер</button>
+				<template #content>
+					<strong>Содержимое тултипа</strong>
 				</template>
 			</Tooltip>
 		`,

@@ -1,47 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import HeaderBurgerIcon from './HeaderBurgerIcon.vue'
-import HeaderMobileMenu from './mobileMenu/HeaderMobileMenu.vue'
+import HeaderBurger from './HeaderBurger.vue'
 import HeaderLogo from './HeaderLogo.vue'
 import HeaderMenu from './menu/HeaderMenu.vue'
 import HeaderActions from './actions/HeaderActions.vue'
 import type { NavigationMenuItem } from '#layers/ui/app/common/components/NavigationMenu/NavigationMenu.types.ts'
-import { useApiFetch } from '~/common/composables/useApiFetch.ts'
 
-const isMobileMenuOpen = ref(false)
+export interface HeaderProps {
+	logoSrc: string
+	menuItems: NavigationMenuItem[]
+}
 
-const { data: menuItems } = useApiFetch<NavigationMenuItem[]>('/menu', {
-	// lazy: true,
-	// default: () => [],
-})
+defineProps<HeaderProps>()
 </script>
 
 <template>
 	<header class="header">
 		<div class="header__inner">
-			<HeaderLogo />
-			<HeaderMenu
-				v-if="menuItems"
-				:items="menuItems"
-			/>
+			<HeaderLogo :src="logoSrc" />
+			<HeaderMenu :items="menuItems" />
 			<HeaderActions />
-			<HeaderBurgerIcon
-				:is-open="isMobileMenuOpen"
-				@click="isMobileMenuOpen = !isMobileMenuOpen"
-			/>
+			<HeaderBurger :items="menuItems" />
 		</div>
-		<HeaderMobileMenu
-			:items="menuItems"
-			:is-open="isMobileMenuOpen"
-			@close="isMobileMenuOpen = false"
-		/>
 	</header>
 </template>
 
 <style scoped lang="scss">
 .header {
+  z-index: $z-header;
   position: relative;
-  z-index: 30;
   background: var(--background);
 }
 

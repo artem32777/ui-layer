@@ -1,0 +1,40 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as CalendarStories from './Calendar.stories'
+import CalendarExampleSource from './CalendarExample.vue?raw'
+
+<Meta of={CalendarStories} />
+
+# Calendar
+
+Календарь для выбора одной или нескольких дат. Основан на [`Calendar` из Reka UI](https://reka-ui.com/docs/components/calendar) и сохраняет встроенную клавиатурную навигацию и доступные подписи дат.
+
+## Когда использовать
+
+- Для выбора одной даты используйте обычный `v-model` со значением `DateValue`.
+- Для выбора нескольких дат включите `multiple`; модель будет содержать `DateValue[]`.
+- `minValue` и `maxValue` ограничивают доступный диапазон.
+- `isDateDisabled` запрещает выбор подходящих дат, а `isDateUnavailable` дополнительно показывает их как недоступные.
+- `numberOfMonths` задаёт количество одновременно отображаемых месяцев.
+- По умолчанию используется локаль `ru-RU`, неделя начинается с понедельника и отображаются шесть недель.
+
+## Базовый пример
+
+<Canvas of={CalendarStories.Base} />
+
+<Controls of={CalendarStories.Base} />
+
+## Множественный выбор
+
+<Canvas of={CalendarStories.Multiple} />
+
+## Два месяца
+
+<Canvas of={CalendarStories.TwoMonths} />
+
+## Отключённое состояние
+
+<Canvas of={CalendarStories.Disabled} />
+
+## Пример использования
+
+<Source code={CalendarExampleSource} language="vue" />

@@ -1,78 +1,70 @@
 <script setup lang="ts">
-import { Toaster, toast } from 'vue-sonner'
+import 'vue-sonner/style.css'
+import { Toaster } from 'vue-sonner'
+import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
 
-function showToast() {
-	toast('Event has been created', {
-		description: 'Sunday, December 03, 2023 at 9:00 AM',
-		action: {
-			label: 'Undo',
-			onClick: () => toast.info('Action cancelled'),
-		},
-	})
-}
+defineProps<{
+	/** Размер индикатора. */
+	expand?: boolean
+	/** Размер индикатора. */
+	visibleToasts?: number
+}>()
 </script>
 
 <template>
-	<slot
-		name="trigger"
-		:show-toast="showToast"
-	/>
 	<ClientOnly>
 		<Toaster
-			class="ui-sonner"
+			class="sonner"
 			position="bottom-right"
+			rich-colors
+			:expand="expand"
+			:visible-toasts="visibleToasts"
 			:toast-options="{
-				class: 'ui-sonner__toast',
-				descriptionClass: 'ui-sonner__description',
+				class: 'sonner__toast',
+				descriptionClass: 'sonner__description',
 				classes: {
-					title: 'ui-sonner__title',
-					actionButton: 'ui-sonner__action',
+					title: 'sonner__title',
+					actionButton: 'sonner__action',
 				},
 			}"
-		/>
+		>
+			<template #loading-icon>
+				<!-- icon -->
+			</template>
+			<template #success-icon>
+				<!-- icon -->
+			</template>
+			<template #error-icon>
+				<!-- icon -->
+			</template>
+			<template #info-icon>
+				<!-- icon -->
+			</template>
+			<template #warning-icon>
+				<!-- icon -->
+			</template>
+		</Toaster>
 	</ClientOnly>
 </template>
 
-<style scoped lang="scss">
-.ui-sonner {
-	--normal-bg: var(--background, #ffffff);
-	--normal-border: var(--grey, #e2e2e2);
-	--normal-text: var(--text, #000000);
-	--success-bg: var(--background, #ffffff);
-	--success-border: var(--grey, #e2e2e2);
-	--success-text: var(--text, #000000);
-	--info-bg: var(--background, #ffffff);
-	--info-border: var(--grey, #e2e2e2);
-	--info-text: var(--text, #000000);
-	--warning-bg: var(--background, #ffffff);
-	--warning-border: var(--grey, #e2e2e2);
-	--warning-text: var(--text, #000000);
-	--error-bg: var(--background, #ffffff);
-	--error-border: var(--red, #ff001f);
-	--error-text: var(--red, #ff001f);
+<style lang="scss">
+.sonner[data-sonner-toaster] {
+  --normal-bg: var(--background, #ffffff);
+  --normal-border: var(--grey, #e2e2e2);
+  --normal-text: var(--text, #000000);
 }
 
-:global(.ui-sonner__toast) {
-	border: 1px solid var(--grey, #e2e2e2);
-	border-radius: 8px;
+.sonner__title {
 	color: var(--text, #000000);
-	background-color: var(--background, #ffffff);
-	box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--text, #000000) 10%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--text, #000000) 10%, transparent);
+  font-weight: 400 !important;
 }
 
-:global(.ui-sonner__title) {
-	color: var(--text, #000000);
-	font-size: 14px;
-	font-weight: 600;
-}
-
-:global(.ui-sonner__description) {
+.sonner__description {
 	color: var(--additional-2, #6b5b72);
 	font-size: 13px;
-	line-height: 1.4;
 }
 
-:global(.ui-sonner__action) {
+.sonner__action {
 	border: 1px solid var(--grey, #e2e2e2);
 	border-radius: 6px;
 	color: var(--text, #000000);
@@ -81,13 +73,8 @@ function showToast() {
 	font-weight: 500;
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
-	&:hover {
-		background-color: var(--grey, #e2e2e2);
-	}
-
-	&:focus-visible {
-		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
-	}
+  &:hover,  &:focus-visible {
+    background-color: var(--grey, #e2e2e2);
+  }
 }
 </style>

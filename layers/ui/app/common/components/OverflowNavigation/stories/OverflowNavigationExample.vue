@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import OverflowNavigation from '../OverflowNavigation.vue'
+import NavigationMenu from '../../NavigationMenu/NavigationMenu.vue'
 
 const items = [
 	{ id: 'catalog', label: 'Каталог', href: '#catalog' },
@@ -11,23 +12,17 @@ const items = [
 <template>
 	<OverflowNavigation
 		:items="items"
-		tag="nav"
-		:overflow-width="104"
+		:overflow-width="70"
+		list-selector=".navigation-menu__list"
 	>
-		<template #default="{ visibleItems, overflowItems, hasOverflow }">
-			<ul>
-				<li
-					v-for="item in visibleItems"
-					:key="item.id"
-				>
-					<a :href="item.href">{{ item.label }}</a>
-				</li>
-				<li v-if="hasOverflow">
-					<button type="button">
-						Ещё ({{ overflowItems.length }})
-					</button>
-				</li>
-			</ul>
+		<template #default="{ visibleItems, overflowItems }">
+			<NavigationMenu
+				class="header-menu__navigation"
+				:items="overflowItems.length
+					? [...visibleItems, { label: 'Ещё', children: overflowItems }]
+					: visibleItems"
+				aria-label="Основная навигация"
+			/>
 		</template>
 	</OverflowNavigation>
 </template>

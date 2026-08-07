@@ -1,5 +1,6 @@
 import type { Ref } from 'vue'
 import { ref, watchEffect } from 'vue'
+import { toast } from 'vue-sonner'
 
 // Минимальная часть Nuxt CookieOptions, которая нужна themeStore.
 interface CookieOptions<T> {
@@ -11,6 +12,10 @@ interface HeadInput {
 	htmlAttrs?: {
 		class?: string | (() => string | undefined)
 	}
+}
+
+export function useNuxtApp() {
+	return { $toast: toast }
 }
 
 /**

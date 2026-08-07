@@ -1,9 +1,10 @@
 <script setup lang="ts">
-// https://reka-ui.com/docs/components/toggle-group
 import { ToggleGroupItem, ToggleGroupRoot } from 'reka-ui'
 import type { ToggleOption } from './ToggleGroup.types'
 
 export type { ToggleOption } from './ToggleGroup.types'
+
+// https://reka-ui.com/docs/components/toggle-group
 
 interface Props {
 	options: ToggleOption[]

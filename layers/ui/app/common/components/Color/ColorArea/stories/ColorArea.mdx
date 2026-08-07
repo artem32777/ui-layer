@@ -1,0 +1,23 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ColorAreaStories from './ColorArea.stories'
+import ColorAreaExampleSource from './ColorAreaExample.vue?raw'
+
+<Meta of={ColorAreaStories} />
+
+# ColorArea
+
+Двумерная область для выбора цвета мышью, касанием или клавиатурой.
+
+## Базовый пример
+
+<Canvas of={ColorAreaStories.Default} />
+
+<Controls of={ColorAreaStories.Default} />
+
+## Отключённое состояние
+
+<Canvas of={ColorAreaStories.Disabled} />
+
+## Пример использования
+
+<Source code={ColorAreaExampleSource} language="vue" />

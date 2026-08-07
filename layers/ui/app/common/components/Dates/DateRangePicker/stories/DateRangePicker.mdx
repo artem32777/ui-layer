@@ -1,0 +1,39 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as DateRangePickerStories from './DateRangePicker.stories'
+import DateRangePickerExampleSource from './DateRangePickerExample.vue?raw'
+
+<Meta of={DateRangePickerStories} />
+
+# DateRangePicker
+
+Поле для ввода и выбора диапазона дат из календаря. Основано на [`Date Range Picker` из Reka UI](https://reka-ui.com/docs/components/date-range-picker) и сохраняет встроенную клавиатурную навигацию.
+
+## Использование
+
+- `v-model` содержит `DateRange` с полями `start` и `end`.
+- `v-model:open` позволяет управлять открытием панели календаря.
+- `maximumDays` ограничивает длину диапазона, а `fixedDate` фиксирует его начало или конец.
+- `minValue`, `maxValue`, `isDateDisabled`, `isDateUnavailable` и `isDateHighlightable` управляют доступностью дат.
+- По клику на заголовок календаря открывается выбор месяца без изменения размера панели.
+
+## Базовый пример
+
+<Canvas of={DateRangePickerStories.Base} />
+
+<Controls of={DateRangePickerStories.Base} />
+
+## Поле с границей
+
+<Canvas of={DateRangePickerStories.Secondary} />
+
+## Два месяца
+
+<Canvas of={DateRangePickerStories.TwoMonths} />
+
+## Отключённое состояние
+
+<Canvas of={DateRangePickerStories.Disabled} />
+
+## Пример использования
+
+<Source code={DateRangePickerExampleSource} language="vue" />

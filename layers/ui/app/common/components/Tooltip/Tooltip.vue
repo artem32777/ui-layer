@@ -1,18 +1,24 @@
 <script setup lang="ts">
-// https://reka-ui.com/docs/components/tooltip
 import { TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger } from 'reka-ui'
+
+// https://reka-ui.com/docs/components/tooltip
 
 export interface TooltipProps {
 	/** Текст тултипа. Если нужен конент сложнее строки, можно его передать в слоте */
 	text?: string
+	/** Позиционирование тултипа */
+	side?: 'top' | 'right' | 'bottom' | 'left'
+	/** Cостояние тултипа */
+	open?: boolean
 }
 
-defineProps<TooltipProps>()
+withDefaults(defineProps<TooltipProps>(), {
+	side: 'top',
+})
 
 defineSlots<{
 	/** Элемент, который открывает тултип. */
-	trigger: any
-
+	default: any
 	/** Содержимое тултипа. */
 	content?: any
 }>()
@@ -20,19 +26,20 @@ defineSlots<{
 
 <template>
 	<TooltipProvider :delay-duration="0">
-		<TooltipRoot>
+		<TooltipRoot :default-open="open">
 			<TooltipTrigger as-child>
-				<slot name="trigger" />
+				<slot />
 			</TooltipTrigger>
 			<TooltipPortal>
 				<TooltipContent
-					class="ui-tooltip__content"
+					class="tooltip-content"
 					:side-offset="5"
+					:side="side"
 				>
 					<slot name="content">
 						{{ text }}
 					</slot>
-					<TooltipArrow class="ui-tooltip__arrow" />
+					<TooltipArrow class="tooltip-arrow" />
 				</TooltipContent>
 			</TooltipPortal>
 		</TooltipRoot>
@@ -40,31 +47,22 @@ defineSlots<{
 </template>
 
 <style scoped lang="scss">
-.ui-tooltip__content {
+:deep(.tooltip-content) {
+  z-index: $z-tooltip;
 	padding: 6px 10px;
 	border-radius: 6px;
 	color: var(--white, #ffffff);
 	background-color: var(--brand, #4149f2);
 	box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--text, #000000) 10%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--text, #000000) 10%, transparent);
-	font-size: 12px;
-	animation: ui-tooltip-fade-in 0.3s ease;
-	user-select: none;
-	z-index: $z-tooltip;
+  animation: tooltip-fade-in 0.3s ease;
 }
 
-.ui-tooltip__arrow {
+:deep(.tooltip-arrow) {
 	fill: var(--brand, #4149f2);
 }
 
-@keyframes ui-tooltip-fade-in {
-	from {
-		opacity: 0;
-		transform: scale(0.98);
-	}
-
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
+@keyframes tooltip-fade-in {
+	from {opacity: 0;transform: scale(0.98)}
+	to {opacity: 1;transform: scale(1)}
 }
 </style>

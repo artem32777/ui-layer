@@ -9,6 +9,8 @@ export const baseNuxtConfig = {
 		plugins: 'config/plugins',
 	},
 
+	// sourcemap: true,
+
 	components: false,
 
 	imports: {
@@ -36,6 +38,7 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 		'@vueuse/nuxt',
 		'nuxt-typed-router',
+		'vue-sonner/nuxt',
 	],
 
 	devtools: { enabled: true },

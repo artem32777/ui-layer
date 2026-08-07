@@ -1,0 +1,33 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as ColorFieldStories from './ColorField.stories'
+import ColorFieldExampleSource from './ColorFieldExample.vue?raw'
+
+<Meta of={ColorFieldStories} />
+
+# ColorField
+
+Поле ввода цвета на основе [`Color Field` из Reka UI](https://reka-ui.com/docs/components/color-field). Поддерживает ввод HEX-значения и редактирование отдельного цветового канала с клавиатуры или колеса мыши.
+
+## Базовый пример
+
+<Canvas of={ColorFieldStories.Default} />
+
+<Controls of={ColorFieldStories.Default} />
+
+## Цветовой канал
+
+<Canvas of={ColorFieldStories.Channel} />
+
+## Состояния
+
+### Отключённое поле
+
+<Canvas of={ColorFieldStories.Disabled} />
+
+### Только для чтения
+
+<Canvas of={ColorFieldStories.Readonly} />
+
+## Пример использования
+
+<Source code={ColorFieldExampleSource} language="vue" />

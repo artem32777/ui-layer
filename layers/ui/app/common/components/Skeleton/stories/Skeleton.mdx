@@ -1,0 +1,38 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as SkeletonStories from './Skeleton.stories'
+import SkeletonExampleSource from './SkeletonExample.vue?raw'
+
+<Meta of={SkeletonStories} />
+
+# Skeleton
+
+Компонент-заглушка для отображения структуры контента во время загрузки.
+
+## Базовый пример
+
+<Canvas of={SkeletonStories.Base} />
+
+<Controls of={SkeletonStories.Base} />
+
+## Без анимации
+
+Используйте `animated="false"`, если shimmer-эффект не нужен. При включённой системной настройке `prefers-reduced-motion` анимация отключается автоматически.
+
+<Canvas of={SkeletonStories.WithoutAnimation} />
+
+## Композиция
+
+Несколько скелетонов можно объединять, чтобы повторить форму будущего контента.
+
+<Canvas of={SkeletonStories.Composition} />
+
+## Параметры
+
+- `width` — ширина; строка с CSS-единицей или число в пикселях. По умолчанию `100%`.
+- `height` — высота; строка с CSS-единицей или число в пикселях. По умолчанию `1em`.
+- `borderRadius` — радиус скругления; строка с CSS-единицей или число в пикселях. По умолчанию `4px`.
+- `animated` — включает shimmer-анимацию. По умолчанию `true`.
+
+## Пример использования
+
+<Source code={SkeletonExampleSource} language="vue" />

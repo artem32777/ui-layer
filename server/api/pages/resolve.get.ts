@@ -1,4 +1,5 @@
 import { createError, defineEventHandler, getQuery } from 'h3'
+import { headerMock } from '../../mocks/header'
 import { pageMocks } from '../../mocks/pages'
 
 export default defineEventHandler(event => {
@@ -16,5 +17,8 @@ export default defineEventHandler(event => {
 		})
 	}
 
-	return page
+	return {
+		...page,
+		header: headerMock,
+	}
 })
