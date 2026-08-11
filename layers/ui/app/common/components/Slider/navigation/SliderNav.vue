@@ -8,7 +8,7 @@ const { xMargin = '40px' } = defineProps<{
 </script>
 
 <template>
-	<nav class="slider__nav">
+	<nav class="slider__nav">1
 		<SliderNavButton />
 		<SliderNavButton is-next />
 	</nav>
