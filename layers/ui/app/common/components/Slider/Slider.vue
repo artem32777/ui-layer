@@ -1,28 +1,23 @@
-<script setup lang="ts" generic="T extends string | Record<string, unknown>">
+<script setup lang="ts">
 import type { Swiper as SwiperInstance } from 'swiper'
-import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { ref } from 'vue'
+import { shallowRef } from 'vue'
 import SliderPagination from './pagination/SliderPagination.vue'
 import { SliderNavClass, type SliderOptions, type SliderProps, type SwiperVueOptions } from './types'
 import SliderNav from './navigation/SliderNav.vue'
 
-const { slides, swiperOptions, options } = defineProps<SliderProps<T>>()
-
-const emit = defineEmits<{
-	'swiper': [swiper: SwiperInstance]
-	'slide-change': [index: number]
-}>()
+const { slides, options, swiperOptions } = defineProps<SliderProps>()
 
 const defaultOptions: SliderOptions = {
 	hasNav: true,
-	hasPagination: true,
+	hasPagination: false,
 }
 
 const mergedOptions = { ...defaultOptions, ...options }
 
 const defaultSwiperOptions: SwiperVueOptions = {
-	modules: [Autoplay, Navigation, Pagination, EffectFade],
+	modules: [Autoplay, Navigation, Pagination],
 	// autoplay: { delay: 3000 },
 	speed: 900,
 	allowTouchMove: true,
@@ -35,7 +30,12 @@ const defaultSwiperOptions: SwiperVueOptions = {
 
 const swiperMergedOptions: SwiperVueOptions = { ...defaultSwiperOptions, ...swiperOptions }
 
-const swiperInstance = ref<SwiperInstance | null>(null)
+const emit = defineEmits<{
+	'swiper': [swiper: SwiperInstance]
+	'slide-change': [index: number]
+}>()
+
+const swiperInstance = shallowRef<SwiperInstance | null>(null)
 
 function handleSwiper(swiper: SwiperInstance) {
 	swiperInstance.value = swiper
@@ -57,17 +57,12 @@ function handleSlideChange(swiper: SwiperInstance) {
 				@slide-change="handleSlideChange"
 			>
 				<SwiperSlide
-					v-for="(slide, index) in slides"
+					v-for="(_, index) in slides"
 					:key="index"
 					class="slider__slide"
 				>
 					<!-- Содержимое слайда -->
-					<slot
-						name="slide"
-						v-bind="{ slide, index }"
-					>
-						{{ slide }}
-					</slot>
+					<slot name="slide" />
 				</SwiperSlide>
 
 				<!-- Навигация -->

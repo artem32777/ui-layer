@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // https://reka-ui.com/docs/components/month-picker
 import { MonthPickerCell, MonthPickerCellTrigger, MonthPickerGrid, MonthPickerGridBody, MonthPickerGridRow, MonthPickerHeader, MonthPickerHeading, MonthPickerNext, MonthPickerPrev, MonthPickerRoot, type DateValue, type MonthPickerRootProps } from 'reka-ui'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 
 export interface MonthPickerProps {
@@ -56,7 +56,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	>
 		<MonthPickerHeader class="month-picker__header">
 			<MonthPickerPrev class="month-picker__navigation">
-				<SvgIcon
+				<Icon
 					class="month-picker__navigation-icon month-picker__navigation-icon--previous"
 					:name="iconNames.chevronRight"
 					:size="12"
@@ -64,7 +64,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 			</MonthPickerPrev>
 			<MonthPickerHeading class="month-picker__heading" />
 			<MonthPickerNext class="month-picker__navigation">
-				<SvgIcon
+				<Icon
 					class="month-picker__navigation-icon"
 					:name="iconNames.chevronRight"
 					:size="12"

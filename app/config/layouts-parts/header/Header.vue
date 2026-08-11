@@ -1,14 +1,9 @@
 <script setup lang="ts">
+import type { HeaderProps } from './Header.types'
 import HeaderBurger from './HeaderBurger.vue'
 import HeaderLogo from './HeaderLogo.vue'
 import HeaderMenu from './menu/HeaderMenu.vue'
 import HeaderActions from './actions/HeaderActions.vue'
-import type { NavigationMenuItem } from '#layers/ui/app/common/components/NavigationMenu/NavigationMenu.types.ts'
-
-export interface HeaderProps {
-	logoSrc: string
-	menuItems: NavigationMenuItem[]
-}
 
 defineProps<HeaderProps>()
 </script>

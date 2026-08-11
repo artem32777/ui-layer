@@ -129,7 +129,7 @@ svgIcons: {
 - генерирует данные SVG в `svgIconData`;
 - генерирует группы `iconGroups` для каталогов иконок;
 - ограничивает `SvgIcon.name` только существующими локальными SVG;
-- рендерит SVG через `SvgIcon` без `@nuxt/icon`.
+- рендерит SVG через `Icon` без `@nuxt/icon`.
 
 Не редактируй `app/modules/svg-icon/runtime/iconNames.ts` вручную. Это generated-файл.
 

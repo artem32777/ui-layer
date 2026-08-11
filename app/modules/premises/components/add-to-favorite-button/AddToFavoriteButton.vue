@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useFavoriteStore } from '../../stores/favoriteStore'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 
 const {
 	variant = 'primary',
@@ -19,7 +19,7 @@ const store = useFavoriteStore()
 		@click="store.favoriteSet.add(String(id))"
 	>
 		<slot>
-			<SvgIcon
+			<Icon
 				name="plus"
 				class="favorite-button__icon"
 			/>

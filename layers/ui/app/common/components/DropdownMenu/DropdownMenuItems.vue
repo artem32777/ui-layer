@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DropdownMenuItem as RekaDropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger } from 'reka-ui'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 import type { DropdownMenuItem } from './DropdownMenu.types'
 
@@ -21,7 +21,7 @@ defineProps<{
 				:disabled="item.disabled"
 			>
 				{{ item.label }}
-				<SvgIcon
+				<Icon
 					:name="iconNames.chevronRight"
 					class="dropdown-menu__sub-arrow"
 				/>

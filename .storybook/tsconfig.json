@@ -13,7 +13,8 @@
   },
   "include": [
     "./**/*.ts",
-    "./**/*.d.ts"
+    "./**/*.d.ts",
+    "../vitest.config.ts"
   ],
   "exclude": [
     "./storybook-static",

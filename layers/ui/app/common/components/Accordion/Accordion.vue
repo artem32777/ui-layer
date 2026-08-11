@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from 'reka-ui'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 import type { AccordionPropsItem } from './Accordion.types'
 
@@ -42,7 +42,7 @@ const modelValue = defineModel<string | string[]>({})
 			<AccordionTrigger class="accordion__trigger">
 				{{ item.trigger }}
 				<slot name="icon">
-					<SvgIcon
+					<Icon
 						:name="iconNames.chevronDown"
 						class="accordion__icon"
 					/>

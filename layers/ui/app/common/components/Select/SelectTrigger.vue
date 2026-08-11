@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { SelectIcon, SelectTrigger as RekaSelectTrigger, SelectValue } from 'reka-ui'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 
 export interface SelectTriggerProps {
 	/** Текст, отображаемый до выбора значения. */
@@ -54,7 +54,7 @@ defineProps<SelectTriggerProps>()
 			aria-hidden="true"
 			as-child
 		>
-			<SvgIcon :name="iconNames.chevronDown" />
+			<Icon :name="iconNames.chevronDown" />
 		</SelectIcon>
 	</RekaSelectTrigger>
 </template>

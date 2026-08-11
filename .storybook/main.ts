@@ -14,9 +14,8 @@ const uiLayerDir = resolve(rootDir, 'layers/ui')
 const config: StorybookConfig = {
 	// Подключаем как обычные CSF-истории, так и написанную вручную MDX-документацию.
 	stories: [
-		'../app/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-		'../layers/ui/app/common/components/**/*.mdx',
-		'../layers/ui/app/common/components/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+		'../layers/ui/app/**/*.mdx',
+		'../{app,layers/ui/app}/**/*.stories.@(js|jsx|mjs|ts|tsx)',
 	],
 	// docs — MDX/Autodocs, a11y — axe-проверки, vitest — запуск play-функций
 	// и accessibility-тестов из интерфейса Storybook.

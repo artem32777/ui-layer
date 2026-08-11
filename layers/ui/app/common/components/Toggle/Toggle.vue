@@ -68,6 +68,7 @@ defineSlots<{
 		cursor: not-allowed;
 	}
 
+// VARIANTS:
   &--outline {
     border: 1px solid var(--grey, #e2e2e2);
     background-color: transparent;

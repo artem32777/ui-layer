@@ -11,7 +11,7 @@ import {
 	isNavigationMenuGroup,
 	type NavigationMenuItem,
 } from './NavigationMenu.types.ts'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon'
 
 defineProps<{
@@ -26,7 +26,7 @@ defineProps<{
 		<template v-if="isNavigationMenuGroup(item)">
 			<NavigationMenuTrigger class="navigation-menu-item__trigger">
 				{{ item.label }}
-				<SvgIcon
+				<Icon
 					:name="iconNames.chevronDown"
 					class="navigation-menu-item__chevron"
 				/>

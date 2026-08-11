@@ -6,13 +6,13 @@ import IconsExampleSource from './IconsExample.vue?raw'
 
 # Иконки
 
-Иконки используются через `SvgIcon` и типизированный реестр `IconName`. Имена берём из `iconNames`, а не передаём строками вручную.
+Иконки используются через `Icon` и типизированный реестр `IconName`. Имена берём из `iconNames`, а не передаём строками вручную.
 
 <Canvas of={DesignSystemStories.IconsGallery} />
 
 ## Правила
 
-- Импортируем `SvgIcon` из `#layers/ui/app/modules/svg-icon/components/SvgIcon.vue`.
+- Импортируем `Icon` из `#layers/ui/app/modules/svg-icon/components/SvgIcon.vue`.
 - Импортируем `iconNames` из `#layers/ui/app/modules/svg-icon/runtime/iconNames`.
 - В компонентах передаём имя так: `:name="iconNames.plus"`.
 - Не используем символы, inline-SVG или произвольные строки, если иконка должна жить в системе.

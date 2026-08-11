@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Footer from '../layouts-parts/footer/Footer.vue'
-import Header, { type HeaderProps } from '../layouts-parts/header/Header.vue'
+import type { HeaderProps } from '../layouts-parts/header/Header.types'
+import Header from '../layouts-parts/header/Header.vue'
 import PageBlocks, { type PageBlock } from '~/common/components/page-blocks/PageBlocks.vue'
 import type { SerializableHead } from 'unhead/types'
 import { RequestNames } from '~/config/constants'
@@ -20,9 +21,7 @@ const route = useRoute()
 
 const { data } = await useApiFetch<PageData>('/pages/resolve', {
 	key: computed(() => `${RequestNames.CmsPage}:${route.path}`),
-	query: computed(() => ({
-		path: route.path,
-	})),
+	query: computed(() => ({ path: route.path })),
 	watch: [() => route.path],
 })
 

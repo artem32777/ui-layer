@@ -1,0 +1,18 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as IconStories from './Icon.stories.ts'
+import IconExampleSource from './IconExample.vue?raw'
+
+<Meta of={IconStories} />
+
+# Icon
+- Компонент выводит SVG-иконки, которые находятся в папке `app/modules/svg-icon/icon-source`
+- Имя передаётся через объект `iconNames`, содержащий автоматически сгенерерированные имена из названий файлов.
+- Подробнее читай в документации модуля генерации иконок - `app/modules/svg-icon/README.md`
+
+<Canvas of={IconStories.Base} />
+
+<Controls of={IconStories.Base} />
+
+## Пример использования
+
+<Source code={IconExampleSource} language="vue" />

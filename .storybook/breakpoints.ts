@@ -1,30 +1,23 @@
 import type { ViewportMap, ViewportType } from 'storybook/viewport'
-import { existsSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 
 interface Breakpoint {
 	name: string
 	width: number
 }
 
-const fallbackBreakpoints: Breakpoint[] = [
-	{ name: '320', width: 320 },
-	{ name: '768', width: 768 },
-	{ name: '1280', width: 1280 },
-	{ name: '1920', width: 1920 },
-]
-
 /**
  * Reads pixel-valued Sass variables and converts them to Storybook viewport options.
- * Falls back to the standard project widths when the file is missing or contains no
- * supported breakpoint declarations.
  */
 export function getBreakpointViewports(filePath: string): ViewportMap {
-	const breakpoints = existsSync(filePath)
-		? parseBreakpoints(readFileSync(filePath, 'utf8'))
-		: fallbackBreakpoints
+	const breakpoints = parseBreakpoints(readFileSync(filePath, 'utf8'))
+
+	if (breakpoints.length === 0) {
+		throw new Error(`No pixel breakpoints found in ${filePath}`)
+	}
 
 	return Object.fromEntries(
-		(breakpoints.length > 0 ? breakpoints : fallbackBreakpoints)
+		breakpoints
 			.sort((left, right) => left.width - right.width)
 			.map(({ name, width }) => [
 				name,

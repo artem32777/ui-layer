@@ -3,7 +3,7 @@ import Button from '../../Button/Button.vue'
 import Checkbox from '../../Checkbox/Checkbox.vue'
 import Input from '../../Input/Input.vue'
 import Modal from '../../Modal/Modal.vue'
-import SvgIcon from '../../../../modules/svg-icon/components/SvgIcon.vue'
+import Icon from '../../../../modules/svg-icon/components/Icon.vue'
 import { iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 
 const meta = {
@@ -134,7 +134,7 @@ export const GridBreakpoints: Story = {
 
 export const IconsGallery: Story = {
 	render: () => ({
-		components: { SvgIcon },
+		components: { SvgIcon: Icon },
 		setup() {
 			return { iconNameList }
 		},

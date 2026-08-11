@@ -2,7 +2,7 @@
 // https://reka-ui.com/docs/components/calendar
 import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot, type CalendarRootProps, type DateValue } from 'reka-ui'
 import { ref } from 'vue'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 import MonthPicker from '../MonthPicker/MonthPicker.vue'
 
@@ -107,7 +107,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 			:inert="isMonthPickerOpen"
 		>
 			<CalendarPrev class="calendar__navigation">
-				<SvgIcon
+				<Icon
 					class="calendar__navigation-icon calendar__navigation-icon--previous"
 					:name="iconNames.chevronRight"
 					:size="12"
@@ -127,7 +127,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 				</button>
 			</CalendarHeading>
 			<CalendarNext class="calendar__navigation">
-				<SvgIcon
+				<Icon
 					class="calendar__navigation-icon"
 					:name="iconNames.chevronRight"
 					:size="12"

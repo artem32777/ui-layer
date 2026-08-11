@@ -81,5 +81,5 @@ export const headerMock = {
 			href: '/kommerciia',
 		},
 		{ label: '3д тур', href: '#virtualnaia-progulka' },
-	] satisfies NavigationMenuItem[],
+	] as const satisfies NavigationMenuItem[],
 }

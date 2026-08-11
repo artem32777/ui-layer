@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
 import { toast } from 'vue-sonner'
 import Tabs from '#layers/ui/app/common/components/Tabs/Tabs.vue'
@@ -12,7 +12,7 @@ const tabItems = [
 
 <template>
 	<div>
-		<SvgIcon name="download" />
+		<Icon name="download" />
 
 		<Button @click="toast.warning('dsds')">
 			toast

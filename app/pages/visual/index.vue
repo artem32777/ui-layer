@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { definePageMeta } from '#imports'
-
-definePageMeta({
-	layout: 'fullscreen',
-})
 </script>
 
 <template>
+	<div>
+		visual
+	</div>
 </template>
 
 <style scoped lang="scss">

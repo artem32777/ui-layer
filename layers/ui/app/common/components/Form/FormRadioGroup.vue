@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import FormField from './FormField.vue'
-import RadioGroup, { type RadioGroupProps } from '#layers/ui/app/common/components/RadioGroup/RadioGroup.vue'
+import RadioGroup from '#layers/ui/app/common/components/RadioGroup/RadioGroup.vue'
+import type { RadioGroupProps } from '#layers/ui/app/common/components/RadioGroup/RadioGroup.types.ts'
 
 defineProps<{
 	name: string

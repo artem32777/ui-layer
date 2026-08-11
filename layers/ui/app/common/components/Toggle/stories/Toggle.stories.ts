@@ -48,18 +48,14 @@ const meta = {
 		a11y: { test: 'error' },
 	},
 	argTypes: {
-		modelValue: {
-			description: 'Нажатое состояние переключателя. Нужно для управления состоянием из родителя',
-			control: 'boolean',
-			table: { type: { summary: 'boolean' } },
-		},
+		modelValue: { description: 'Нажатое состояние переключателя.' },
 		variant: {
 			control: 'select',
-			options: getOptions('variant', ['outline']),
+			options: getOptions('variant', ['base', 'outline']),
 		},
 		size: {
 			control: 'select',
-			options: getOptions('size', ['sm', 'lg']),
+			options: getOptions('size', ['sm', 'md', 'lg']),
 		},
 		disabled: { control: 'boolean' },
 	},

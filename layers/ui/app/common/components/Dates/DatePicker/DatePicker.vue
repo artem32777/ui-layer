@@ -2,7 +2,7 @@
 // https://reka-ui.com/docs/components/date-picker
 import { DatePickerCalendar, DatePickerCell, DatePickerCellTrigger, DatePickerContent, DatePickerField, DatePickerGrid, DatePickerGridBody, DatePickerGridHead, DatePickerGridRow, DatePickerHeadCell, DatePickerHeader, DatePickerHeading, DatePickerInput, DatePickerNext, DatePickerPrev, DatePickerRoot, DatePickerTrigger, type DatePickerRootProps, type DateValue } from 'reka-ui'
 import { ref, watch } from 'vue'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 import MonthPicker from '../MonthPicker/MonthPicker.vue'
 
@@ -158,7 +158,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 				class="date-picker__trigger"
 				aria-label="Открыть календарь"
 			>
-				<SvgIcon
+				<Icon
 					class="date-picker__trigger-icon"
 					:name="iconNames.chevronDown"
 					:size="12"
@@ -194,7 +194,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 					:inert="isMonthPickerOpen"
 				>
 					<DatePickerPrev class="calendar__navigation">
-						<SvgIcon
+						<Icon
 							class="calendar__navigation-icon calendar__navigation-icon--previous"
 							:name="iconNames.chevronRight"
 							:size="12"
@@ -214,7 +214,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 						</button>
 					</DatePickerHeading>
 					<DatePickerNext class="calendar__navigation">
-						<SvgIcon
+						<Icon
 							class="calendar__navigation-icon"
 							:name="iconNames.chevronRight"
 							:size="12"

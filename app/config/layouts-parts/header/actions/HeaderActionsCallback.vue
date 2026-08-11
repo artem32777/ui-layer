@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import CallbackModal from '../../../../modules/callback/components/modal/CallbackModal.vue'
 </script>
 
@@ -11,7 +11,7 @@ import CallbackModal from '../../../../modules/callback/components/modal/Callbac
 			aria-label="Заказать звонок"
 		>
 			<span class="header-actions__callback-text">Заказать звонок</span>
-			<SvgIcon
+			<Icon
 				name="phone"
 				:size="20"
 				class="header-actions__callback-icon"

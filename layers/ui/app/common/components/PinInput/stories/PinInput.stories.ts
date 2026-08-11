@@ -1,19 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ConcreteComponent } from 'vue'
+import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, fn } from 'storybook/test'
 import PinInput from '../PinInput.vue'
 
-type PinInputStoryArgs = {
-	modelValue?: string[] | number[]
-	onComplete?: (value: string[] | number[]) => void
-	length?: number
-	placeholder?: string
-	mask?: boolean
-	otp?: boolean
-	type?: 'text' | 'number'
-	invalid?: boolean
-	disabled?: boolean
-}
+type PinInputStoryArgs = ComponentProps<typeof PinInput>
 
 const renderStates = (args: PinInputStoryArgs) => ({
 	components: { PinInput },
@@ -39,22 +30,17 @@ const renderStates = (args: PinInputStoryArgs) => ({
 const meta = {
 	title: 'UI/PinInput',
 	component: PinInput as unknown as ConcreteComponent<PinInputStoryArgs>,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		modelValue: {
 			description: 'Введённые значения полей.',
 			control: 'object',
 			table: { type: { summary: 'string[] | number[]' } },
 		},
-		length: { control: { type: 'number', min: 1 } },
-		placeholder: { control: 'text' },
-		mask: { control: 'boolean' },
-		otp: { control: 'boolean' },
 		type: {
 			control: 'select',
 			options: ['text', 'number'],
+			table: { type: { summary: 'string | number' } },
 		},
 		invalid: { control: 'boolean' },
 		disabled: { control: 'boolean' },
@@ -107,7 +93,7 @@ export const Tests: Story = {
 	play: async ({ args, canvas, userEvent }) => {
 		const inputs = canvas.getAllByRole('textbox')
 
-		await userEvent.click(inputs[0])
+		await userEvent.click(inputs[0]!)
 		await userEvent.keyboard('123456')
 
 		for (const [index, input] of inputs.entries())

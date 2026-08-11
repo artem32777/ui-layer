@@ -13,9 +13,8 @@ export default defineConfig({
 	// Временные trace, diff и actual screenshots не коммитятся.
 	outputDir: './test-results',
 
-	// Один тест последовательно обходит Storybook index. Параллельный запуск
-	// здесь не ускорит обход, зато может создать лишнюю нагрузку на dev server.
-	fullyParallel: false,
+	// Docs regression и полный visual-обход используют один Storybook server.
+	workers: 1,
 	reporter: 'list',
 
 	// Полный обход 100+ историй может быть заметно дольше обычного UI-теста.

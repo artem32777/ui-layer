@@ -11,30 +11,26 @@ export interface SvgIconProps {
 	color?: string
 }
 
-const { name, size, color } = defineProps<SvgIconProps>()
-
-const iconSize = computed(() => {
-	if (typeof size === 'number') {
-		return `${size}px`
-	}
-
-	return size
-})
+const {
+	name,
+	size = '14',
+} = defineProps<SvgIconProps>()
 
 const icon = computed(() => svgIconData[name])
+const iconSize = computed(() => `${size}px`)
 
 const iconAttrs = computed(() => ({
 	...icon.value.attrs,
-	width: iconSize.value || icon.value.attrs.width,
-	height: iconSize.value || icon.value.attrs.height,
+	width: iconSize.value,
+	height: iconSize.value,
 }))
 </script>
 
 <template>
 	<svg
 		v-bind="iconAttrs"
-		class="svg-icon"
 		:style="{ color }"
+		class="svg-icon"
 		v-html="icon.body"
 	/>
 </template>

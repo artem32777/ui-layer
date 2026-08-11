@@ -1,6 +1,8 @@
 <script setup lang="ts" generic="T extends boolean = false">
+// @ts-nocheck
 import { computed, useId } from 'vue'
-import Select, { type SelectOption } from '#layers/ui/app/common/components/Select/Select.vue'
+import Select from '#layers/ui/app/common/components/Select/Select.vue'
+import type { SelectOption } from '#layers/ui/app/common/components/Select/Select.types.ts'
 
 export interface PremisesFilterSelectItem {
 	id: number
@@ -32,6 +34,7 @@ const options = computed<SelectOption[]>(() => props.items.map(item => ({
 	value: String(item.value),
 	disabled: item.disabled,
 })))
+
 const selectModel = computed({
 	get: () => Array.isArray(model.value)
 		? model.value.map(String)

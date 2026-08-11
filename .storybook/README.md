@@ -9,10 +9,11 @@ accessibility-проверок и визуальных регрессий.
 .storybook/
 ├── main.ts                 # Поиск stories, addons, Vite aliases и SCSS
 ├── preview.ts              # Глобальный Vue runtime и параметры stories
+├── breakpoints.ts          # Viewport-ы Storybook из проектных SCSS-переменных
 ├── nuxt-imports.ts         # Browser-only адаптер Nuxt composables
+├── use-api-fetch.ts         # Детерминированный API mock для DataTable stories
 ├── env.d.ts                # Типы для SCSS imports
 ├── tsconfig.json           # TypeScript-проверка файлов этой директории
-├── vitest.config.ts        # Component/interaction/a11y tests в Chromium
 ├── playwright.config.ts    # Настройки visual regression tests
 └── visual-tests/
     ├── docs.spec.ts        # Regression-тест клиентского перехода Canvas → Docs
@@ -20,10 +21,13 @@ accessibility-проверок и визуальных регрессий.
     └── *.spec.ts-snapshots # Эталонные PNG для текущей платформы
 ```
 
-В корне проекта остаётся только `vitest.config.ts`-bridge. Storybook 10.5
-ищет Vitest config от package root вверх и не поддерживает произвольный путь.
-Bridge реэкспортирует настоящую конфигурацию отсюда и сохраняет работу кнопки
-запуска тестов внутри Storybook.
+`storybook-static/` и `test-results/` — генерируемые и игнорируемые Git каталоги. Их можно
+удалять в любой момент: сборка и тесты создадут их заново. PNG внутри
+`visual-tests/*.spec.ts-snapshots/`, напротив, являются версионируемыми эталонами visual tests.
+
+Корневой `vitest.config.ts` содержит project `storybook` для component,
+interaction и a11y-тестов в Chromium. Конфиг лежит в стандартном месте, поэтому
+его одинаково находят Vitest CLI и кнопка запуска тестов внутри Storybook.
 
 ## Команды
 
@@ -122,20 +126,11 @@ Playwright для каждого запуска самостоятельно п�
 порту: тест намеренно не переиспользует чужие процессы, чтобы прерванный или
 устаревший server не вызвал `ERR_CONNECTION_REFUSED` посреди visual suite.
 
-## Совместимость Docs со Storybook 10.5.5
-
-Встроенный instrumentation loader Storybook 10.5.5 заменяет
-`HTMLElement.prototype.focus` getter-обёрткой. При клиентском переходе
-Canvas → Docs React Aria читает этот getter с prototype, из-за чего Chrome
-выбрасывает `TypeError: Illegal invocation`.
-
-Loader в `preview.ts` выполняется после core loaders Storybook и возвращает
-нативный method descriptor. Исправление применяется только при наличии
-проблемного getter и не заменяет обычные focus wrappers компонентов.
+## Docs regression
 
 `.storybook/visual-tests/docs.spec.ts` воспроизводит именно переход через
 manager UI. Не заменяйте его прямым открытием Docs URL: при полной перезагрузке
-preview runtime исходная ошибка не воспроизводится.
+не проверяется клиентское переключение между Canvas и Docs.
 
 ## Зачем нужны Storybook adapters
 
@@ -147,8 +142,9 @@ preview runtime исходная ошибка не воспроизводитс�
 - простой browser-only `ClientOnly`;
 - `SelectRoot`, который в приложении регистрирует модуль Reka UI.
 
-`nuxt-imports.ts` заменяет только два composable, нужных ThemeSwitcher:
-`useCookie` и `useHead`. Это не общий mock Nuxt runtime. Если новый компонент
+`nuxt-imports.ts` заменяет `useCookie` и `useHead`, нужные ThemeSwitcher, а также
+`useNuxtApp`, нужный Toast. `use-api-fetch.ts` отдельно обслуживает примеры DataTable.
+Это не общий mock Nuxt runtime. Если новый компонент
 использует другой auto-imported composable, добавьте узкий адаптер и опишите,
 какой сценарий он покрывает.
 
@@ -159,7 +155,6 @@ preview runtime исходная ошибка не воспроизводитс�
 - SCSS не видит mixin/variable: проверьте `getSharedScssAdditionalData`.
 - Компонент доступен в Nuxt, но не в Storybook: зарегистрируйте его в
   `preview.ts` или импортируйте явно в исходном компоненте.
-- `Illegal invocation` при открытии Docs: запустите `docs.spec.ts` и проверьте
-  compatibility loader `restoreNativeHTMLElementFocus` в `preview.ts`.
+- Docs не открывается после Canvas: запустите `docs.spec.ts`.
 - `ERR_CONNECTION_REFUSED` на Windows: не удаляйте IPv4 `browser.api.host`
-  из `vitest.config.ts`.
+  из корневого `vitest.config.ts`.

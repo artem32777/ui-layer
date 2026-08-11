@@ -23,9 +23,7 @@ const items: ContextMenuItem[] = [
 const meta = {
 	title: 'UI/ContextMenu',
 	component: ContextMenu,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		items: {
 			table: {
@@ -38,8 +36,6 @@ const meta = {
 	},
 	args: {
 		items,
-		disabled: false,
-		modal: true,
 	} satisfies ContextMenuStoryArgs,
 	render: (args: ContextMenuStoryArgs) => ({
 		components: { ContextMenu },

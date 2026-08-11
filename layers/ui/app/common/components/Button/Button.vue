@@ -2,7 +2,7 @@
 import { Primitive } from 'reka-ui'
 import { computed, useSlots } from 'vue'
 import type { IconName } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 
 export interface ButtonProps {
 	/** Визуальный вариация. */
@@ -59,7 +59,7 @@ const isIconOnly = computed(() => !slots.default && Boolean(props.iconLeft || pr
 			},
 		]"
 	>
-		<SvgIcon
+		<Icon
 			v-if="iconLeft"
 			:name="iconLeft"
 			:size="20"
@@ -72,7 +72,7 @@ const isIconOnly = computed(() => !slots.default && Boolean(props.iconLeft || pr
 
 		<slot v-else />
 
-		<SvgIcon
+		<Icon
 			v-if="iconRight"
 			:name="iconRight"
 			:size="20"

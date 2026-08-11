@@ -1,5 +1,5 @@
 import type { SerializableHead } from 'unhead/types'
-import type { HeaderProps } from '~/config/layouts-parts/header/Header.vue'
+import type { HeaderProps } from '~/config/layouts-parts/header/Header.types'
 
 export interface PageDocument {
 	id: string

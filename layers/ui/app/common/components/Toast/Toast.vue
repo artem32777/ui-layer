@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import 'vue-sonner/style.css'
 import { Toaster } from 'vue-sonner'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 
 defineProps<{
 	/** Размер индикатора. */

@@ -15,7 +15,7 @@ defineProps<PictureProps>()
 		>
 		<Img
 			v-bind="imageOptions"
-			:src="src"
+			:src="src || srcSet[0]!.src"
 			:alt="alt"
 		/>
 	</picture>

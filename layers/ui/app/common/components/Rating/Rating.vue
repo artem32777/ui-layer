@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RatingItem, RatingItemIndicator, RatingRoot } from 'reka-ui'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 
 export interface RatingProps {
@@ -46,7 +46,7 @@ const modelValue = defineModel<number>({ default: 0 })
 			class="rating__item"
 			:item="item"
 		>
-			<SvgIcon
+			<Icon
 				class="rating__star rating__star--background"
 				:name="iconNames.star"
 				:size="28"
@@ -60,7 +60,7 @@ const modelValue = defineModel<number>({ default: 0 })
 				:step="stepValue"
 				:aria-label="`${stepValue} из ${length}`"
 			>
-				<SvgIcon
+				<Icon
 					class="rating__star"
 					:name="iconNames.star"
 					:size="28"

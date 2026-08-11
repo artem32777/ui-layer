@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CheckboxIndicator, CheckboxRoot } from 'reka-ui'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 
 const modelValue = defineModel<boolean>({ default: false })
@@ -37,7 +37,7 @@ defineSlots<{
 			:disabled="disabled"
 		>
 			<CheckboxIndicator class="checkbox__indicator">
-				<SvgIcon
+				<Icon
 					:name="iconNames.check"
 					:size="size"
 					class="checkbox__check"

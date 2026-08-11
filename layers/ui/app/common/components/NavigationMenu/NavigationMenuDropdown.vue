@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { NavigationMenuContent, NavigationMenuItem as RekaNavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuSub, NavigationMenuTrigger, NavigationMenuViewport } from 'reka-ui'
 import { getNavigationMenuItemValue, isNavigationMenuGroup, type NavigationMenuItem } from './NavigationMenu.types.ts'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon'
 
 const { width = 150 } = defineProps<{
@@ -28,7 +28,7 @@ const currentItem = ref('')
 				<template v-if="isNavigationMenuGroup(item)">
 					<NavigationMenuTrigger class="navigation-menu-dropdown-item__trigger">
 						{{ item.label }}
-						<SvgIcon
+						<Icon
 							:name="iconNames.chevronRight"
 							class="navigation-menu-dropdown-item__arrow"
 						/>

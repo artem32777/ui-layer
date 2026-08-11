@@ -1,7 +1,7 @@
 import type { Swiper } from 'swiper/vue'
 
-export interface SliderProps<T> {
-	slides: T[]
+export interface SliderProps {
+	slides: Record<string, any>
 	swiperOptions?: SwiperVueOptions
 	options?: SliderOptions
 }

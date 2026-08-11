@@ -19,20 +19,8 @@ test('Docs открывается после Canvas без Illegal invocation', 
 	expect(indexResponse.ok()).toBe(true)
 
 	const { entries } = await indexResponse.json() as StorybookIndex
-	const allEntries = Object.values(entries)
-	const docsIds = new Set(
-		allEntries
-			.filter(entry => entry.type === 'docs')
-			.map(entry => entry.id),
-	)
-	const storyWithDocs = allEntries.find((entry) => {
-		if (entry.type !== 'story') {
-			return false
-		}
-
-		const componentId = entry.id.split('--')[0]
-		return docsIds.has(`${componentId}--docs`)
-	})
+	// Form.mdx содержит больше всего Canvas-блоков и полностью нагружает Docs runtime.
+	const storyWithDocs = Object.values(entries).find(entry => entry.id === 'form-form--field')
 
 	// Если autodocs случайно отключат для всех компонентов, тест должен явно
 	// сообщить о проблеме, а не завершиться зелёным без проверки.

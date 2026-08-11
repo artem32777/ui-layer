@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { Theme, useThemeStore } from '#layers/ui/app/common/stores/themeStore'
 import { iconNames } from '#layers/ui/app/modules/svg-icon'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 
 const themeStore = useThemeStore()
 const { theme } = storeToRefs(themeStore)
@@ -24,7 +24,7 @@ const { setTheme } = themeStore
 			:aria-pressed="theme === Theme.light"
 			@click="setTheme(Theme.light)"
 		>
-			<SvgIcon :name="iconNames.themeLight" />
+			<Icon :name="iconNames.themeLight" />
 		</button>
 
 		<button
@@ -35,7 +35,7 @@ const { setTheme } = themeStore
 			:aria-pressed="theme === Theme.dark"
 			@click="setTheme(Theme.dark)"
 		>
-			<SvgIcon :name="iconNames.themeDark" />
+			<Icon :name="iconNames.themeDark" />
 		</button>
 
 		<button
@@ -46,7 +46,7 @@ const { setTheme } = themeStore
 			:aria-pressed="theme === Theme.system"
 			@click="setTheme(Theme.system)"
 		>
-			<SvgIcon :name="iconNames.themeSystem" />
+			<Icon :name="iconNames.themeSystem" />
 		</button>
 	</div>
 </template>

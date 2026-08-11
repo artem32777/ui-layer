@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import PageBlocks from '../../common/components/page-blocks/PageBlocks.vue'
 </script>
 
 <template>
-	<PageBlocks />
+	<div>
+		news
+	</div>
 </template>

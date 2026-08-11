@@ -1,9 +1,32 @@
-/**
- * Compatibility bridge for @storybook/addon-vitest.
- *
- * Storybook 10.5 searches for Vitest configuration only from the package root
- * upwards. The actual, fully documented config lives in `.storybook`, while
- * this re-export keeps both the Storybook testing widget and plain `vitest`
- * CLI auto-discovery working.
- */
-export { default } from './.storybook/vitest.config'
+import { resolve } from 'node:path'
+import { playwright } from '@vitest/browser-playwright'
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+	test: {
+		projects: [
+			{
+				extends: true,
+				plugins: [
+					storybookTest({
+						configDir: resolve(import.meta.dirname, '.storybook'),
+						storybookScript: 'npm run storybook -- --no-open',
+					}),
+				],
+				test: {
+					name: 'storybook',
+					browser: {
+						enabled: true,
+						provider: playwright({}),
+						headless: true,
+						instances: [{ browser: 'chromium' }],
+						api: {
+							host: '127.0.0.1',
+						},
+					},
+				},
+			},
+		],
+	},
+})

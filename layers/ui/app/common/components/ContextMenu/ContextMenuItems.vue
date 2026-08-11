@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ContextMenuItem as RekaContextMenuItem, ContextMenuPortal, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger } from 'reka-ui'
-import SvgIcon from '#layers/ui/app/modules/svg-icon/components/SvgIcon.vue'
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 import type { ContextMenuItem } from './ContextMenu.types'
 
@@ -21,7 +21,7 @@ defineProps<{
 				:disabled="item.disabled"
 			>
 				{{ item.label }}
-				<SvgIcon
+				<Icon
 					:name="iconNames.chevronRight"
 					class="context-menu__sub-arrow"
 				/>

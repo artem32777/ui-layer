@@ -23,7 +23,6 @@ const meta = {
 		step: { control: 'number' },
 		name: { control: 'text' },
 		required: { control: 'boolean' },
-		id: { control: 'text' },
 	},
 	args: {
 		modelValue: '#3b82f6',
