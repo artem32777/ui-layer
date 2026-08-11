@@ -24,10 +24,16 @@ npx playwright install chromium
 
 ## Storybook
 
+Опубликованный Storybook: https://artem32777.github.io/ui-layer/
+
 | Команда | Что делает |
 | --- | --- |
 | `npm run storybook` | Запускает Storybook на порту `6006`. |
 | `npm run build-storybook` | Собирает статический Storybook в `.storybook/storybook-static`. |
+
+Публикация запускается автоматически при push в `master` или вручную через
+workflow `Deploy Storybook to GitHub Pages`. Перед первым запуском выберите
+`GitHub Actions` в `Settings → Pages → Build and deployment → Source`.
 
 ## Тесты
 
