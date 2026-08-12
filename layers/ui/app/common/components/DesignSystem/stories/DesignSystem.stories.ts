@@ -14,45 +14,6 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const ColorPalette: Story = {
-	render: () => ({
-		setup() {
-			return {
-				colors: [
-					{ name: '--brand', value: '#4149f2', role: 'Главный акцент, primary-действия, выбранные элементы.' },
-					{ name: '--brand-dark', value: '#292fba', role: 'Hover, pressed, усиленный акцент.' },
-					{ name: '--brand-light', value: '#5e65f6', role: 'Фокус, подсветки, мягкие акцентные состояния.' },
-					{ name: '--headers', value: '#000000', role: 'Заголовки и крупные смысловые акценты.' },
-					{ name: '--text', value: '#000000', role: 'Основной текст интерфейса.' },
-					{ name: '--background', value: '#ffffff', role: 'Фон поверхностей и страниц.' },
-					{ name: '--grey', value: '#e2e2e2', role: 'Границы, разделители, вторичные фоны.' },
-					{ name: '--red', value: '#ff001f', role: 'Ошибки, invalid-состояния, опасные действия.' },
-					{ name: '--additional-1', value: '#21223c', role: 'Дополнительный тёмный текст или фон.' },
-					{ name: '--additional-2', value: '#6b5b72', role: 'Вторичный текст и подписи.' },
-					{ name: '--white', value: '#ffffff', role: 'Текст на тёмных/акцентных поверхностях.' },
-					{ name: '--black', value: '#000000', role: 'Тени, color-mix и контрастные состояния.' },
-				],
-			}
-		},
-		template: `
-			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
-				<div
-					v-for="color in colors"
-					:key="color.name"
-					style="overflow: hidden; border: 1px solid var(--grey); border-radius: 8px; background: var(--background);"
-				>
-					<div :style="{ height: '88px', background: 'var(' + color.name + ')' }" />
-					<div style="display: grid; gap: 6px; padding: 12px;">
-						<strong style="color: var(--text); font-size: 14px;">{{ color.name }}</strong>
-						<span style="color: var(--additional-2); font-size: 13px;">{{ color.value }}</span>
-						<span style="color: var(--text); font-size: 13px; line-height: 1.45;">{{ color.role }}</span>
-					</div>
-				</div>
-			</div>
-		`,
-	}),
-}
-
 export const TypographyScale: Story = {
 	render: () => ({
 		setup() {
