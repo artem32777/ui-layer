@@ -35,6 +35,7 @@ const meta = {
 	args: {
 		modelValue: ['delivery'],
 		type: 'multiple',
+		closeOnContentClick: false,
 		items: [
 			{
 				trigger: 'Доставка',
@@ -56,9 +57,8 @@ const meta = {
 		setup() { return { args } },
 		template: `
 			<Accordion
-				v-model="args.modelValue"
-				:items="args.items"
-				:type="args.type"
+					v-bind="args"
+					v-model="args.modelValue"
 			/>
 		`,
 	}),

@@ -54,6 +54,7 @@ function handleContentClick(value: string) {
 			</AccordionTrigger>
 			<AccordionContent
 				class="accordion__content"
+				:style="{ 'cursor: pointer': closeOnContentClick }"
 				@click="handleContentClick(item.trigger)"
 			>
 				<div
