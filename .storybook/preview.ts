@@ -33,7 +33,13 @@ setup((app) => {
 })
 
 const preview: Preview = {
+	decorators: [
+		() => ({
+			template: '<div style="min-width: 90vw; display: flex; justify-content: center"><story /></div>',
+		}),
+	],
 	parameters: {
+		layout: 'centered',
 		viewport: {
 			options: __STORYBOOK_BREAKPOINT_VIEWPORTS__,
 		},

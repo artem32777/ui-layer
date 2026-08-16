@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import { toast } from 'vue-sonner'
 import Tabs from '#layers/ui/app/common/components/Tabs/Tabs.vue'
+import Tooltip from '#layers/ui/app/common/components/Tooltip/Tooltip.vue'
+import { useFavoriteStore } from '~/modules/premises'
+
+const favoriteStore = useFavoriteStore()
 
 const tabItems = [
 	{ value: 'account', label: 'Account test' },
@@ -14,8 +17,12 @@ const tabItems = [
 	<div>
 		<Icon name="download" />
 
-		<Button @click="toast.warning('dsds')">
-			toast
+		<Button @click="favoriteStore.addToFavorite('toast-example')">
+			Добавить в избранное
+		</Button>
+
+		<Button @click="favoriteStore.removeFromFavorite('toast-example')">
+			Удалить из избранного
 		</Button>
 
 		<Tabs :items="tabItems">
@@ -23,6 +30,10 @@ const tabItems = [
 				dsds
 			</template>
 		</Tabs>
+
+		<Tooltip text="dsdss">
+			323232
+		</Tooltip>
 	</div>
 </template>
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 export interface SkeletonProps {
-	/** Ширина скелетона. Числовое значение задаётся в пикселях. */
+	/** Ширина скелетона */
 	width?: string | number
-	/** Высота скелетона. Числовое значение задаётся в пикселях. */
+	/** Высота скелетона */
 	height?: string | number
-	/** Радиус скругления. Числовое значение задаётся в пикселях. */
+	/** Радиус скругления */
 	borderRadius?: string | number
 	/** Включает shimmer-анимацию. */
 	animated?: boolean
@@ -12,7 +12,7 @@ export interface SkeletonProps {
 
 withDefaults(defineProps<SkeletonProps>(), {
 	width: '100%',
-	height: '1em',
+	height: '10px',
 	borderRadius: '4px',
 	animated: true,
 })

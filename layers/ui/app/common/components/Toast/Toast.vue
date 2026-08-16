@@ -4,9 +4,9 @@ import { Toaster } from 'vue-sonner'
 import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 
 defineProps<{
-	/** Размер индикатора. */
+	/** Отображение тостов без их группировки. */
 	expand?: boolean
-	/** Размер индикатора. */
+	/** Количество одновременно отображаемых тостов. */
 	visibleToasts?: number
 }>()
 </script>

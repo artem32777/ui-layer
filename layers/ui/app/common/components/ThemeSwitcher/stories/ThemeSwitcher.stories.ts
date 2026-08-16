@@ -5,9 +5,6 @@ import ThemeSwitcher from '../ThemeSwitcher.vue'
 const meta = {
 	title: 'UI/ThemeSwitcher',
 	component: ThemeSwitcher,
-	parameters: {
-		layout: 'centered',
-	},
 } satisfies Meta<typeof ThemeSwitcher>
 
 export default meta

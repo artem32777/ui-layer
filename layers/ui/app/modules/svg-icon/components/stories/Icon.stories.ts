@@ -15,7 +15,7 @@ const meta = {
 			control: 'select',
 			options: iconNameList,
 		},
-		size: { control: 'text' },
+		size: { control: 'number' },
 		color: { control: 'color' },
 	},
 	args: {
@@ -38,7 +38,7 @@ export const Base: Story = {
 }
 
 export const Icons: Story = {
-	render: () => ({
+	render: args => ({
 		components: { Icon },
 		setup() {
 			const search = ref('')
@@ -65,7 +65,7 @@ export const Icons: Story = {
 			const filteredIconCount = computed(() => filteredIconGroups.value
 				.reduce((count, group) => count + Object.keys(group.icons).length, 0))
 
-			return { search, iconCount, filteredIconGroups, filteredIconCount, copy, copied, text }
+			return { args, search, iconCount, filteredIconGroups, filteredIconCount, copy, copied, text }
 		},
 		template: `
 			<div style="display: grid; gap: 28px;">
@@ -109,7 +109,7 @@ export const Icons: Story = {
 								style="display: grid; gap: 10px; justify-items: center; padding: 18px 12px; border: 1px solid var(--grey); border-radius: 8px; color: var(--text); background: var(--background); cursor: pointer; font: inherit;"
 								@click="copy(iconName)"
 							>
-								<Icon :name="iconName" :size="28" />
+								<Icon :name="iconName" v-bind="args" :size="40"   />
 								<code style="color: var(--additional-2); font-size: 12px;">{{ copied && text === iconName ? 'Скопировано' : iconName }}</code>
 							</button>
 						</div>

@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { SwitchRoot, SwitchThumb } from 'reka-ui'
 
-/** Включённое состояние переключателя. */
-const modelValue = defineModel<boolean>({ default: false })
+// https://reka-ui.com/docs/components/switch
 
-interface Props {
+export interface SwitchProps {
 	/** Отключает переключатель и запрещает взаимодействие. */
 	disabled?: boolean
 }
 
-defineProps<Props>()
+defineProps<SwitchProps>()
+
+const modelValue = defineModel<boolean>({ default: false })
 </script>
 
 <template>
@@ -24,9 +25,7 @@ defineProps<Props>()
 
 <style scoped lang="scss">
 .switch {
-	position: relative;
 	display: inline-flex;
-	align-items: center;
 	width: 36px;
 	height: 20px;
 	padding: 2px;
@@ -41,7 +40,7 @@ defineProps<Props>()
 
 	&:focus-visible {
 		outline: 2px solid var(--brand-dark, #292fba);
-		outline-offset: 2px;
+		outline-offset: 1px;
 	}
 
 	&[data-disabled] {
@@ -51,12 +50,10 @@ defineProps<Props>()
 }
 
 .switch__thumb {
-	display: block;
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
 	background-color: var(--white, #ffffff);
-	transform: translateX(0);
 	transition: transform 0.3s ease;
 
 	&[data-state="checked"] {

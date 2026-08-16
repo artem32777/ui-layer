@@ -26,16 +26,16 @@ const renderStates = (args: SelectStoryArgs) => ({
 	},
 	template: `
     <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-      <div style="display: flex; flex: 1 1 240px; flex-direction: column; gap: 8px;">
-        <span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+      <div>
+        <span>default</span>
         <Select v-bind="args" v-model="args.modelValue" :disabled="false" :invalid="false"/>
       </div>
-      <div style="display: flex; flex: 1 1 240px; flex-direction: column; gap: 8px;">
-        <span style="color: #666; font-size: 12px; line-height: 1;">invalid</span>
+      <div>
+        <span>invalid</span>
         <Select v-bind="args" v-model="args.modelValue" :disabled="false" invalid/>
       </div>
-      <div style="display: flex; flex: 1 1 240px; flex-direction: column; gap: 8px;">
-        <span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+      <div>
+        <span>disabled</span>
         <Select v-bind="args" v-model="args.modelValue" disabled :invalid="false"/>
       </div>
     </div>

@@ -2,37 +2,39 @@
 const modelValue = defineModel<string>({ default: '' })
 
 interface TextareaProps {
+	/** Плейсхордер. */
 	placeholder?: string
+	/** Состояние ошибки. */
+	invalid?: boolean
+	/** Отключает поле и запрещает взаимодействие. */
 	disabled?: boolean
-	rows?: number
 }
+
 withDefaults(defineProps<TextareaProps>(), {
-	rows: 4,
+	placeholder: 'Введите сообщение',
 })
 </script>
 
 <template>
 	<textarea
 		v-model="modelValue"
-		class="textarea"
 		:placeholder="placeholder"
+		:aria-invalid="invalid"
 		:disabled="disabled"
-		:rows="rows"
+		aria-label="textarea"
+		class="textarea"
 	/>
 </template>
 
 <style scoped lang="scss">
 .textarea {
 	width: 100%;
-	max-width: 848px;
-	min-height: 120px;
 	padding: 16px;
 	resize: vertical;
 	border: 1px solid transparent;
 	border-radius: 8px;
 	color: var(--text, #000000);
 	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 50%, transparent);
-	line-height: 1.5;
 	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
 
 	&::placeholder {

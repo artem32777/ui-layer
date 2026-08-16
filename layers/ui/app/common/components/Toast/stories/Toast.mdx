@@ -5,45 +5,13 @@ import ToastExampleSource from './ToastExample.vue?raw'
 <Meta of={ToastStories} />
 
 # Toast
-- Основан на <font color="blue">[`Vue-sonner`](https://vue-sonner.vercel.app/)</font>;
-- Краткое уведомление о результате действия. Контейнер отображается в правом нижнем углу и монтируется один раз на уровне приложения.
+- Основан на <font color="blue">[`Vue-sonner`](https://vue-sonner.vercel.app/)</font>.
 
-## Подключение
-
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-	modules: ['vue-sonner/nuxt'],
-})
-```
-Компонент-контейнер подключается один раз в `app.vue`:
-```vue
-<script setup lang="ts">
-import Toast from '#layers/ui/app/common/components/Toast/Toast.vue'
-</script>
-
-<template>
-	<NuxtPage />
-	<Toast />
-</template>
-```
-
-`$toast` предоставляется клиентским Nuxt-плагином. Вызывайте его из компонентов, обработчиков событий и клиентских хуков, но не из Nitro routes или другого серверного кода.
-
-## Примеры
-
-### Уведомление по клику
+### Пример использования
 
 <Source code={ToastExampleSource} language="vue" />
 
-<Canvas of={ToastStories.Base} />
-
-
-### Все виды уведомлений
-
-- Пример показывает шесть видов одновременно.
-- Стек сразу раскрыт, а уведомления не закрываются по таймеру.
-
+### Примеры базовых уведомлений.
 <Canvas of={ToastStories.Opened} />
 
 ## Какой вид выбрать
@@ -89,6 +57,28 @@ import Toast from '#layers/ui/app/common/components/Toast/Toast.vue'
 		</tr>
 	</tbody>
 </table>
+
+## Подключение
+
+```ts
+// nuxt.config.ts
+
+export default defineNuxtConfig({
+	modules: ['vue-sonner/nuxt'],
+})
+```
+```vue
+// app.vue
+
+<script setup lang="ts">
+import Toast from '#layers/ui/app/common/components/Toast/Toast.vue'
+</script>
+
+<template>
+	<NuxtPage />
+	<Toast />
+</template>
+```
 
 ## Заголовок и описание
 
@@ -184,6 +174,108 @@ $toast.warning('Проверьте данные', {
 ```
 
 Используйте индивидуальные стили только для отдельного продуктового сценария. Общий внешний вид настраивается централизованно в `Toast.vue`.
+
+## Создание кастомного тоста
+
+Если стандартных вариантов `$toast.success` и других недостаточно, создайте отдельный публичный метод, например `$toast.favorite`. Внутри такого метода используется `vueSonnerToast.custom`. Кастомный тост состоит из двух соседних файлов внутри своего feature:
+
+- Vue-компонент содержит разметку, иконки и scoped-стили;
+- TypeScript-файл вызывает `vueSonnerToast.custom`, передаёт props и добавляет новый публичный метод в API toast.
+
+Например, структура тоста избранного:
+
+```text
+components/add-to-favorite/toast/
+├── FavoriteToast.vue
+└── favoriteToast.ts
+```
+
+### Компонент тоста
+
+Компонент принимает только необходимые для отображения данные. Вся его стилизация остаётся рядом с разметкой:
+
+```vue
+<script setup lang="ts">
+import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
+import type { FavoriteAction } from './favoriteToast.ts'
+
+defineProps<{
+	action: FavoriteAction
+}>()
+</script>
+
+<template>
+	<div class="favorite-toast">
+		<Icon :name="action === 'add' ? 'star' : 'close'" />
+		<span class="favorite-toast__text">
+			{{ action === 'add' ? 'Добавлено в избранное' : 'Удалено из избранного' }}
+		</span>
+	</div>
+</template>
+
+<style scoped lang="scss">
+.favorite-toast {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 16px;
+	border-radius: 8px;
+	color: #ffffff;
+	background-color: #000000;
+}
+</style>
+```
+
+### Новый метод toast
+
+Расширяйте исходный singleton из `vue-sonner` через `Object.assign`. Компонент обязательно передавайте через `markRaw`, иначе Vue сделает его реактивным и выведет warning о лишних накладных расходах:
+
+```ts
+import { toast as vueSonnerToast } from 'vue-sonner'
+import { markRaw } from 'vue'
+import FavoriteToast from './FavoriteToast.vue'
+
+export type FavoriteAction = 'add' | 'remove'
+
+export const favoriteToast = Object.assign(vueSonnerToast, {
+	favorite(action: FavoriteAction) {
+		return vueSonnerToast.custom(markRaw(FavoriteToast), {
+			componentProps: { action },
+			position: 'bottom-center',
+		})
+	},
+})
+```
+
+`componentProps` передаёт props в компонент, а остальные параметры соответствуют обычным опциям `vue-sonner`: `position`, `duration`, `dismissible`, `closeButton` и другим.
+
+### Подключение к `$toast`
+
+Модуль `vue-sonner/nuxt` уже регистрирует `$toast`, поэтому нельзя повторно возвращать `provide: { toast }`: Nuxt завершит инициализацию с ошибкой `Cannot redefine property: $toast`.
+
+Импортируйте расширенный singleton в проектном Nuxt-плагине. Generic плагина добавит новый метод в тип `$toast`, а импорт выполнит расширение исходного объекта до его использования:
+
+```ts
+import { defineNuxtPlugin } from '#imports'
+import { favoriteToast } from '~/modules/premises/components/add-to-favorite/toast/favoriteToast'
+
+export default defineNuxtPlugin<{ toast: typeof favoriteToast }>(() => {
+	void favoriteToast
+})
+```
+
+После этого кастомный метод вызывается так же, как стандартные виды:
+
+```ts
+import { useNuxtApp } from '#imports'
+
+const { $toast } = useNuxtApp()
+
+$toast.favorite('add')
+$toast.favorite('remove')
+```
+
+Вызывайте `useNuxtApp()` только внутри Vue setup-функции, Nuxt-плагина, middleware или composable. Вызов на верхнем уровне импортируемого модуля выполняется без активного Nuxt-контекста и приводит к ошибке `A composable that requires access to the Nuxt instance was called outside of a plugin`.
 
 ## Настройка всех уведомлений
 

@@ -14,27 +14,23 @@ const renderStates = (args: ToggleStoryArgs) => ({
 	template: `
 		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
 			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+				<span>default</span>
 				<Toggle v-bind="args" v-model="args.modelValue" :disabled="false" aria-label="Полужирное начертание">B</Toggle>
 			</div>
 			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">outline</span>
-				<Toggle v-bind="args" v-model="args.modelValue" variant="outline" :disabled="false" aria-label="Полужирное начертание, outline">B</Toggle>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">pressed</span>
+				<span>pressed</span>
 				<Toggle v-bind="args" :model-value="true" :disabled="false" aria-label="Полужирное начертание, нажато">B</Toggle>
 			</div>
 			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+				<span>disabled</span>
 				<Toggle v-bind="args" v-model="args.modelValue" disabled aria-label="Полужирное начертание, недоступно">B</Toggle>
 			</div>
 			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">sm</span>
+				<span>sm</span>
 				<Toggle v-bind="args" v-model="args.modelValue" size="sm" :disabled="false" aria-label="Полужирное начертание, sm">B</Toggle>
 			</div>
 			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">lg</span>
+				<span>lg</span>
 				<Toggle v-bind="args" v-model="args.modelValue" size="lg" :disabled="false" aria-label="Полужирное начертание, lg">B</Toggle>
 			</div>
 		</div>
@@ -86,18 +82,7 @@ export const Outline: Story = {
 	args: {
 		variant: 'outline',
 	} satisfies Partial<ToggleStoryArgs>,
-}
-
-export const Pressed: Story = {
-	args: {
-		modelValue: true,
-	} satisfies Partial<ToggleStoryArgs>,
-}
-
-export const Disabled: Story = {
-	args: {
-		disabled: true,
-	} satisfies Partial<ToggleStoryArgs>,
+	render: renderStates,
 }
 
 export const Tests: Story = {

@@ -6,35 +6,42 @@ import { TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRo
 export interface TooltipProps {
 	/** Текст тултипа. Если нужен конент сложнее строки, можно его передать в слоте */
 	text?: string
-	/** Позиционирование тултипа */
+	/** Где появляется тултип */
 	side?: 'top' | 'right' | 'bottom' | 'left'
-	/** Cостояние тултипа */
-	open?: boolean
+	/** Положение стрелки-указателя */
+	align?: 'start' | 'center' | 'end'
+	/** Отступ от триггера до тултипа */
+	offset?: number
 }
 
 withDefaults(defineProps<TooltipProps>(), {
 	side: 'top',
+	align: 'center',
+	offset: 10,
 })
 
 defineSlots<{
-	/** Элемент, который открывает тултип. */
+	/** Обязательный элемент или строка, которые открывают тултип. */
 	default: any
-	/** Содержимое тултипа. */
+	/** Содержимое тултипа (вместо prop `text`) */
 	content?: any
 }>()
+
+const isOpenModel = defineModel<boolean>()
 </script>
 
 <template>
 	<TooltipProvider :delay-duration="0">
-		<TooltipRoot :default-open="open">
-			<TooltipTrigger as-child>
+		<TooltipRoot v-model:open="isOpenModel">
+			<TooltipTrigger as="span">
 				<slot />
 			</TooltipTrigger>
 			<TooltipPortal>
 				<TooltipContent
-					class="tooltip-content"
-					:side-offset="5"
 					:side="side"
+					:align="align"
+					:side-offset="offset"
+					class="tooltip-content"
 				>
 					<slot name="content">
 						{{ text }}

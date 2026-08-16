@@ -7,6 +7,12 @@ import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
 const themeStore = useThemeStore()
 const { theme } = storeToRefs(themeStore)
 const { setTheme } = themeStore
+
+const themeOptions = [
+	{ value: Theme.light, icon: iconNames.themeLight, label: 'Светлая тема' },
+	{ value: Theme.dark, icon: iconNames.themeDark, label: 'Тёмная тема' },
+	{ value: Theme.system, icon: iconNames.themeSystem, label: 'Системная тема' },
+]
 </script>
 
 <template>
@@ -16,37 +22,17 @@ const { setTheme } = themeStore
 		aria-label="Выбор темы"
 	>
 		<button
+			v-for="option in themeOptions"
+			:key="option.value"
 			class="theme-switcher__button"
-			:class="{ 'theme-switcher__button_active': theme === Theme.light }"
+			:class="{ 'theme-switcher__button--active': theme === option.value }"
 			type="button"
-			aria-label="Светлая тема"
-			title="Светлая тема"
-			:aria-pressed="theme === Theme.light"
-			@click="setTheme(Theme.light)"
+			:aria-label="option.label"
+			:title="option.label"
+			:aria-pressed="theme === option.value"
+			@click="setTheme(option.value)"
 		>
-			<Icon :name="iconNames.themeLight" />
-		</button>
-
-		<button
-			class="theme-switcher__button"
-			:class="{ 'theme-switcher__button_active': theme === Theme.dark }"
-			aria-label="Тёмная тема"
-			title="Тёмная тема"
-			:aria-pressed="theme === Theme.dark"
-			@click="setTheme(Theme.dark)"
-		>
-			<Icon :name="iconNames.themeDark" />
-		</button>
-
-		<button
-			class="theme-switcher__button"
-			:class="{ 'theme-switcher__button_active': theme === Theme.system }"
-			aria-label="Системная тема"
-			title="Системная тема"
-			:aria-pressed="theme === Theme.system"
-			@click="setTheme(Theme.system)"
-		>
-			<Icon :name="iconNames.themeSystem" />
+			<Icon :name="option.icon" />
 		</button>
 	</div>
 </template>
@@ -81,7 +67,7 @@ const { setTheme } = themeStore
 		outline-offset: -2px;
 	}
 
-  &_active {
+  &--active {
     color: var(--white, #ffffff);
     background-color: var(--brand, #4149f2);
 

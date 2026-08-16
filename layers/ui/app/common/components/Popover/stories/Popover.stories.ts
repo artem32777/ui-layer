@@ -65,9 +65,6 @@ export const Opened: Story = {
 		modelValue: true,
 		side: 'top',
 	},
-	parameters: {
-		layout: 'centered',
-	},
 }
 
 export const Tests: Story = {

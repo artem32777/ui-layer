@@ -5,36 +5,11 @@ import SwitchExampleSource from './SwitchExample.vue?raw'
 <Meta of={SwitchStories} />
 
 # Switch
+- - Основан на <font color="blue">[`Switch из Reka UI`](https://reka-ui.com/docs/components/switch)</font>;
 
-Компонент переключателя. Используется для бинарных настроек, когда изменение можно применить сразу без отдельной кнопки сохранения.
+<Canvas of={SwitchStories.Base} />
 
-## Когда использовать
-
-- `v-model` — управляет состоянием переключателя.
-- `disabled` — отключает переключатель и запрещает изменение значения.
-
-## Базовый пример
-
-<Canvas of={SwitchStories.Unchecked} />
-
-<Controls of={SwitchStories.Unchecked} />
-
-## Варианты
-
-### Включён
-
-```vue
-<Switch v-model="isEnabled" />
-```
-
-### Отключённое состояние
-
-```vue
-<Switch
-	v-model="isEnabled"
-	disabled
-/>
-```
+<Controls of={SwitchStories.Base} />
 
 ## Пример использования
 

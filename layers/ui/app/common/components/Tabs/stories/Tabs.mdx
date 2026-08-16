@@ -5,13 +5,12 @@ import TabsExampleSource from './TabsExample.vue?raw'
 <Meta of={TabsStories} />
 
 # Tabs
-- Основан на <font color="blue">[`Tabs из Reka UI`](https://reka-ui.com/docs/components/tabs)</font>;
-- Автоматически формирует именнованные слоты для контента из значений value массива заголовков;
-- Массив заголовков нужно типизировать через `as const satisfies TabsItem[]`;
+- Основан на <font color="blue">[`Tabs из Reka UI`](https://reka-ui.com/docs/components/tabs)</font>.
+- Автоматически формирует типизированные слоты для контента из значений value массива заголовков.
 
-<Canvas of={TabsStories.Account} />
+<Canvas of={TabsStories.Base} />
 
-<Controls of={TabsStories.Account} />
+<Controls of={TabsStories.Base} />
 
 ## Пример использования
 

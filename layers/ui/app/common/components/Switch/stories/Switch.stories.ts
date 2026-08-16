@@ -5,6 +5,23 @@ import Switch from '../Switch.vue'
 
 type SwitchStoryArgs = ComponentProps<typeof Switch>
 
+const renderStates = (args: SwitchStoryArgs) => ({
+	components: { Switch },
+	setup() { return { args } },
+	template: `
+		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
+			<div style="display: flex; flex-direction: column; gap: 8px;">
+				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+				<Switch v-bind="args" v-model="args.modelValue"  />
+			</div>
+			<div style="display: flex; flex-direction: column; gap: 8px;">
+				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+				<Switch v-bind="args" v-model="args.modelValue" disabled />
+			</div>
+		</div>
+	`,
+})
+
 const meta = {
 	title: 'UI/Switch',
 	component: Switch,
@@ -31,19 +48,16 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Unchecked: Story = {}
+export const Base: Story = {
+	render: renderStates,
+}
 
 export const Checked: Story = {
 	args: {
 		modelValue: true,
 	} satisfies Partial<SwitchStoryArgs>,
+	render: renderStates,
 }
-//
-// export const Disabled: Story = {
-// 	args: {
-// 		disabled: true,
-// 	} satisfies Partial<SwitchStoryArgs>,
-// }
 
 export const Tests: Story = {
 	play: async ({ canvas, userEvent }) => {

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Prevent displayed color values in `ColorPalette` from diverging from the CSS custom properties defined in `app/config/styles/colors.scss`.
+Prevent displayed color values in `Colors` from diverging from the CSS custom properties defined in `app/config/styles/colors.scss`.
 
 ## Design
 

@@ -5,10 +5,6 @@ import IconExampleSource from './IconExample.vue?raw'
 <Meta of={IconStories} />
 
 # Icon
-- Компонент выводит SVG-иконки, которые находятся в папке `app/modules/svg-icon/icon-source`
-- Имя передаётся через объект `iconNames`, содержащий автоматически сгенерерированные имена из названий файлов.
-- Подробнее читай в документации модуля генерации иконок - `app/modules/svg-icon/README.md`
-
 <Canvas of={IconStories.Base} />
 
 <Controls of={IconStories.Base} />
@@ -16,3 +12,30 @@ import IconExampleSource from './IconExample.vue?raw'
 ## Пример использования
 
 <Source code={IconExampleSource} language="vue" />
+
+## Добавление новых иконок
+1. Добавь SVG-файл в `./icon-source`.
+2. Используй имя файла в lowercase kebab-case, например `arrow-right.svg`.
+3. Поддерживаются вложенные папки для группировки. Имя папки становится частью имени иконки, например `test/download-2.svg` станет `test-download-2`.
+4. В dev-режиме перезапуск Nuxt не нужен: модуль следит за SVG-файлами и автоматически обновляет `./runtime/iconNames.ts`.
+
+## Настройки модуля
+Настройки модуля задаются в `nuxt.config.ts`:
+
+```ts
+modules: [
+	resolve('./app/modules/svg-icon'),
+],
+
+svgIcons: {
+	iconsDir: resolve('./app/modules/svg-icon/icon-source'),
+	runtimeIconNamesPath: resolve('./app/modules/svg-icon/runtime/iconNames.ts'),
+	rootGroupTitle: 'Корень',
+	recursive: true,
+}
+```
+
+## Реестр иконок
+- По клику копируется название
+- Доступен поиск
+<Canvas of={IconStories.Icons} />

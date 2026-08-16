@@ -5,9 +5,11 @@ import * as ColorsStories from './Colors.stories'
 
 # Цвета
 
-Палитра строится на CSS-переменных из `app/config/styles/colors.scss`. В компонентах используем переменные, а не прямые hex-значения: так светлая и тёмная темы остаются синхронными.
+- Палитра строится на CSS-переменных из `app/config/styles/colors.scss`.
+- В компонентах используем переменные `var(--brand)`.
+- Клик по цвету на превью ниже для изменения его в сторибуке.
 
-<Canvas of={ColorsStories.ColorPalette} />
+<Canvas of={ColorsStories.Colors} />
 
 ## Правила
 

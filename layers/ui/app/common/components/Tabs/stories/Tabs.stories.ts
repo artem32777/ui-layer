@@ -60,8 +60,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Account: Story = {}
-export const Password: Story = { args: { modelValue: 'password' } }
+export const Base: Story = {}
 
 export const Tests: Story = {
 	play: async ({ canvas, userEvent }) => {

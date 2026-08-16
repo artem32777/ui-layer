@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends Record<string, any>">
 import type { Swiper as SwiperInstance } from 'swiper'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -7,7 +7,13 @@ import SliderPagination from './pagination/SliderPagination.vue'
 import { SliderNavClass, type SliderOptions, type SliderProps, type SwiperVueOptions } from './types'
 import SliderNav from './navigation/SliderNav.vue'
 
-const { slides, options, swiperOptions } = defineProps<SliderProps>()
+const { slides, options, swiperOptions } = defineProps<SliderProps<T>>()
+
+defineSlots<{
+	slide: (props: { slide: T, index: number }) => unknown
+	nav?: () => unknown
+	pagination?: (props: { count: number, swiper: SwiperInstance | null }) => unknown
+}>()
 
 const defaultOptions: SliderOptions = {
 	hasNav: true,
@@ -57,12 +63,15 @@ function handleSlideChange(swiper: SwiperInstance) {
 				@slide-change="handleSlideChange"
 			>
 				<SwiperSlide
-					v-for="(_, index) in slides"
+					v-for="(slide, index) in slides"
 					:key="index"
 					class="slider__slide"
 				>
 					<!-- Содержимое слайда -->
-					<slot name="slide" />
+					<slot
+						name="slide"
+						v-bind="{ slide, index }"
+					/>
 				</SwiperSlide>
 
 				<!-- Навигация -->

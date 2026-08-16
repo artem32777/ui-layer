@@ -65,6 +65,7 @@ defineProps<SelectTriggerProps>()
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-width: 150px;
   min-height: 56px;
   padding: 0 16px;
   gap: 8px;
@@ -72,7 +73,6 @@ defineProps<SelectTriggerProps>()
   border-radius: 8px;
   color: var(--text, #000000);
   background-color: color-mix(in srgb, var(--grey, #e2e2e2) 40%, transparent);
-  font-weight: 600;
   transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
   cursor: pointer;
 

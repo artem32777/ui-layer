@@ -14,7 +14,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Base: Story = {
-	name: 'По клику',
 	render: () => ({
 		components: { Toast, ToastExample },
 		template: `

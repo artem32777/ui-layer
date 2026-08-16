@@ -33,7 +33,7 @@ export default defineNuxtConfig({
 
 	modules: [
 		'@nuxt/eslint',
-		'@nuxt/hints',
+		// '@nuxt/hints',
 		'@nuxtjs/device',
 		'@pinia/nuxt',
 		'@vueuse/nuxt',

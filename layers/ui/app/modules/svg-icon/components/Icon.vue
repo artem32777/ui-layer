@@ -3,11 +3,11 @@ import { computed } from 'vue'
 import { svgIconData, type IconName } from '../runtime/iconNames'
 
 export interface SvgIconProps {
-	/** Имя иконки из типизированного реестра `IconName`. */
+	/** Имя иконки из обекта `iconNames` */
 	name: IconName
-	/** Ширина и высота иконки. Число преобразуется в пиксели, строка используется как CSS-значение. */
+	/** Ширина и высота иконки.  */
 	size?: number | string
-	/** Цвет иконки. По умолчанию наследуется через `currentColor`. */
+	/** Цвет иконки. По умолчанию наследуется currentColor. */
 	color?: string
 }
 

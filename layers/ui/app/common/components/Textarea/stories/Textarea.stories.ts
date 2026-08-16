@@ -8,18 +8,18 @@ const renderStates = (args: TextareaStoryArgs) => ({
 	components: { Textarea },
 	setup() { return { args } },
 	template: `
-		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-			<div style="display: flex; flex: 1 1 240px; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
-				<Textarea v-bind="args" v-model="args.modelValue" :disabled="false" aria-label="Textarea" />
+		<div style="display: flex; align-items: flex-start; gap: 24px;">
+			<div style="display: flex; flex-direction: column; gap: 8px;">
+				<span>default</span>
+				<Textarea v-bind="args" v-model="args.modelValue" aria-label="Textarea" />
 			</div>
-			<div style="display: flex; flex: 1 1 240px; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">invalid</span>
-				<Textarea v-bind="args" v-model="args.modelValue" :disabled="false" aria-invalid="true" aria-label="Textarea invalid" />
+			<div style="display: flex; flex-direction: column; gap: 8px;">
+				<span>invalid</span>
+				<Textarea v-bind="args" v-model="args.modelValue" aria-invalid="true" />
 			</div>
-			<div style="display: flex; flex: 1 1 240px; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
-				<Textarea v-bind="args" v-model="args.modelValue" disabled aria-label="Textarea disabled" />
+			<div style="display: flex; flex-direction: column; gap: 8px;">
+				<span>disabled</span>
+				<Textarea v-bind="args" v-model="args.modelValue" disabled />
 			</div>
 		</div>
 	`,
@@ -34,23 +34,21 @@ const meta = {
 	argTypes: {
 		placeholder: { control: 'text' },
 		modelValue: {
-			description: 'Текущее значение текстового поля.',
+			description: 'Значение текстового поля.',
 			control: 'text',
 			table: { type: { summary: 'string' } },
 		},
-		rows: { control: 'number' },
+		invalid: { control: 'boolean' },
 		disabled: { control: 'boolean' },
 	},
 	args: {
 		placeholder: 'Введите сообщение',
 		modelValue: '',
-		rows: 4,
-		disabled: false,
 	} satisfies TextareaStoryArgs,
 	render: (args: TextareaStoryArgs) => ({
 		components: { Textarea },
 		setup() { return { args } },
-		template: '<Textarea v-bind="args" v-model="args.modelValue" aria-label="Textarea" />',
+		template: '<Textarea v-bind="args" v-model="args.modelValue" />',
 	}),
 } satisfies Meta<typeof Textarea>
 
@@ -60,13 +58,6 @@ type Story = StoryObj<typeof meta>
 
 export const DocsExample: Story = {
 	tags: ['!dev'],
-}
-
-export const DocsFilled: Story = {
-	tags: ['!dev'],
-	args: {
-		modelValue: 'Текст в поле\nс переносом строки',
-	} satisfies Partial<TextareaStoryArgs>,
 }
 
 export const Base: Story = {

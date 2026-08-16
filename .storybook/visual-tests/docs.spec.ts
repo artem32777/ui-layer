@@ -46,6 +46,27 @@ test('Docs открывается после Canvas без Illegal invocation', 
 	const previewFrame = page.locator('#storybook-preview-iframe')
 	await expect(previewFrame).toBeVisible()
 
+	await previewFrame.contentFrame().locator('#storybook-root').evaluate(() => {
+		const nativeFocus = HTMLElement.prototype.focus
+		let currentFocus = nativeFocus
+
+		Object.defineProperties(HTMLElement.prototype, {
+			focus: {
+				configurable: true,
+				set(newFocus) {
+					currentFocus = newFocus
+				},
+				get() {
+					return this.ownerDocument?.defaultView ? currentFocus : () => {}
+				},
+			},
+		})
+	})
+
+	await expect(previewFrame.contentFrame().locator('#storybook-root').evaluate(() => (
+		typeof HTMLElement.prototype.focus
+	))).resolves.toBe('function')
+
 	// Нажатие, а не второй `page.goto`, сохраняет тот же preview runtime —
 	// именно в нём Storybook успевает установить проблемный focus getter.
 	const componentId = storyWithDocs!.id.split('--')[0]
