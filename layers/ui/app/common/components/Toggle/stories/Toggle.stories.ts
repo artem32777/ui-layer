@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
 import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Toggle from '../Toggle.vue'
 
 type ToggleStoryArgs = ComponentProps<typeof Toggle>
@@ -9,31 +11,26 @@ type ToggleStoryArgs = ComponentProps<typeof Toggle>
 const getOptions = getStringsArrFromKey<ToggleStoryArgs>()
 
 const renderStates = (args: ToggleStoryArgs) => ({
-	components: { Toggle },
+	components: { StoryGridItem, StoryGridRow, Toggle },
 	setup() { return { args } },
 	template: `
-		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>default</span>
+		<StoryGridRow>
+			<StoryGridItem title="default">
 				<Toggle v-bind="args" v-model="args.modelValue" :disabled="false" aria-label="Полужирное начертание">B</Toggle>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>pressed</span>
+			</StoryGridItem>
+			<StoryGridItem title="pressed">
 				<Toggle v-bind="args" :model-value="true" :disabled="false" aria-label="Полужирное начертание, нажато">B</Toggle>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled">
 				<Toggle v-bind="args" v-model="args.modelValue" disabled aria-label="Полужирное начертание, недоступно">B</Toggle>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>sm</span>
+			</StoryGridItem>
+			<StoryGridItem title="sm">
 				<Toggle v-bind="args" v-model="args.modelValue" size="sm" :disabled="false" aria-label="Полужирное начертание, sm">B</Toggle>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>lg</span>
+			</StoryGridItem>
+			<StoryGridItem title="lg">
 				<Toggle v-bind="args" v-model="args.modelValue" size="lg" :disabled="false" aria-label="Полужирное начертание, lg">B</Toggle>
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 

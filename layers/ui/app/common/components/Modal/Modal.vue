@@ -74,7 +74,7 @@ defineSlots<{
 					<slot name="closeBtn">
 						<Button
 							:icon-left="iconNames.close"
-							variant="ghost"
+							variant="outline"
 						/>
 					</slot>
 				</DialogClose>

@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ConcreteComponent } from 'vue'
+import { reactive } from 'vue'
 import { expect, waitFor, within } from 'storybook/test'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import Select from '../Select.vue'
 import type { SelectProps } from '../Select.vue'
 import selectTypesSource from '../Select.types.ts?raw'
@@ -20,25 +25,22 @@ const options = [
 ]
 
 const renderStates = (args: SelectStoryArgs) => ({
-	components: { Select },
+	components: { Select, StoryGridItem, StoryGridRow },
 	setup() {
 		return { args }
 	},
 	template: `
-    <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-      <div>
-        <span>default</span>
-        <Select v-bind="args" v-model="args.modelValue" :disabled="false" :invalid="false"/>
-      </div>
-      <div>
-        <span>invalid</span>
-        <Select v-bind="args" v-model="args.modelValue" :disabled="false" invalid/>
-      </div>
-      <div>
-        <span>disabled</span>
-        <Select v-bind="args" v-model="args.modelValue" disabled :invalid="false"/>
-      </div>
-    </div>
+		<StoryGridRow>
+			<StoryGridItem title="default">
+				<Select v-bind="args" v-model="args.modelValue" :disabled="false" :invalid="false"/>
+			</StoryGridItem>
+			<StoryGridItem title="invalid">
+				<Select v-bind="args" v-model="args.modelValue" :disabled="false" invalid/>
+			</StoryGridItem>
+			<StoryGridItem title="disabled">
+				<Select v-bind="args" v-model="args.modelValue" disabled :invalid="false"/>
+			</StoryGridItem>
+		</StoryGridRow>
   `,
 })
 
@@ -124,6 +126,90 @@ export const DocsMultiple: Story = {
 		modelValue: ['moscow', 'kazan'],
 		multiple: true,
 	},
+}
+
+export const States: Story = {
+	render: (args: SelectStoryArgs) => ({
+		components: { Select, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		setup() {
+			const models = reactive({
+				base: {
+					default: undefined as string | undefined,
+					selected: 'moscow',
+					multiple: ['moscow', 'kazan'],
+					invalid: undefined as string | undefined,
+					disabled: undefined as string | undefined,
+					sm: undefined as string | undefined,
+					lg: undefined as string | undefined,
+				},
+				secondary: {
+					default: undefined as string | undefined,
+					selected: 'moscow',
+					multiple: ['moscow', 'kazan'],
+					invalid: undefined as string | undefined,
+					disabled: undefined as string | undefined,
+					sm: undefined as string | undefined,
+					lg: undefined as string | undefined,
+				},
+			})
+
+			return { args, models }
+		},
+		template: `
+			<StoryGrid>
+				<StoryGridSection title="base">
+					<StoryGridRow>
+						<StoryGridItem title="Default · md">
+							<Select v-bind="args" v-model="models.base.default" variant="base" size="md" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Selected">
+							<Select v-bind="args" v-model="models.base.selected" variant="base" size="md" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Multiple">
+							<Select v-bind="args" v-model="models.base.multiple" variant="base" size="md" multiple :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Invalid">
+							<Select v-bind="args" v-model="models.base.invalid" variant="base" size="md" :multiple="false" invalid :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Disabled">
+							<Select v-bind="args" v-model="models.base.disabled" variant="base" size="md" :multiple="false" :invalid="false" disabled />
+						</StoryGridItem>
+						<StoryGridItem title="Size: sm">
+							<Select v-bind="args" v-model="models.base.sm" variant="base" size="sm" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Size: lg">
+							<Select v-bind="args" v-model="models.base.lg" variant="base" size="lg" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+				<StoryGridSection title="secondary">
+					<StoryGridRow>
+						<StoryGridItem title="Default · md">
+							<Select v-bind="args" v-model="models.secondary.default" variant="secondary" size="md" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Selected">
+							<Select v-bind="args" v-model="models.secondary.selected" variant="secondary" size="md" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Multiple">
+							<Select v-bind="args" v-model="models.secondary.multiple" variant="secondary" size="md" multiple :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Invalid">
+							<Select v-bind="args" v-model="models.secondary.invalid" variant="secondary" size="md" :multiple="false" invalid :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Disabled">
+							<Select v-bind="args" v-model="models.secondary.disabled" variant="secondary" size="md" :multiple="false" :invalid="false" disabled />
+						</StoryGridItem>
+						<StoryGridItem title="Size: sm">
+							<Select v-bind="args" v-model="models.secondary.sm" variant="secondary" size="sm" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+						<StoryGridItem title="Size: lg">
+							<Select v-bind="args" v-model="models.secondary.lg" variant="secondary" size="lg" :multiple="false" :invalid="false" :disabled="false" />
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+			</StoryGrid>
+		`,
+	}),
 }
 
 export const Base: Story = {

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Spinner from '../Spinner.vue'
 
 type SpinnerStoryArgs = ComponentProps<typeof Spinner>
@@ -34,23 +36,20 @@ export const DocsExample: Story = {
 
 export const Base: Story = {
 	render: args => ({
-		components: { Spinner },
+		components: { Spinner, StoryGridItem, StoryGridRow },
 		setup() { return { args } },
 		template: `
-			<div style="display: flex; align-items: flex-start; gap: 24px;">
-				<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-					<span style="color: #666; font-size: 12px; line-height: 1;">s</span>
+			<StoryGridRow>
+				<StoryGridItem title="s" style="align-items: center;">
 					<Spinner v-bind="args" size="s" label="Загрузка, размер s" />
-				</div>
-				<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-					<span style="color: #666; font-size: 12px; line-height: 1;">m</span>
+				</StoryGridItem>
+				<StoryGridItem title="m" style="align-items: center;">
 					<Spinner v-bind="args" size="m" label="Загрузка, размер m" />
-				</div>
-				<div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-					<span style="color: #666; font-size: 12px; line-height: 1;">l</span>
+				</StoryGridItem>
+				<StoryGridItem title="l" style="align-items: center;">
 					<Spinner v-bind="args" size="l" label="Загрузка, размер l" />
-				</div>
-			</div>
+				</StoryGridItem>
+			</StoryGridRow>
 		`,
 	}),
 	play: async ({ canvas }) => {

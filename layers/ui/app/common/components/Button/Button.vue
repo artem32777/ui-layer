@@ -5,7 +5,7 @@ import { Icon, type IconName } from '#layers/ui/app/modules/svg-icon'
 
 export interface ButtonProps {
 	/** Визуальный вариация. */
-	variant?: 'base' | 'ghost' | 'outline'
+	variant?: 'base' | 'outline'
 	/** Cостояние. */
 	state?: 'default' | 'disabled' | 'progress' | 'focused' | 'hovered' | 'pressed'
 	/** Размер. */
@@ -20,8 +20,6 @@ export interface ButtonProps {
 	iconRight?: IconName
 	/** Отключает кнопку и запрещает взаимодействие. */
 	disabled?: boolean
-	/** Передаёт рендер корневого элемента дочернему компоненту Reka UI. */
-	asChild?: boolean
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -43,8 +41,7 @@ const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props
 
 <template>
 	<Primitive
-		:as="asChild ? 'span' : 'button'"
-		:as-child="asChild"
+		as="button"
 		:type="type"
 		:disabled="isDisabled"
 		:aria-busy="state === 'progress'"
@@ -136,7 +133,7 @@ const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props
 		}
 	}
 
-// BASE-STROKED:
+// OUTLINE:
 	&.button--outline {
 		color: var(--brand-dark, #292fba);
 		background-color: transparent;
@@ -160,29 +157,6 @@ const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props
 			background-color: color-mix(in srgb, var(--brand, #4149f2) 10%, transparent);
 			border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
 			box-shadow: inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 10%, transparent);
-		}
-	}
-
-// GHOST:
-	&.button--ghost {
-		color: var(--brand-dark, #292fba);
-		background-color: transparent;
-		border: none;
-
-		&:focus-visible,
-		&.button--state-focused {
-			outline: none;
-		}
-
-		&:active,
-		&.button--state-pressed {
-			box-shadow: inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 10%, transparent);
-		}
-
-		&:disabled,
-		&[data-disabled] {
-			background-color: transparent;
-			border: none;
 		}
 	}
 

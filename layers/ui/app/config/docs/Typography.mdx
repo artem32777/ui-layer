@@ -1,0 +1,26 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as DesignSystemStories from './DesignSystem.stories'
+
+<Meta title="Design System/Типографика" />
+
+# Типографика
+
+- Локальная шкала типографики описана в `layers/ui/app/config/styles/shared/font-size.scss`.
+- Для компонентов и страниц используем миксин `font-size($name)`, чтобы размеры менялись по тем же брейкпоинтам.
+
+<Canvas of={DesignSystemStories.TypographyScale} />
+
+
+## Пример
+
+```scss
+.section__title {
+	@include font-size(h2);
+	color: var(--headers);
+}
+
+.section__description {
+	@include font-size(p2-regular);
+	color: var(--additional-2);
+}
+```

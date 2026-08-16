@@ -2,28 +2,27 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ConcreteComponent } from 'vue'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, fn } from 'storybook/test'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import PinInput from '../PinInput.vue'
 
 type PinInputStoryArgs = ComponentProps<typeof PinInput>
 
 const renderStates = (args: PinInputStoryArgs) => ({
-	components: { PinInput },
+	components: { PinInput, StoryGridItem, StoryGridRow },
 	setup() { return { args } },
 	template: `
-		<div style="display: flex; flex-direction: column; gap: 24px;">
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+		<StoryGridRow>
+			<StoryGridItem title="default">
 				<PinInput v-bind="args" v-model="args.modelValue" :invalid="false" :disabled="false" aria-label="Pin input" />
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">invalid</span>
+			</StoryGridItem>
+			<StoryGridItem title="invalid">
 				<PinInput v-bind="args" v-model="args.modelValue" invalid :disabled="false" aria-label="Invalid pin input" />
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled">
 				<PinInput v-bind="args" v-model="args.modelValue" :invalid="false" disabled aria-label="Disabled pin input" />
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 

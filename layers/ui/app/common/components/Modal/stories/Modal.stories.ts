@@ -2,8 +2,11 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, waitFor, within } from 'storybook/test'
 import Modal from '../Modal.vue'
+import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey.ts'
 
 type ModalStoryArgs = ComponentProps<typeof Modal>
+
+const getOptions = getStringsArrFromKey<ModalStoryArgs>()
 
 const meta = {
 	title: 'UI/Modal',
@@ -15,6 +18,10 @@ const meta = {
 		modelValue: {
 			description: 'Открыто ли модальное окно.',
 			control: 'boolean',
+		},
+		variant: {
+			control: 'select',
+			options: getOptions('variant', ['base', 'fullscreen-mobile']),
 		},
 	},
 	args: {

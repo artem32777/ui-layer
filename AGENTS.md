@@ -31,7 +31,7 @@
 - Автоимпорт компонентов и composables отключён через `components: false` и `imports.autoImport: false`. Добавляй явные импорты.
 - Nuxt-каталоги перенесены: layouts, middleware и plugins ищутся в `config/layouts`, `config/middleware` и `config/plugins` внутри соответствующего `app`.
 - Страницы и сегменты маршрутов с именем, начинающимся на `_`, доступны в dev-режиме, но исключаются из production-сборки через `pages.pattern`.
-- SCSS-файлы из `app/config/styles/shared` и `app/common/mixins` автоматически подключаются к каждому SCSS style-блоку. Не добавляй повторные `@use` для них.
+- SCSS-файлы из `layers/ui/app/config/styles/shared` и `layers/ui/app/common/mixins` автоматически подключаются к каждому SCSS style-блоку. Не добавляй повторные `@use` для них.
 - Для навигации импортируй `navigateTo`, `useRoute` и `useRouter` из `~/common/utils/router`. Прямые импорты этих функций из `#app` и `#imports` запрещены ESLint.
 
 - В импортах не разноси один импорт на разные строки. импорт всегда должен быть в одной строке
@@ -44,7 +44,7 @@
 - Пседоклассы и всевдоэлементы через &:hover, не пиши как в простом css .class:hover;
 - Не обращайся к элементам через селекторы, если можно использовать классы. Это не касается файлов глобальных стилей;
 - Медиазапросы не пиши в корне css, вставляй их только внутри классов;
-- Если нужно задать z-index для компонентов верхнего уровня (`header`, `footer`, `main` и др), а также для fixed - используй переменные из app/config/styles/shared/z-index.scss или создай там новую.
+- Если нужно задать z-index для компонентов верхнего уровня (`header`, `footer`, `main` и др), а также для fixed - используй переменные из layers/ui/app/config/styles/shared/z-index.scss или создай там новую.
 
 ## VUE-правила
 - В компонентах делай секцию <script setup lang="ts> всегда сверху, потом template, потом style;

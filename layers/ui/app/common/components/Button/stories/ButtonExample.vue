@@ -5,7 +5,6 @@ import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 
 <template>
 	<Button
-		variant="ghost"
 		size="l"
 		:icon-left="iconNames.plus"
 	>

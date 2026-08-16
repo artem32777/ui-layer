@@ -1,13 +1,11 @@
 import type { NuxtConfig } from 'nuxt/schema'
 import { readdirSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
 import { defineNuxtConfig } from 'nuxt/config'
 
-const rootDir = dirname(fileURLToPath(import.meta.url))
 const sharedScssDirectories = [
-	'app/config/styles/shared',
-	'app/common/mixins',
+	'layers/ui/app/config/styles/shared',
+	'layers/ui/app/common/mixins',
 ]
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -56,8 +54,6 @@ export default defineNuxtConfig({
 		},
 	},
 
-	css: ['@/config/styles/index.scss'],
-
 	compatibilityDate: '2026-07-27',
 
 	nitro: {
@@ -69,16 +65,6 @@ export default defineNuxtConfig({
 
 	typescript: {
 		typeCheck: true,
-	},
-
-	vite: {
-		css: {
-			preprocessorOptions: {
-				scss: {
-					additionalData: `${getSharedScssAdditionalData(rootDir)}\n`,
-				},
-			},
-		},
 	},
 
 	eslint: {

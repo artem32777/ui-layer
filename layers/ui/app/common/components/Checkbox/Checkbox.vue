@@ -5,7 +5,7 @@ import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 const modelValue = defineModel<boolean>({ default: false })
 
 export interface CheckboxProps {
-	/** Размер чекбокса и иконки отметки внутри него в пикселях. */
+	/** Размер чекбокса */
 	size?: number | string
 	/** Состояние ошибки. */
 	invalid?: boolean
@@ -94,5 +94,6 @@ defineSlots<{
 
 .checkbox__indicator {
 	color: var(--white, #ffffff);
+  padding: 2px;
 }
 </style>

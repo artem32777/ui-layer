@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { ref } from 'vue'
-import colorsScss from '~~/app/config/styles/colors.scss?raw'
+import colorsScss from '#layers/ui/app/config/styles/colors.scss?raw'
 
 const meta = {
 	title: 'Design System/Examples',
@@ -63,9 +63,9 @@ export const Colors: Story = {
 						@input="setColor(color.name, $event)"
 					>
 					<div style="display: grid; gap: 6px; padding: 12px;">
-						<strong style="color: var(--text); font-size: 14px;">{{ color.name }}</strong>
-						<span style="color: var(--additional-2); font-size: 13px;">{{ color.value }}</span>
-						<span style="color: var(--text); font-size: 13px; line-height: 1.45;">{{ color.role }}</span>
+						<strong>{{ color.name }}</strong>
+						<span>{{ color.value }}</span>
+						<span>{{ color.role }}</span>
 					</div>
 				</div>
 			</div>

@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, within } from 'storybook/test'
 import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import NumberField from '../NumberField.vue'
 
 type NumberFieldStoryArgs = ComponentProps<typeof NumberField>
@@ -9,46 +11,41 @@ type NumberFieldStoryArgs = ComponentProps<typeof NumberField>
 const getOptions = getStringsArrFromKey<NumberFieldStoryArgs>()
 
 const renderStates = (variant: NumberFieldStoryArgs['variant']) => (args: NumberFieldStoryArgs) => ({
-	components: { NumberField },
+	components: { NumberField, StoryGridItem, StoryGridRow },
 	setup() { return { args, variant } },
 	template: `
-		<div style="display: flex; flex-direction: column; gap: 24px; max-width: 360px;">
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+		<StoryGridRow style="max-width: 360px;">
+			<StoryGridItem title="default" style="width: 100%;">
 				<label style="display: flex; flex-direction: column; gap: 8px;">
 					Количество
 					<NumberField v-bind="args" v-model="args.modelValue" :variant="variant" :disabled="false" />
 				</label>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">invalid</span>
+			</StoryGridItem>
+			<StoryGridItem title="invalid" style="width: 100%;">
 				<label style="display: flex; flex-direction: column; gap: 8px;">
 					Количество
 					<NumberField v-bind="args" v-model="args.modelValue" :variant="variant" :disabled="false" aria-invalid="true" />
 				</label>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled" style="width: 100%;">
 				<label style="display: flex; flex-direction: column; gap: 8px;">
 					Количество
 					<NumberField v-bind="args" v-model="args.modelValue" :variant="variant" disabled />
 				</label>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">size: sm</span>
+			</StoryGridItem>
+			<StoryGridItem title="size: sm" style="width: 100%;">
 				<label style="display: flex; flex-direction: column; gap: 8px;">
 					Количество
 					<NumberField v-bind="args" v-model="args.modelValue" :variant="variant" size="sm" :disabled="false" />
 				</label>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">size: lg</span>
+			</StoryGridItem>
+			<StoryGridItem title="size: lg" style="width: 100%;">
 				<label style="display: flex; flex-direction: column; gap: 8px;">
 					Количество
 					<NumberField v-bind="args" v-model="args.modelValue" :variant="variant" size="lg" :disabled="false" />
 				</label>
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 

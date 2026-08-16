@@ -1,24 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Switch from '../Switch.vue'
 
 type SwitchStoryArgs = ComponentProps<typeof Switch>
 
 const renderStates = (args: SwitchStoryArgs) => ({
-	components: { Switch },
+	components: { StoryGridItem, StoryGridRow, Switch },
 	setup() { return { args } },
 	template: `
-		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+		<StoryGridRow>
+			<StoryGridItem title="default">
 				<Switch v-bind="args" v-model="args.modelValue"  />
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled">
 				<Switch v-bind="args" v-model="args.modelValue" disabled />
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 

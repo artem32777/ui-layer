@@ -1,28 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, waitFor } from 'storybook/test'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Rating from '../Rating.vue'
 
 type RatingStoryArgs = ComponentProps<typeof Rating>
 
 const renderStates = (args: RatingStoryArgs) => ({
-	components: { Rating },
+	components: { Rating, StoryGridItem, StoryGridRow },
 	setup() { return { args } },
 	template: `
-		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+		<StoryGridRow>
+			<StoryGridItem title="default">
 				<Rating v-bind="args" v-model="args.modelValue" :invalid="false" :disabled="false" aria-label="Оценка" />
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">invalid</span>
+			</StoryGridItem>
+			<StoryGridItem title="invalid">
 				<Rating v-bind="args" v-model="args.modelValue" invalid :disabled="false" aria-label="Некорректная оценка" />
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled">
 				<Rating v-bind="args" v-model="args.modelValue" :invalid="false" disabled aria-label="Недоступная оценка" />
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 

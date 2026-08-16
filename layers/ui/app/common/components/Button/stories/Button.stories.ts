@@ -4,6 +4,10 @@ import { useClipboard } from '@vueuse/core'
 import { computed } from 'vue'
 import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
 import { iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import Button from '../Button.vue'
 
 type ButtonStoryArgs = ComponentProps<typeof Button>
@@ -16,7 +20,7 @@ const getOptions = getStringsArrFromKey<ButtonStoryArgs>()
 type ButtonState = NonNullable<ButtonStoryArgs['state']>
 type ButtonVariant = NonNullable<ButtonStoryArgs['variant']>
 const buttonStates = ['default', 'hovered', 'focused', 'pressed', 'progress', 'disabled'] satisfies ButtonState[]
-const buttonVariants = ['base', 'outline', 'ghost'] satisfies ButtonVariant[]
+const buttonVariants = ['base', 'outline'] satisfies ButtonVariant[]
 
 const meta = {
 	title: 'UI/Button',
@@ -24,7 +28,7 @@ const meta = {
 	argTypes: {
 		variant: {
 			control: 'select',
-			options: getOptions('variant', ['base', 'outline', 'ghost', 'outline']),
+			options: getOptions('variant', ['base', 'outline', 'outline']),
 		},
 		size: {
 			control: 'select',
@@ -47,7 +51,6 @@ const meta = {
 			options: iconNameList,
 		},
 		disabled: { control: 'boolean' },
-		asChild: { control: 'boolean' },
 	},
 	args: {
 		text: 'Кнопка',
@@ -56,7 +59,6 @@ const meta = {
 		size: 'm',
 		type: 'button',
 		disabled: false,
-		asChild: false,
 	} satisfies ButtonStoryArgs,
 	render: (args: ButtonStoryArgs) => ({
 		components: { Button },
@@ -76,27 +78,25 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
-export const Base: Story = {
+export const States: Story = {
 	render: (args: ButtonStoryArgs) => ({
-		components: { Button },
+		components: { Button, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
 			return { args, buttonStates, buttonVariants, iconNames }
 		},
 		template: `
-			<div style="display: flex; flex-direction: column; gap: 40px;">
-				<section
+			<StoryGrid>
+				<StoryGridSection
 					v-for="variant in buttonVariants"
 					:key="variant"
-					style="display: flex; flex-direction: column; gap: 16px; border-bottom: 1px solid #000; padding-bottom: 20px"
+					:title="variant"
 				>
-					<h2 style="font-size: 25px; font-weight: 600">{{ variant }}</h2>
-					<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-						<div
+					<StoryGridRow>
+						<StoryGridItem
 							v-for="state in buttonStates"
 							:key="state"
-							style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px;"
+							:title="state"
 						>
-							<span>{{ state }}</span>
 							<Button v-bind="args" :variant="variant" :state="state"/>
 							<Button v-bind="args" :variant="variant" :state="state" :icon-left="iconNames.plus">
 								{{ args.text }}
@@ -105,10 +105,10 @@ export const Base: Story = {
 								{{ args.text }}
 							</Button>
 							<Button v-bind="args" :variant="variant" :state="state" text="" :icon-left="iconNames.plus" aria-label="Добавить" />
-						</div>
-					</div>
-				</section>
-			</div>
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+			</StoryGrid>
 		`,
 	}),
 }
@@ -144,7 +144,6 @@ export const Styles: StylesStory = {
 					:icon-left="args.iconLeft"
 					:icon-right="args.iconRight"
 					:disabled="args.disabled"
-					:as-child="args.asChild"
 					:style="{ backgroundColor: args.backgroundColor, borderRadius: args.borderRadius }"
 				/>
 				<label style="display: grid; gap: 8px; width: min(100%, 420px);">

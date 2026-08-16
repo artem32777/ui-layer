@@ -1,5 +1,5 @@
 import { createResolver } from 'nuxt/kit'
-import { baseNuxtConfig } from '../../nuxt.config.ts'
+import { baseNuxtConfig, getSharedScssAdditionalData } from '../../nuxt.config.ts'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -12,7 +12,17 @@ export default defineNuxtConfig({
 		'vue-sonner/nuxt',
 	],
 
-	css: ['swiper/css'],
+	css: [resolve('./app/config/styles/index.scss'), 'swiper/css'],
+
+	vite: {
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `${getSharedScssAdditionalData(resolve('../..'))}\n`,
+				},
+			},
+		},
+	},
 
 	svgIcons: {
 		iconsDir: resolve('./app/modules/svg-icon/icon-source'),

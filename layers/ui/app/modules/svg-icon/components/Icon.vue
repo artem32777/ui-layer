@@ -13,11 +13,11 @@ export interface SvgIconProps {
 
 const {
 	name,
-	size = '14',
+	size = '16',
 } = defineProps<SvgIconProps>()
 
 const icon = computed(() => svgIconData[name])
-const iconSize = computed(() => `${size}px`)
+const iconSize = computed(() => `${size}`)
 
 const iconAttrs = computed(() => ({
 	...icon.value.attrs,

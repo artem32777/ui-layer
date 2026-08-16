@@ -5,5 +5,5 @@ export { default as FormRadioGroup } from './components/FormRadioGroup.vue'
 export { default as FormCheckbox } from './components/FormCheckbox.vue'
 export { default as FormNumberField } from './components/FormNumberField.vue'
 
-export { validation } from './validation'
-export { VMessage } from './ValidationMessages'
+export { VRule } from './validation/rules'
+export { VMessage } from './validation/messages'

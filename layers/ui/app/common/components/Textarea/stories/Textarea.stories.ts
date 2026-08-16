@@ -1,27 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Textarea from '../Textarea.vue'
 
 type TextareaStoryArgs = ComponentProps<typeof Textarea>
 
 const renderStates = (args: TextareaStoryArgs) => ({
-	components: { Textarea },
+	components: { StoryGridItem, StoryGridRow, Textarea },
 	setup() { return { args } },
 	template: `
-		<div style="display: flex; align-items: flex-start; gap: 24px;">
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>default</span>
+		<StoryGridRow>
+			<StoryGridItem title="default">
 				<Textarea v-bind="args" v-model="args.modelValue" aria-label="Textarea" />
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>invalid</span>
+			</StoryGridItem>
+			<StoryGridItem title="invalid">
 				<Textarea v-bind="args" v-model="args.modelValue" aria-invalid="true" />
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span>disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled">
 				<Textarea v-bind="args" v-model="args.modelValue" disabled />
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 

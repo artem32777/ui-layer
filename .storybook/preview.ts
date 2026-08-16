@@ -3,8 +3,8 @@ import { setup } from '@storybook/vue3'
 import { createPinia } from 'pinia'
 import { SelectRoot } from 'reka-ui'
 import { defineComponent } from 'vue'
-import breakpointsSource from '../app/config/styles/shared/breakpoints.scss?raw'
-import '../app/config/styles/index.scss'
+import breakpointsSource from '../layers/ui/app/config/styles/shared/breakpoints.scss?raw'
+import '../layers/ui/app/config/styles/index.scss'
 import { getBreakpointViewports } from './breakpoints'
 
 const ClientOnly = defineComponent({
@@ -34,7 +34,7 @@ const preview: Preview = {
 			},
 		},
 		options: {
-			storySort: { order: ['Design System', 'UI', 'FORM', 'Example'] },
+			storySort: { order: ['Docs', 'Design System', 'UI', 'FORM', 'Example'] },
 		},
 	},
 }

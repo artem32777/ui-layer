@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Input from '../Input.vue'
 
 type InputStoryArgs = ComponentProps<typeof Input>
@@ -9,31 +11,26 @@ type InputVariant = NonNullable<InputStoryArgs['variant']>
 const getOptions = getStringsArrFromKey<InputStoryArgs>()
 
 const renderStates = (variant: InputVariant) => (args: InputStoryArgs) => ({
-	components: { Input },
+	components: { Input, StoryGridItem, StoryGridRow },
 	setup() { return { args, variant } },
 	template: `
-		<div style="display: flex; flex-direction: column; gap: 54px; max-width: 600px">
-			<div style="display: flex; gap: 8px; flex-direction: column">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+		<StoryGridRow style="max-width: 600px;">
+			<StoryGridItem title="default" style="width: 100%;">
 				<Input v-bind="args" v-model="args.modelValue" :variant="variant" aria-label="Input" />
-			</div>
-			<div style="display: flex; gap: 8px; flex-direction: column;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">invalid</span>
+			</StoryGridItem>
+			<StoryGridItem title="invalid" style="width: 100%;">
 				<Input v-bind="args" v-model="args.modelValue" :variant="variant" aria-invalid="true" aria-label="Input invalid" />
-			</div>
-			<div style="display: flex; gap: 8px; flex-direction: column;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled" style="width: 100%;">
 				<Input v-bind="args" v-model="args.modelValue" :variant="variant" disabled aria-label="Input disabled" />
-			</div>
-			<div style="display: flex; gap: 8px; flex-direction: column;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">size: sm</span>
+			</StoryGridItem>
+			<StoryGridItem title="size: sm" style="width: 100%;">
 				<Input v-bind="args" v-model="args.modelValue" :variant="variant" size="sm" aria-label="Input disabled" />
-			</div>
-			<div style="display: flex; gap: 8px; flex-direction: column;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">size: lg</span>
+			</StoryGridItem>
+			<StoryGridItem title="size: lg" style="width: 100%;">
 				<Input v-bind="args" v-model="args.modelValue" :variant="variant" size="lg" aria-label="Input disabled" />
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 

@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { VMessage } from './ValidationMessages'
+import { VMessage } from './messages.ts'
 
-export const validation = {
+export const VRule = {
 	name: (minLength: number = 1, message: string = VMessage.name) =>
 		z.string().trim().min(minLength, message),
 

@@ -1,34 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Checkbox from '../Checkbox.vue'
 
 type CheckboxStoryArgs = ComponentProps<typeof Checkbox>
 
 const renderStates = (args: CheckboxStoryArgs) => ({
-	components: { Checkbox },
+	components: { Checkbox, StoryGridItem, StoryGridRow },
 	setup() { return { args } },
 	template: `
-		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">default</span>
+		<StoryGridRow>
+			<StoryGridItem title="default">
 				<Checkbox v-bind="args" v-model="args.modelValue" :disabled="false" :invalid="false">
-					Текст чекбокса default
+					Текст
 				</Checkbox>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">invalid</span>
+			</StoryGridItem>
+			<StoryGridItem title="invalid">
 				<Checkbox v-bind="args" v-model="args.modelValue" :disabled="false" invalid>
-					Текст чекбокса invalid
+					Текст
 				</Checkbox>
-			</div>
-			<div style="display: flex; flex-direction: column; gap: 8px;">
-				<span style="color: #666; font-size: 12px; line-height: 1;">disabled</span>
+			</StoryGridItem>
+			<StoryGridItem title="disabled">
 				<Checkbox v-bind="args" v-model="args.modelValue" disabled :invalid="false">
-					Текст чекбокса disabled
+					Текст
 				</Checkbox>
-			</div>
-		</div>
+			</StoryGridItem>
+		</StoryGridRow>
 	`,
 })
 
@@ -56,7 +55,9 @@ const meta = {
 	} satisfies CheckboxStoryArgs,
 	render: (args: CheckboxStoryArgs) => ({
 		components: { Checkbox },
-		setup() { return { args } },
+		setup() {
+			return { args }
+		},
 		template: '<Checkbox v-bind="args" v-model="args.modelValue">Текст чекбокса</Checkbox>',
 	}),
 } satisfies Meta<typeof Checkbox>
