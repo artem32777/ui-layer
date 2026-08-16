@@ -1,8 +1,7 @@
 <script setup lang="ts">
 // https://reka-ui.com/docs/components/month-picker
 import { MonthPickerCell, MonthPickerCellTrigger, MonthPickerGrid, MonthPickerGridBody, MonthPickerGridRow, MonthPickerHeader, MonthPickerHeading, MonthPickerNext, MonthPickerPrev, MonthPickerRoot, type DateValue, type MonthPickerRootProps } from 'reka-ui'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
 export interface MonthPickerProps {
 	/** Доступное название выбора месяца. */

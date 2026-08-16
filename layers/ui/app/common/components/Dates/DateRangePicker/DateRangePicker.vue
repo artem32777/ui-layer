@@ -2,8 +2,7 @@
 // https://reka-ui.com/docs/components/date-range-picker
 import { DateRangePickerCalendar, DateRangePickerCell, DateRangePickerCellTrigger, DateRangePickerContent, DateRangePickerField, DateRangePickerGrid, DateRangePickerGridBody, DateRangePickerGridHead, DateRangePickerGridRow, DateRangePickerHeadCell, DateRangePickerHeader, DateRangePickerHeading, DateRangePickerInput, DateRangePickerNext, DateRangePickerPrev, DateRangePickerRoot, DateRangePickerTrigger, type DateRange, type DateRangePickerRootProps, type DateValue } from 'reka-ui'
 import { ref, watch } from 'vue'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 import MonthPicker from '../MonthPicker/MonthPicker.vue'
 
 export interface DateRangePickerProps {

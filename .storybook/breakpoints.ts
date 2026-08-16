@@ -1,5 +1,4 @@
 import type { ViewportMap, ViewportType } from 'storybook/viewport'
-import { readFileSync } from 'node:fs'
 
 interface Breakpoint {
 	name: string
@@ -7,13 +6,13 @@ interface Breakpoint {
 }
 
 /**
- * Reads pixel-valued Sass variables and converts them to Storybook viewport options.
+ * Converts pixel-valued Sass variables to Storybook viewport options.
  */
-export function getBreakpointViewports(filePath: string): ViewportMap {
-	const breakpoints = parseBreakpoints(readFileSync(filePath, 'utf8'))
+export function getBreakpointViewports(source: string): ViewportMap {
+	const breakpoints = parseBreakpoints(source)
 
 	if (breakpoints.length === 0) {
-		throw new Error(`No pixel breakpoints found in ${filePath}`)
+		throw new Error('No pixel breakpoints found')
 	}
 
 	return Object.fromEntries(

@@ -1,5 +1,14 @@
 import type { NuxtConfig } from 'nuxt/schema'
 import { readdirSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { defineNuxtConfig } from 'nuxt/config'
+
+const rootDir = dirname(fileURLToPath(import.meta.url))
+const sharedScssDirectories = [
+	'app/config/styles/shared',
+	'app/common/mixins',
+]
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export const baseNuxtConfig = {
@@ -8,8 +17,6 @@ export const baseNuxtConfig = {
 		middleware: 'config/middleware',
 		plugins: 'config/plugins',
 	},
-
-	// sourcemap: true,
 
 	components: false,
 
@@ -68,7 +75,7 @@ export default defineNuxtConfig({
 		css: {
 			preprocessorOptions: {
 				scss: {
-					additionalData: `${getSharedScssAdditionalData()}\n`,
+					additionalData: `${getSharedScssAdditionalData(rootDir)}\n`,
 				},
 			},
 		},
@@ -88,14 +95,9 @@ export default defineNuxtConfig({
 	},
 })
 
-function getSharedScssAdditionalData() {
-	const directories = [
-		'app/config/styles/shared',
-		'app/common/mixins',
-	]
-
-	return directories
-		.flatMap(directory => readdirSync(new URL(`./${directory}`, import.meta.url), { withFileTypes: true })
+export function getSharedScssAdditionalData(rootDir: string) {
+	return sharedScssDirectories
+		.flatMap(directory => readdirSync(resolve(rootDir, directory), { withFileTypes: true })
 			.filter(file => file.isFile() && file.name.endsWith('.scss'))
 			.map(file => `@use "~~/${directory}/${file.name}" as *;`))
 		.join('\n')

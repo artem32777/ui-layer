@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { VMessage } from '#layers/ui/app/common/constants/ValidationMessages'
+import { VMessage } from './ValidationMessages'
 
 export const validation = {
 	name: (minLength: number = 1, message: string = VMessage.name) =>

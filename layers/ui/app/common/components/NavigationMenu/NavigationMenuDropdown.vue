@@ -2,8 +2,7 @@
 import { ref } from 'vue'
 import { NavigationMenuContent, NavigationMenuItem as RekaNavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuSub, NavigationMenuTrigger, NavigationMenuViewport } from 'reka-ui'
 import { getNavigationMenuItemValue, isNavigationMenuGroup, type NavigationMenuItem } from './NavigationMenu.types.ts'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
 const { width = 150 } = defineProps<{
 	items: NavigationMenuItem[]

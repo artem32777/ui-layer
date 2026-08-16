@@ -71,33 +71,26 @@ export const Icons: Story = {
 			<div style="display: grid; gap: 28px;">
 				<div style="display: flex; gap: 24px; align-items: end; justify-content: space-between; flex-wrap: wrap;">
 					<div>
-						<strong style="display: block; color: var(--text); font-size: 18px;">Иконки</strong>
-						<span style="color: var(--additional-2); font-size: 14px;">{{ filteredIconCount }} / {{ iconCount }}</span>
+						<strong style="display: block; font-size: 18px;">Иконки</strong>
+						<span>{{ filteredIconCount }} / {{ iconCount }}</span>
 					</div>
 					<label style="display: grid; gap: 8px; width: min(100%, 320px);">
-						<span style="color: var(--additional-2); font-size: 13px; font-weight: 600;">Search</span>
+						<span style="font-weight: 600;">Search</span>
 						<input
 							v-model="search"
 							type="search"
 							placeholder="download"
 							autocomplete="off"
-							style="width: 100%; height: 42px; padding: 0 14px; border: 1px solid var(--grey); border-radius: 8px; background: var(--background); color: var(--text); font: inherit; outline: none;"
+							style="width: 100%; height: 42px; padding: 0 14px; border: 1px solid var(--grey); border-radius: 8px; background: var(--background); color: var(--text)"
 						>
 					</label>
 				</div>
-				<div
-					v-if="filteredIconCount"
-					style="display: grid; gap: 28px;"
-				>
+				<div v-if="filteredIconCount">
 					<section
 						v-for="group in filteredIconGroups"
 						:key="group.dir"
-						style="display: grid; gap: 12px;"
 					>
-						<strong
-							v-if="group.dir"
-							style="color: var(--text); font-size: 16px;"
-						>
+						<strong v-if="group.dir">
 							{{ group.title }}
 						</strong>
 						<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px;">
@@ -106,18 +99,18 @@ export const Icons: Story = {
 								:key="iconName"
 								type="button"
 								:title="copied && text === iconName ? 'Скопировано' : 'Скопировать название'"
-								style="display: grid; gap: 10px; justify-items: center; padding: 18px 12px; border: 1px solid var(--grey); border-radius: 8px; color: var(--text); background: var(--background); cursor: pointer; font: inherit;"
+								style="display: grid; gap: 10px; justify-items: center; padding: 18px 12px; border: 1px solid var(--grey); border-radius: 8px; color: var(--text); background: var(--background)"
 								@click="copy(iconName)"
 							>
-								<Icon :name="iconName" v-bind="args" :size="40"   />
-								<code style="color: var(--additional-2); font-size: 12px;">{{ copied && text === iconName ? 'Скопировано' : iconName }}</code>
+								<Icon v-bind="args" :name="iconName" :size="40" />
+								<span>{{ copied && text === iconName ? 'Скопировано' : iconName }}</span>
 							</button>
 						</div>
 					</section>
 				</div>
 				<p
 					v-else
-					style="margin: 0; padding: 24px; border: 1px dashed var(--grey); border-radius: 8px; background: var(--background); color: var(--additional-2); text-align: center;"
+					style="padding: 24px; border: 1px dashed var(--grey); border-radius: 8px; background: var(--background); text-align: center;"
 				>
 					Иконки не найдены
 				</p>

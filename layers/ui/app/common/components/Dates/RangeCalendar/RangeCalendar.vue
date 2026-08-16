@@ -2,8 +2,7 @@
 // https://reka-ui.com/docs/components/range-calendar
 import { RangeCalendarCell, RangeCalendarCellTrigger, RangeCalendarGrid, RangeCalendarGridBody, RangeCalendarGridHead, RangeCalendarGridRow, RangeCalendarHeadCell, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarNext, RangeCalendarPrev, RangeCalendarRoot, type DateRange, type DateValue, type RangeCalendarRootProps } from 'reka-ui'
 import { ref } from 'vue'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 import MonthPicker from '../MonthPicker/MonthPicker.vue'
 
 export interface RangeCalendarProps {

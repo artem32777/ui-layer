@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { DropdownMenuItem as RekaDropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger } from 'reka-ui'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 import type { DropdownMenuItem } from './DropdownMenu.types'
 
 defineProps<{

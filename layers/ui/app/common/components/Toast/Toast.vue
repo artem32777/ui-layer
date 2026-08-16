@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import 'vue-sonner/style.css'
 import { Toaster } from 'vue-sonner'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
+import { Icon } from '#layers/ui/app/modules/svg-icon'
 
 defineProps<{
 	/** Отображение тостов без их группировки. */

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Primitive } from 'reka-ui'
 import { computed, useSlots } from 'vue'
-import type { IconName } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
+import { Icon, type IconName } from '#layers/ui/app/modules/svg-icon'
 
 export interface ButtonProps {
 	/** Визуальный вариация. */
@@ -39,7 +38,7 @@ defineSlots<{
 
 const slots = useSlots()
 const isDisabled = computed(() => props.disabled || props.state === 'disabled' || props.state === 'progress')
-const isIconOnly = computed(() => !slots.default && Boolean(props.iconLeft || props.iconRight))
+const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props.iconLeft || props.iconRight))
 </script>
 
 <template>

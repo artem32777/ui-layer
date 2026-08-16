@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
+import { Icon } from '#layers/ui/app/modules/svg-icon'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
 import Tabs from '#layers/ui/app/common/components/Tabs/Tabs.vue'
 import Tooltip from '#layers/ui/app/common/components/Tooltip/Tooltip.vue'

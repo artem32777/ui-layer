@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ContextMenuItem as RekaContextMenuItem, ContextMenuPortal, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger } from 'reka-ui'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 import type { ContextMenuItem } from './ContextMenu.types'
 
 defineProps<{

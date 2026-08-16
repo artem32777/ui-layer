@@ -3,7 +3,7 @@ import { useForm } from 'vee-validate'
 import { z } from 'zod'
 import { useNuxtApp } from '#imports'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import FormInput from '#layers/ui/app/common/components/Form/FormInput.vue'
+import { FormInput } from '#layers/ui/app/modules/form'
 import { useAuthStore } from '#layers/admin/app/modules/auth/stores/authStore'
 import { navigateTo, useRoute } from '~/common/utils/router'
 

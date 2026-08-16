@@ -3,8 +3,7 @@ import Button from '../../Button/Button.vue'
 import Checkbox from '../../Checkbox/Checkbox.vue'
 import Input from '../../Input/Input.vue'
 import Modal from '../../Modal/Modal.vue'
-import Icon from '../../../../modules/svg-icon/components/Icon.vue'
-import { iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import { Icon, iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon'
 
 const meta = {
 	title: 'Design System/Examples',

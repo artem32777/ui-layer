@@ -2,7 +2,7 @@
 import { useForm } from 'vee-validate'
 import { z } from 'zod'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import FormInput from '#layers/ui/app/common/components/Form/FormInput.vue'
+import { FormInput } from '#layers/ui/app/modules/form'
 import { useApiFetch } from '../../../../../../app/common/composables/useApiFetch'
 
 const { handleSubmit, isSubmitting, values } = useForm({

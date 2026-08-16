@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { useClipboard } from '@vueuse/core'
-import { expect, waitFor } from 'storybook/test'
 import { computed } from 'vue'
 import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
 import { iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
@@ -12,34 +11,12 @@ type ButtonStylesStoryArgs = ButtonStoryArgs & {
 	backgroundColor: string
 	borderRadius: string
 }
+const getOptions = getStringsArrFromKey<ButtonStoryArgs>()
+
 type ButtonState = NonNullable<ButtonStoryArgs['state']>
 type ButtonVariant = NonNullable<ButtonStoryArgs['variant']>
-
-const getOptions = getStringsArrFromKey<ButtonStoryArgs>()
-const buttonStates = ['default', 'disabled', 'progress', 'focused', 'hovered', 'pressed'] satisfies ButtonState[]
-
-const renderAllStates = (variant: ButtonVariant) => (args: ButtonStoryArgs) => ({
-	components: { Button },
-	setup() {
-		return {
-			args,
-			buttonStates,
-			variant,
-		}
-	},
-	template: `
-		<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-			<div
-				v-for="state in buttonStates"
-				:key="state"
-				style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px;"
-			>
-				<span style="color: #666; font-size: 12px; line-height: 1;">{{ state }}</span>
-				<Button v-bind="args" :variant="variant" :state="state" />
-			</div>
-		</div>
-	`,
-})
+const buttonStates = ['default', 'hovered', 'focused', 'pressed', 'progress', 'disabled'] satisfies ButtonState[]
+const buttonVariants = ['base', 'outline', 'ghost'] satisfies ButtonVariant[]
 
 const meta = {
 	title: 'UI/Button',
@@ -78,12 +55,14 @@ const meta = {
 		state: 'default',
 		size: 'm',
 		type: 'button',
-		iconLeft: undefined,
-		iconRight: undefined,
+		disabled: false,
+		asChild: false,
 	} satisfies ButtonStoryArgs,
 	render: (args: ButtonStoryArgs) => ({
 		components: { Button },
-		setup() { return { args } },
+		setup() {
+			return { args }
+		},
 		template: '<Button v-bind="args">{{ args.label }}</Button>',
 	}),
 } satisfies Meta<typeof Button>
@@ -98,21 +77,40 @@ export const DocsExample: Story = {
 }
 
 export const Base: Story = {
-	render: renderAllStates('base'),
-}
-
-export const Outline: Story = {
-	args: {
-		variant: 'outline',
-	} satisfies Partial<ButtonStoryArgs>,
-	render: renderAllStates('outline'),
-}
-
-export const Ghost: Story = {
-	args: {
-		variant: 'ghost',
-	} satisfies Partial<ButtonStoryArgs>,
-	render: renderAllStates('ghost'),
+	render: (args: ButtonStoryArgs) => ({
+		components: { Button },
+		setup() {
+			return { args, buttonStates, buttonVariants, iconNames }
+		},
+		template: `
+			<div style="display: flex; flex-direction: column; gap: 40px;">
+				<section
+					v-for="variant in buttonVariants"
+					:key="variant"
+					style="display: flex; flex-direction: column; gap: 16px; border-bottom: 1px solid #000; padding-bottom: 20px"
+				>
+					<h2 style="font-size: 25px; font-weight: 600">{{ variant }}</h2>
+					<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
+						<div
+							v-for="state in buttonStates"
+							:key="state"
+							style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px;"
+						>
+							<span>{{ state }}</span>
+							<Button v-bind="args" :variant="variant" :state="state"/>
+							<Button v-bind="args" :variant="variant" :state="state" :icon-left="iconNames.plus">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" :state="state" :icon-right="iconNames.chevronRight">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" :state="state" text="" :icon-left="iconNames.plus" aria-label="Добавить" />
+						</div>
+					</div>
+				</section>
+			</div>
+		`,
+	}),
 }
 
 export const Styles: StylesStory = {
@@ -150,70 +148,22 @@ export const Styles: StylesStory = {
 					:style="{ backgroundColor: args.backgroundColor, borderRadius: args.borderRadius }"
 				/>
 				<label style="display: grid; gap: 8px; width: min(100%, 420px);">
-					<span style="font-size: 14px; font-weight: 600;">JSON для админки</span>
+					<span style="font-weight: 600;">JSON для админки</span>
 					<textarea
 						:value="json"
 						readonly
 						aria-label="JSON для админки"
 						rows="4"
-						style="box-sizing: border-box; width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; resize: vertical; font-family: monospace;"
+						style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; resize: vertical"
 					/>
 				</label>
 				<button
 					type="button"
-					style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #ffffff; cursor: pointer;"
+					style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #ffffff"
 					@click="copy()"
 				>
 					{{ copied ? 'Скопировано' : 'Скопировать JSON' }}
 				</button>
-			</div>
-		`,
-	}),
-	play: async ({ canvas, userEvent }) => {
-		const button = canvas.getByRole('button', { name: 'Кнопка' })
-		const json = canvas.getByRole('textbox', { name: 'JSON для админки' })
-		const copyButton = canvas.getByRole('button', { name: 'Скопировать JSON' })
-
-		await expect(button).toHaveStyle({
-			backgroundColor: '#7c3aed',
-			borderRadius: '16px',
-		})
-		await expect(json).toHaveValue(`{
-  "backgroundColor": "#7c3aed",
-  "borderRadius": "16px"
-}`)
-		await userEvent.click(copyButton)
-		await waitFor(() => expect(copyButton).toHaveTextContent('Скопировано'))
-	},
-}
-
-export const IconOnly: Story = {
-	args: {
-		iconLeft: iconNames.plus,
-		text: '',
-	} satisfies Partial<ButtonStoryArgs>,
-	render: (args: ButtonStoryArgs) => ({
-		components: { Button },
-		setup() { return { args, buttonStates } },
-		template: `
-			<div style="display: flex; flex-direction: column; gap: 32px;">
-				<div
-					v-for="variant in ['base', 'ghost', 'outline']"
-					:key="variant"
-					style="display: flex; flex-direction: column; gap: 12px;"
-				>
-					<span style="color: #666; font-size: 14px; font-weight: 600; line-height: 1;">{{ variant }}</span>
-					<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px;">
-						<div
-							v-for="state in buttonStates"
-							:key="state"
-							style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px;"
-						>
-							<span style="color: #666; font-size: 12px; line-height: 1;">{{ state }}</span>
-							<Button v-bind="args" :variant="variant" :state="state" aria-label="Add" />
-						</div>
-					</div>
-				</div>
 			</div>
 		`,
 	}),

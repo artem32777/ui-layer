@@ -1,24 +1,18 @@
 import type { StorybookConfig } from '@storybook/vue3-vite'
-import { readdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
-import { getBreakpointViewports } from './breakpoints.ts'
+import { getSharedScssAdditionalData } from '../nuxt.config.ts'
 
-// Storybook запускается из корня проекта, но сам конфиг лежит в `.storybook`.
-// Абсолютные пути ниже не зависят от текущей рабочей директории процесса.
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const appDir = resolve(rootDir, 'app')
 const uiLayerDir = resolve(rootDir, 'layers/ui')
 
 const config: StorybookConfig = {
-	// Подключаем как обычные CSF-истории, так и написанную вручную MDX-документацию.
 	stories: [
 		'../layers/ui/app/**/*.mdx',
 		'../{app,layers/ui/app}/**/*.stories.@(js|jsx|mjs|ts|tsx)',
 	],
-	// docs — MDX/Autodocs, a11y — axe-проверки, vitest — запуск play-функций
-	// и accessibility-тестов из интерфейса Storybook.
 	addons: [
 		'@storybook/addon-docs',
 		'@storybook/addon-a11y',
@@ -28,20 +22,8 @@ const config: StorybookConfig = {
 		name: '@storybook/vue3-vite',
 		options: {},
 	},
-	// Файлы из Nuxt `public` становятся доступны историям от корня URL.
 	staticDirs: ['../public'],
 	viteFinal: async (viteConfig) => {
-		viteConfig.define = {
-			...viteConfig.define,
-			__STORYBOOK_BREAKPOINT_VIEWPORTS__: JSON.stringify(
-				getBreakpointViewports(
-					resolve(rootDir, 'app/config/styles/shared/breakpoints.scss'),
-				),
-			),
-		}
-
-		// Storybook 10 + Vite 8 в этом проекте не добавляют Vue SFC transform
-		// для файлов слоя автоматически, поэтому регистрируем plugin-vue явно.
 		viteConfig.plugins = [
 			...(viteConfig.plugins ?? []),
 			vue(),
@@ -51,8 +33,7 @@ const config: StorybookConfig = {
 		viteConfig.resolve.alias = {
 			'~/common/composables/useApiFetch': resolve(rootDir, '.storybook/use-api-fetch.ts'),
 			...(viteConfig.resolve.alias as Record<string, string> ?? {}),
-			// В Storybook нет Nuxt runtime, поэтому `#imports` ведёт на небольшой
-			// browser-only адаптер из `.storybook/nuxt-imports.ts`.
+			// В Storybook нет Nuxt runtime, поэтому `#imports` ведёт на небольшой browser-only адаптер из `.storybook/nuxt-imports.ts`.
 			'#imports': resolve(rootDir, '.storybook/nuxt-imports.ts'),
 			// Повторяем Nuxt aliases, используемые компонентами UI-слоя.
 			'#layers/ui': uiLayerDir,
@@ -68,7 +49,7 @@ const config: StorybookConfig = {
 		viteConfig.css.preprocessorOptions ??= {}
 		viteConfig.css.preprocessorOptions.scss = {
 			...viteConfig.css.preprocessorOptions.scss,
-			additionalData: `${getSharedScssAdditionalData()}\n`,
+			additionalData: `${getSharedScssAdditionalData(rootDir)}\n`,
 		}
 
 		return viteConfig
@@ -76,21 +57,3 @@ const config: StorybookConfig = {
 }
 
 export default config
-
-/**
- * Формирует общий SCSS-пролог для каждого `<style lang="scss">`.
- * Список директорий синхронизирован с `getSharedScssAdditionalData`
- * в корневом `nuxt.config.ts`.
- */
-function getSharedScssAdditionalData() {
-	const directories = [
-		'app/config/styles/shared',
-		'app/common/mixins',
-	]
-
-	return directories
-		.flatMap(directory => readdirSync(resolve(rootDir, directory), { withFileTypes: true })
-			.filter(file => file.isFile() && file.name.endsWith('.scss'))
-			.map(file => `@use "~~/${directory}/${file.name}" as *;`))
-		.join('\n')
-}

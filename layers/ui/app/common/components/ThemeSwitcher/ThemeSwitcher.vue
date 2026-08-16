@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { Theme, useThemeStore } from '#layers/ui/app/common/stores/themeStore'
-import { iconNames } from '#layers/ui/app/modules/svg-icon'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
 const themeStore = useThemeStore()
 const { theme } = storeToRefs(themeStore)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
+import { Icon } from '#layers/ui/app/modules/svg-icon'
 import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 </script>
 

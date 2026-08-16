@@ -11,8 +11,7 @@ import {
 	isNavigationMenuGroup,
 	type NavigationMenuItem,
 } from './NavigationMenu.types.ts'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
 defineProps<{
 	item: NavigationMenuItem

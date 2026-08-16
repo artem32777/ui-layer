@@ -1,19 +1,12 @@
 import type { Preview } from '@storybook/vue3-vite'
-import type { ViewportMap } from 'storybook/viewport'
 import { setup } from '@storybook/vue3'
 import { createPinia } from 'pinia'
 import { SelectRoot } from 'reka-ui'
 import { defineComponent } from 'vue'
+import breakpointsSource from '../app/config/styles/shared/breakpoints.scss?raw'
 import '../app/config/styles/index.scss'
+import { getBreakpointViewports } from './breakpoints'
 
-declare const __STORYBOOK_BREAKPOINT_VIEWPORTS__: ViewportMap
-
-/**
- * Упрощённый аналог Nuxt ClientOnly.
- *
- * Storybook и браузерные тесты всегда выполняются на клиенте, поэтому
- * достаточно сразу отрисовать default slot без SSR-заглушки.
- */
 const ClientOnly = defineComponent({
 	name: 'ClientOnly',
 	setup(_, { slots }) {
@@ -21,11 +14,8 @@ const ClientOnly = defineComponent({
 	},
 })
 
-// `setup` вызывается для каждого Vue-приложения, которое создаёт Storybook.
-// Так каждая история получает независимый Pinia store.
 setup((app) => {
 	app.use(createPinia())
-
 	// Эти компоненты в Nuxt регистрируются модулями автоматически.
 	// В чистом Storybook/Vue runtime их нужно зарегистрировать вручную.
 	app.component('ClientOnly', ClientOnly)
@@ -33,28 +23,18 @@ setup((app) => {
 })
 
 const preview: Preview = {
-	decorators: [
-		() => ({
-			template: '<div style="min-width: 90vw; display: flex; justify-content: center"><story /></div>',
-		}),
-	],
+	// decorators: [() => ({ template: '<div style="padding: 50px"><story /></div>' })],
 	parameters: {
-		layout: 'centered',
-		viewport: {
-			options: __STORYBOOK_BREAKPOINT_VIEWPORTS__,
-		},
-		// Автоматически подбирает подходящий control по имени аргумента.
+		viewport: { options: getBreakpointViewports(breakpointsSource) },
 		controls: {
+			// Автоматически подбирает подходящий control по имени аргумента.
 			matchers: {
 				color: /(background|color)$/i,
 				date: /Date$/i,
 			},
 		},
-		// Стабильный порядок верхнеуровневых разделов в sidebar.
 		options: {
-			storySort: {
-				order: ['Design System', 'UI', 'FORM', 'Example'],
-			},
+			storySort: { order: ['Design System', 'UI', 'FORM', 'Example'] },
 		},
 	},
 }

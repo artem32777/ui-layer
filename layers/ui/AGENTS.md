@@ -5,7 +5,7 @@
 - Добавляй исходники в `app/modules/svg-icon/icon-source`; вложенные каталоги поддерживаются.
 - `app/modules/svg-icon/build-icons.ts` генерирует `app/modules/svg-icon/runtime/iconNames.ts` при старте и сборке Nuxt и следит за SVG в dev-режиме. Никогда не редактируй runtime-файл вручную.
 - `app/modules/svg-icon/index.ts` — публичный barrel, а не генератор.
-- Для пропсов используй `IconName`, для конкретных значений — `iconNames.someName`, для рендера — `app/modules/svg-icon/components/Icon.vue`.
+- Для пропсов используй `IconName`, для конкретных значений — `iconNames.someName`, для рендера — `Icon` из `app/modules/svg-icon`.
 
 ## Component Changes
 

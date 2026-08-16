@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useFavoriteStore } from '../../stores/favoriteStore'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
+import { Icon } from '#layers/ui/app/modules/svg-icon'
 
 const {
 	variant = 'primary',

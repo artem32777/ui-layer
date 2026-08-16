@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from 'reka-ui'
-import Icon from '#layers/ui/app/modules/svg-icon/components/Icon.vue'
-import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 import type { AccordionPropsItem } from './Accordion.types'
 
 // https://reka-ui.com/docs/components/accordion

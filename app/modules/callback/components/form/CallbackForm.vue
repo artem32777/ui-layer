@@ -2,11 +2,9 @@
 import { useForm } from 'vee-validate'
 import { z } from 'zod'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import FormInput from '#layers/ui/app/common/components/Form/FormInput.vue'
-import FormPhoneInput from '#layers/ui/app/common/components/Form/FormPhoneInput.vue'
+import { FormInput, FormPhoneInput, validation } from '#layers/ui/app/modules/form'
 import CallbackFormStatus from './CallbackFormStatus.vue'
 import { useApiFetch } from '../../../../common/composables/useApiFetch'
-import { validation } from '#layers/ui/app/common/utils/validation'
 
 const { handleSubmit, isSubmitting, values } = useForm({
 	validationSchema: z.object({
