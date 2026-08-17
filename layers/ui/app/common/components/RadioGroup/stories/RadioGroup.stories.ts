@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
+import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
 import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
@@ -9,13 +10,16 @@ import RadioGroup from '../RadioGroup.vue'
 import radioGroupTypesSource from '../RadioGroup.types.ts?raw'
 
 type RadioGroupStoryArgs = ComponentProps<typeof RadioGroup>
+type RadioGroupState = NonNullable<RadioGroupStoryArgs['state']>
 
+const getOptions = getStringsArrFromKey<RadioGroupStoryArgs>()
 const defaultOptions = [
 	{ label: 'False', value: 'false' },
 	{ label: 'True', value: 'true' },
 	{ label: 'Disabled', value: 'disabled', disabled: true },
 ]
 
+const radioGroupStates = ['default', 'hovered', 'focused', 'invalid', 'disabled'] satisfies RadioGroupState[]
 const radioGroupChecked = ['', 'true']
 
 const meta = {
@@ -40,11 +44,18 @@ const meta = {
 			},
 		},
 		invalid: { control: 'boolean' },
+		disabled: { control: 'boolean' },
+		state: {
+			control: 'select',
+			options: getOptions('state', ['default', 'hovered', 'focused', 'invalid', 'disabled']),
+		},
 	},
 	args: {
 		modelValue: 'true',
 		options: defaultOptions,
+		state: 'default',
 		invalid: false,
+		disabled: false,
 	} satisfies RadioGroupStoryArgs,
 	render: (args: RadioGroupStoryArgs) => ({
 		components: { RadioGroup },
@@ -68,7 +79,7 @@ export const States: Story = {
 	render: (args: RadioGroupStoryArgs) => ({
 		components: { RadioGroup, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
-			return { args, radioGroupChecked }
+			return { args, radioGroupChecked, radioGroupStates }
 		},
 		template: `
 			<StoryGrid>
@@ -78,11 +89,19 @@ export const States: Story = {
 					:title="checked ? 'checked' : 'base'"
 				>
 					<StoryGridRow>
-						<StoryGridItem title="default">
-							<RadioGroup v-bind="args" :model-value="checked" :invalid="false" />
-						</StoryGridItem>
-						<StoryGridItem title="invalid">
-							<RadioGroup v-bind="args" :model-value="checked" invalid />
+						<StoryGridItem
+							v-for="state in radioGroupStates"
+							:key="state"
+							:title="state"
+						>
+							<RadioGroup
+								v-bind="args"
+								:model-value="checked"
+								:state="state"
+								:invalid="state === 'invalid'"
+								:disabled="state === 'disabled'"
+								:aria-label="(checked ? 'checked' : 'base') + ' ' + state"
+							/>
 						</StoryGridItem>
 					</StoryGridRow>
 				</StoryGridSection>

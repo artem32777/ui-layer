@@ -59,7 +59,7 @@ const submit = handleSubmit(async (values) => {
 			class="login-form__submit"
 			type="submit"
 			size="xl"
-			:state="isSubmitting ? 'progress' : 'default'"
+			:disabled="isSubmitting"
 		>
 			Войти
 		</Button>

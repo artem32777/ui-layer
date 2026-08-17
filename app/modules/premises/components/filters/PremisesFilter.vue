@@ -82,8 +82,8 @@ const emit = defineEmits<{
 				<Button
 					class="premises-filter__action"
 					type="button"
-					variant="outline"
-					size="xl"
+					variant="secondary"
+					size="big"
 					:disabled="disabled"
 					@click="emit('reset')"
 				>
@@ -92,8 +92,8 @@ const emit = defineEmits<{
 				<Button
 					class="premises-filter__action"
 					type="submit"
-					variant="base"
-					size="xl"
+					variant="primary"
+					size="big"
 					:disabled="disabled"
 				>
 					Показать

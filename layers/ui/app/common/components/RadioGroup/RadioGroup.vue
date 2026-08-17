@@ -4,15 +4,21 @@ import type { RadioGroupProps } from './RadioGroup.types'
 
 const modelValue = defineModel<string>()
 
-defineProps<RadioGroupProps>()
+withDefaults(defineProps<RadioGroupProps>(), {
+	state: 'default',
+})
 </script>
 
 <template>
 	<RadioGroupRoot
 		v-model="modelValue"
 		class="radio-group"
-		:class="{ 'radio-group--invalid': invalid }"
-		:aria-invalid="invalid"
+		:class="[
+			`radio-group--state-${state}`,
+			{ 'radio-group--invalid': invalid || state === 'invalid' },
+		]"
+		:aria-invalid="invalid || state === 'invalid' ? true : undefined"
+		:disabled="disabled || state === 'disabled'"
 	>
 		<label
 			v-for="option in options"
@@ -40,11 +46,29 @@ defineProps<RadioGroupProps>()
 	flex-direction: column;
 	gap: 10px;
 
-	&.radio-group--invalid {
+	&.radio-group--invalid,
+	&.radio-group--state-invalid {
 		.radio-group__icon {
 			box-shadow:
 				inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 6%, transparent),
 				0 0 0 1px var(--red, #ff001f);
+		}
+	}
+
+	&.radio-group--state-hovered {
+		.radio-group__icon {
+			background-color: color-mix(in srgb, var(--grey, #e2e2e2) 70%, transparent);
+		}
+
+		.radio-group__icon[data-state="checked"] {
+			background-color: var(--brand-dark, #292fba);
+		}
+	}
+
+	&.radio-group--state-focused {
+		.radio-group__icon {
+			outline: 2px solid var(--brand-dark, #292fba);
+			outline-offset: 2px;
 		}
 	}
 }
@@ -64,6 +88,10 @@ defineProps<RadioGroupProps>()
 	transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
 
+	&:hover {
+		background-color: color-mix(in srgb, var(--grey, #e2e2e2) 70%, transparent);
+	}
+
 	&:focus-visible {
 		outline: 2px solid var(--brand-dark, #292fba);
 		outline-offset: 2px;
@@ -71,6 +99,10 @@ defineProps<RadioGroupProps>()
 
 	&[data-state="checked"] {
 		background-color: var(--brand, #4149f2);
+
+		&:hover {
+			background-color: var(--brand-dark, #292fba);
+		}
 	}
 
 	&[data-disabled] {

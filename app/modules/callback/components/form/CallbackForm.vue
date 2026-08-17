@@ -41,7 +41,7 @@ const { execute, status, clear } = useApiFetch('/callback', {
 				class="callback-form__submit"
 				type="submit"
 				size="l"
-				:state="isSubmitting ? 'progress' : 'default'"
+				:disabled="isSubmitting"
 			>
 				Отправить
 			</Button>

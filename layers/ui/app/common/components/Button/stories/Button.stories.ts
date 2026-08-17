@@ -19,8 +19,8 @@ const getOptions = getStringsArrFromKey<ButtonStoryArgs>()
 
 type ButtonState = NonNullable<ButtonStoryArgs['state']>
 type ButtonVariant = NonNullable<ButtonStoryArgs['variant']>
-const buttonStates = ['default', 'hovered', 'focused', 'pressed', 'progress', 'disabled'] satisfies ButtonState[]
-const buttonVariants = ['base', 'outline'] satisfies ButtonVariant[]
+const buttonStates = ['default', 'hovered', 'focused', 'pressed', 'disabled'] satisfies ButtonState[]
+const buttonVariants = ['primary', 'secondary', 'accent', 'white'] satisfies ButtonVariant[]
 
 const meta = {
 	title: 'UI/Button',
@@ -28,15 +28,15 @@ const meta = {
 	argTypes: {
 		variant: {
 			control: 'select',
-			options: getOptions('variant', ['base', 'outline', 'outline']),
+			options: getOptions('variant', ['primary', 'secondary', 'accent', 'white']),
 		},
 		size: {
 			control: 'select',
-			options: getOptions('size', ['m', 'l', 'xl']),
+			options: getOptions('size', ['small', 'medium', 'big']),
 		},
 		state: {
 			control: 'select',
-			options: getOptions('state', ['default', 'disabled', 'progress', 'focused', 'hovered', 'pressed']),
+			options: getOptions('state', ['default', 'disabled', 'focused', 'hovered', 'pressed']),
 		},
 		type: {
 			control: 'select',
@@ -54,9 +54,9 @@ const meta = {
 	},
 	args: {
 		text: 'Кнопка',
-		variant: 'base',
+		variant: 'primary',
 		state: 'default',
-		size: 'm',
+		size: 'medium',
 		type: 'button',
 		disabled: false,
 	} satisfies ButtonStoryArgs,

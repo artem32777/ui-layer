@@ -60,7 +60,7 @@ const { execute } = useApiFetch('/auth/register', {
 			class="register-form__submit"
 			type="submit"
 			size="xl"
-			:state="isSubmitting ? 'progress' : 'default'"
+			:disabled="isSubmitting"
 		>
 			Зарегистрироваться
 		</Button>

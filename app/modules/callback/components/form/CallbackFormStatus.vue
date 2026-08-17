@@ -25,7 +25,7 @@ const emit = defineEmits<{
 		</p>
 		<Button
 			type="button"
-			variant="outline"
+			variant="secondary"
 			@click="emit('close')"
 		>
 			Понятно

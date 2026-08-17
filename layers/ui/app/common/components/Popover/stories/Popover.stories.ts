@@ -44,7 +44,7 @@ const meta = {
 						</label>
 
 						<div style="display: flex; justify-content: flex-end; gap: 8px;">
-							<Button text="Copy link" variant="outline" />
+							<Button text="Copy link" variant="secondary" />
 							<Button text="Done" @click="close" />
 						</div>
 					</div>

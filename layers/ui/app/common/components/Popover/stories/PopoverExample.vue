@@ -35,7 +35,7 @@ const link = ref('https://example.com/docs/share/abc123')
 				<div class="popover-example__actions">
 					<Button
 						text="Скопировать"
-						variant="outline"
+						variant="secondary"
 					/>
 					<Button
 						text="Готово"

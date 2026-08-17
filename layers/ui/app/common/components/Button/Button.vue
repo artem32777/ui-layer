@@ -4,12 +4,12 @@ import { computed, useSlots } from 'vue'
 import { Icon, type IconName } from '#layers/ui/app/modules/svg-icon'
 
 export interface ButtonProps {
-	/** Визуальный вариация. */
-	variant?: 'base' | 'outline'
+	/** Визуальная вариация. */
+	variant?: 'primary' | 'secondary' | 'accent' | 'white'
 	/** Cостояние. */
-	state?: 'default' | 'disabled' | 'progress' | 'focused' | 'hovered' | 'pressed'
+	state?: 'default' | 'disabled' | 'focused' | 'hovered' | 'pressed'
 	/** Размер. */
-	size?: 'm' | 'l' | 'xl'
+	size?: 'small' | 'medium' | 'big'
 	/** Текст кнопки. Если не передан, используется default-слот. */
 	text?: string
 	/** Поведение кнопки. */
@@ -23,9 +23,9 @@ export interface ButtonProps {
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-	variant: 'base',
+	variant: 'primary',
 	state: 'default',
-	size: 'm',
+	size: 'medium',
 	type: 'button',
 })
 
@@ -35,8 +35,9 @@ defineSlots<{
 }>()
 
 const slots = useSlots()
-const isDisabled = computed(() => props.disabled || props.state === 'disabled' || props.state === 'progress')
+const isDisabled = computed(() => props.disabled || props.state === 'disabled')
 const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props.iconLeft || props.iconRight))
+const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'medium' ? 18 : 20)
 </script>
 
 <template>
@@ -44,11 +45,10 @@ const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props
 		as="button"
 		:type="type"
 		:disabled="isDisabled"
-		:aria-busy="state === 'progress'"
 		class="button"
 		:class="[
 			`button--${variant}`,
-			`button--${size}`,
+			`button--size-${size}`,
 			`button--state-${state}`,
 			{
 				'button--icon-only': isIconOnly,
@@ -58,7 +58,7 @@ const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props
 		<Icon
 			v-if="iconLeft"
 			:name="iconLeft"
-			:size="20"
+			:size="iconSize"
 			class="button-icon"
 		/>
 
@@ -71,7 +71,7 @@ const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props
 		<Icon
 			v-if="iconRight"
 			:name="iconRight"
-			:size="20"
+			:size="iconSize"
 			class="button-icon"
 		/>
 	</Primitive>
@@ -82,99 +82,111 @@ const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 8px;
-	padding: 0 24px;
-	border: 1px solid transparent;
-	border-radius: 100px;
 	font-weight: 600;
-	white-space: nowrap;
-	transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+	transition: color 0.3s ease, background-color 0.3s ease;
 
-// SIZES:
-	&.button--m {
-		height: 32px;
+// SIZES
+	&.button--size-small {
+		gap: 6px;
+		min-height: 30px;
+		padding: 0 12px;
+		font-size: 14px;
+		line-height: 14px;
+    border-radius: 10px;
 	}
 
-	&.button--l {
-		height: 40px;
+	&.button--size-medium {
+		gap: 8px;
+		min-height: 40px;
+		padding: 0 18px;
+		font-size: 16px;
+		line-height: 20px;
+    border-radius: 12px;
 	}
 
-	&.button--xl {
-		height: 56px;
-		font-size: 18px;
+	&.button--size-big {
+		gap: 8px;
+		min-height: 54px;
+		padding: 0 24px;
+		font-size: 16px;
+		line-height: 20px;
+    border-radius: 16px;
 	}
 
+// ICON-ONLY
 	&.button--icon-only {
 		padding: 0;
 		aspect-ratio: 1;
 	}
 
-// BASE:
-	&.button--base {
-		color: var(--white, #ffffff);
-		background-color: var(--brand, #4149f2);
+// VARIANTS:
+	&.button--primary {
+		color: var(--white);
+		background-color: var(--primary);
 
 		&:hover,
-		&.button--state-hovered {
-			background-color: var(--brand-dark, #292fba);
-		}
-
-		&:focus-visible,
-		&.button--state-focused {
-			border-width: 2px;
-			border-color: var(--brand-dark, #292fba);
-			outline: none;
-		}
-
 		&:active,
+		&.button--state-hovered,
 		&.button--state-pressed {
-			background-color: var(--brand-dark, #292fba);
-			box-shadow: inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 10%, transparent);
+			background-color: var(--primary-light);
 		}
 	}
 
-// OUTLINE:
-	&.button--outline {
-		color: var(--brand-dark, #292fba);
-		background-color: transparent;
-		border-color: color-mix(in srgb, var(--brand, #4149f2) 30%, transparent);
+	&.button--secondary {
+		color: var(--neutral-950);
+		background-color: var(--neutral-500);
 
 		&:hover,
-		&.button--state-hovered {
-			background-color: color-mix(in srgb, var(--brand, #4149f2) 10%, transparent);
-			border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
-		}
-
-		&:focus-visible,
-		&.button--state-focused {
-			border-width: 2px;
-			border-color: var(--brand, #4149f2);
-			outline: none;
-		}
-
 		&:active,
+		&.button--state-hovered,
 		&.button--state-pressed {
-			background-color: color-mix(in srgb, var(--brand, #4149f2) 10%, transparent);
-			border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
-			box-shadow: inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 10%, transparent);
+			background-color: var(--neutral-600);
+		}
+	}
+
+	&.button--accent {
+		color: var(--white);
+		background-color: var(--accent);
+
+		&:hover,
+		&:active,
+		&.button--state-hovered,
+		&.button--state-pressed {
+			background-color: var(--accent-dark);
+		}
+	}
+
+	&.button--white {
+		color: var(--neutral-950);
+		background-color: var(--white);
+
+		&:hover,
+		&:active,
+		&.button--state-hovered,
+		&.button--state-pressed {
+			background-color: var(--white-90);
 		}
 	}
 
 	&:disabled,
-	&[data-disabled] {
-		color: var(--white, #ffffff);
-		background-color: var(--grey, #e2e2e2);
+	&[data-disabled],
+	&.button--state-disabled {
+		color: var(--neutral-750);
+		background-color: var(--neutral-500);
 		pointer-events: none;
 		cursor: default;
+	}
+
+	&.button--white:disabled,
+	&.button--white[data-disabled],
+	&.button--white.button--state-disabled {
+    color: var(--neutral-750);
+		background-color: var(--white-50);
 	}
 }
 
 .button-icon {
 	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 24px;
-	height: 24px;
-	flex: 0 0 24px;
+	flex: 0 0 auto;
 }
 </style>

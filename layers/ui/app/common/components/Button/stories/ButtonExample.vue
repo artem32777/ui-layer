@@ -5,7 +5,7 @@ import { iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 
 <template>
 	<Button
-		size="l"
+		size="big"
 		:icon-left="iconNames.plus"
 	>
 		Добавить
