@@ -5,6 +5,8 @@ const modelValue = defineModel<string>({ default: '' })
 export interface InputProps {
 	/** Визуальный вариант поля. */
 	variant?: 'base' | 'secondary'
+	/** Состояние. */
+	state?: 'default' | 'hovered' | 'focused' | 'invalid' | 'disabled'
 	/** Размер поля ввода. */
 	size?: 'sm' | 'md' | 'lg'
 	/** Текст-подсказка внутри пустого поля. */
@@ -17,6 +19,7 @@ export interface InputProps {
 
 withDefaults(defineProps<InputProps>(), {
 	variant: 'base',
+	state: 'default',
 	size: 'md',
 	type: 'text',
 })
@@ -29,10 +32,12 @@ withDefaults(defineProps<InputProps>(), {
 		:class="[
 			`input--${size}`,
 			`input--${variant}`,
+			`input--state-${state}`,
 		]"
 		:type="type"
 		:placeholder="placeholder"
-		:disabled="disabled"
+		:disabled="disabled || state === 'disabled'"
+		:aria-invalid="state === 'invalid' ? true : undefined"
 	>
 </template>
 
@@ -51,25 +56,34 @@ withDefaults(defineProps<InputProps>(), {
 		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
 	}
 
-	&:focus {
-		outline: none;
-	}
-
-	&:disabled {
-		border-color: var(--grey, #e2e2e2);
-		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
-		background-color: var(--background, #ffffff);
-		cursor: default;
-	}
-
 // VARIANTS:
 	&.input--secondary {
 		border-color: var(--grey, #e2e2e2);
 		background-color: var(--background, #ffffff);
 	}
 
-	&[aria-invalid='true'] {
+	&:hover,
+	&.input--state-hovered {
+		background-color: color-mix(in srgb, var(--brand, #4149f2) 3%, transparent);
+	}
+
+	&:focus,
+	&.input--state-focused {
+		outline: none;
+		border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
+	}
+
+	&[aria-invalid='true'],
+	&.input--state-invalid {
 		border-color: var(--red, #ff001f);
+	}
+
+	&:disabled,
+	&.input--state-disabled {
+		border-color: var(--grey, #e2e2e2);
+		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
+		background-color: var(--background, #ffffff);
+		cursor: default;
 	}
 
 // SIZES:

@@ -1,38 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import Input from '../Input.vue'
 
 type InputStoryArgs = ComponentProps<typeof Input>
+type InputState = NonNullable<InputStoryArgs['state']>
 type InputVariant = NonNullable<InputStoryArgs['variant']>
 
 const getOptions = getStringsArrFromKey<InputStoryArgs>()
-
-const renderStates = (variant: InputVariant) => (args: InputStoryArgs) => ({
-	components: { Input, StoryGridItem, StoryGridRow },
-	setup() { return { args, variant } },
-	template: `
-		<StoryGridRow style="max-width: 600px;">
-			<StoryGridItem title="default" style="width: 100%;">
-				<Input v-bind="args" v-model="args.modelValue" :variant="variant" aria-label="Input" />
-			</StoryGridItem>
-			<StoryGridItem title="invalid" style="width: 100%;">
-				<Input v-bind="args" v-model="args.modelValue" :variant="variant" aria-invalid="true" aria-label="Input invalid" />
-			</StoryGridItem>
-			<StoryGridItem title="disabled" style="width: 100%;">
-				<Input v-bind="args" v-model="args.modelValue" :variant="variant" disabled aria-label="Input disabled" />
-			</StoryGridItem>
-			<StoryGridItem title="size: sm" style="width: 100%;">
-				<Input v-bind="args" v-model="args.modelValue" :variant="variant" size="sm" aria-label="Input disabled" />
-			</StoryGridItem>
-			<StoryGridItem title="size: lg" style="width: 100%;">
-				<Input v-bind="args" v-model="args.modelValue" :variant="variant" size="lg" aria-label="Input disabled" />
-			</StoryGridItem>
-		</StoryGridRow>
-	`,
-})
+const inputStates = ['default', 'hovered', 'focused', 'invalid', 'disabled'] satisfies InputState[]
+const inputVariants = ['base', 'secondary'] satisfies InputVariant[]
 
 const meta = {
 	title: 'UI/Input',
@@ -53,6 +34,10 @@ const meta = {
 			control: 'select',
 			options: getOptions('variant', ['base', 'secondary']),
 		},
+		state: {
+			control: 'select',
+			options: getOptions('state', ['default', 'hovered', 'focused', 'invalid', 'disabled']),
+		},
 		placeholder: { control: 'text' },
 		modelValue: {
 			description: 'Текущее значение поля ввода.',
@@ -64,6 +49,7 @@ const meta = {
 	args: {
 		placeholder: 'Введите значение',
 		variant: 'base',
+		state: 'default',
 		size: 'md',
 		disabled: false,
 		type: 'text',
@@ -84,13 +70,38 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
-export const Base: Story = {
-	render: renderStates('base'),
-}
-
-export const Secondary: Story = {
-	args: {
-		variant: 'secondary',
-	} satisfies Partial<InputStoryArgs>,
-	render: renderStates('secondary'),
+export const States: Story = {
+	render: (args: InputStoryArgs) => ({
+		components: { Input, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		setup() {
+			return { args, inputStates, inputVariants }
+		},
+		template: `
+			<StoryGrid>
+				<StoryGridSection
+					v-for="variant in inputVariants"
+					:key="variant"
+					:title="variant"
+				>
+					<StoryGridRow>
+						<StoryGridItem
+							v-for="state in inputStates"
+							:key="state"
+							:title="state"
+							style="width: 180px;"
+						>
+							<Input
+								v-bind="args"
+								v-model="args.modelValue"
+								:variant="variant"
+								:state="state"
+								:disabled="state === 'disabled'"
+								:aria-label="'Input ' + state"
+							/>
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+			</StoryGrid>
+		`,
+	}),
 }

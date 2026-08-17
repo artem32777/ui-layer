@@ -9,6 +9,8 @@ export interface PinInputProps<T extends 'text' | 'number' = 'text'> {
 	otp?: boolean
 	/** Ограничивает ввод текстом или цифрами. */
 	type?: T
+	/** Состояние. */
+	state?: 'default' | 'hovered' | 'focused' | 'invalid' | 'disabled'
 	/** Отображает состояние ошибки. */
 	invalid?: boolean
 	/** Отключает поля и запрещает ввод. */

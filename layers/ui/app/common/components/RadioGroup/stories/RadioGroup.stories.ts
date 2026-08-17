@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import RadioGroup from '../RadioGroup.vue'
 import radioGroupTypesSource from '../RadioGroup.types.ts?raw'
 
@@ -14,20 +16,7 @@ const defaultOptions = [
 	{ label: 'Disabled', value: 'disabled', disabled: true },
 ]
 
-const renderStates = (args: RadioGroupStoryArgs) => ({
-	components: { RadioGroup, StoryGridItem, StoryGridRow },
-	setup() { return { args } },
-	template: `
-		<StoryGridRow>
-			<StoryGridItem title="default">
-				<RadioGroup v-bind="args" v-model="args.modelValue" :invalid="false" />
-			</StoryGridItem>
-			<StoryGridItem title="invalid">
-				<RadioGroup v-bind="args" v-model="args.modelValue" invalid />
-			</StoryGridItem>
-		</StoryGridRow>
-	`,
-})
+const radioGroupChecked = ['', 'true']
 
 const meta = {
 	title: 'UI/RadioGroup',
@@ -75,18 +64,31 @@ export const DocsExample: Story = {
 	} satisfies Partial<RadioGroupStoryArgs>,
 }
 
-export const Base: Story = {
-	args: {
-		modelValue: '',
-	} satisfies Partial<RadioGroupStoryArgs>,
-	render: renderStates,
-}
-
-export const Checked: Story = {
-	args: {
-		modelValue: 'true',
-	} satisfies Partial<RadioGroupStoryArgs>,
-	render: renderStates,
+export const States: Story = {
+	render: (args: RadioGroupStoryArgs) => ({
+		components: { RadioGroup, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		setup() {
+			return { args, radioGroupChecked }
+		},
+		template: `
+			<StoryGrid>
+				<StoryGridSection
+					v-for="checked in radioGroupChecked"
+					:key="checked || 'base'"
+					:title="checked ? 'checked' : 'base'"
+				>
+					<StoryGridRow>
+						<StoryGridItem title="default">
+							<RadioGroup v-bind="args" :model-value="checked" :invalid="false" />
+						</StoryGridItem>
+						<StoryGridItem title="invalid">
+							<RadioGroup v-bind="args" :model-value="checked" invalid />
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+			</StoryGrid>
+		`,
+	}),
 }
 
 export const Tests: Story = {

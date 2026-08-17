@@ -1,35 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import Checkbox from '../Checkbox.vue'
 
 type CheckboxStoryArgs = ComponentProps<typeof Checkbox>
-
-const renderStates = (args: CheckboxStoryArgs) => ({
-	components: { Checkbox, StoryGridItem, StoryGridRow },
-	setup() { return { args } },
-	template: `
-		<StoryGridRow>
-			<StoryGridItem title="default">
-				<Checkbox v-bind="args" v-model="args.modelValue" :disabled="false" :invalid="false">
-					Текст
-				</Checkbox>
-			</StoryGridItem>
-			<StoryGridItem title="invalid">
-				<Checkbox v-bind="args" v-model="args.modelValue" :disabled="false" invalid>
-					Текст
-				</Checkbox>
-			</StoryGridItem>
-			<StoryGridItem title="disabled">
-				<Checkbox v-bind="args" v-model="args.modelValue" disabled :invalid="false">
-					Текст
-				</Checkbox>
-			</StoryGridItem>
-		</StoryGridRow>
-	`,
-})
 
 const meta = {
 	title: 'UI/Checkbox',
@@ -70,15 +48,41 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
-export const Base: Story = {
-	render: renderStates,
-}
-
-export const Checked: Story = {
-	args: {
-		modelValue: true,
-	} satisfies Partial<CheckboxStoryArgs>,
-	render: renderStates,
+export const States: Story = {
+	render: (args: CheckboxStoryArgs) => ({
+		components: { Checkbox, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		setup() {
+			const checkboxChecked = [false, true]
+			return { args, checkboxChecked }
+		},
+		template: `
+			<StoryGrid>
+				<StoryGridSection
+					v-for="checked in checkboxChecked"
+					:key="String(checked)"
+					:title="checked ? 'checked' : 'base'"
+				>
+					<StoryGridRow>
+						<StoryGridItem title="default">
+							<Checkbox v-bind="args" :model-value="checked" :disabled="false" :invalid="false">
+								Текст
+							</Checkbox>
+						</StoryGridItem>
+						<StoryGridItem title="invalid">
+							<Checkbox v-bind="args" :model-value="checked" :disabled="false" invalid>
+								Текст
+							</Checkbox>
+						</StoryGridItem>
+						<StoryGridItem title="disabled">
+							<Checkbox v-bind="args" :model-value="checked" disabled :invalid="false">
+								Текст
+							</Checkbox>
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+			</StoryGrid>
+		`,
+	}),
 }
 
 export const Tests: Story = {

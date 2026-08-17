@@ -28,6 +28,7 @@ const meta = {
 		a11y: { test: 'error' },
 	},
 	argTypes: {
+		modelValue: { description: 'Открыто ли меню.' },
 		items: {
 			table: {
 				type: {
@@ -40,12 +41,13 @@ const meta = {
 	args: {
 		items,
 		offset: 6,
+		modelValue: false,
 	} satisfies DropdownMenuStoryArgs,
 	render: (args: DropdownMenuStoryArgs) => ({
 		components: { Button, DropdownMenu },
 		setup: () => ({ args }),
 		template: `
-			<DropdownMenu v-bind="args">
+			<DropdownMenu v-model="args.modelValue" v-bind="args">
 				<Button text="Open menu" />
 			</DropdownMenu>
 		`,
@@ -57,6 +59,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Base: Story = {}
+
+export const Opened: Story = {
+	args: {
+		modelValue: true,
+	},
+}
 
 export const Tests: Story = {
 	play: async ({ canvas, canvasElement, userEvent }) => {

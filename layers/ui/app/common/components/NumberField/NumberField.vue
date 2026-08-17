@@ -4,6 +4,8 @@ import { NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, NumberFie
 export interface NumberFieldProps {
 	/** Визуальный вариант */
 	variant?: 'base' | 'secondary'
+	/** Состояние. */
+	state?: 'default' | 'hovered' | 'focused' | 'invalid' | 'disabled'
 	/** Размер */
 	size?: 'sm' | 'md' | 'lg'
 	/** Начальное значение. */
@@ -20,6 +22,7 @@ export interface NumberFieldProps {
 
 const props = withDefaults(defineProps<NumberFieldProps>(), {
 	variant: 'base',
+	state: 'default',
 	size: 'md',
 })
 
@@ -34,7 +37,10 @@ const modelValue = defineModel<number | null>()
 		:class="[
 			`number-field--${size}`,
 			`number-field--${variant}`,
+			`number-field--state-${state}`,
 		]"
+		:disabled="disabled || state === 'disabled'"
+		:aria-invalid="state === 'invalid' ? true : undefined"
 	>
 		<NumberFieldDecrement class="number-field__button number-field__button--decrement">
 			−
@@ -59,49 +65,57 @@ const modelValue = defineModel<number | null>()
 	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 40%, transparent);
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 
-	&:focus-within {
+// VARIANTS:
+	&--secondary {
+		border-color: var(--grey, #e2e2e2);
+		background-color: var(--background, #ffffff);
+	}
+
+	&:hover,
+	&.number-field--state-hovered {
+		background-color: color-mix(in srgb, var(--brand, #4149f2) 3%, transparent);
+	}
+
+	&:focus-within,
+	&.number-field--state-focused {
 		border-color: var(--brand-dark, #292fba);
 		box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand, #4149f2) 25%, transparent);
 	}
 
-	&[aria-invalid='true'] {
+	&[aria-invalid='true'],
+	&.number-field--state-invalid {
 		border-color: var(--red, #ff001f);
 
-		&:focus-within {
+		&:focus-within,
+		&.number-field--state-focused {
 			box-shadow: 0 0 0 2px color-mix(in srgb, var(--red, #ff001f) 20%, transparent);
 		}
 	}
 
-	&[data-disabled] {
+	&[data-disabled],
+	&.number-field--state-disabled {
 		border-color: var(--grey, #e2e2e2);
 		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
 		background-color: var(--background, #ffffff);
 	}
 
-// VARIANTS:
-  &--secondary {
-    border-color: var(--grey, #e2e2e2);
-    background-color: var(--background, #ffffff);
-  }
+// SIZES:
+	&--sm {
+		height: 48px;
+		font-size: 14px;
 
-  // SIZES:
+		.number-field__button {
+			flex-basis: 40px;
+		}
+	}
 
-  &--sm {
-    height: 48px;
-    font-size: 14px;
+	&--lg {
+		height: 64px;
 
-    .number-field__button {
-      flex-basis: 40px;
-    }
-  }
-
-  &--lg {
-    height: 64px;
-
-    .number-field__button {
-      flex-basis: 56px;
-    }
-  }
+		.number-field__button {
+			flex-basis: 56px;
+		}
+	}
 }
 
 .number-field__button {

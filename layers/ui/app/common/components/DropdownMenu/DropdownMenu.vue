@@ -20,10 +20,12 @@ defineSlots<{
 	/** Содержимое меню. По умолчанию отображает пункты из prop `items`. */
 	content?: () => any
 }>()
+
+const modelValue = defineModel<boolean>({ default: false })
 </script>
 
 <template>
-	<DropdownMenuRoot>
+	<DropdownMenuRoot v-model:open="modelValue">
 		<DropdownMenuTrigger as-child>
 			<slot />
 		</DropdownMenuTrigger>

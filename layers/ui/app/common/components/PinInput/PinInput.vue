@@ -8,6 +8,7 @@ const modelValue = defineModel<PinInputValue<T>>({ default: () => [] })
 
 withDefaults(defineProps<PinInputProps<T>>(), {
 	length: 6,
+	state: 'default',
 })
 
 const emit = defineEmits<{
@@ -23,10 +24,13 @@ const emit = defineEmits<{
 		:placeholder="placeholder"
 		:mask="mask"
 		:otp="otp"
-		:disabled="disabled"
-		:aria-invalid="invalid"
+		:disabled="disabled || state === 'disabled'"
+		:aria-invalid="invalid || state === 'invalid' ? true : undefined"
 		class="pin-input"
-		:class="{ 'pin-input--invalid': invalid }"
+		:class="[
+			`pin-input--state-${state}`,
+			{ 'pin-input--invalid': invalid || state === 'invalid' },
+		]"
 		@complete="emit('complete', $event)"
 	>
 		<PinInputInput
@@ -43,11 +47,36 @@ const emit = defineEmits<{
 	display: inline-flex;
 	gap: 8px;
 
-  &--invalid {
-    .pin-input__input {
-      border-color: var(--red, #ff001f);
-    }
-  }
+	&.pin-input--invalid,
+	&.pin-input--state-invalid {
+		.pin-input__input {
+			border-color: var(--red, #ff001f);
+		}
+	}
+
+	&.pin-input--state-hovered {
+		.pin-input__input {
+			border-color: var(--grey, #e2e2e2);
+		}
+	}
+
+	&.pin-input--state-focused {
+		.pin-input__input {
+			border-color: var(--brand, #4149f2);
+			outline: none;
+			box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 20%, transparent);
+		}
+	}
+
+	&.pin-input--state-disabled {
+		.pin-input__input {
+			border-color: var(--grey, #e2e2e2);
+			color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
+			background-color: var(--background, #ffffff);
+			opacity: 0.5;
+			cursor: default;
+		}
+	}
 }
 
 .pin-input__input {
