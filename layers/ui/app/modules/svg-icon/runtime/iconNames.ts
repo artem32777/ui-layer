@@ -24,7 +24,7 @@ export const iconNameList = Object.keys(iconNames) as IconName[]
 
 export const svgIconData = {
 	"check": {"attrs":{"xmlns":"http://www.w3.org/2000/svg","width":"20","height":"20","viewBox":"0 0 20 20","fill":"none"},"body":"\n\t<path\n\t\td=\"M16.6663 5L7.49967 14.1667L3.33301 10\"\n\t\tstroke=\"currentColor\"\n\t\tstroke-width=\"1.5\"\n\t\tstroke-linecap=\"round\"\n\t\tstroke-linejoin=\"round\"\n\t/>\n"},
-	"checkbox-disabled": {"attrs":{"xmlns":"http://www.w3.org/2000/svg","width":"8","height":"8","viewBox":"0 0 8 8","fill":"none"},"body":"\r\n    <path d=\"M1 7L7 1M7 7L1 1\" stroke=\"#A5A6AA\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n"},
+	"checkbox-disabled": {"attrs":{"width":"14","height":"14","viewBox":"0 0 14 14","fill":"none","xmlns":"http://www.w3.org/2000/svg"},"body":"\r\n    <path d=\"M4 10L10 4M10 10L4 4\" stroke=\"#BFC0C4\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n"},
 	"checkbox-indicator": {"attrs":{"viewBox":"0 0 14 14","fill":"none","xmlns":"http://www.w3.org/2000/svg"},"body":"\n  <path d=\"M3 7L6 10L11 5\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n"},
 	"chevronDown": {"attrs":{"xmlns":"http://www.w3.org/2000/svg","width":"24","height":"24","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},"body":"<path d=\"m6 9 6 6 6-6\"/>"},
 	"chevronRight": {"attrs":{"xmlns":"http://www.w3.org/2000/svg","width":"24","height":"24","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"},"body":"<path d=\"m9 18 6-6-6-6\"/>"},

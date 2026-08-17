@@ -50,7 +50,7 @@ const isDisabled = computed(() => props.disabled || props.state === 'disabled')
 			<Icon
 				v-if="isDisabled"
 				:name="iconNames['checkbox-disabled']"
-				:size="6"
+				:size="16"
 				class="checkbox__check"
 				aria-hidden="true"
 			/>
@@ -87,29 +87,31 @@ const isDisabled = computed(() => props.disabled || props.state === 'disabled')
   font-weight: 600;
   line-height: 20px;
 
-	&:hover,
-	&:focus-within,
-	&:active,
-	&.checkbox--state-hovered,
-	&.checkbox--state-focused,
-	&.checkbox--state-pressed {
-		.checkbox__root {
-			background-color: var(--white);
-			border-color: var(--primary-light);
+	&:not(.checkbox--state-disabled) {
+		&:hover,
+		&:focus-within,
+		&:active,
+		&.checkbox--state-hovered,
+		&.checkbox--state-focused,
+		&.checkbox--state-pressed {
+			.checkbox__root {
+				background-color: var(--white);
+				border-color: var(--primary-light);
 
-			&[data-state="checked"] {
-				background-color: var(--primary-light);
+				&[data-state="checked"] {
+					background-color: var(--primary-light);
+				}
 			}
 		}
 	}
 
 	&.checkbox--state-disabled {
+    pointer-events: none;
+
 		.checkbox__root {
 			color: var(--neutral-700);
 			background-color: var(--neutral-500);
 			border-color: var(--neutral-500);
-			cursor: default;
-			pointer-events: none;
 
 			.checkbox__indicator {
 				color: var(--neutral-700);
@@ -131,10 +133,9 @@ const isDisabled = computed(() => props.disabled || props.state === 'disabled')
 	background-color: var(--neutral-500);
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
-  padding: 3px;
 
   &[aria-invalid="true"]{
-    box-shadow: 0 0 0 1px var(--red, #ff001f);
+    box-shadow: 0 0 0 1px var(--accent);
   }
 
 	&[data-state="checked"]{

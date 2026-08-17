@@ -13,6 +13,7 @@ defineProps<{
 
 <style scoped lang="scss">
 .story-grid-item {
+  min-width: 200px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;

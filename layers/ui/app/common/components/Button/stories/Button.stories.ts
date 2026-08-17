@@ -74,6 +74,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 type StylesStory = StoryObj<ButtonStylesStoryArgs>
 
+export const Base: Story = {
+}
+
 export const DocsExample: Story = {
 	tags: ['!dev'],
 }
