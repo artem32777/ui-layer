@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import Checkbox from '../../common/components/Checkbox/Checkbox.vue'
-import Input from '../../common/components/Input/Input.vue'
 
 const meta = {
 	title: 'Design System/Examples',

@@ -1,12 +1,5 @@
 import type { NuxtConfig } from 'nuxt/schema'
-import { readdirSync } from 'node:fs'
-import { resolve } from 'node:path'
 import { defineNuxtConfig } from 'nuxt/config'
-
-const sharedScssDirectories = [
-	'layers/ui/app/config/styles/shared',
-	'layers/ui/app/common/mixins',
-]
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export const baseNuxtConfig = {
@@ -40,10 +33,7 @@ export default defineNuxtConfig({
 		'@nuxt/eslint',
 		// '@nuxt/hints',
 		'@nuxtjs/device',
-		'@pinia/nuxt',
-		'@vueuse/nuxt',
 		'nuxt-typed-router',
-		'vue-sonner/nuxt',
 	],
 
 	devtools: { enabled: true },
@@ -80,11 +70,3 @@ export default defineNuxtConfig({
 		},
 	},
 })
-
-export function getSharedScssAdditionalData(rootDir: string) {
-	return sharedScssDirectories
-		.flatMap(directory => readdirSync(resolve(rootDir, directory), { withFileTypes: true })
-			.filter(file => file.isFile() && file.name.endsWith('.scss'))
-			.map(file => `@use "~~/${directory}/${file.name}" as *;`))
-		.join('\n')
-}

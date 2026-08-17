@@ -103,7 +103,7 @@ defineProps<Props>()
 }
 
 .ui-range-slider-values__value--placeholder {
-	opacity: 0.4;
+	opacity: 0.6;
 }
 
 .ui-range-slider-values__delete {
@@ -130,7 +130,7 @@ defineProps<Props>()
 }
 
 .ui-range-slider-values__single-number--placeholder {
-	opacity: 0.4;
+	opacity: 0.6;
 }
 
 .ui-range-slider-values__additional-text {

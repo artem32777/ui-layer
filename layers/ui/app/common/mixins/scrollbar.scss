@@ -1,7 +1,7 @@
 @mixin scrollbar(
-  $width: 4px,
-  $scrollbar-color: var(--grey),
   $thumb-color: var(--brand),
+  $scrollbar-color: var(--grey),
+  $width: 4px,
   $thumb-radius: 10px
 ) {
   @supports not selector(::-webkit-scrollbar) {

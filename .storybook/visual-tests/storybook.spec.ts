@@ -18,6 +18,8 @@ test('visual regression for every story', async ({ page, request }) => {
 	const stories = Object.values(entries)
 		// MDX docs не дублируем: проверяем именно конечные состояния компонентов.
 		.filter(entry => entry.type === 'story')
+		// STORY_ID позволяет локально проверить одну story без полного visual-обхода.
+		.filter(entry => !process.env.STORY_ID || entry.id === process.env.STORY_ID)
 		// Детерминированный порядок упрощает чтение отчёта и поиск flaky story.
 		.sort((first, second) => first.id.localeCompare(second.id))
 

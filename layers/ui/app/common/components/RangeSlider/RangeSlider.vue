@@ -62,6 +62,7 @@ const modelValue = defineModel<number[]>({ required: true })
 				v-for="(_, index) in modelValue"
 				:key="index"
 				class="ui-range-slider__thumb"
+				:aria-label="type === 'double' ? `${label}: ${index === 0 ? 'от' : 'до'}` : label"
 			/>
 		</SliderRoot>
 	</div>
@@ -142,7 +143,7 @@ const modelValue = defineModel<number[]>({ required: true })
 
 	.ui-range-slider__label {
 		margin-bottom: 0;
-		opacity: 0.5;
+		opacity: 0.7;
 	}
 
 	.ui-range-slider__control {

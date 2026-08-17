@@ -1,56 +1,42 @@
-import {Canvas, Meta} from '@storybook/addon-docs/blocks'
+import {Meta} from '@storybook/addon-docs/blocks'
 
-<Meta title="Docs/Introduction"/>
+<Meta title="Docs/Введение" />
 
-## Структура:
-```text
-project/
-├── .storybook/
-└── layers/
-    └── ui/
-         └── nuxt.config.ts
-         └── app/
-```
+# UI-слой содержит:
 
-## Либы:
-```json
-"dependencies": {
-   "@tanstack/vue-table": "^8.21.3",
-   "@vueuse/nuxt": "^14.3.0",
-   "maska": "^3.2.0",
-   "reka-ui": "^2.10.1",
-   "swiper": "^14.0.6",
-   "vee-validate": "^4.15.1",
-   "vue-sonner": "^2.0.9"
-},
-"devDependencies": {
-   "@playwright/test": "^1.62.0",
-   "@storybook/addon-a11y": "^10.5.5",
-   "@storybook/addon-docs": "^10.5.5",
-   "@storybook/addon-vitest": "^10.5.5",
-   "@storybook/vue3-vite": "^10.5.5",
-   "@vitejs/plugin-vue": "^6.0.8",
-   "@vitest/browser-playwright": "^4.1.10",
-   "playwright": "^1.62.0",
-   "sass-embedded": "^1.100.0",
-   "storybook": "^10.5.5",
-   "vitest": "^4.1.10",
-   "vue-component-type-helpers": "^3.3.8"
-}
-```
+## Стили
+- Глобальные стили проекта.
+- Локальные переменные цветов, брейкпоинтов и др.
+- Переиспользуемые миксины.
+- Подробнее смотри в <span style={{color: '#1ea7fd'}}>[документации стилей](?path=/docs/design-system-файлы-стилей--docs)</span>.
 
-## Ui-кит:
-- В некоторых компонентах используются примитивы headless библиотеки <a href="https://reka-ui.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Reka UI</a>.
-- Для таблиц - <a href="https://tanstack.com/table/latest" style={{color: '#1ea7fd', textDecoration: 'underline'}}>TanStack Table</a>.
-- Для каруселей - <a href="https://swiperjs.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Swiper</a>.
-- Для тоста -  <a href="https://vue-sonner.vercel.app/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Vue Sonner</a>
+## Ui-кит
+- В некоторых компонентах используются примитивы <a href="https://reka-ui.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Reka UI</a>.
+- Для <span style={{color: '#1ea7fd'}}>[таблиц](?path=/docs/ui-datatable--docs)</span> используется <a href="https://tanstack.com/table/latest" style={{color: '#1ea7fd', textDecoration: 'underline'}}>TanStack Table</a>.
+- Для <span style={{color: '#1ea7fd'}}>[каруселей](?path=/docs/ui-slider--docs)</span> используется <a href="https://swiperjs.com/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Swiper</a>.
+- Для <span style={{color: '#1ea7fd'}}>[тоста](?path=/docs/ui-toast--docs)</span> используется  <a href="https://vue-sonner.vercel.app/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Vue Sonner</a>..
 
-
-## Формы и валидация
-- Логика форм сделана с помощью Vee-validate.
-- Валидация с Zod.
-- Компоненты расположены в `layers/ui/app/modules/form`.
-- Отдельная группа в стори http://localhost:6006/?path=/docs/form-form--docs.
+## Формы
+- Логика форм реализована с помощью <a href="https://vee-validate.logaretm.com/v4/guide/overview/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Vee-validate</a>.
+- Правила валидации сделаны на <a href="https://zod.dev/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Zod</a>.
+- Подробнее смотри в <span style={{color: '#1ea7fd'}}>[документации форм](?path=/docs/form-form--docs)</span>.
 
 ## Иконки:
-- Используйте компонент `Icon` и модуль автоматической генерации иконок из svg-файлов - `app/modules/svg-icon`.
+- Для локальных иконок используется модуль `modules/svg-icon`.
+- <span style={{color: '#1ea7fd'}}>[Каталог локальных иконок](?path=/docs/design-system-иконки--docs)</span>. в сторибуке.
+- Подробнее смотри в <span style={{color: '#1ea7fd'}}>[документации компонента иконок](?path=/docs/ui-icon--docs)</span>.
+
+## Тесты:
+- Тесты компонентов и сценариев на <a href="https://vitest.dev/guide/" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Vitest</a>.
+- Тесты доступности на <a href="https://storybook.js.org/addons/@storybook/addon-a11y" style={{color: '#1ea7fd', textDecoration: 'underline'}}>addon-a11y</a>.
+- Визуальные регрессии на <a href="https://storybook.js.org/addons/storybook-addon-playwright" style={{color: '#1ea7fd', textDecoration: 'underline'}}>Playwright</a>.
+- Команды запуска и подробности смотри в <span style={{color: '#1ea7fd'}}>[документации «Использование»](?path=/docs/docs-использование--docs)</span>.
+
+## Сторибук:
+- Документация системы дизайна.
+- Документация и стори состояний ui-компонентов.
+- Возможность изменения цветов и стилей компонентов.
+
+## Другое:
+- Переключатель тем.
+- Вспомогательные функции.

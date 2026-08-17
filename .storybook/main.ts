@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/vue3-vite'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
-import { getSharedScssAdditionalData } from '../nuxt.config.ts'
+import { getSharedScssAdditionalData } from '../layers/ui/nuxt.config.ts'
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const appDir = resolve(rootDir, 'app')

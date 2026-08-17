@@ -105,7 +105,7 @@ defineSlots<{
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 48px);
-  padding: 24px;
+  padding: 22px;
   border-radius: 8px;
   background-color: var(--background, #ffffff);
   box-shadow: 0 20px 25px -5px color-mix(in srgb, var(--text, #000000) 10%, transparent), 0 8px 10px -6px color-mix(in srgb, var(--text, #000000) 10%, transparent);

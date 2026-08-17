@@ -13,10 +13,10 @@ const renderStates = (args: SwitchStoryArgs) => ({
 	template: `
 		<StoryGridRow>
 			<StoryGridItem title="default">
-				<Switch v-bind="args" v-model="args.modelValue"  />
+				<Switch v-bind="args" v-model="args.modelValue" aria-label="Переключатель" />
 			</StoryGridItem>
 			<StoryGridItem title="disabled">
-				<Switch v-bind="args" v-model="args.modelValue" disabled />
+				<Switch v-bind="args" v-model="args.modelValue" disabled aria-label="Переключатель, недоступен" />
 			</StoryGridItem>
 		</StoryGridRow>
 	`,
@@ -40,7 +40,7 @@ const meta = {
 	render: (args: SwitchStoryArgs) => ({
 		components: { Switch },
 		setup() { return { args } },
-		template: '<Switch v-bind="args" v-model="args.modelValue" />',
+		template: '<Switch v-bind="args" v-model="args.modelValue" aria-label="Переключатель" />',
 	}),
 } satisfies Meta<typeof Switch>
 

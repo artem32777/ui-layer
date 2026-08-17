@@ -93,11 +93,14 @@ export const NumberField: Story = {
 		components: { Form, FormNumberField },
 		template: `
 			<Form :initial-errors="{ quantity: 'Укажите количество' }">
-				<FormNumberField
-					name="quantity"
-					:min="0"
-					:max="20"
-				/>
+				<label>
+					Количество
+					<FormNumberField
+						name="quantity"
+						:min="0"
+						:max="20"
+					/>
+				</label>
 			</Form>
 		`,
 	}),

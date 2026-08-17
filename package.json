@@ -13,6 +13,8 @@
     "test:stories": "vitest run --project=storybook",
     "test:stories:watch": "vitest --project=storybook",
     "test:visual": "playwright test --config .storybook/playwright.config.ts",
+    "test:visual:story": "node .storybook/run-visual-story.mjs",
+    "test:visual:story:update": "node .storybook/run-visual-story.mjs --update-snapshots",
     "test:visual:update": "playwright test --config .storybook/playwright.config.ts --update-snapshots"
   },
   "dependencies": {
@@ -42,6 +44,7 @@
     "@types/node": "^26.1.1",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/browser-playwright": "^4.1.10",
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^10.8.0",
     "playwright": "^1.62.0",
     "prettier": "^3.9.6",

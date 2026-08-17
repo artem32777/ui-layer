@@ -1,0 +1,51 @@
+import {Meta} from '@storybook/addon-docs/blocks'
+
+<Meta title="Docs/Установка" />
+
+# Установка UI-слоя
+
+## Структура:
+Скопируйте `vitest.config.ts` и папки `.storybook` и `layers/ui` в свой проект:
+```text
+project/
+├──  vitest.config.ts
+├── .storybook/
+└── layers/
+    └── ui/
+         └── nuxt.config.ts
+         └── app/
+```
+
+## Либы:
+Установите эти зависимости:
+```json
+"dependencies": {
+   "nuxt": "^4.5.0",
+   "vue": "^3.5.40",
+   "@vueuse/nuxt": "^14.3.0",
+   "@tanstack/vue-table": "^8.21.3",
+   "@vueuse/nuxt": "^14.3.0",
+   "@pinia/nuxt": "^1.0.1",
+   "pinia": "^4.0.2",
+   "maska": "^3.2.0",
+   "reka-ui": "^2.10.1",
+   "swiper": "^14.0.6",
+   "vee-validate": "^4.15.1",
+   "vue-sonner": "^2.0.9"
+},
+"devDependencies": {
+   "@playwright/test": "^1.62.0",
+   "@storybook/addon-a11y": "^10.5.5",
+   "@storybook/addon-docs": "^10.5.5",
+   "@storybook/addon-vitest": "^10.5.5",
+   "@storybook/vue3-vite": "^10.5.5",
+   "@vitejs/plugin-vue": "^6.0.8",
+   "@vitest/browser-playwright": "^4.1.10",
+   "@vitest/coverage-v8": "^4.1.10",
+   "playwright": "^1.62.0",
+   "sass-embedded": "^1.100.0",
+   "storybook": "^10.5.5",
+   "vitest": "^4.1.10",
+   "vue-component-type-helpers": "^3.3.8"
+}
+```

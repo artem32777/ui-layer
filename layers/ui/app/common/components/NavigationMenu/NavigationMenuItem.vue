@@ -78,6 +78,6 @@ defineProps<{
 }
 
 .navigation-menu-item__chevron {
-  transition: transform 0.3s ease;
+  transition: transform 0.7s ease;
 }
 </style>

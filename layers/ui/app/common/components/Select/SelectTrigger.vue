@@ -29,6 +29,7 @@ defineProps<SelectTriggerProps>()
 			{ 'select--invalid': invalid },
 		]"
 		:aria-invalid="invalid"
+		:aria-label="selectedLabels.length ? selectedLabels.join(', ') : placeholder"
 	>
 		<SelectValue
 			class="select__value"

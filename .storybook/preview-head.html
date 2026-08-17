@@ -1,12 +1,33 @@
+<style>
+    .sbdocs-content {
+        p, li, td, th, span, code {
+            font-size: 20px !important;
+        }
+
+        h1 { span {font-size: 30px !important} }
+        h2 { span {font-size: 25px !important} }
+
+        .language-vue, .language-scss, .language-text {
+            font-size: 18px;
+        }
+    }
+</style>
+
 <script>
 	(() => {
+		// Сохраняем нативные реализации до того, как Storybook переопределит
+		// HTMLElement.prototype.focus через Object.defineProperties.
 		const nativeHTMLElementFocus = HTMLElement.prototype.focus
 		const nativeDefineProperties = Object.defineProperties
 
+		// Перехватываем только попытку определить getter focus на HTMLElement.prototype.
+		// Остальные вызовы Object.defineProperties продолжают работать без изменений.
 		Object.defineProperties = (object, descriptors) => {
 			if (object === HTMLElement.prototype && descriptors.focus?.get) {
 				const storybookFocusGetter = descriptors.focus.get
 
+				// Обращение к HTMLElement.prototype.focus должно возвращать нативную функцию.
+				// Для конкретных DOM-элементов сохраняем поведение getter-а Storybook.
 				descriptors.focus.get = function () {
 					return this === HTMLElement.prototype
 						? nativeHTMLElementFocus

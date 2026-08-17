@@ -1,7 +1,7 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:math";
-@use "../../config/styles/shared/font-size" as config;
+@use "../../config/styles/shared/typography" as config;
 
 @mixin font-size($name) {
   // Получаем набор размеров и дополнительных параметров по имени пресета.

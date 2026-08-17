@@ -52,6 +52,10 @@ defineProps<{
   --normal-bg: var(--background, #ffffff);
   --normal-border: var(--grey, #e2e2e2);
   --normal-text: var(--text, #000000);
+  --success-text: #007526;
+  --info-text: #0866c2;
+  --warning-text: #a85500;
+  --error-text: #cc0000;
 }
 
 .sonner__title {

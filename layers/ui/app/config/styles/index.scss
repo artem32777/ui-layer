@@ -3,11 +3,11 @@
 @use "colors";
 
 html {
-  @include scrollbar(0.5rem, transparent, var(--brand), 0.5rem);
+  @include scrollbar(var(--brand), transparent, 0.5rem,  0.5rem);
 }
 
 body * {
-  @include scrollbar();
+  //@include scrollbar();
 }
 
 body {
