@@ -7,11 +7,9 @@ import * as FormStories from './Form.stories.ts'
 
 Адаптеры компонентов дизайн-системы для `vee-validate`. Они связывают значение, состояние ошибки и сообщение валидации по имени поля.
 
+Ошибка поля появляется после ухода с него: `validateOnModelUpdate` выключен, `validateOnBlur` включён. При следующем вводе ошибка сразу скрывается и снова показывается только после следующего ухода с поля.
+
 ## FormInput
-
-<Canvas of={FormStories.InputField} />
-
-<Controls of={FormStories.InputField} />
 
 ### Состояние ошибки
 
@@ -36,15 +34,3 @@ import * as FormStories from './Form.stories.ts'
 ## FormCheckbox
 
 <Canvas of={FormStories.Checkbox} />
-
-## FormField
-
-Базовая обёртка поля. Передаёт в слот `value`, `handleChange`, `errorMessage` и `invalid`.
-
-<Canvas of={FormStories.Field} />
-
-## FormFieldError
-
-Выводит сообщение только при наличии `errorMessage`.
-
-<Canvas of={FormStories.FieldError} />

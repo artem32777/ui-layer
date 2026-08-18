@@ -6,23 +6,24 @@ import SliderExampleSource from './SliderExample.vue?raw'
 
 # Slider
 
-Слайдер на базе Swiper с навигацией, пагинацией и слотом для произвольного содержимого слайда.
+Ползунок для выбора одного значения, диапазона или нескольких непересекающихся диапазонов.
 
 ## Когда использовать
 
-- `slides` — массив строк или объектов.
-- Слот `slide` получает текущие `slide` и `index`.
-- `options.hasNav` и `options.hasPagination` управляют встроенными элементами навигации.
-- `swiperOptions` передаёт дополнительные настройки Swiper.
-- События `swiper` и `slide-change` дают доступ к экземпляру и активному индексу.
-
-Контейнер компонента должен иметь заданную ширину и высоту.
+- `type="double"` — интервал между двумя значениями.
+- `type="one-range"` — одно значение.
+- `variant="block"` — компактное блочное отображение значений.
+- `MultiSlider` — несколько интервалов на одной шкале; значения передаются парами.
 
 ## Базовый пример
 
-<Canvas of={SliderStories.Base} />
+<Canvas of={SliderStories.Double} />
 
-<Controls of={SliderStories.Base} />
+<Controls of={SliderStories.Double} />
+
+## Несколько диапазонов
+
+<Canvas of={SliderStories.MultipleRanges} />
 
 ## Пример использования
 

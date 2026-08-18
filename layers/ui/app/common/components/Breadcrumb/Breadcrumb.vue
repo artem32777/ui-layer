@@ -1,18 +1,5 @@
 <script setup lang="ts">
-import type { BreadcrumbItem } from './Breadcrumb.types'
-
-export type { BreadcrumbItem } from './Breadcrumb.types'
-
-interface BreadcrumbsProps {
-	/** Массив элементов хлебных крошек. */
-	items: BreadcrumbItem[]
-
-	/** Сворачивает промежуточные элементы в многоточие. */
-	collapsed?: boolean
-
-	/** Символ разделителя между элементами. */
-	separator?: string
-}
+import type { BreadcrumbsProps } from './Breadcrumb.types'
 
 const props = withDefaults(defineProps<BreadcrumbsProps>(), {
 	collapsed: false,

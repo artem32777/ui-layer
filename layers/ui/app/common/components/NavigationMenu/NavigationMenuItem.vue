@@ -13,9 +13,7 @@ import {
 } from './NavigationMenu.types.ts'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
-defineProps<{
-	item: NavigationMenuItem
-}>()
+defineProps<{ item: NavigationMenuItem }>()
 </script>
 
 <template>

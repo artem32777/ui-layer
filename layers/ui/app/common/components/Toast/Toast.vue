@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import 'vue-sonner/style.css'
 import { Toaster } from 'vue-sonner'
-import { Icon } from '#layers/ui/app/modules/svg-icon'
 
 defineProps<{
 	/** Отображение тостов без их группировки. */
@@ -27,23 +26,7 @@ defineProps<{
 					actionButton: 'sonner__action',
 				},
 			}"
-		>
-			<template #loading-icon>
-				<!-- icon -->
-			</template>
-			<template #success-icon>
-				<!-- icon -->
-			</template>
-			<template #error-icon>
-				<!-- icon -->
-			</template>
-			<template #info-icon>
-				<!-- icon -->
-			</template>
-			<template #warning-icon>
-				<!-- icon -->
-			</template>
-		</Toaster>
+		/>
 	</ClientOnly>
 </template>
 

@@ -1,3 +1,16 @@
+export interface NavigationMenuProps {
+	/** Рекурсивное дерево ссылок и групп навигационного меню. */
+	items: NavigationMenuItem[]
+}
+
+export interface NavigationMenuDropdownProps {
+	items: NavigationMenuItem[]
+	width?: number
+}
+
+/** Пункт любого уровня: ссылка или группа со следующим уровнем. */
+export type NavigationMenuItem = NavigationMenuLinkItem | NavigationMenuGroupItem
+
 /** Допустимое значение атрибута `target` для ссылки меню. */
 export type NavigationMenuLinkTarget = '_blank' | '_self' | '_parent' | '_top'
 
@@ -21,14 +34,6 @@ export interface NavigationMenuGroupItem {
 	children: NavigationMenuItem[]
 	/** Минимальная ширина открываемой панели в пикселях. По умолчанию — 150. */
 	width?: number
-}
-
-/** Пункт любого уровня: ссылка или группа со следующим уровнем. */
-export type NavigationMenuItem = NavigationMenuLinkItem | NavigationMenuGroupItem
-
-export interface NavigationMenuProps {
-	/** Рекурсивное дерево ссылок и групп навигационного меню. */
-	items: NavigationMenuItem[]
 }
 
 /** Проверяет, является ли пункт раскрывающейся группой. */

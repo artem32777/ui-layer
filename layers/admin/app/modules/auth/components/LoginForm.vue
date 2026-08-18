@@ -9,7 +9,7 @@ import { navigateTo, useRoute } from '~/common/utils/router'
 
 const { handleSubmit, isSubmitting } = useForm({
 	validationSchema: z.object({
-		email: z.email('Введите корректный email'),
+		email: z.string().email('Введите корректный email'),
 		password: z.string().min(1, 'Введите пароль'),
 	}),
 })

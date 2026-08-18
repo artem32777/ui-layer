@@ -1,0 +1,29 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as CarouselStories from './Carousel.stories'
+import CarouselExampleSource from './CarouselExample.vue?raw'
+
+<Meta of={CarouselStories} />
+
+# Carousel
+
+Слайдер на базе Swiper с навигацией, пагинацией и слотом для произвольного содержимого слайда.
+
+## Когда использовать
+
+- `slides` — массив строк или объектов.
+- Слот `slide` получает текущие `slide` и `index`.
+- `options.hasNav` и `options.hasPagination` управляют встроенными элементами навигации.
+- `swiperOptions` передаёт дополнительные настройки Swiper.
+- События `swiper` и `slide-change` дают доступ к экземпляру и активному индексу.
+
+Контейнер компонента должен иметь заданную ширину и высоту.
+
+## Базовый пример
+
+<Canvas of={CarouselStories.Base} />
+
+<Controls of={CarouselStories.Base} />
+
+## Пример использования
+
+<Source code={CarouselExampleSource} language="vue" />

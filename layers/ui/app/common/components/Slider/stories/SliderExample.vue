@@ -1,19 +1,20 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import MultiSlider from '../MultiSlider.vue'
 import Slider from '../Slider.vue'
 
-const slides = [
-	{ title: 'Первый слайд', text: 'Описание первого слайда' },
-	{ title: 'Второй слайд', text: 'Описание второго слайда' },
-]
+const price = ref([20, 80])
+const intervals = ref([10, 30, 60, 90])
 </script>
 
 <template>
-	<Slider :slides="slides">
-		<template #slide="{ slide }">
-			<article>
-				<h2>{{ slide.title }}</h2>
-				<p>{{ slide.text }}</p>
-			</article>
-		</template>
-	</Slider>
+	<Slider
+		v-model="price"
+		label="Цена"
+		additional-text=" тыс. ₽"
+	/>
+	<MultiSlider
+		v-model="intervals"
+		:step="5"
+	/>
 </template>

@@ -1,53 +1,36 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, within } from 'storybook/test'
-import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
 import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
+import { numberFieldSizes, numberFieldVariants } from '../NumberField.types.ts'
 import NumberField from '../NumberField.vue'
 
 type NumberFieldStoryArgs = ComponentProps<typeof NumberField>
-type NumberFieldState = NonNullable<NumberFieldStoryArgs['state']>
-type NumberFieldVariant = NonNullable<NumberFieldStoryArgs['variant']>
-
-const getOptions = getStringsArrFromKey<NumberFieldStoryArgs>()
-const numberFieldStates = ['default', 'hovered', 'focused', 'invalid', 'disabled'] satisfies NumberFieldState[]
-const numberFieldVariants = ['base', 'secondary'] satisfies NumberFieldVariant[]
 
 const meta = {
 	title: 'UI/NumberField',
 	component: NumberField,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		modelValue: {
 			description: 'Текущее значение.',
 			table: { type: { summary: 'number | null' } },
 		},
-		variant: {
-			control: 'select',
-			options: getOptions('variant', ['base', 'secondary']),
-		},
-		state: {
-			control: 'select',
-			options: getOptions('state', ['default', 'hovered', 'focused', 'invalid', 'disabled']),
-		},
-		size: {
-			control: 'select',
-			options: getOptions('size', ['sm', 'md', 'lg']),
-		},
+		variant: { control: 'select', options: numberFieldVariants },
 		disabled: { control: 'boolean' },
+		invalid: { control: 'boolean' },
+		size: { control: 'select', options: numberFieldSizes },
 	},
 	args: {
 		modelValue: 10,
-		variant: 'base',
-		state: 'default',
-		size: 'md',
-		step: 1,
+		variant: 'primary',
 		disabled: false,
+		invalid: false,
+		size: 'medium',
+		step: 1,
 	} satisfies NumberFieldStoryArgs,
 	render: (args: NumberFieldStoryArgs) => ({
 		components: { NumberField },
@@ -65,10 +48,16 @@ export const DocsExample: Story = {
 }
 
 export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.number-field-story--hovered',
+			focusWithin: '.number-field-story--focused',
+		},
+	},
 	render: (args: NumberFieldStoryArgs) => ({
 		components: { NumberField, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
-			return { args, numberFieldStates, numberFieldVariants }
+			return { args, numberFieldVariants }
 		},
 		template: `
 			<StoryGrid>
@@ -78,19 +67,44 @@ export const States: Story = {
 					:title="variant"
 				>
 					<StoryGridRow>
-						<StoryGridItem
-							v-for="state in numberFieldStates"
-							:key="state"
-							:title="state"
-							style="width: 180px;"
-						>
+						<StoryGridItem title="default" style="width: 180px;">
 							<NumberField
 								v-bind="args"
 								v-model="args.modelValue"
 								:variant="variant"
-								:state="state"
-								:disabled="state === 'disabled'"
-								:aria-label="'Количество ' + state"
+						
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="hover" style="width: 180px;">
+							<NumberField
+								v-bind="args"
+								v-model="args.modelValue"
+								:variant="variant"
+								class="number-field-story--hovered"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="focus" style="width: 180px;">
+							<NumberField
+								v-bind="args"
+								v-model="args.modelValue"
+								:variant="variant"
+								class="number-field-story--focused"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="invalid" style="width: 180px;">
+							<NumberField
+								v-bind="args"
+								v-model="args.modelValue"
+								:variant="variant"
+								invalid
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="disabled" style="width: 180px;">
+							<NumberField
+								v-bind="args"
+								v-model="args.modelValue"
+								:variant="variant"
+								disabled
 							/>
 						</StoryGridItem>
 					</StoryGridRow>

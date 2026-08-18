@@ -1,4 +1,4 @@
-export interface PinInputProps<T extends 'text' | 'number' = 'text'> {
+export interface PinInputProps<T extends PinInputType = 'text'> {
 	/** Количество полей для ввода. */
 	length?: number
 	/** Символ-заполнитель для пустых полей. */
@@ -9,10 +9,12 @@ export interface PinInputProps<T extends 'text' | 'number' = 'text'> {
 	otp?: boolean
 	/** Ограничивает ввод текстом или цифрами. */
 	type?: T
-	/** Состояние. */
-	state?: 'default' | 'hovered' | 'focused' | 'invalid' | 'disabled'
-	/** Отображает состояние ошибки. */
-	invalid?: boolean
-	/** Отключает поля и запрещает ввод. */
+	/** Отключает поле. */
 	disabled?: boolean
+	/** Отмечает поле как невалидное. */
+	invalid?: boolean
 }
+
+export const pinInputTypes = ['text', 'number'] as const
+
+export type PinInputType = typeof pinInputTypes[number]

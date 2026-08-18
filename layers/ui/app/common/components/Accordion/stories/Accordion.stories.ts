@@ -35,7 +35,6 @@ const meta = {
 	args: {
 		modelValue: ['delivery'],
 		type: 'multiple',
-		closeOnContentClick: false,
 		items: [
 			{
 				trigger: 'Доставка',

@@ -1,53 +1,36 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Textarea from '../Textarea.vue'
 
 type TextareaStoryArgs = ComponentProps<typeof Textarea>
 
-const renderStates = (args: TextareaStoryArgs) => ({
-	components: { StoryGridItem, StoryGridRow, Textarea },
-	setup() { return { args } },
-	template: `
-		<StoryGridRow>
-			<StoryGridItem title="default">
-				<Textarea v-bind="args" v-model="args.modelValue" aria-label="Textarea" />
-			</StoryGridItem>
-			<StoryGridItem title="invalid">
-				<Textarea v-bind="args" v-model="args.modelValue" aria-invalid="true" />
-			</StoryGridItem>
-			<StoryGridItem title="disabled">
-				<Textarea v-bind="args" v-model="args.modelValue" disabled />
-			</StoryGridItem>
-		</StoryGridRow>
-	`,
-})
-
 const meta = {
 	title: 'UI/Textarea',
 	component: Textarea,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
-		placeholder: { control: 'text' },
 		modelValue: {
-			description: 'Значение текстового поля.',
+			description: 'Значение поля.',
 			control: 'text',
 			table: { type: { summary: 'string' } },
 		},
-		invalid: { control: 'boolean' },
+		placeholder: { control: 'text' },
 		disabled: { control: 'boolean' },
+		invalid: { control: 'boolean' },
 	},
 	args: {
 		placeholder: 'Введите сообщение',
+		disabled: false,
+		invalid: false,
 		modelValue: '',
 	} satisfies TextareaStoryArgs,
 	render: (args: TextareaStoryArgs) => ({
 		components: { Textarea },
 		setup() { return { args } },
-		template: '<Textarea v-bind="args" v-model="args.modelValue" />',
+		template: '<Textarea v-bind="args" v-model="args.modelValue" aria-label="Textarea" />',
 	}),
 } satisfies Meta<typeof Textarea>
 
@@ -59,13 +42,62 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
-export const Base: Story = {
-	render: renderStates,
-}
-
-export const Filled: Story = {
-	args: {
-		modelValue: 'Текст в поле\nс переносом строки',
-	} satisfies Partial<TextareaStoryArgs>,
-	render: renderStates,
+export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.textarea-story--hovered',
+			focus: '.textarea-story--focused',
+		},
+	},
+	render: (args: TextareaStoryArgs) => ({
+		components: { Textarea, StoryGrid, StoryGridItem, StoryGridRow },
+		setup() {
+			return { args }
+		},
+		template: `
+			<StoryGrid>
+				<StoryGridRow>
+					<StoryGridItem title="default">
+						<Textarea
+							v-bind="args"
+							v-model="args.modelValue"
+							aria-label="Textarea default"
+						/>
+					</StoryGridItem>
+					<StoryGridItem title="hover">
+						<Textarea
+							v-bind="args"
+							v-model="args.modelValue"
+							class="textarea-story--hovered"
+							aria-label="Textarea hover"
+						/>
+					</StoryGridItem>
+					<StoryGridItem title="focus">
+						<Textarea
+							v-bind="args"
+							v-model="args.modelValue"
+							class="textarea-story--focused"
+							aria-label="Textarea focus"
+						/>
+					</StoryGridItem>
+					<StoryGridItem title="invalid">
+						<Textarea
+							v-bind="args"
+							v-model="args.modelValue"
+							invalid
+							aria-label="Textarea invalid"
+						/>
+					</StoryGridItem>
+					<StoryGridItem title="disabled">
+						<Textarea
+							v-bind="args"
+							v-model="args.modelValue"
+							disabled
+							aria-label="Textarea disabled"
+						/>
+					</StoryGridItem>
+				</StoryGridRow>
+			</StoryGrid>
+		`,
+	}),
 }

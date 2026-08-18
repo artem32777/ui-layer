@@ -8,7 +8,7 @@ import { useApiFetch } from '../../../../../../app/common/composables/useApiFetc
 const { handleSubmit, isSubmitting, values } = useForm({
 	validationSchema: z.object({
 		name: validation.name(),
-		email: z.email('Введите корректный email'),
+		email: z.string().email('Введите корректный email'),
 		password: z.string().min(6, 'Пароль должен содержать не менее 6 символов'),
 		passwordConfirmation: z.string().min(1, 'Повторите пароль'),
 	}).refine(({ password, passwordConfirmation }) => password === passwordConfirmation, {

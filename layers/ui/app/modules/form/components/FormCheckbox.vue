@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import FormField from './FormField.vue'
-import Checkbox, { type CheckboxProps } from '#layers/ui/app/common/components/Checkbox/Checkbox.vue'
+import type { CheckboxProps } from '#layers/ui/app/common/components/Checkbox/Checkbox.types.ts'
+import Checkbox from '#layers/ui/app/common/components/Checkbox/Checkbox.vue'
 
 defineProps<{
 	name: string
@@ -15,7 +16,7 @@ defineProps<{
 	>
 		<Checkbox
 			v-bind="checkboxProps"
-			:model-value="value"
+			:model-value="value as boolean"
 			:invalid="invalid"
 			@update:model-value="handleChange"
 		>

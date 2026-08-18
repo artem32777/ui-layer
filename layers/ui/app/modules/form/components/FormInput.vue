@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import FormField from './FormField.vue'
-import Input, { type InputProps } from '#layers/ui/app/common/components/Input/Input.vue'
+import type { InputProps } from '#layers/ui/app/common/components/Input/Input.types.ts'
+import Input from '#layers/ui/app/common/components/Input/Input.vue'
 
 const props = defineProps<InputProps & {
 	name: string
@@ -14,8 +15,8 @@ const props = defineProps<InputProps & {
 	>
 		<Input
 			v-bind="props"
-			:model-value="value"
-			:aria-invalid="invalid"
+			:model-value="value as string"
+			:invalid="invalid"
 			@update:model-value="handleChange"
 		/>
 	</FormField>

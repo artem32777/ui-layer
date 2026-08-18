@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import SliderNavButton from './SliderNavButton.vue'
+import CarouselNavButton from './CarouselNavButton.vue'
 
 const { xMargin = '40px' } = defineProps<{
 	xMargin?: string
@@ -8,14 +8,14 @@ const { xMargin = '40px' } = defineProps<{
 </script>
 
 <template>
-	<nav class="slider__nav">1
-		<SliderNavButton />
-		<SliderNavButton is-next />
+	<nav class="carousel__nav">1
+		<CarouselNavButton />
+		<CarouselNavButton is-next />
 	</nav>
 </template>
 
 <style scoped lang="scss">
-.slider__nav {
+.carousel__nav {
   position: absolute;
   z-index: 114;
   top: 50%;
@@ -29,7 +29,7 @@ const { xMargin = '40px' } = defineProps<{
   pointer-events: none;
 }
 
-.slider__nav-button {
+.carousel__nav-button {
   pointer-events: auto;
   display: flex;
   align-items: center;
@@ -47,7 +47,7 @@ const { xMargin = '40px' } = defineProps<{
   }
 }
 
-.slider__nav-button :global(.ui-icon) {
+.carousel__nav-button :global(.ui-icon) {
   width: 20px;
   height: 20px;
 }

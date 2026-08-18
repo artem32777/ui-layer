@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { vMaska } from 'maska/vue'
 import FormField from './FormField.vue'
-import Input, { type InputProps } from '#layers/ui/app/common/components/Input/Input.vue'
+import type { InputProps } from '#layers/ui/app/common/components/Input/Input.types.ts'
+import Input from '#layers/ui/app/common/components/Input/Input.vue'
 
 const props = defineProps<Omit<InputProps, 'placeholder'> & {
 	name: string
@@ -11,17 +12,16 @@ const props = defineProps<Omit<InputProps, 'placeholder'> & {
 
 <template>
 	<FormField
-		v-slot="{ value, handleChange, invalid }"
+		v-slot="{ handleChange, invalid }"
 		:name="name"
 	>
 		<Input
 			v-maska="'+7 (###) ###-##-##'"
 			v-bind="props"
-			:model-value="value"
-			:aria-invalid="invalid"
+			:placeholder="placeholder || '+7 (___) ___-__-__'"
 			type="tel"
 			inputmode="tel"
-			:placeholder="placeholder || '+7 (___) ___-__-__'"
+			:invalid="invalid"
 			@update:model-value="handleChange"
 		/>
 	</FormField>

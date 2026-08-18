@@ -1,19 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import type { ConcreteComponent } from 'vue'
+import { type ConcreteComponent, reactive } from 'vue'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, fn } from 'storybook/test'
-import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
 import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
+import { pinInputTypes } from '../PinInput.types.ts'
 import PinInput from '../PinInput.vue'
 
 type PinInputStoryArgs = ComponentProps<typeof PinInput>
-type PinInputState = NonNullable<PinInputStoryArgs['state']>
-
-const getOptions = getStringsArrFromKey<PinInputStoryArgs>()
-const pinInputStates = ['default', 'hovered', 'focused', 'invalid', 'disabled'] satisfies PinInputState[]
 const pinInputVariants = [
 	{ title: 'base', type: 'text', mask: false },
 	{ title: 'numeric', type: 'number', mask: false },
@@ -32,15 +28,10 @@ const meta = {
 		},
 		type: {
 			control: 'select',
-			options: ['text', 'number'],
-			table: { type: { summary: 'string | number' } },
+			options: pinInputTypes,
 		},
-		state: {
-			control: 'select',
-			options: getOptions('state', ['default', 'hovered', 'focused', 'invalid', 'disabled']),
-		},
-		invalid: { control: 'boolean' },
 		disabled: { control: 'boolean' },
+		invalid: { control: 'boolean' },
 	},
 	args: {
 		modelValue: [],
@@ -49,7 +40,6 @@ const meta = {
 		mask: false,
 		otp: false,
 		type: 'text',
-		state: 'default',
 		invalid: false,
 		disabled: false,
 	} satisfies PinInputStoryArgs,
@@ -69,10 +59,16 @@ export const DocsExample: Story = {
 }
 
 export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.pin-input-story--hovered .pin-input__input',
+			focusVisible: '.pin-input-story--focused .pin-input__input',
+		},
+	},
 	render: (args: PinInputStoryArgs) => ({
 		components: { PinInput, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
-			return { args, pinInputStates, pinInputVariants }
+			return { args, pinInputVariants }
 		},
 		template: `
 			<StoryGrid>
@@ -82,20 +78,43 @@ export const States: Story = {
 					:title="variant.title"
 				>
 					<StoryGridRow>
-						<StoryGridItem
-							v-for="state in pinInputStates"
-							:key="state"
-							:title="state"
-						>
+						<StoryGridItem title="default">
 							<PinInput
 								v-bind="args"
-								v-model="args.modelValue"
 								:type="variant.type"
 								:mask="variant.mask"
-								:state="state"
-								:invalid="state === 'invalid'"
-								:disabled="state === 'disabled'"
-								:aria-label="'Pin input ' + variant.title + ' ' + state"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="hover">
+							<PinInput
+								v-bind="args"
+								:type="variant.type"
+								:mask="variant.mask"
+								class="pin-input-story--hovered"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="focus">
+							<PinInput
+								v-bind="args"
+								:type="variant.type"
+								:mask="variant.mask"
+								class="pin-input-story--focused"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="invalid">
+							<PinInput
+								v-bind="args"
+								:type="variant.type"
+								:mask="variant.mask"
+								invalid
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="disabled">
+							<PinInput
+								v-bind="args"
+								:type="variant.type"
+								:mask="variant.mask"
+								disabled
 							/>
 						</StoryGridItem>
 					</StoryGridRow>

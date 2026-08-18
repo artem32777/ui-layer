@@ -1,28 +1,13 @@
 <script setup lang="ts">
-/** Текущее значение поля ввода. */
-const modelValue = defineModel<string>({ default: '' })
-
-export interface InputProps {
-	/** Визуальный вариант поля. */
-	variant?: 'base' | 'secondary'
-	/** Состояние. */
-	state?: 'default' | 'hovered' | 'focused' | 'invalid' | 'disabled'
-	/** Размер поля ввода. */
-	size?: 'sm' | 'md' | 'lg'
-	/** Текст-подсказка внутри пустого поля. */
-	placeholder?: string
-	/** Тип input. */
-	type?: 'text' | 'email' | 'number' | 'password' | 'search' | 'file' | 'date' | 'tel'
-	/** Отключает поле и запрещает ввод. */
-	disabled?: boolean
-}
+import type { InputProps } from './Input.types.ts'
 
 withDefaults(defineProps<InputProps>(), {
-	variant: 'base',
-	state: 'default',
-	size: 'md',
+	variant: 'primary',
+	size: 'medium',
 	type: 'text',
 })
+
+const modelValue = defineModel<string>()
 </script>
 
 <template>
@@ -30,14 +15,13 @@ withDefaults(defineProps<InputProps>(), {
 		v-model="modelValue"
 		class="input"
 		:class="[
-			`input--${size}`,
-			`input--${variant}`,
-			`input--state-${state}`,
+			`input--variant-${variant}`,
+			`input--size-${size}`,
 		]"
 		:type="type"
 		:placeholder="placeholder"
-		:disabled="disabled || state === 'disabled'"
-		:aria-invalid="state === 'invalid' ? true : undefined"
+		:disabled="disabled"
+		:aria-invalid="invalid"
 	>
 </template>
 
@@ -56,30 +40,25 @@ withDefaults(defineProps<InputProps>(), {
 		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
 	}
 
-// VARIANTS:
-	&.input--secondary {
+	&.input--variant-secondary {
 		border-color: var(--grey, #e2e2e2);
 		background-color: var(--background, #ffffff);
 	}
 
-	&:hover,
-	&.input--state-hovered {
+	&:hover {
 		background-color: color-mix(in srgb, var(--brand, #4149f2) 3%, transparent);
 	}
 
-	&:focus,
-	&.input--state-focused {
+	&:focus {
 		outline: none;
 		border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
 	}
 
-	&[aria-invalid='true'],
-	&.input--state-invalid {
+	&[aria-invalid='true'] {
 		border-color: var(--red, #ff001f);
 	}
 
-	&:disabled,
-	&.input--state-disabled {
+	&:disabled {
 		border-color: var(--grey, #e2e2e2);
 		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
 		background-color: var(--background, #ffffff);
@@ -87,13 +66,13 @@ withDefaults(defineProps<InputProps>(), {
 	}
 
 // SIZES:
-	&.input--sm {
+	&.input--size-small {
 		height: 48px;
 		padding: 0 14px;
 		font-size: 14px;
 	}
 
-	&.input--lg {
+	&.input--size-big {
 		height: 64px;
 		padding: 0 18px;
 	}

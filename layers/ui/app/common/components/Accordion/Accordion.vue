@@ -1,20 +1,11 @@
 <script setup lang="ts">
 import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from 'reka-ui'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
-import type { AccordionPropsItem } from './Accordion.types'
+import type { AccordionProps } from './Accordion.types'
 
 // https://reka-ui.com/docs/components/accordion
 
-interface AccordionProps {
-	/** Массив айтемов аккордиона. */
-	items: AccordionPropsItem[]
-	/** Режим открытия: один айтем или несколько одновременно. */
-	type?: 'single' | 'multiple'
-	/** Закрывать айтем при клике по его контенту. */
-	closeOnContentClick?: boolean
-}
-
-const props = withDefaults(defineProps<AccordionProps>(), {
+withDefaults(defineProps<AccordionProps>(), {
 	type: 'multiple',
 })
 
@@ -24,12 +15,6 @@ defineSlots<{
 }>()
 
 const modelValue = defineModel<string | string[]>({})
-
-function handleContentClick(value: string) {
-	if (!props.closeOnContentClick) return
-
-	modelValue.value = props.type === 'multiple' && Array.isArray(modelValue.value) ? modelValue.value.filter(item => item !== value) : undefined
-}
 </script>
 
 <template>
@@ -52,11 +37,7 @@ function handleContentClick(value: string) {
 					/>
 				</slot>
 			</AccordionTrigger>
-			<AccordionContent
-				class="accordion__content"
-				:style="{ 'cursor: pointer': closeOnContentClick }"
-				@click="handleContentClick(item.trigger)"
-			>
+			<AccordionContent class="accordion__content">
 				<div
 					class="accordion__content-inner"
 					v-html="item.content"

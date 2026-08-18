@@ -7,7 +7,7 @@ import { useApiFetch } from '../../../../../../app/common/composables/useApiFetc
 
 const { handleSubmit, isSubmitting, values } = useForm({
 	validationSchema: z.object({
-		email: z.email('Введите корректный email'),
+		email: z.string().email('Введите корректный email'),
 	}),
 })
 

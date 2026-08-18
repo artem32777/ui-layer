@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import Breadcrumb, { type BreadcrumbItem } from '../Breadcrumb.vue'
+import Breadcrumb from '../Breadcrumb.vue'
+import type { BreadcrumbItem } from '../Breadcrumb.types.ts'
 
 const items: BreadcrumbItem[] = [
 	{ label: 'Главная', href: '/' },

@@ -12,8 +12,8 @@ withDefaults(defineProps<{
 
 <template>
 	<Button
-		class="slider-nav-button"
-		:class="`slider-nav-button_${variant}`"
+		class="carousel-nav-button"
+		:class="`carousel-nav-button_${variant}`"
 		:aria-label="`${isNext ? 'Следующий' : 'Предыдущий'} слайд`"
 	>
 		<Icon :name="isNext ? 'plus' : 'download'" />
@@ -21,7 +21,7 @@ withDefaults(defineProps<{
 </template>
 
 <style scoped lang="scss">
-.slider-nav-button {
+.carousel-nav-button {
 
 }
 </style>

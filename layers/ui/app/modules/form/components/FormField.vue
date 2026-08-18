@@ -1,27 +1,26 @@
 <script setup lang="ts">
 import FormFieldError from './FormFieldError.vue'
-import { Field } from 'vee-validate'
+import { useField } from 'vee-validate'
 
-defineProps<{
+const props = defineProps<{
 	name: string
 }>()
+
+const { value, handleChange, errorMessage, meta } = useField(() => props.name, {}, {
+	validateOnValueUpdate: false,
+	validateOnMount: false,
+})
 </script>
 
 <template>
-	<Field
-		v-slot="{ value, handleChange, errorMessage }"
-		:name="name"
-	>
-		<div class="v-field">
-			<slot
-				:value="value"
-				:error-message="errorMessage"
-				:handle-change="handleChange"
-				:invalid="!!errorMessage"
-			/>
-			<FormFieldError :error-message="errorMessage" />
-		</div>
-	</Field>
+	<div class="v-field">
+		<slot
+			:value="value"
+			:handle-change="handleChange"
+			:invalid="!!errorMessage"
+		/>
+		<FormFieldError :error-message="errorMessage" />
+	</div>
 </template>
 
 <style scoped lang="scss">

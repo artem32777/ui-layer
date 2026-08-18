@@ -2,14 +2,14 @@
 import { useForm } from 'vee-validate'
 import { z } from 'zod'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import { FormInput, FormPhoneInput, validation } from '#layers/ui/app/modules/form'
+import { FormInput, FormPhoneInput, VRule } from '#layers/ui/app/modules/form'
 import CallbackFormStatus from './CallbackFormStatus.vue'
 import { useApiFetch } from '../../../../common/composables/useApiFetch'
 
 const { handleSubmit, isSubmitting, values } = useForm({
 	validationSchema: z.object({
-		name: validation.name(),
-		phone: validation.phone(),
+		name: VRule.name(),
+		phone: VRule.phone(),
 	}),
 })
 
@@ -40,7 +40,6 @@ const { execute, status, clear } = useApiFetch('/callback', {
 			<Button
 				class="callback-form__submit"
 				type="submit"
-				size="l"
 				:disabled="isSubmitting"
 			>
 				Отправить

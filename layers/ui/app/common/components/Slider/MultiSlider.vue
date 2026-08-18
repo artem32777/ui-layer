@@ -35,31 +35,31 @@ const ranges = computed(() => Array.from(
 <template>
 	<SliderRoot
 		v-model="modelValue"
-		class="ui-multi-range-slider"
+		class="ui-multi-slider"
 		:min="min"
 		:max="max"
 		:step="step"
 		:disabled="disabled"
 		:min-steps-between-thumbs="1"
 	>
-		<SliderTrack class="ui-multi-range-slider__track">
+		<SliderTrack class="ui-multi-slider__track">
 			<span
 				v-for="(range, index) in ranges"
 				:key="index"
-				class="ui-multi-range-slider__range"
+				class="ui-multi-slider__range"
 				:style="{ left: `${range.left}%`, width: `${range.width}%` }"
 			/>
 		</SliderTrack>
 		<SliderThumb
 			v-for="(_, index) in modelValue"
 			:key="index"
-			class="ui-multi-range-slider__thumb"
+			class="ui-multi-slider__thumb"
 		/>
 	</SliderRoot>
 </template>
 
 <style scoped lang="scss">
-.ui-multi-range-slider {
+.ui-multi-slider {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -73,7 +73,7 @@ const ranges = computed(() => Array.from(
 	}
 }
 
-.ui-multi-range-slider__track {
+.ui-multi-slider__track {
 	position: relative;
 	flex-grow: 1;
 	overflow: hidden;
@@ -82,14 +82,14 @@ const ranges = computed(() => Array.from(
 	background-color: var(--grey, #e2e2e2);
 }
 
-.ui-multi-range-slider__range {
+.ui-multi-slider__range {
 	position: absolute;
 	height: 100%;
 	border-radius: 9999px;
 	background-color: var(--brand, #4149f2);
 }
 
-.ui-multi-range-slider__thumb {
+.ui-multi-slider__thumb {
 	display: block;
 	box-sizing: border-box;
 	width: 20px;

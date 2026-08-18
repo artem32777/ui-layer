@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { useClipboard } from '@vueuse/core'
 import { computed } from 'vue'
-import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
 import { iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon/runtime/iconNames'
 import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
+import { buttonSizes, buttonVariants } from '../Button.types.ts'
 import Button from '../Button.vue'
 
 type ButtonStoryArgs = ComponentProps<typeof Button>
@@ -15,50 +15,24 @@ type ButtonStylesStoryArgs = ButtonStoryArgs & {
 	backgroundColor: string
 	borderRadius: string
 }
-const getOptions = getStringsArrFromKey<ButtonStoryArgs>()
-
-type ButtonState = NonNullable<ButtonStoryArgs['state']>
-type ButtonVariant = NonNullable<ButtonStoryArgs['variant']>
-const buttonStates = ['default', 'hovered', 'focused', 'pressed', 'disabled'] satisfies ButtonState[]
-const buttonVariants = ['primary', 'secondary', 'accent', 'white'] satisfies ButtonVariant[]
 
 const meta = {
 	title: 'UI/Button',
 	component: Button,
 	argTypes: {
-		variant: {
-			control: 'select',
-			options: getOptions('variant', ['primary', 'secondary', 'accent', 'white']),
-		},
-		size: {
-			control: 'select',
-			options: getOptions('size', ['small', 'medium', 'big']),
-		},
-		state: {
-			control: 'select',
-			options: getOptions('state', ['default', 'disabled', 'focused', 'hovered', 'pressed']),
-		},
-		type: {
-			control: 'select',
-			options: getOptions('type', ['button', 'submit', 'reset']),
-		},
-		iconLeft: {
-			control: 'select',
-			options: iconNameList,
-		},
-		iconRight: {
-			control: 'select',
-			options: iconNameList,
-		},
+		variant: { control: 'select', options: buttonVariants },
+		size: { control: 'select', options: buttonSizes },
 		disabled: { control: 'boolean' },
+		type: { control: 'select', options: ['button', 'submit', 'reset'] },
+		iconLeft: { control: 'select', options: iconNameList },
+		iconRight: { control: 'select', options: iconNameList },
 	},
 	args: {
 		text: 'Кнопка',
 		variant: 'primary',
-		state: 'default',
+		disabled: false,
 		size: 'medium',
 		type: 'button',
-		disabled: false,
 	} satisfies ButtonStoryArgs,
 	render: (args: ButtonStoryArgs) => ({
 		components: { Button },
@@ -82,10 +56,16 @@ export const DocsExample: Story = {
 }
 
 export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.button-story--hovered',
+			focusVisible: '.button-story--focused',
+		},
+	},
 	render: (args: ButtonStoryArgs) => ({
 		components: { Button, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
-			return { args, buttonStates, buttonVariants, iconNames }
+			return { args, buttonVariants, iconNames }
 		},
 		template: `
 			<StoryGrid>
@@ -95,19 +75,45 @@ export const States: Story = {
 					:title="variant"
 				>
 					<StoryGridRow>
-						<StoryGridItem
-							v-for="state in buttonStates"
-							:key="state"
-							:title="state"
-						>
-							<Button v-bind="args" :variant="variant" :state="state"/>
-							<Button v-bind="args" :variant="variant" :state="state" :icon-left="iconNames.plus">
+						<StoryGridItem title="default">
+							<Button v-bind="args" :variant="variant" />
+							<Button v-bind="args" :variant="variant" :icon-left="iconNames.plus">
 								{{ args.text }}
 							</Button>
-							<Button v-bind="args" :variant="variant" :state="state" :icon-right="iconNames.chevronRight">
+							<Button v-bind="args" :variant="variant" :icon-right="iconNames.chevronRight">
 								{{ args.text }}
 							</Button>
-							<Button v-bind="args" :variant="variant" :state="state" text="" :icon-left="iconNames.plus" aria-label="Добавить" />
+							<Button v-bind="args" :variant="variant" text="" :icon-left="iconNames.plus" aria-label="Добавить" />
+						</StoryGridItem>
+						<StoryGridItem title="hover">
+							<Button v-bind="args" :variant="variant" class="button-story--hovered" />
+							<Button v-bind="args" :variant="variant" :icon-left="iconNames.plus" class="button-story--hovered">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" :icon-right="iconNames.chevronRight" class="button-story--hovered">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" text="" :icon-left="iconNames.plus" class="button-story--hovered" aria-label="Добавить" />
+						</StoryGridItem>
+						<StoryGridItem title="focus">
+							<Button v-bind="args" :variant="variant" class="button-story--focused" />
+							<Button v-bind="args" :variant="variant" :icon-left="iconNames.plus" class="button-story--focused">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" :icon-right="iconNames.chevronRight" class="button-story--focused">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" text="" :icon-left="iconNames.plus" class="button-story--focused" aria-label="Добавить" />
+						</StoryGridItem>
+						<StoryGridItem title="disabled">
+							<Button v-bind="args" :variant="variant" disabled />
+							<Button v-bind="args" :variant="variant" disabled :icon-left="iconNames.plus">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" disabled :icon-right="iconNames.chevronRight">
+								{{ args.text }}
+							</Button>
+							<Button v-bind="args" :variant="variant" disabled text="" :icon-left="iconNames.plus" aria-label="Добавить" />
 						</StoryGridItem>
 					</StoryGridRow>
 				</StoryGridSection>
@@ -141,7 +147,6 @@ export const Styles: StylesStory = {
 				<Button
 					:text="args.text"
 					:variant="args.variant"
-					:state="args.state"
 					:size="args.size"
 					:type="args.type"
 					:icon-left="args.iconLeft"

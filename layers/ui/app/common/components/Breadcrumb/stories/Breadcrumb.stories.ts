@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
 import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import Breadcrumb from '../Breadcrumb.vue'
 import breadcrumbTypesSource from '../Breadcrumb.types.ts?raw'
+import type { ComponentProps } from 'vue-component-type-helpers'
 
 type BreadcrumbStoryArgs = ComponentProps<typeof Breadcrumb>
 

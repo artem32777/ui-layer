@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RangeSlider from '#layers/ui/app/common/components/RangeSlider/RangeSlider.vue'
+import Slider from '#layers/ui/app/common/components/Slider/Slider.vue'
 
 export interface PremisesFilterRangeProps {
 	label: string
@@ -19,7 +19,7 @@ const model = defineModel<number[]>({ required: true })
 
 <template>
 	<div class="premises-filter-range-field">
-		<RangeSlider
+		<Slider
 			v-model="model"
 			:label="label"
 			:additional-text="additionalText"
@@ -37,12 +37,12 @@ const model = defineModel<number[]>({ required: true })
 .premises-filter-range-field {
 	min-width: 0;
 
-	:deep(.ui-range-slider) {
+	:deep(.ui-slider) {
 		width: 100%;
 		min-width: 0;
 	}
 
-	:deep(.ui-range-slider-values--block) {
+	:deep(.ui-slider-values--block) {
 		border: 1px solid var(--grey);
 		background-color: color-mix(in srgb, var(--grey) 20%, var(--background));
 	}

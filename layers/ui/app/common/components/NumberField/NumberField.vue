@@ -1,29 +1,10 @@
 <script setup lang="ts">
 import { NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, NumberFieldRoot } from 'reka-ui'
-
-export interface NumberFieldProps {
-	/** Визуальный вариант */
-	variant?: 'base' | 'secondary'
-	/** Состояние. */
-	state?: 'default' | 'hovered' | 'focused' | 'invalid' | 'disabled'
-	/** Размер */
-	size?: 'sm' | 'md' | 'lg'
-	/** Начальное значение. */
-	defaultValue?: number
-	/** Минимальное  значение. */
-	min?: number
-	/** Максимальное  значение. */
-	max?: number
-	/** Шаг изменения значения. */
-	step?: number
-	/** Отключает поле и запрещает взаимодействие. */
-	disabled?: boolean
-}
+import type { NumberFieldProps } from './NumberField.types.ts'
 
 const props = withDefaults(defineProps<NumberFieldProps>(), {
-	variant: 'base',
-	state: 'default',
-	size: 'md',
+	variant: 'primary',
+	size: 'medium',
 })
 
 const modelValue = defineModel<number | null>()
@@ -35,12 +16,12 @@ const modelValue = defineModel<number | null>()
 		v-bind="props"
 		class="number-field"
 		:class="[
-			`number-field--${size}`,
-			`number-field--${variant}`,
-			`number-field--state-${state}`,
+			`number-field--variant-${variant}`,
+			`number-field--size-${size}`,
 		]"
-		:disabled="disabled || state === 'disabled'"
-		:aria-invalid="state === 'invalid' ? true : undefined"
+		:disabled="disabled"
+		:aria-invalid="invalid"
+		aria-label="Количество"
 	>
 		<NumberFieldDecrement class="number-field__button number-field__button--decrement">
 			−
@@ -66,41 +47,36 @@ const modelValue = defineModel<number | null>()
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 
 // VARIANTS:
-	&--secondary {
+	&--variant-secondary {
 		border-color: var(--grey, #e2e2e2);
 		background-color: var(--background, #ffffff);
 	}
 
-	&:hover,
-	&.number-field--state-hovered {
+	&:hover {
 		background-color: color-mix(in srgb, var(--brand, #4149f2) 3%, transparent);
 	}
 
-	&:focus-within,
-	&.number-field--state-focused {
+	&:focus-within {
 		border-color: var(--brand-dark, #292fba);
 		box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand, #4149f2) 25%, transparent);
 	}
 
-	&[aria-invalid='true'],
-	&.number-field--state-invalid {
+	&[aria-invalid='true'] {
 		border-color: var(--red, #ff001f);
 
-		&:focus-within,
-		&.number-field--state-focused {
+		&:focus-within {
 			box-shadow: 0 0 0 2px color-mix(in srgb, var(--red, #ff001f) 20%, transparent);
 		}
 	}
 
-	&[data-disabled],
-	&.number-field--state-disabled {
+	&[data-disabled] {
 		border-color: var(--grey, #e2e2e2);
 		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
 		background-color: var(--background, #ffffff);
 	}
 
 // SIZES:
-	&--sm {
+	&--size-small {
 		height: 48px;
 		font-size: 14px;
 
@@ -109,7 +85,7 @@ const modelValue = defineModel<number | null>()
 		}
 	}
 
-	&--lg {
+	&--size-big {
 		height: 64px;
 
 		.number-field__button {

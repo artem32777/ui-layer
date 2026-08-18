@@ -1,13 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NavigationMenuContent, NavigationMenuItem as RekaNavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuSub, NavigationMenuTrigger, NavigationMenuViewport } from 'reka-ui'
-import { getNavigationMenuItemValue, isNavigationMenuGroup, type NavigationMenuItem } from './NavigationMenu.types.ts'
+import {
+	NavigationMenuContent,
+	NavigationMenuItem as RekaNavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuSub,
+	NavigationMenuTrigger,
+	NavigationMenuViewport,
+} from 'reka-ui'
+import {
+	getNavigationMenuItemValue,
+	isNavigationMenuGroup,
+	type NavigationMenuDropdownProps,
+} from './NavigationMenu.types.ts'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
-const { width = 150 } = defineProps<{
-	items: NavigationMenuItem[]
-	width?: number
-}>()
+withDefaults(defineProps<NavigationMenuDropdownProps>(), {
+	width: 150,
+})
 
 const currentItem = ref('')
 </script>

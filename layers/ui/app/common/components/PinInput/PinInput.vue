@@ -1,14 +1,13 @@
-<script setup lang="ts" generic="T extends 'text' | 'number' = 'text'">
+<script setup lang="ts" generic="T extends PinInputType = 'text'">
 import { PinInputInput, PinInputRoot } from 'reka-ui'
-import type { PinInputProps } from './PinInput.types'
+import type { PinInputProps, PinInputType } from './PinInput.types.ts'
 
-type PinInputValue<T extends 'text' | 'number'> = [T] extends ['number'] ? number[] : string[]
+type PinInputValue<T extends PinInputType> = [T] extends ['number'] ? number[] : string[]
 
 const modelValue = defineModel<PinInputValue<T>>({ default: () => [] })
 
 withDefaults(defineProps<PinInputProps<T>>(), {
 	length: 6,
-	state: 'default',
 })
 
 const emit = defineEmits<{
@@ -24,13 +23,10 @@ const emit = defineEmits<{
 		:placeholder="placeholder"
 		:mask="mask"
 		:otp="otp"
-		:disabled="disabled || state === 'disabled'"
-		:aria-invalid="invalid || state === 'invalid' ? true : undefined"
+		:disabled="disabled"
+		:aria-invalid="invalid"
 		class="pin-input"
-		:class="[
-			`pin-input--state-${state}`,
-			{ 'pin-input--invalid': invalid || state === 'invalid' },
-		]"
+		aria-label="Pin Input"
 		@complete="emit('complete', $event)"
 	>
 		<PinInputInput
@@ -47,34 +43,9 @@ const emit = defineEmits<{
 	display: inline-flex;
 	gap: 8px;
 
-	&.pin-input--invalid,
-	&.pin-input--state-invalid {
+	&[aria-invalid='true'] {
 		.pin-input__input {
 			border-color: var(--red, #ff001f);
-		}
-	}
-
-	&.pin-input--state-hovered {
-		.pin-input__input {
-			border-color: var(--grey, #e2e2e2);
-		}
-	}
-
-	&.pin-input--state-focused {
-		.pin-input__input {
-			border-color: var(--brand, #4149f2);
-			outline: none;
-			box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 20%, transparent);
-		}
-	}
-
-	&.pin-input--state-disabled {
-		.pin-input__input {
-			border-color: var(--grey, #e2e2e2);
-			color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
-			background-color: var(--background, #ffffff);
-			opacity: 0.5;
-			cursor: default;
 		}
 	}
 }
@@ -85,11 +56,12 @@ const emit = defineEmits<{
 	border-radius: 8px;
 	color: var(--text, #000000);
 	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 40%, transparent);
+  border: 1px solid transparent;
 	text-align: center;
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 
 	&:hover {
-		border-color: var(--grey, #e2e2e2);
+		border-color: var(--accent);
 	}
 
 	&:focus-visible {

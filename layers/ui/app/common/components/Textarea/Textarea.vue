@@ -1,28 +1,21 @@
 <script setup lang="ts">
-const modelValue = defineModel<string>({ default: '' })
-
-interface TextareaProps {
-	/** Плейсхордер. */
-	placeholder?: string
-	/** Состояние ошибки. */
-	invalid?: boolean
-	/** Отключает поле и запрещает взаимодействие. */
-	disabled?: boolean
-}
+import type { TextareaProps } from './Textarea.types.ts'
 
 withDefaults(defineProps<TextareaProps>(), {
 	placeholder: 'Введите сообщение',
 })
+
+const modelValue = defineModel<string>({ default: '' })
 </script>
 
 <template>
 	<textarea
 		v-model="modelValue"
-		:placeholder="placeholder"
-		:aria-invalid="invalid"
-		:disabled="disabled"
-		aria-label="textarea"
 		class="textarea"
+		:placeholder="placeholder"
+		:disabled="disabled"
+		:aria-invalid="invalid"
+		aria-label="Textarea"
 	/>
 </template>
 
@@ -41,8 +34,17 @@ withDefaults(defineProps<TextareaProps>(), {
 		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
 	}
 
+	&:hover {
+		background-color: color-mix(in srgb, var(--brand, #4149f2) 3%, transparent);
+	}
+
 	&:focus {
 		outline: none;
+		border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
+	}
+
+	&[aria-invalid='true'] {
+		border-color: var(--red, #ff001f);
 	}
 
 	&:disabled {
@@ -50,10 +52,6 @@ withDefaults(defineProps<TextareaProps>(), {
 		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
 		background-color: var(--background, #ffffff);
 		cursor: default;
-	}
-
-	&[aria-invalid='true'] {
-		border-color: var(--red, #ff001f);
 	}
 }
 </style>
