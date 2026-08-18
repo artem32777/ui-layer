@@ -4,6 +4,7 @@ import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Textarea from '../Textarea.vue'
+import { ref } from 'vue'
 
 type TextareaStoryArgs = ComponentProps<typeof Textarea>
 
@@ -52,7 +53,8 @@ export const States: Story = {
 	render: (args: TextareaStoryArgs) => ({
 		components: { Textarea, StoryGrid, StoryGridItem, StoryGridRow },
 		setup() {
-			return { args }
+			const model = ref('Текст')
+			return { args, model }
 		},
 		template: `
 			<StoryGrid>
@@ -60,40 +62,33 @@ export const States: Story = {
 					<StoryGridItem title="default">
 						<Textarea
 							v-bind="args"
-							v-model="args.modelValue"
-							aria-label="Textarea default"
 						/>
+					</StoryGridItem>
+					<StoryGridItem title="filled">
+						<Textarea v-bind="args" v-model="model"/>
 					</StoryGridItem>
 					<StoryGridItem title="hover">
 						<Textarea
 							v-bind="args"
-							v-model="args.modelValue"
 							class="textarea-story--hovered"
-							aria-label="Textarea hover"
 						/>
 					</StoryGridItem>
 					<StoryGridItem title="focus">
 						<Textarea
 							v-bind="args"
-							v-model="args.modelValue"
 							class="textarea-story--focused"
-							aria-label="Textarea focus"
 						/>
 					</StoryGridItem>
 					<StoryGridItem title="invalid">
 						<Textarea
 							v-bind="args"
-							v-model="args.modelValue"
 							invalid
-							aria-label="Textarea invalid"
 						/>
 					</StoryGridItem>
 					<StoryGridItem title="disabled">
 						<Textarea
 							v-bind="args"
-							v-model="args.modelValue"
 							disabled
-							aria-label="Textarea disabled"
 						/>
 					</StoryGridItem>
 				</StoryGridRow>

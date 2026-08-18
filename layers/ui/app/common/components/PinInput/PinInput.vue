@@ -43,6 +43,20 @@ const emit = defineEmits<{
 	display: inline-flex;
 	gap: 8px;
 
+	&:hover {
+		.pin-input__input {
+			border-color: var(--brand);
+		}
+	}
+
+	&:focus-within {
+		.pin-input__input {
+			border-color: var(--brand, #4149f2);
+			outline: none;
+			box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 20%, transparent);
+		}
+	}
+
 	&[aria-invalid='true'] {
 		.pin-input__input {
 			border-color: var(--red, #ff001f);
@@ -53,22 +67,12 @@ const emit = defineEmits<{
 .pin-input__input {
 	width: 48px;
 	height: 56px;
+	border: 1px solid transparent;
 	border-radius: 8px;
 	color: var(--text, #000000);
 	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 40%, transparent);
-  border: 1px solid transparent;
 	text-align: center;
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-
-	&:hover {
-		border-color: var(--accent);
-	}
-
-	&:focus-visible {
-		border-color: var(--brand, #4149f2);
-		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 20%, transparent);
-	}
 
 	&[data-disabled] {
 		border-color: var(--grey, #e2e2e2);

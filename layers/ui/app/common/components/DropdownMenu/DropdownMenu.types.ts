@@ -8,3 +8,11 @@ export interface DropdownMenuItem {
 	/** Отключает пункт меню и запрещает взаимодействие с ним. */
 	disabled?: boolean
 }
+
+export interface DropdownMenuProps {
+	/** Пункты меню для стандартного отображения через DropdownMenuItems. */
+	items?: DropdownMenuItem[]
+	/** Расстояние между триггером и выпадающим меню в пикселях. */
+	offset?: number
+}
+

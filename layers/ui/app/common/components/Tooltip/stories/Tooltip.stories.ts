@@ -1,41 +1,43 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, waitFor, within } from 'storybook/test'
-import Tooltip from '../Tooltip.vue'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import Button from '../../Button/Button.vue'
-import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey.ts'
+import { tooltipAligns, tooltipSides } from '../Tooltip.types.ts'
+import Tooltip from '../Tooltip.vue'
 
 type TooltipStoryArgs = ComponentProps<typeof Tooltip>
-const getOptions = getStringsArrFromKey<TooltipStoryArgs>()
 
 const meta = {
 	title: 'UI/Tooltip',
 	component: Tooltip,
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		modelValue: {
-			description: 'Задаётся если нужно управление состоянием из родителя',
+			description: 'Открыт ли тултип',
 			control: 'boolean',
 			table: { type: { summary: 'boolean' } },
 		},
 		text: { control: 'text' },
-		align: {
-			control: 'select',
-			options: getOptions('align', ['start', 'center', 'end']),
-		},
-		side: {
-			control: 'select',
-			options: getOptions('side', ['top', 'bottom', 'left', 'right']),
-		},
+		align: { control: 'select', options: tooltipAligns },
+		side: { control: 'select', options: tooltipSides },
 		offset: { control: 'number' },
 	},
 	args: {
 		text: 'Текст подсказки',
+		side: 'bottom',
+		align: 'center',
+		offset: 10,
+		modelValue: false,
 	} satisfies TooltipStoryArgs,
 	render: (args: TooltipStoryArgs) => ({
 		components: { Tooltip, Button },
 		setup() { return { args } },
 		template: `
-			<Tooltip v-bind="args" >
+			<Tooltip v-bind="args">
 				<Button>Наведите курсор</Button>
 			</Tooltip>
 		`,
@@ -46,23 +48,50 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Base: Story = {
-
+export const DocsExample: Story = {
+	tags: ['!dev'],
 }
 
-export const Opened: Story = {
+export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.tooltip-story--hovered',
+			focusVisible: '.tooltip-story--focused',
+		},
+	},
 	render: (args: TooltipStoryArgs) => ({
-		components: { Tooltip, Button },
+		components: { Tooltip, Button, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
-			return {
-				modelValue: true,
-				args,
-			}
+			return { args, tooltipSides }
 		},
 		template: `
-			<Tooltip v-model="modelValue" v-bind="args">
-				<Button type="button">Триггер</Button>
-			</Tooltip>
+			<StoryGrid>
+				<StoryGridSection title="bottom">
+					<StoryGridRow>
+						<StoryGridItem title="default" style="padding: 48px;">
+							<Tooltip v-bind="args">
+								<Button>Наведите курсор</Button>
+							</Tooltip>
+						</StoryGridItem>
+						<StoryGridItem title="hover" style="padding: 48px;">
+							<Tooltip
+								v-bind="args"
+								:model-value="true"
+							>
+								<Button class="tooltip-story--hovered">Наведите курсор</Button>
+							</Tooltip>
+						</StoryGridItem>
+						<StoryGridItem title="focus" style="padding: 48px;">
+							<Tooltip
+								v-bind="args"
+								:model-value="true"
+							>
+								<Button class="tooltip-story--focused">Наведите курсор</Button>
+							</Tooltip>
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+			</StoryGrid>
 		`,
 	}),
 }

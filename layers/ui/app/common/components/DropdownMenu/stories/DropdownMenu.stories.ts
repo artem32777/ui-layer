@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, waitFor, within } from 'storybook/test'
+import { reactive } from 'vue'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
+import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
+import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import Button from '../../Button/Button.vue'
 import DropdownMenu from '../DropdownMenu.vue'
 import dropdownMenuTypesSource from '../DropdownMenu.types.ts?raw'
-import type { DropdownMenuItem } from '../DropdownMenu.types'
+import type { DropdownMenuItem } from '../DropdownMenu.types.ts'
 
 type DropdownMenuStoryArgs = ComponentProps<typeof DropdownMenu>
 
@@ -24,9 +28,7 @@ const items: DropdownMenuItem[] = [
 const meta = {
 	title: 'UI/DropdownMenu',
 	component: DropdownMenu,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		modelValue: { description: 'Открыто ли меню.' },
 		items: {
@@ -37,6 +39,7 @@ const meta = {
 				},
 			},
 		},
+		offset: { control: 'number' },
 	},
 	args: {
 		items,
@@ -47,7 +50,7 @@ const meta = {
 		components: { Button, DropdownMenu },
 		setup: () => ({ args }),
 		template: `
-			<DropdownMenu v-model="args.modelValue" v-bind="args">
+			<DropdownMenu v-bind="args" v-model="args.modelValue">
 				<Button text="Open menu" />
 			</DropdownMenu>
 		`,
@@ -58,12 +61,59 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Base: Story = {}
+export const DocsExample: Story = {
+	tags: ['!dev'],
+}
 
-export const Opened: Story = {
-	args: {
-		modelValue: true,
+export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.dropdown-menu-story--hovered',
+			focusVisible: '.dropdown-menu-story--focused',
+		},
 	},
+	render: (args: DropdownMenuStoryArgs) => ({
+		components: { Button, DropdownMenu, StoryGrid, StoryGridItem, StoryGridRow },
+		setup() {
+			const models = reactive({
+				default: false,
+				hover: true,
+				focus: true,
+			})
+
+			return { args, models }
+		},
+		template: `
+			<StoryGrid>
+				<StoryGridRow>
+					<StoryGridItem title="default" style="min-height: 220px; padding: 24px;">
+						<DropdownMenu
+							v-bind="args"
+							v-model="models.default"
+						>
+							<Button text="Open menu" />
+						</DropdownMenu>
+					</StoryGridItem>
+					<StoryGridItem title="hover" style="min-height: 220px; padding: 24px;">
+						<DropdownMenu
+							v-bind="args"
+							v-model="models.hover"
+						>
+							<Button text="Open menu" class="dropdown-menu-story--hovered" />
+						</DropdownMenu>
+					</StoryGridItem>
+					<StoryGridItem title="focus" style="min-height: 220px; padding: 24px;">
+						<DropdownMenu
+							v-bind="args"
+							v-model="models.focus"
+						>
+							<Button text="Open menu" class="dropdown-menu-story--focused" />
+						</DropdownMenu>
+					</StoryGridItem>
+				</StoryGridRow>
+			</StoryGrid>
+		`,
+	}),
 }
 
 export const Tests: Story = {

@@ -137,7 +137,7 @@ export const States: Story = {
 							<Select v-bind="args" v-model="models.multipleSelected" :multiple="true" />
 						</StoryGridItem>
 						<StoryGridItem title="Disabled">
-							<Select v-bind="args" />
+							<Select v-bind="args" disabled />
 						</StoryGridItem>
 					</StoryGridRow>
 				</StoryGridSection>

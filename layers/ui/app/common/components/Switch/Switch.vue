@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { SwitchRoot, SwitchThumb } from 'reka-ui'
+import type { SwitchProps } from './Switch.types.ts'
 
 // https://reka-ui.com/docs/components/switch
 
-export interface SwitchProps {
-	/** Отключает переключатель и запрещает взаимодействие. */
-	disabled?: boolean
-}
-
 defineProps<SwitchProps>()
 
-const modelValue = defineModel<boolean>({ default: false })
+const modelValue = defineModel<boolean>()
 </script>
 
 <template>
@@ -18,6 +14,8 @@ const modelValue = defineModel<boolean>({ default: false })
 		v-model="modelValue"
 		class="switch"
 		:disabled="disabled"
+		:aria-invalid="invalid"
+		aria-label="Переключатель"
 	>
 		<SwitchThumb class="switch__thumb" />
 	</SwitchRoot>
@@ -34,13 +32,25 @@ const modelValue = defineModel<boolean>({ default: false })
 	transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
 
+	&:hover {
+		background-color: color-mix(in srgb, var(--additional-1, #21223c) 85%, var(--white, #ffffff));
+	}
+
 	&[data-state="checked"] {
 		background-color: var(--brand, #4149f2);
+
+		&:hover {
+			background-color: var(--brand-dark, #292fba);
+		}
 	}
 
 	&:focus-visible {
 		outline: 2px solid var(--brand-dark, #292fba);
 		outline-offset: 1px;
+	}
+
+	&[aria-invalid='true'] {
+		box-shadow: 0 0 0 1px var(--red, #ff001f);
 	}
 
 	&[data-disabled] {

@@ -1,59 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
-import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
+import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
+import { toggleSizes, toggleVariants } from '../Toggle.types.ts'
 import Toggle from '../Toggle.vue'
 
 type ToggleStoryArgs = ComponentProps<typeof Toggle>
-
-const getOptions = getStringsArrFromKey<ToggleStoryArgs>()
-
-const renderStates = (args: ToggleStoryArgs) => ({
-	components: { StoryGridItem, StoryGridRow, Toggle },
-	setup() { return { args } },
-	template: `
-		<StoryGridRow>
-			<StoryGridItem title="default">
-				<Toggle v-bind="args" v-model="args.modelValue" :disabled="false" aria-label="Полужирное начертание">B</Toggle>
-			</StoryGridItem>
-			<StoryGridItem title="pressed">
-				<Toggle v-bind="args" :model-value="true" :disabled="false" aria-label="Полужирное начертание, нажато">B</Toggle>
-			</StoryGridItem>
-			<StoryGridItem title="disabled">
-				<Toggle v-bind="args" v-model="args.modelValue" disabled aria-label="Полужирное начертание, недоступно">B</Toggle>
-			</StoryGridItem>
-			<StoryGridItem title="sm">
-				<Toggle v-bind="args" v-model="args.modelValue" size="sm" :disabled="false" aria-label="Полужирное начертание, sm">B</Toggle>
-			</StoryGridItem>
-			<StoryGridItem title="lg">
-				<Toggle v-bind="args" v-model="args.modelValue" size="lg" :disabled="false" aria-label="Полужирное начертание, lg">B</Toggle>
-			</StoryGridItem>
-		</StoryGridRow>
-	`,
-})
+const togglePressed = [false, true]
 
 const meta = {
 	title: 'UI/Toggle',
 	component: Toggle,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
-		modelValue: { description: 'Нажатое состояние переключателя.' },
-		variant: {
-			control: 'select',
-			options: getOptions('variant', ['base', 'outline']),
+		modelValue: {
+			description: 'Нажатое состояние переключателя.',
+			control: 'boolean',
+			table: { type: { summary: 'boolean' } },
 		},
-		size: {
-			control: 'select',
-			options: getOptions('size', ['sm', 'md', 'lg']),
-		},
+		variant: { control: 'select', options: toggleVariants },
+		size: { control: 'select', options: toggleSizes },
 		disabled: { control: 'boolean' },
 	},
 	args: {
 		modelValue: false,
+		variant: 'primary',
+		size: 'medium',
 		disabled: false,
 	} satisfies ToggleStoryArgs,
 	render: (args: ToggleStoryArgs) => ({
@@ -71,15 +46,77 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
-export const Base: Story = {
-	render: renderStates,
-}
-
-export const Outline: Story = {
-	args: {
-		variant: 'outline',
-	} satisfies Partial<ToggleStoryArgs>,
-	render: renderStates,
+export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.toggle-story--hovered',
+			focusVisible: '.toggle-story--focused',
+		},
+	},
+	render: (args: ToggleStoryArgs) => ({
+		components: { Toggle, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		setup() {
+			return { args, toggleVariants, togglePressed }
+		},
+		template: `
+			<StoryGrid>
+				<StoryGridSection
+					v-for="variant in toggleVariants"
+					:key="variant"
+					:title="variant"
+				>
+					<StoryGridRow
+						v-for="pressed in togglePressed"
+						:key="String(pressed)"
+					>
+						<StoryGridItem :title="pressed ? 'on' : 'default'">
+							<Toggle
+								v-bind="args"
+								:variant="variant"
+								:model-value="pressed"
+								aria-label="Полужирное начертание"
+							>
+								B
+							</Toggle>
+						</StoryGridItem>
+						<StoryGridItem title="hover">
+							<Toggle
+								v-bind="args"
+								:variant="variant"
+								:model-value="pressed"
+								class="toggle-story--hovered"
+								aria-label="Полужирное начертание hover"
+							>
+								B
+							</Toggle>
+						</StoryGridItem>
+						<StoryGridItem title="focus">
+							<Toggle
+								v-bind="args"
+								:variant="variant"
+								:model-value="pressed"
+								class="toggle-story--focused"
+								aria-label="Полужирное начертание focus"
+							>
+								B
+							</Toggle>
+						</StoryGridItem>
+						<StoryGridItem title="disabled">
+							<Toggle
+								v-bind="args"
+								:variant="variant"
+								:model-value="pressed"
+								disabled
+								aria-label="Полужирное начертание disabled"
+							>
+								B
+							</Toggle>
+						</StoryGridItem>
+					</StoryGridRow>
+				</StoryGridSection>
+			</StoryGrid>
+		`,
+	}),
 }
 
 export const Tests: Story = {

@@ -10,10 +10,8 @@ export interface RadioOption {
 export interface RadioGroupProps {
 	/** Список вариантов выбора. */
 	options: RadioOption[]
-	/** Состояние. */
-	state?: 'default' | 'hovered' | 'focused' | 'invalid' | 'disabled'
-	/** Показывает состояние ошибки для всей группы. */
-	invalid?: boolean
 	/** Отключает всю группу и запрещает выбор. */
 	disabled?: boolean
+	/** Показывает состояние ошибки для всей группы. */
+	invalid?: boolean
 }

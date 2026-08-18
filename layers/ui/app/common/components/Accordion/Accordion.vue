@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { AccordionContent, AccordionItem, AccordionRoot, AccordionTrigger } from 'reka-ui'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
-import type { AccordionProps } from './Accordion.types'
+import type { AccordionProps } from './Accordion.types.ts'
 
 // https://reka-ui.com/docs/components/accordion
 
@@ -22,6 +22,8 @@ const modelValue = defineModel<string | string[]>({})
 		v-model="modelValue"
 		class="accordion"
 		:type="type"
+		:disabled="disabled"
+		:collapsible="true"
 	>
 		<AccordionItem
 			v-for="item in items"
@@ -49,16 +51,17 @@ const modelValue = defineModel<string | string[]>({})
 
 <style scoped lang="scss">
 .accordion {
-  border-bottom: 1px solid var(--grey, #e2e2e2);
+  width: 100%;
+	border-bottom: 1px solid var(--grey, #e2e2e2);
 }
 
 .accordion__trigger {
-  border-top: 1px solid var(--grey, #e2e2e2);
 	display: flex;
-  width: 100%;
+	width: 100%;
 	align-items: center;
 	justify-content: space-between;
 	min-height: 48px;
+	border-top: 1px solid var(--grey, #e2e2e2);
 	color: var(--text, #000000);
 	cursor: pointer;
 
@@ -74,6 +77,12 @@ const modelValue = defineModel<string | string[]>({})
 		.accordion__icon {
 			transform: rotateX(180deg);
 		}
+	}
+
+	&[data-disabled] {
+		opacity: 0.5;
+		cursor: default;
+    pointer-events: none;
 	}
 }
 
@@ -95,7 +104,7 @@ const modelValue = defineModel<string | string[]>({})
 }
 
 .accordion__content-inner {
-  padding: 0 0 16px;
+	padding: 0 0 16px;
 }
 
 @keyframes accordion-slide-down {

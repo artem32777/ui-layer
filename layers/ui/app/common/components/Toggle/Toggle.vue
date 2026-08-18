@@ -1,28 +1,20 @@
 <script setup lang="ts">
 import { Toggle as ToggleRoot } from 'reka-ui'
+import type { ToggleProps } from './Toggle.types.ts'
 
 // https://reka-ui.com/docs/components/toggle
 
-export interface ToggleProps {
-	/** Визуальный вариант. */
-	variant?: 'outline' | 'base'
-	/** Размер. */
-	size?: 'sm' | 'md' | 'lg'
-	/** Отключает переключатель и запрещает взаимодействие. */
-	disabled?: boolean
-}
-
 withDefaults(defineProps<ToggleProps>(), {
-	variant: 'base',
-	size: 'md',
+	variant: 'primary',
+	size: 'medium',
 })
-
-const modelValue = defineModel<boolean>({ default: false })
 
 defineSlots<{
 	/** Содержимое переключателя. */
 	default?: any
 }>()
+
+const modelValue = defineModel<boolean>({ default: false })
 </script>
 
 <template>
@@ -30,8 +22,8 @@ defineSlots<{
 		v-model="modelValue"
 		class="toggle"
 		:class="[
-			`toggle--${size}`,
-			`toggle--${variant}`,
+			`toggle--variant-${variant}`,
+			`toggle--size-${size}`,
 		]"
 		:disabled="disabled"
 	>
@@ -47,6 +39,11 @@ defineSlots<{
 	border-radius: 6px;
 	color: var(--text, #000000);
 	cursor: pointer;
+
+  &.toggle--variant-outline {
+    border: 1px solid var(--grey, #e2e2e2);
+    background-color: transparent;
+  }
 
 	&:hover {
 		color: var(--additional-1, #21223c);
@@ -68,27 +65,21 @@ defineSlots<{
 		cursor: not-allowed;
 	}
 
-// VARIANTS:
-  &--outline {
-    border: 1px solid var(--grey, #e2e2e2);
-    background-color: transparent;
-  }
-
 // SIZES:
-  &--sm {
-    width: 32px;
-    height: 32px;
-    font-size: 13px;
-  }
+	&.toggle--size-small {
+		width: 32px;
+		height: 32px;
+		font-size: 13px;
+	}
 
-  &--md {
-    width: 36px;
-    height: 36px;
-  }
+	&.toggle--size-medium {
+		width: 36px;
+		height: 36px;
+	}
 
-  &--lg {
-    width: 40px;
-    height: 40px;
-  }
+	&.toggle--size-big {
+		width: 40px;
+		height: 40px;
+	}
 }
 </style>

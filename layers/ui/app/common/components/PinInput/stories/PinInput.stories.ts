@@ -61,8 +61,8 @@ export const DocsExample: Story = {
 export const States: Story = {
 	parameters: {
 		pseudo: {
-			hover: '.pin-input-story--hovered .pin-input__input',
-			focusVisible: '.pin-input-story--focused .pin-input__input',
+			hover: '.pin-input-story--hovered',
+			focusWithin: '.pin-input-story--focused',
 		},
 	},
 	render: (args: PinInputStoryArgs) => ({

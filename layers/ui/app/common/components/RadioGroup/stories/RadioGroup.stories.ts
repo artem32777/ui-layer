@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
-import { getStringsArrFromKey } from '~/common/utils/getStringsArrFromKey'
 import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
@@ -10,24 +9,19 @@ import RadioGroup from '../RadioGroup.vue'
 import radioGroupTypesSource from '../RadioGroup.types.ts?raw'
 
 type RadioGroupStoryArgs = ComponentProps<typeof RadioGroup>
-type RadioGroupState = NonNullable<RadioGroupStoryArgs['state']>
 
-const getOptions = getStringsArrFromKey<RadioGroupStoryArgs>()
 const defaultOptions = [
 	{ label: 'False', value: 'false' },
 	{ label: 'True', value: 'true' },
 	{ label: 'Disabled', value: 'disabled', disabled: true },
 ]
 
-const radioGroupStates = ['default', 'hovered', 'focused', 'invalid', 'disabled'] satisfies RadioGroupState[]
 const radioGroupChecked = ['', 'true']
 
 const meta = {
 	title: 'UI/RadioGroup',
 	component: RadioGroup,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		modelValue: {
 			description: 'Выбранное значение группы радиокнопок.',
@@ -43,17 +37,12 @@ const meta = {
 				},
 			},
 		},
-		invalid: { control: 'boolean' },
 		disabled: { control: 'boolean' },
-		state: {
-			control: 'select',
-			options: getOptions('state', ['default', 'hovered', 'focused', 'invalid', 'disabled']),
-		},
+		invalid: { control: 'boolean' },
 	},
 	args: {
 		modelValue: 'true',
 		options: defaultOptions,
-		state: 'default',
 		invalid: false,
 		disabled: false,
 	} satisfies RadioGroupStoryArgs,
@@ -76,10 +65,16 @@ export const DocsExample: Story = {
 }
 
 export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.radio-group-story--hovered',
+			focusWithin: '.radio-group-story--focused',
+		},
+	},
 	render: (args: RadioGroupStoryArgs) => ({
 		components: { RadioGroup, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
-			return { args, radioGroupChecked, radioGroupStates }
+			return { args, radioGroupChecked }
 		},
 		template: `
 			<StoryGrid>
@@ -89,18 +84,43 @@ export const States: Story = {
 					:title="checked ? 'checked' : 'base'"
 				>
 					<StoryGridRow>
-						<StoryGridItem
-							v-for="state in radioGroupStates"
-							:key="state"
-							:title="state"
-						>
+						<StoryGridItem title="default">
 							<RadioGroup
 								v-bind="args"
 								:model-value="checked"
-								:state="state"
-								:invalid="state === 'invalid'"
-								:disabled="state === 'disabled'"
-								:aria-label="(checked ? 'checked' : 'base') + ' ' + state"
+								:aria-label="(checked ? 'checked' : 'base') + ' default'"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="hover">
+							<RadioGroup
+								v-bind="args"
+								:model-value="checked"
+								class="radio-group-story--hovered"
+								:aria-label="(checked ? 'checked' : 'base') + ' hover'"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="focus">
+							<RadioGroup
+								v-bind="args"
+								:model-value="checked"
+								class="radio-group-story--focused"
+								:aria-label="(checked ? 'checked' : 'base') + ' focus'"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="invalid">
+							<RadioGroup
+								v-bind="args"
+								:model-value="checked"
+								invalid
+								:aria-label="(checked ? 'checked' : 'base') + ' invalid'"
+							/>
+						</StoryGridItem>
+						<StoryGridItem title="disabled">
+							<RadioGroup
+								v-bind="args"
+								:model-value="checked"
+								disabled
+								:aria-label="(checked ? 'checked' : 'base') + ' disabled'"
 							/>
 						</StoryGridItem>
 					</StoryGridRow>

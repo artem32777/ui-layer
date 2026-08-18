@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { DropdownMenuContent, DropdownMenuPortal, DropdownMenuRoot, DropdownMenuTrigger } from 'reka-ui'
 import DropdownMenuItems from './DropdownMenuItems.vue'
-import type { DropdownMenuItem } from './DropdownMenu.types.ts'
-
-interface DropdownMenuProps {
-	/** Пункты меню для стандартного отображения через DropdownMenuItems. */
-	items?: DropdownMenuItem[]
-	/** Расстояние между триггером и выпадающим меню в пикселях. */
-	offset?: number
-}
+import type { DropdownMenuProps } from './DropdownMenu.types.ts'
 
 withDefaults(defineProps<DropdownMenuProps>(), {
 	offset: 6,

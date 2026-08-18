@@ -15,9 +15,9 @@ export interface SelectProps<T> {
 	/** Текст, отображаемый до выбора значения. */
 	placeholder?: string
 	/** Визуальный вариант */
-	variant?: 'primary' | 'secondary'
+	variant?: SelectVariant
 	/** Размер поля выбора. */
-	size?: 'small' | 'medium' | 'big'
+	size?: SelectSize
 	/** Разрешает выбрать несколько значений. */
 	multiple?: T
 	/** Состояние ошибки */
@@ -27,7 +27,7 @@ export interface SelectProps<T> {
 }
 
 export const selectVariants = ['primary', 'secondary'] as const
-export const selectSizes = ['small', 'medium', 'big'] as const
+export const selectSizes = ['medium', 'big'] as const
 
 export type SelectVariant = typeof selectVariants[number]
 export type SelectSize = typeof selectSizes[number]

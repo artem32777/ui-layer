@@ -9,5 +9,11 @@ export interface AccordionProps {
 	/** Массив айтемов аккордиона. */
 	items: AccordionPropsItem[]
 	/** Режим открытия: один айтем или несколько одновременно. */
-	type?: 'single' | 'multiple'
+	type?: AccordionType
+	/** Отключает весь аккордеон и запрещает открытие. */
+	disabled?: boolean
 }
+
+export const accordionTypes = ['single', 'multiple'] as const
+
+export type AccordionType = typeof accordionTypes[number]

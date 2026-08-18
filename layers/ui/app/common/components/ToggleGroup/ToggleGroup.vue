@@ -1,17 +1,10 @@
 <script setup lang="ts">
 import { ToggleGroupItem, ToggleGroupRoot } from 'reka-ui'
-import type { ToggleGroupItemType } from './ToggleGroup.types'
+import type { ToggleGroupProps } from './ToggleGroup.types.ts'
 
 // https://reka-ui.com/docs/components/toggle-group
 
-export interface ToggleGroupItems {
-	// Массив элементов тогл-группы
-	items: ToggleGroupItemType[]
-	// Можно выбирать только один или несколько айтемов
-	type?: 'single' | 'multiple'
-}
-
-withDefaults(defineProps<ToggleGroupItems>(), {
+withDefaults(defineProps<ToggleGroupProps>(), {
 	type: 'single',
 })
 
@@ -23,6 +16,7 @@ const modelValue = defineModel<string | string[]>()
 		v-model="modelValue"
 		:type="type"
 		class="toggle-group"
+		:disabled="disabled"
 	>
 		<ToggleGroupItem
 			v-for="option in items"
@@ -42,6 +36,20 @@ const modelValue = defineModel<string | string[]>()
 	border: 1px solid var(--grey, #e2e2e2);
 	border-radius: 6px;
 	background-color: var(--background, #ffffff);
+
+	&:hover {
+		.toggle-group__item {
+			color: var(--additional-1, #21223c);
+			background-color: var(--grey, #e2e2e2);
+		}
+	}
+
+	&:focus-within {
+		.toggle-group__item {
+			outline: none;
+			box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		}
+	}
 }
 
 .toggle-group__item {

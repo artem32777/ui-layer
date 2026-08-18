@@ -56,7 +56,7 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
 				aria-hidden="true"
 				as-child
 			>
-				<Icon :name="iconNames.chevronDown" />
+				<Icon :name="iconNames.selectChevron" />
 			</SelectIcon>
 		</SelectTrigger>
 		<ClientOnly>
@@ -72,13 +72,14 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
   justify-content: space-between;
   width: 100%;
   min-width: 150px;
-  min-height: 56px;
-  padding: 0 16px;
-  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  gap: 6px;
   border: 1px solid transparent;
-  border-radius: 8px;
-  color: var(--text, #000000);
-  background-color: color-mix(in srgb, var(--grey, #e2e2e2) 40%, transparent);
+  border-radius: 16px;
+  @include font-size(button);
+  color: var(--neutral-950);
+  background-color: var(--neutral-500);
   transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
   cursor: pointer;
 
@@ -89,10 +90,11 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
 
   &:focus {
     border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
+    background-color: var(--neutral-600);
   }
 
   &:hover {
-    background-color: color-mix(in srgb, var(--brand, #4149f2) 3%, transparent);
+    background-color: var(--neutral-600);
   }
 
   &[data-state='open'] {
@@ -111,15 +113,9 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
   }
 
 // SIZES:
-  &.select--size-sm {
-    min-height: 48px;
-    padding: 0 14px;
-    font-size: 14px;
-  }
-
   &.select--size-lg {
-    min-height: 64px;
-    padding: 0 18px;
+    height: 54px;
+    padding: 0 20px;
   }
 }
 
@@ -132,10 +128,12 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 4px;
-  background-color: color-mix(in srgb, var(--brand, #4149f2) 7%, transparent);
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 16px;
+  @include font-size(label);
+  color: var(--white);
+  background-color: var(--primary-light);
 }
 
 .select__icon {

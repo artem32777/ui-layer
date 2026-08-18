@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BreadcrumbsProps } from './Breadcrumb.types'
+import type { BreadcrumbsProps } from './Breadcrumb.types.ts'
 
 const props = withDefaults(defineProps<BreadcrumbsProps>(), {
 	collapsed: false,
@@ -70,6 +70,19 @@ const isSeparatorVisible = (index: number) =>
 <style scoped lang="scss">
 .breadcrumb {
 	color: var(--additional-2, #6b5b72);
+
+	&:hover {
+		.breadcrumb__link {
+			color: var(--brand, #4149f2);
+		}
+	}
+
+	&:focus-within {
+		.breadcrumb__link {
+			outline: none;
+			box-shadow: 0 0 0 2px var(--brand, #4149f2);
+		}
+	}
 }
 
 .breadcrumb__list {

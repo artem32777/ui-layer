@@ -2,23 +2,17 @@
 import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from 'reka-ui'
 import type { RadioGroupProps } from './RadioGroup.types'
 
-const modelValue = defineModel<string>()
+defineProps<RadioGroupProps>()
 
-withDefaults(defineProps<RadioGroupProps>(), {
-	state: 'default',
-})
+const modelValue = defineModel<string>()
 </script>
 
 <template>
 	<RadioGroupRoot
 		v-model="modelValue"
 		class="radio-group"
-		:class="[
-			`radio-group--state-${state}`,
-			{ 'radio-group--invalid': invalid || state === 'invalid' },
-		]"
-		:aria-invalid="invalid || state === 'invalid' ? true : undefined"
-		:disabled="disabled || state === 'disabled'"
+		:aria-invalid="invalid"
+		:disabled="disabled"
 	>
 		<label
 			v-for="option in options"
@@ -46,16 +40,7 @@ withDefaults(defineProps<RadioGroupProps>(), {
 	flex-direction: column;
 	gap: 10px;
 
-	&.radio-group--invalid,
-	&.radio-group--state-invalid {
-		.radio-group__icon {
-			box-shadow:
-				inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 6%, transparent),
-				0 0 0 1px var(--red, #ff001f);
-		}
-	}
-
-	&.radio-group--state-hovered {
+	&:hover {
 		.radio-group__icon {
 			background-color: color-mix(in srgb, var(--grey, #e2e2e2) 70%, transparent);
 		}
@@ -65,12 +50,24 @@ withDefaults(defineProps<RadioGroupProps>(), {
 		}
 	}
 
-	&.radio-group--state-focused {
+	&:focus-within {
 		.radio-group__icon {
 			outline: 2px solid var(--brand-dark, #292fba);
 			outline-offset: 2px;
 		}
 	}
+
+	&[aria-invalid='true'] {
+		.radio-group__icon {
+			box-shadow:
+				inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 6%, transparent),
+				0 0 0 1px var(--red, #ff001f);
+		}
+	}
+
+  &[data-disabled]{
+    pointer-events: none;
+  }
 }
 
 .radio-group__item {
@@ -107,11 +104,6 @@ withDefaults(defineProps<RadioGroupProps>(), {
 
 	&[data-disabled] {
 		opacity: 0.5;
-		cursor: default;
-
-    ~.radio-group__label {
-      cursor: default;
-    }
 	}
 }
 

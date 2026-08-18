@@ -1,18 +1,8 @@
 <script setup lang="ts">
 import { TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger } from 'reka-ui'
+import type { TooltipProps } from './Tooltip.types.ts'
 
 // https://reka-ui.com/docs/components/tooltip
-
-export interface TooltipProps {
-	/** Текст тултипа. Если нужен конент сложнее строки, можно его передать в слоте */
-	text?: string
-	/** Где появляется тултип */
-	side?: 'top' | 'right' | 'bottom' | 'left'
-	/** Положение стрелки-указателя */
-	align?: 'start' | 'center' | 'end'
-	/** Отступ от триггера до тултипа */
-	offset?: number
-}
 
 withDefaults(defineProps<TooltipProps>(), {
 	side: 'top',
@@ -55,13 +45,13 @@ const isOpenModel = defineModel<boolean>()
 
 <style scoped lang="scss">
 :deep(.tooltip-content) {
-  z-index: $z-tooltip;
+	z-index: $z-tooltip;
 	padding: 6px 10px;
 	border-radius: 6px;
 	color: var(--white, #ffffff);
 	background-color: var(--brand, #4149f2);
 	box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--text, #000000) 10%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--text, #000000) 10%, transparent);
-  animation: tooltip-fade-in 0.3s ease;
+	animation: tooltip-fade-in 0.3s ease;
 }
 
 :deep(.tooltip-arrow) {
