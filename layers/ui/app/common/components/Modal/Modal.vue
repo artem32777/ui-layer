@@ -138,7 +138,7 @@ defineSlots<{
 }
 
 .modal__subtitle {
-  color: var(--additional-2, #6b5b72);
+  color: var(--primary-50, #6b5b72);
   margin-bottom: 10px;
 }
 
@@ -149,7 +149,7 @@ defineSlots<{
 
   &:hover, &:focus-visible  {
     color: var(--text, #000000);
-    background-color: var(--grey, #e2e2e2);
+    background-color: var(--neutral-500, #e2e2e2);
   }
 }
 

@@ -14,26 +14,12 @@ export const Colors: Story = {
 	render: () => ({
 		setup() {
 			const styles = getComputedStyle(document.documentElement)
-			const roles: Record<string, string> = {
-				'--brand': 'Главный акцент, primary-действия, выбранные элементы.',
-				'--brand-dark': 'Hover, pressed, усиленный акцент.',
-				'--brand-light': 'Фокус, подсветки, мягкие акцентные состояния.',
-				'--headers': 'Заголовки и крупные смысловые акценты.',
-				'--text': 'Основной текст интерфейса.',
-				'--background': 'Фон поверхностей и страниц.',
-				'--grey': 'Границы, разделители, вторичные фоны.',
-				'--red': 'Ошибки, invalid-состояния, опасные действия.',
-				'--additional-1': 'Дополнительный тёмный текст или фон.',
-				'--additional-2': 'Вторичный текст и подписи.',
-				'--white': 'Текст на тёмных/акцентных поверхностях.',
-				'--black': 'Тени, color-mix и контрастные состояния.',
-			}
 			const colors = ref(Array.from(colorsScss.match(/:root\s*{([^}]*)}/s)?.[1]?.matchAll(/(--[\w-]+)\s*:/g) ?? [])
-				.map(match => ({
-					name: match[1]!,
-					role: roles[match[1]!] ?? '',
-					value: styles.getPropertyValue(match[1]!).trim(),
-				}))
+				.map((match) => {
+					const value = styles.getPropertyValue(match[1]!).trim()
+
+					return { name: match[1]!, value, initialValue: value }
+				})
 				.filter(color => CSS.supports('color', color.value)))
 
 			return {
@@ -46,26 +32,39 @@ export const Colors: Story = {
 
 					if (color) color.value = value
 				},
+				resetColors() {
+					colors.value.forEach((color) => {
+						document.documentElement.style.setProperty(color.name, color.initialValue)
+						color.value = color.initialValue
+					})
+				},
 			}
 		},
 		template: `
-			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
-				<div
-					v-for="color in colors"
-					:key="color.name"
-					style="overflow: hidden; border: 1px solid var(--grey); border-radius: 8px; background: var(--background);"
+			<div style="display: grid; gap: 16px;">
+				<button
+						style="justify-self: start; border: 1px solid black; padding: 5px;  border-radius: 4px"
+						@click="resetColors"
 				>
-					<input
-						type="color"
-						:value="color.value"
-						:aria-label="'Изменить ' + color.name"
-						style="display: block; width: 100%; height: 88px; padding: 0; border: 0; cursor: pointer;"
-						@input="setColor(color.name, $event)"
+					Сбросить
+				</button>
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+					<div
+						v-for="color in colors"
+						:key="color.name"
+						style="overflow: hidden; border: 1px solid var(--grey); border-radius: 8px; background: var(--background);"
 					>
-					<div style="display: grid; gap: 6px; padding: 12px;">
-						<strong>{{ color.name }}</strong>
-						<span>{{ color.value }}</span>
-						<span>{{ color.role }}</span>
+						<input
+							type="color"
+							:value="color.value"
+							:aria-label="'Изменить ' + color.name"
+							style="width: 100%; height: 88px; cursor: pointer;"
+							@input="setColor(color.name, $event)"
+						>
+						<div style="display: grid; gap: 6px; padding: 6px;">
+							<strong>{{ color.name }}</strong>
+							<span>{{ color.value }}</span>
+						</div>
 					</div>
 				</div>
 			</div>

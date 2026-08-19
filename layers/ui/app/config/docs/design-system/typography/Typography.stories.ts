@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import TypographyEditor from './TypographyEditor.vue'
 
 const meta = {
-	title: 'Design System/Examples/Typography',
+	title: 'Design System/Examples',
 } satisfies Meta
 
 export default meta

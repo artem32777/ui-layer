@@ -4,6 +4,7 @@ import Button from '#layers/ui/app/common/components/Button/Button.vue'
 import Tabs from '#layers/ui/app/common/components/Tabs/Tabs.vue'
 import Tooltip from '#layers/ui/app/common/components/Tooltip/Tooltip.vue'
 import { useFavoriteStore } from '~/modules/premises'
+import ThemeSwitcher from '#layers/ui/app/common/components/ThemeSwitcher/ThemeSwitcher.vue'
 
 const favoriteStore = useFavoriteStore()
 
@@ -16,6 +17,7 @@ const tabItems = [
 <template>
 	<div>
 		<Icon name="download" />
+		<ThemeSwitcher />
 
 		<Button @click="favoriteStore.addToFavorite('toast-example')">
 			Добавить в избранное

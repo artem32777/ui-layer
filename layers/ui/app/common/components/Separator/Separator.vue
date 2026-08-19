@@ -27,7 +27,7 @@ withDefaults(defineProps<SeparatorProps>(), {
 <style scoped lang="scss">
 .separator {
 	flex-shrink: 0;
-	background-color: var(--grey, #e2e2e2);
+	background-color: var(--neutral-500, #e2e2e2);
 
 	&[data-orientation="horizontal"] {
 		width: 100%;

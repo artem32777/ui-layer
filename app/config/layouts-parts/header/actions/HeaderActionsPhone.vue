@@ -35,7 +35,7 @@ const formatPhone = () => {
   transition: color 0.3s ease;
 
   &:hover {
-    color: var(--brand);
+    color: var(--primary);
   }
 
   @media (max-width: $lg) {

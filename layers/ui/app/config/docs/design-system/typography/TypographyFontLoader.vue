@@ -99,9 +99,9 @@ function applyFontToSelected() {
 	display: grid;
 	gap: 12px;
 	padding: 16px;
-	border: 1px solid var(--grey);
+	border: 1px solid var(--neutral-500);
 	border-radius: 8px;
-	background: var(--background);
+	background: var(--white);
 }
 
 .typography-font-loader__upload {
@@ -116,7 +116,7 @@ function applyFontToSelected() {
 }
 
 .typography-font-loader__file-input {
-	color: var(--text);
+	color: var(--neutral-950);
 }
 
 .typography-font-loader__preview {
@@ -125,7 +125,7 @@ function applyFontToSelected() {
 }
 
 .typography-font-loader__name {
-	color: var(--additional-2);
+	color: var(--primary-50);
 	font-size: 13px;
 }
 
@@ -142,14 +142,14 @@ function applyFontToSelected() {
 
 .typography-font-loader__button {
 	padding: 8px 14px;
-	border: 1px solid var(--brand);
+	border: 1px solid var(--primary);
 	border-radius: 6px;
 	color: var(--white);
-	background: var(--brand);
+	background: var(--primary);
 	cursor: pointer;
 
 	&:hover {
-		background: var(--brand-dark);
+		background: var(--primary-dark);
 	}
 
 	&:disabled {
@@ -159,6 +159,6 @@ function applyFontToSelected() {
 }
 
 .typography-font-loader__error {
-	color: var(--red);
+	color: var(--accent);
 }
 </style>

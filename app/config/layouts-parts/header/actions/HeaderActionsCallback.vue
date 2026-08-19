@@ -27,12 +27,12 @@ import CallbackModal from '../../../../modules/callback/components/modal/Callbac
     min-height: 44px;
     padding: 0;
     border-radius: 50%;
-    color: var(--brand);
-    background-color: color-mix(in srgb, var(--brand) 10%, transparent);
+    color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
 
     &:hover {
       color: var(--white);
-      background-color: var(--brand);
+      background-color: var(--primary);
     }
   }
 }

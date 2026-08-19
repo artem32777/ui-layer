@@ -79,7 +79,7 @@ const ranges = computed(() => Array.from(
 	overflow: hidden;
 	height: 8px;
 	border-radius: 9999px;
-	background-color: var(--grey, #e2e2e2);
+	background-color: var(--neutral-500, #e2e2e2);
 }
 
 .ui-multi-slider__range {

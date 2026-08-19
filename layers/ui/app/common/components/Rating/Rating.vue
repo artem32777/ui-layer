@@ -103,7 +103,7 @@ const modelValue = defineModel<number>({ default: 0 })
   }
 
   &--invalid {
-    border-bottom: 1px solid var(--red, #ff001f);
+    border-bottom: 1px solid var(--accent, #ff001f);
   }
 }
 
@@ -120,7 +120,7 @@ const modelValue = defineModel<number>({ default: 0 })
   color: currentColor;
 
   &--background {
-    color: var(--grey, #e2e2e2);
+    color: var(--neutral-500, #e2e2e2);
     transition: color 0.2s ease;
   }
 }

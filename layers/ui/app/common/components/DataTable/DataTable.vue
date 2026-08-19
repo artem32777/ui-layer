@@ -185,7 +185,7 @@ defineExpose({ table })
 
 .ui-data-table__container {
   overflow: auto;
-  border: 1px solid var(--grey, #e2e2e2);
+  border: 1px solid var(--neutral-500, #e2e2e2);
   border-radius: 8px;
 }
 
@@ -195,7 +195,7 @@ defineExpose({ table })
 }
 
 .ui-data-table__head {
-  background-color: var(--grey, #e2e2e2);
+  background-color: var(--neutral-500, #e2e2e2);
 }
 
 th,
@@ -207,7 +207,7 @@ td {
 
 th {
   height: 40px;
-  color: var(--additional-2, #6b5b72);
+  color: var(--primary-50, #6b5b72);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -217,7 +217,7 @@ td {
 }
 
 tr {
-  border-bottom: 1px solid var(--grey, #e2e2e2);
+  border-bottom: 1px solid var(--neutral-500, #e2e2e2);
 
   &:last-child {
     border-bottom: 0;
@@ -230,7 +230,7 @@ tr {
 
 .ui-data-table__state {
   height: 72px;
-  color: var(--additional-2, #6b5b72);
+  color: var(--primary-50, #6b5b72);
   text-align: center;
 }
 </style>

@@ -102,7 +102,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	box-sizing: border-box;
 	width: fit-content;
 	padding: 16px;
-	border: 1px solid var(--grey, #e2e2e2);
+	border: 1px solid var(--neutral-500, #e2e2e2);
 	border-radius: var(--radius, 8px);
 	color: var(--text, #000000);
 	background-color: var(--background, #ffffff);
@@ -126,7 +126,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 }
 
 .month-picker__heading {
-	color: var(--headers, #000000);
+	color: var(--neutral-950);
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 24px;
@@ -153,8 +153,8 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	cursor: pointer;
 
 	&:hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {
@@ -211,8 +211,8 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	user-select: none;
 
 	&:not([data-selected]):not([data-disabled]):not([data-unavailable]):hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {
@@ -238,7 +238,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	}
 
 	&[data-unavailable] {
-		color: var(--additional-2, #888888);
+		color: var(--primary-50, #888888);
 		text-decoration: line-through;
 		cursor: not-allowed;
 	}

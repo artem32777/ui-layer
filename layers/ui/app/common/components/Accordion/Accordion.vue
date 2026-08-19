@@ -52,7 +52,7 @@ const modelValue = defineModel<string | string[]>()
 <style scoped lang="scss">
 .accordion {
   width: 100%;
-	border-bottom: 1px solid var(--grey, #e2e2e2);
+	border-bottom: 1px solid var(--neutral-500, #e2e2e2);
 }
 
 .accordion__trigger {
@@ -61,7 +61,7 @@ const modelValue = defineModel<string | string[]>()
 	align-items: center;
 	justify-content: space-between;
 	min-height: 48px;
-	border-top: 1px solid var(--grey, #e2e2e2);
+	border-top: 1px solid var(--neutral-500, #e2e2e2);
 	color: var(--text, #000000);
 	cursor: pointer;
 

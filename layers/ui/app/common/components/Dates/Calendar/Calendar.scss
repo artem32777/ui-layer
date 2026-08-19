@@ -6,7 +6,7 @@
 	box-sizing: border-box;
 	width: fit-content;
 	padding: 16px;
-	border: 1px solid var(--grey, #e2e2e2);
+	border: 1px solid var(--neutral-500, #e2e2e2);
 	border-radius: var(--radius, 8px);
 	color: var(--text, #000000);
 	background-color: var(--background, #ffffff);
@@ -90,8 +90,8 @@
 	cursor: pointer;
 
 	&:hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {
@@ -130,7 +130,7 @@
 	width: 36px;
 	height: 32px;
 	padding: 0;
-	color: var(--additional-2, #888888);
+	color: var(--primary-50, #888888);
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 16px;
@@ -163,8 +163,8 @@
 	user-select: none;
 
 	&:not([data-selected]):not([data-disabled]):not([data-unavailable]):hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {
@@ -190,11 +190,11 @@
 	}
 
 	&[data-outside-view]:not([data-selected]) {
-		color: var(--additional-2, #6b5b72);
+		color: var(--primary-50, #6b5b72);
 	}
 
 	&[data-unavailable] {
-		color: var(--additional-2, #888888);
+		color: var(--primary-50, #888888);
 		text-decoration: line-through;
 		cursor: not-allowed;
 	}

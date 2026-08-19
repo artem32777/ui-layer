@@ -101,7 +101,7 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 // VARIANTS:
 	&.button--variant-primary {
 		color: var(--white);
-		background-color: var(--primary);
+		background-color: var(--Backgrounds-bg-primary);
 
 		&:hover, &:active {
 			background-color: var(--primary-light);

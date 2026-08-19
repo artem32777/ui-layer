@@ -28,12 +28,12 @@ const modelValue = defineModel<boolean>()
 	height: 20px;
 	padding: 2px;
 	border-radius: 200px;
-	background-color: var(--additional-1, #21223c);
+	background-color: var(--primary-dark, #21223c);
 	transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
 
 	&:hover {
-		background-color: color-mix(in srgb, var(--additional-1, #21223c) 85%, var(--white, #ffffff));
+		background-color: color-mix(in srgb, var(--primary-dark, #21223c) 85%, var(--white, #ffffff));
 	}
 
 	&[data-state="checked"] {
@@ -50,7 +50,7 @@ const modelValue = defineModel<boolean>()
 	}
 
 	&[aria-invalid='true'] {
-		box-shadow: 0 0 0 1px var(--red, #ff001f);
+		box-shadow: 0 0 0 1px var(--accent, #ff001f);
 	}
 
 	&[data-disabled] {

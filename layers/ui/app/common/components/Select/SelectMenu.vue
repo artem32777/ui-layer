@@ -96,7 +96,7 @@ const groupedOptions = computed(() => {
   }
 
   &[data-disabled] {
-    color: var(--additional-2, #6b5b72);
+    color: var(--primary-50, #6b5b72);
     pointer-events: none;
   }
 }
@@ -107,14 +107,14 @@ const groupedOptions = computed(() => {
 
 .select-menu__group-label {
   padding: 6px 28px;
-  color: var(--additional-2, #6b5b72);
+  color: var(--primary-50, #6b5b72);
   font-size: 12px;
 }
 
 .select-menu__separator {
   //height: 1px;
   //margin: 4px;
-  //background-color: var(--grey, #e2e2e2);
+  //background-color: var(--neutral-500, #e2e2e2);
 }
 
 @keyframes select-menu-fade-in {

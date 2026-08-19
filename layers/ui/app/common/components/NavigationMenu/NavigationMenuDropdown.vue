@@ -78,7 +78,7 @@ const currentItem = ref('')
 	padding: 8px;
 	border-radius: 8px;
 	background: var(--background, #ffffff);
-	box-shadow: 0 16px 40px color-mix(in srgb, var(--black, #000000) 14%, transparent);
+	box-shadow: 0 16px 40px color-mix(in srgb, var(--neutral-950, #000000) 14%, transparent);
 }
 
 :deep(.navigation-menu-dropdown-item__trigger),
@@ -96,7 +96,7 @@ const currentItem = ref('')
   &:hover,
   &:focus-visible,
   &[data-state='open'] {
-    background: color-mix(in srgb, var(--grey, #e2e2e2) 35%, var(--background, #ffffff));
+    background: color-mix(in srgb, var(--neutral-500, #e2e2e2) 35%, var(--background, #ffffff));
     color: var(--brand, #4149f2);
   }
 

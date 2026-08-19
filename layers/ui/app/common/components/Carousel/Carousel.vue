@@ -123,6 +123,6 @@ function handleSlideChange(swiper: SwiperInstance) {
 }
 
 .carousel__slide {
-
+  padding: 0 var(--spacing-120);
 }
 </style>

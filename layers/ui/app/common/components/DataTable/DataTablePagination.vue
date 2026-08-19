@@ -116,7 +116,7 @@ const lastVisibleRow = computed(() => {
 
 .ui-data-table-pagination__summary {
 	margin: 0;
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 	font-size: 13px;
 }
 </style>

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import type { TypographyItem, TypographyProperty } from './typography.types'
 import TypographyFontLoader from './TypographyFontLoader.vue'
 import TypographyPreset from './TypographyPreset.vue'
-import typographyScss from '#layers/ui/app/config/styles/shared/typography.scss?raw'
+import typographyScss from '#layers/ui/app/config/styles/typography.scss?raw'
 
 // Читаем названия брейкпоинтов прямо из SCSS, чтобы редактор не дублировал конфигурацию вручную.
 const breakpointTokens = typographyScss.match(/\$breakpoints:\s*\(([^)]+)\)/)?.[1]?.split(',').map(token => token.trim()) ?? []
@@ -92,14 +92,14 @@ function resetAll() {
 .typography-editor__reset {
 	justify-self: end;
 	padding: 8px 14px;
-	border: 1px solid var(--grey);
+	border: 1px solid var(--neutral-500);
 	border-radius: 6px;
-	color: var(--text);
-	background: var(--background);
+	color: var(--neutral-950);
+	background: var(--white);
 	cursor: pointer;
 
 	&:hover {
-		border-color: var(--brand);
+		border-color: var(--primary);
 	}
 }
 </style>

@@ -21,7 +21,6 @@ const meta = {
 	args: {
 		name: iconNames.plus,
 		size: 24,
-		color: '#4149f2',
 	} satisfies IconStoryArgs,
 } satisfies Meta<typeof Icon>
 
@@ -81,7 +80,7 @@ export const Icons: Story = {
 							type="search"
 							placeholder="download"
 							autocomplete="off"
-							style="width: 100%; height: 42px; padding: 0 14px; border: 1px solid var(--grey); border-radius: 8px; background: var(--background); color: var(--text)"
+							style="width: 100%; height: 42px; padding: 0 14px; border: 1px solid #000; border-radius: 8px; background: var(--white); "
 						>
 					</label>
 				</div>
@@ -99,7 +98,7 @@ export const Icons: Story = {
 								:key="iconName"
 								type="button"
 								:title="copied && text === iconName ? 'Скопировано' : 'Скопировать название'"
-								style="display: grid; gap: 10px; justify-items: center; padding: 18px 12px; border: 1px solid var(--grey); border-radius: 8px; color: var(--text); background: var(--background)"
+								style="display: grid; gap: 10px; justify-items: center; padding: 18px 12px; border: 1px solid #000; border-radius: 8px; background: var(--white)"
 								@click="copy(iconName)"
 							>
 								<Icon v-bind="args" :name="iconName" :size="40" />
@@ -110,7 +109,7 @@ export const Icons: Story = {
 				</div>
 				<p
 					v-else
-					style="padding: 24px; border: 1px dashed var(--grey); border-radius: 8px; background: var(--background); text-align: center;"
+					style="padding: 24px; border: 1px dashed #000; border-radius: 8px; text-align: center;"
 				>
 					Иконки не найдены
 				</p>

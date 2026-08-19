@@ -1,0 +1,43 @@
+@use "sass:list";
+@use "./shared/breakpoints" as *;
+
+// Создаёт css переменные с префиксом var(--spacing-2) с адаптивными размерами.
+$spacing-breakpoints: ($xxxs, $sm, $xxl);
+$spacing-sizes: (
+	0: (0px, 0px, 0px),
+	2: (2px, 2px, 2px),
+	4: (4px, 4px, 4px),
+	8: (8px, 8px, 8px),
+	12: (8px, 10px, 12px),
+	16: (12px, 14px, 16px),
+	20: (16px, 18px, 20px),
+	24: (20px, 22px, 24px),
+	32: (22px, 26px, 32px),
+	40: (24px, 30px, 40px),
+	48: (28px, 34px, 48px),
+	56: (32px, 38px, 56px),
+	64: (34px, 42px, 64px),
+	72: (36px, 46px, 72px),
+	80: (40px, 50px, 80px),
+	88: (42px, 54px, 88px),
+	96: (44px, 58px, 96px),
+	104: (44px, 62px, 104px),
+	120: (44px, 66px, 120px),
+	136: (44px, 70px, 136px),
+	152: (48px, 70px, 152px),
+	200: (50px, 70px, 200px),
+);
+
+:root {
+	@each $name, $sizes in $spacing-sizes {
+		--spacing-#{$name}: #{list.nth($sizes, 1)};
+	}
+
+	@for $index from 2 through list.length($spacing-breakpoints) {
+		@media (min-width: list.nth($spacing-breakpoints, $index)) {
+			@each $name, $sizes in $spacing-sizes {
+				--spacing-#{$name}: #{list.nth($sizes, $index)};
+			}
+		}
+	}
+}

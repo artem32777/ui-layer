@@ -43,8 +43,8 @@ const model = defineModel<number[]>({ required: true })
 	}
 
 	:deep(.ui-slider-values--block) {
-		border: 1px solid var(--grey);
-		background-color: color-mix(in srgb, var(--grey) 20%, var(--background));
+		border: 1px solid var(--neutral-500);
+		background-color: color-mix(in srgb, var(--neutral-500) 20%, var(--white));
 	}
 }
 </style>

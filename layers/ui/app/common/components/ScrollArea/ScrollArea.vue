@@ -58,7 +58,7 @@ defineSlots<{
 	touch-action: none;
 	user-select: none;
 	transition: background-color 0.3s ease;
-  background-color: var(--grey, #e2e2e2);
+  background-color: var(--neutral-500, #e2e2e2);
 
 	&:hover {
 		background-color: color-mix(in srgb, var(--text, #000000) 6%, transparent);

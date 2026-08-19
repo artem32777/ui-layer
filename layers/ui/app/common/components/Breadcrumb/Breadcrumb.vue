@@ -69,7 +69,7 @@ const isSeparatorVisible = (index: number) =>
 
 <style scoped lang="scss">
 .breadcrumb {
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 
 	&:hover {
 		.breadcrumb__link {
@@ -99,7 +99,7 @@ const isSeparatorVisible = (index: number) =>
 }
 
 .breadcrumb__link {
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 	transition: color 0.3s ease;
 
 	&:hover {
@@ -117,11 +117,11 @@ const isSeparatorVisible = (index: number) =>
 }
 
 .breadcrumb__separator {
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 }
 
 .breadcrumb__ellipsis {
 	display: inline-flex;
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 }
 </style>

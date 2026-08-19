@@ -41,7 +41,7 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .header-mobile-menu__item {
-  border-bottom: 1px solid color-mix(in srgb, var(--black) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--neutral-950) 8%, transparent);
 }
 
 .header-mobile-menu__button,
@@ -52,7 +52,7 @@ const emit = defineEmits<{
   justify-content: space-between;
   width: 100%;
   padding: 16px 0;
-  color: var(--text);
+  color: var(--neutral-950);
   border: 0;
   background: transparent;
   font: inherit;

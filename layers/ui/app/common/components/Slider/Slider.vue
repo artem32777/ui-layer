@@ -102,7 +102,7 @@ const modelValue = defineModel<number[]>({ required: true })
 	position: relative;
 	flex-grow: 1;
 	height: 1px;
-	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 50%, transparent);
+	background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 50%, transparent);
 }
 
 .ui-slider__range {
@@ -134,7 +134,7 @@ const modelValue = defineModel<number[]>({ required: true })
 	}
 
 	.ui-slider__range {
-		background-color: color-mix(in srgb, var(--grey, #e2e2e2) 50%, transparent);
+		background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 50%, transparent);
 	}
 }
 

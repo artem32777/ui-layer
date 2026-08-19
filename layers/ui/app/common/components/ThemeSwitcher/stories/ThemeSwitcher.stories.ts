@@ -16,6 +16,7 @@ export const Base: Story = {}
 export const Tests: Story = {
 	play: async ({ canvas, canvasElement, userEvent }) => {
 		const light = canvas.getByRole('button', { name: 'Светлая тема' })
+		const grey = canvas.getByRole('button', { name: 'Серая тема' })
 		const dark = canvas.getByRole('button', { name: 'Тёмная тема' })
 		const system = canvas.getByRole('button', { name: 'Системная тема' })
 		const documentElement = canvasElement.ownerDocument.documentElement
@@ -23,16 +24,24 @@ export const Tests: Story = {
 		await userEvent.click(light)
 		await expect(light).toHaveAttribute('aria-pressed', 'true')
 		await waitFor(() => expect(documentElement).not.toHaveClass('dark'))
+		await waitFor(() => expect(documentElement).not.toHaveClass('grey'))
+
+		await userEvent.click(grey)
+		await expect(grey).toHaveAttribute('aria-pressed', 'true')
+		await expect(light).toHaveAttribute('aria-pressed', 'false')
+		await waitFor(() => expect(documentElement).toHaveClass('grey'))
 
 		await userEvent.click(dark)
 		await expect(dark).toHaveAttribute('aria-pressed', 'true')
-		await expect(light).toHaveAttribute('aria-pressed', 'false')
+		await expect(grey).toHaveAttribute('aria-pressed', 'false')
 		await waitFor(() => expect(documentElement).toHaveClass('dark'))
+		await waitFor(() => expect(documentElement).not.toHaveClass('grey'))
 
 		await userEvent.click(system)
 		await expect(system).toHaveAttribute('aria-pressed', 'true')
 
 		await userEvent.click(light)
 		await waitFor(() => expect(documentElement).not.toHaveClass('dark'))
+		await waitFor(() => expect(documentElement).not.toHaveClass('grey'))
 	},
 }

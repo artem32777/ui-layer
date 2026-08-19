@@ -41,18 +41,18 @@ const modelValue = defineModel<boolean>({ default: false })
 	cursor: pointer;
 
   &.toggle--variant-outline {
-    border: 1px solid var(--grey, #e2e2e2);
+    border: 1px solid var(--neutral-500, #e2e2e2);
     background-color: transparent;
   }
 
 	&:hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&[data-state="on"] {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {

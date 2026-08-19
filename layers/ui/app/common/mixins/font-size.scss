@@ -1,8 +1,13 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:math";
-@use "../../config/styles/shared/typography" as config;
 
+// Импортируем конфигурацию кастомных размеров шрифтов:
+@use "../../config/styles/typography" as config;
+
+// Миксин разворачивает в css медиазапросы по количеству брейкпоинтов, указанном в конфиге
+// Значения всех свойств указывается через переменные var(--font-h1-size-1, 116px), var(--font-h1-weight, 600)
+// --font-h1-size-1 при этом не существует, но может быть создана и таким образом переопределенна
 @mixin font-size($name) {
   // Получаем набор размеров и дополнительных параметров по имени пресета.
   $sizes: map.get(config.$font-sizes, $name);

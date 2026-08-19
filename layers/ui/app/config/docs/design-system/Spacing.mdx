@@ -1,0 +1,65 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Design System/Адаптивные расстояния" />
+
+# Адаптивные расстояния
+Локальная шкала находится в `layers/ui/app/config/styles/spacing.scss`.
+
+
+## Использование
+
+Используйте CSS-переменные `var(--spacing-*)` для `gap`, `padding`, `margin` и других размеров. Значение переменной автоматически меняется на брейкпоинтах, поэтому дополнительные медиазапросы не нужны.
+
+```scss
+.card {
+	gap: var(--spacing-24);
+	padding: var(--spacing-40);
+}
+```
+
+## Брейкпоинты
+
+| Режим | Ширина |
+| --- | --- |
+| Mobile | до `767px` |
+| Tablet | от `768px` (`$sm`) |
+| Desktop | от `1920px` (`$xxl`) |
+
+## Шкала
+
+| Переменная | Mobile | Tablet | Desktop |
+| --- | ---: | ---: | ---: |
+| `--spacing-0` | 0px | 0px | 0px |
+| `--spacing-2` | 2px | 2px | 2px |
+| `--spacing-4` | 4px | 4px | 4px |
+| `--spacing-8` | 8px | 8px | 8px |
+| `--spacing-12` | 8px | 10px | 12px |
+| `--spacing-16` | 12px | 14px | 16px |
+| `--spacing-20` | 16px | 18px | 20px |
+| `--spacing-24` | 20px | 22px | 24px |
+| `--spacing-32` | 22px | 26px | 32px |
+| `--spacing-40` | 24px | 30px | 40px |
+| `--spacing-48` | 28px | 34px | 48px |
+| `--spacing-56` | 32px | 38px | 56px |
+| `--spacing-64` | 34px | 42px | 64px |
+| `--spacing-72` | 36px | 46px | 72px |
+| `--spacing-80` | 40px | 50px | 80px |
+| `--spacing-88` | 42px | 54px | 88px |
+| `--spacing-96` | 44px | 58px | 96px |
+| `--spacing-104` | 44px | 62px | 104px |
+| `--spacing-120` | 44px | 66px | 120px |
+| `--spacing-136` | 44px | 70px | 136px |
+| `--spacing-152` | 48px | 70px | 152px |
+| `--spacing-200` | 50px | 70px | 200px |
+
+## Настройка
+
+Каждая запись в `$spacing-sizes` задаёт имя CSS-переменной и три значения в порядке Mobile, Tablet, Desktop.
+
+```scss
+$spacing-sizes: (
+	24: (20px, 22px, 24px),
+);
+```
+
+Эта запись генерирует `--spacing-24`: `20px` на Mobile, `22px` на Tablet и `24px` на Desktop.

@@ -1,6 +1,6 @@
 @mixin scrollbar(
-  $thumb-color: var(--brand),
-  $scrollbar-color: var(--grey),
+  $thumb-color: var(--primary),
+  $scrollbar-color: var(--neutral-500),
   $width: 4px,
   $thumb-radius: 10px
 ) {

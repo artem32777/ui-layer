@@ -43,7 +43,7 @@ export function useCookie<T>(name: string, options: CookieOptions<T> = {}): Ref<
 /**
  * Browser-only замена Nuxt `useHead`.
  *
- * ThemeSwitcher меняет класс `dark` на `<html>`; watchEffect сохраняет
+ * ThemeSwitcher меняет класс темы на `<html>`; watchEffect сохраняет
  * реактивное поведение исходного Nuxt composable.
  */
 export function useHead(input: HeadInput) {
@@ -53,5 +53,6 @@ export function useHead(input: HeadInput) {
 			: input.htmlAttrs?.class
 
 		document.documentElement.classList.toggle('dark', classValue?.split(/\s+/).includes('dark') ?? false)
+		document.documentElement.classList.toggle('grey', classValue?.split(/\s+/).includes('grey') ?? false)
 	})
 }

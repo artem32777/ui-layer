@@ -33,7 +33,7 @@ defineProps<{
 <style lang="scss">
 .sonner[data-sonner-toaster] {
   --normal-bg: var(--background, #ffffff);
-  --normal-border: var(--grey, #e2e2e2);
+  --normal-border: var(--neutral-500, #e2e2e2);
   --normal-text: var(--text, #000000);
   --success-text: #007526;
   --info-text: #0866c2;
@@ -47,12 +47,12 @@ defineProps<{
 }
 
 .sonner__description {
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 	font-size: 13px;
 }
 
 .sonner__action {
-	border: 1px solid var(--grey, #e2e2e2);
+	border: 1px solid var(--neutral-500, #e2e2e2);
 	border-radius: 6px;
 	color: var(--text, #000000);
 	background-color: var(--background, #ffffff);
@@ -61,7 +61,7 @@ defineProps<{
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover,  &:focus-visible {
-    background-color: var(--grey, #e2e2e2);
+    background-color: var(--neutral-500, #e2e2e2);
   }
 }
 </style>

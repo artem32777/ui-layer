@@ -23,7 +23,7 @@ defineProps<HeaderProps>()
 .header {
   z-index: $z-header;
   position: relative;
-  background: var(--background);
+  background: var(--white);
 }
 
 .header__inner {

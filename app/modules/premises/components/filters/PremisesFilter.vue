@@ -108,9 +108,9 @@ const emit = defineEmits<{
 	box-sizing: border-box;
 	width: 100%;
 	padding: 24px;
-	border: 1px solid var(--grey);
+	border: 1px solid var(--neutral-500);
 	border-radius: var(--radius);
-	background-color: var(--background);
+	background-color: var(--white);
 
 	@media (max-width: $sm) {
 		padding: 16px;

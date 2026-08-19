@@ -94,16 +94,18 @@ const emit = defineEmits<{
 </template>
 
 <style scoped lang="scss">
+@use "../../../styles/typography" as config;
+
 .typography-preset {
 	overflow: hidden;
-	border: 1px solid var(--grey);
+	border: 1px solid var(--neutral-500);
 	border-radius: 8px;
-	background: var(--background);
+	background: var(--white);
 	transition: border-color 0.2s ease;
 }
 
 .typography-preset--opened {
-	border-color: var(--brand);
+	border-color: var(--primary);
 }
 
 .typography-preset__summary {
@@ -114,13 +116,13 @@ const emit = defineEmits<{
 	width: 100%;
 	padding: 16px;
 	border: 0;
-	color: var(--text);
+	color: var(--neutral-950);
 	background: transparent;
 	text-align: left;
 	cursor: pointer;
 
 	&:hover {
-		background: color-mix(in srgb, var(--brand) 6%, transparent);
+		background: color-mix(in srgb, var(--primary) 6%, transparent);
 	}
 
 	@media (max-width: $sm) {
@@ -134,20 +136,20 @@ const emit = defineEmits<{
 }
 
 .typography-preset__token {
-	color: var(--text);
+	color: var(--neutral-950);
 }
 
 .typography-preset__values {
-	color: var(--additional-2);
+	color: var(--primary-50);
 	font-size: 13px;
 }
 
 .typography-preset__preview {
-	color: var(--text);
+	color: var(--neutral-950);
 }
 
 // Создаём preview-класс для каждого пресета из той же SCSS-карты, которую редактирует форма.
-@each $name, $values in $font-sizes {
+@each $name, $values in config.$font-sizes {
 	.typography-preset__preview--#{$name} {
 		@include font-size($name);
 	}
@@ -158,7 +160,7 @@ const emit = defineEmits<{
 	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	gap: 12px;
 	padding: 16px;
-	border-top: 1px solid var(--grey);
+	border-top: 1px solid var(--neutral-500);
 }
 
 .typography-preset__control {
@@ -167,16 +169,16 @@ const emit = defineEmits<{
 }
 
 .typography-preset__label {
-	color: var(--additional-2);
+	color: var(--primary-50);
 	font-size: 12px;
 }
 
 .typography-preset__input {
 	width: 100%;
 	padding: 8px 10px;
-	border: 1px solid var(--grey);
+	border: 1px solid var(--neutral-500);
 	border-radius: 6px;
-	color: var(--text);
-	background: var(--background);
+	color: var(--neutral-950);
+	background: var(--white);
 }
 </style>

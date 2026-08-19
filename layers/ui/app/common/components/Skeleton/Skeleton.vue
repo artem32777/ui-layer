@@ -31,7 +31,7 @@ withDefaults(defineProps<SkeletonProps>(), {
 .skeleton {
 	flex-shrink: 0;
 	overflow: hidden;
-	background-color: var(--grey, #e2e2e2);
+	background-color: var(--neutral-500, #e2e2e2);
 }
 
 .skeleton--animated {

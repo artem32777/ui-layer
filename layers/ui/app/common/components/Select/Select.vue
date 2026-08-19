@@ -84,7 +84,7 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
   cursor: pointer;
 
   &.select--variant-secondary {
-    border-color: var(--grey, #e2e2e2);
+    border-color: var(--neutral-500, #e2e2e2);
     background-color: var(--background, #ffffff);
   }
 
@@ -109,7 +109,7 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
   }
 
   &[aria-invalid="true"] {
-    border-color: var(--red, #ff001f);
+    border-color: var(--accent, #ff001f);
   }
 
 // SIZES:

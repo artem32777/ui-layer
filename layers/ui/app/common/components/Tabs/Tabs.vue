@@ -57,7 +57,7 @@ const modelValue = defineModel<TabValues>()
 	align-self: flex-start;
 	padding: 4px;
 	border-radius: 8px;
-	background-color: var(--grey, #e2e2e2);
+	background-color: var(--neutral-500, #e2e2e2);
 }
 
 .tabs-list__trigger {
@@ -67,7 +67,7 @@ const modelValue = defineModel<TabValues>()
 	height: 32px;
 	padding: 0 12px;
 	border-radius: 6px;
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 	user-select: none;
 	transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 
@@ -90,9 +90,9 @@ const modelValue = defineModel<TabValues>()
 .tabs-content {
 	margin-top: 12px;
 	padding: 16px;
-	border: 1px solid var(--grey, #e2e2e2);
+	border: 1px solid var(--neutral-500, #e2e2e2);
 	border-radius: 8px;
-	color: var(--additional-2, #6b5b72);
+	color: var(--primary-50, #6b5b72);
 	background-color: var(--background, #ffffff);
 
 	&:focus-visible {

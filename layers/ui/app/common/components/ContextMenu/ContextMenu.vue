@@ -46,10 +46,10 @@ defineSlots<{
 	max-height: var(--reka-context-menu-content-available-height);
 	padding: 4px;
 	overflow-y: auto;
-	border: 1px solid var(--grey, #e2e2e2);
+	border: 1px solid var(--neutral-500, #e2e2e2);
 	border-radius: 8px;
 	color: var(--text, #000000);
 	background: var(--background, #ffffff);
-	box-shadow: 0 10px 24px color-mix(in srgb, var(--black, #000000) 12%, transparent);
+	box-shadow: 0 10px 24px color-mix(in srgb, var(--neutral-950, #000000) 12%, transparent);
 }
 </style>

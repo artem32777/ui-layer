@@ -33,14 +33,14 @@ const modelValue = defineModel<string | string[]>()
 <style scoped lang="scss">
 .toggle-group {
 	display: inline-flex;
-	border: 1px solid var(--grey, #e2e2e2);
+	border: 1px solid var(--neutral-500, #e2e2e2);
 	border-radius: 6px;
 	background-color: var(--background, #ffffff);
 
 	&:hover {
 		.toggle-group__item {
-			color: var(--additional-1, #21223c);
-			background-color: var(--grey, #e2e2e2);
+			color: var(--primary-dark, #21223c);
+			background-color: var(--neutral-500, #e2e2e2);
 		}
 	}
 
@@ -63,13 +63,13 @@ const modelValue = defineModel<string | string[]>()
 	transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
 
 	&:hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&[data-state="on"] {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {

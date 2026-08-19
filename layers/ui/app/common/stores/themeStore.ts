@@ -5,6 +5,7 @@ import { useCookie, useHead } from '#imports'
 
 export enum Theme {
 	light = 'light',
+	grey = 'grey',
 	dark = 'dark',
 	system = 'system',
 }
@@ -21,7 +22,7 @@ export const useThemeStore = defineStore('ui-theme', () => {
 
 	useHead({
 		htmlAttrs: {
-			class: () => isDark.value ? Theme.dark : undefined,
+			class: () => theme.value === Theme.grey ? Theme.grey : isDark.value ? Theme.dark : undefined,
 		},
 	})
 

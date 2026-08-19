@@ -82,8 +82,8 @@ const modelValue = defineModel<number>('page', { default: 1 })
 	cursor: pointer;
 
 	&:hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {

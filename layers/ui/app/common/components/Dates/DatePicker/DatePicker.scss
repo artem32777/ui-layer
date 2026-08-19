@@ -13,7 +13,7 @@
 	border: 1px solid transparent;
 	border-radius: 8px;
 	color: var(--text, #000000);
-	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 40%, transparent);
+	background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 40%, transparent);
 	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
 
 	&:focus-within {
@@ -31,7 +31,7 @@
 }
 
 .date-picker__field--secondary {
-	border-color: var(--grey, #e2e2e2);
+	border-color: var(--neutral-500, #e2e2e2);
 	background-color: var(--background, #ffffff);
 }
 
@@ -55,7 +55,7 @@
 
 .date-picker__range-separator {
 	margin: 0 8px;
-	color: var(--additional-2, #888888);
+	color: var(--primary-50, #888888);
 }
 
 .date-picker__segment {
@@ -93,8 +93,8 @@
 	cursor: pointer;
 
 	&:hover {
-		color: var(--additional-1, #21223c);
-		background-color: var(--grey, #e2e2e2);
+		color: var(--primary-dark, #21223c);
+		background-color: var(--neutral-500, #e2e2e2);
 	}
 
 	&:focus-visible {

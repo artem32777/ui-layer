@@ -27,14 +27,14 @@ const { favoriteSet } = storeToRefs(store)
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  color: var(--brand);
-  background: color-mix(in srgb, var(--brand) 10%, transparent);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
   text-decoration: none;
   transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     color: var(--white);
-    background: var(--brand);
+    background: var(--primary);
   }
 
   @media (max-width: $sm) {
@@ -62,7 +62,7 @@ const { favoriteSet } = storeToRefs(store)
   padding: 0 5px;
   border-radius: 9px;
   color: var(--white);
-  background: var(--brand);
+  background: var(--primary);
   font-size: 12px;
   line-height: 1;
   font-weight: 700;
