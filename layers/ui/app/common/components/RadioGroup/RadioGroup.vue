@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from 'reka-ui'
 import type { RadioGroupProps } from './RadioGroup.types'
+import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
 defineProps<RadioGroupProps>()
 
@@ -24,12 +25,19 @@ const modelValue = defineModel<string>()
 				:value="option.value"
 				:disabled="option.disabled"
 			>
-				<RadioGroupIndicator class="radio-group__indicator" />
+				<Icon
+					v-if="option.disabled"
+					:name="iconNames.disabled"
+					:size="14"
+					class="radio-group__disabled-icon"
+				/>
+				<RadioGroupIndicator
+					v-else
+					class="radio-group__indicator"
+				/>
 			</RadioGroupItem>
 
-			<span class="radio-group__label">
-				{{ option.label }}
-			</span>
+			{{ option.label }}
 		</label>
 	</RadioGroupRoot>
 </template>
@@ -40,70 +48,57 @@ const modelValue = defineModel<string>()
 	flex-direction: column;
 	gap: 10px;
 
-	&:hover {
-		.radio-group__icon {
-			background-color: color-mix(in srgb, var(--grey, #e2e2e2) 70%, transparent);
-		}
-
-		.radio-group__icon[data-state="checked"] {
-			background-color: var(--brand-dark, #292fba);
-		}
-	}
-
-	&:focus-within {
-		.radio-group__icon {
-			outline: 2px solid var(--brand-dark, #292fba);
-			outline-offset: 2px;
-		}
-	}
-
 	&[aria-invalid='true'] {
 		.radio-group__icon {
-			box-shadow:
-				inset 0 2px 4px color-mix(in srgb, var(--black, #000000) 6%, transparent),
-				0 0 0 1px var(--red, #ff001f);
+			border-color: var(--accent);
 		}
 	}
 
-  &[data-disabled]{
-    pointer-events: none;
-  }
+	&[data-disabled] {
+		pointer-events: none;
+		opacity: 0.5;
+	}
 }
 
 .radio-group__item {
 	display: flex;
 	align-items: center;
-	gap: 10px;
-	color: var(--text, #000000);
-}
+	gap: 8px;
+  color: var(--neutral-950);
+  @include font-size(button);
 
-.radio-group__icon {
-	width: 24px;
-	height: 24px;
-	border-radius: 50%;
-	background-color: color-mix(in srgb, var(--grey, #e2e2e2) 50%, transparent);
-	transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-	cursor: pointer;
+	&:hover,
+	&:focus-within {
+		.radio-group__icon {
+			background-color: transparent;
+			border-color: var(--primary-light);
 
-	&:hover {
-		background-color: color-mix(in srgb, var(--grey, #e2e2e2) 70%, transparent);
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--brand-dark, #292fba);
-		outline-offset: 2px;
-	}
-
-	&[data-state="checked"] {
-		background-color: var(--brand, #4149f2);
-
-		&:hover {
-			background-color: var(--brand-dark, #292fba);
+			&[data-state='checked'] {
+				background-color: var(--primary-light);
+			}
 		}
 	}
 
-	&[data-disabled] {
-		opacity: 0.5;
+	&:has(.radio-group__icon[data-disabled]) {
+		pointer-events: none;
+    color: var(--neutral-700);
+	}
+}
+
+.radio-group__icon {
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: var(--neutral-500);
+	border: 1px solid transparent;
+	transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+	cursor: pointer;
+
+	&[data-state='checked'] {
+		background-color: var(--primary);
 	}
 }
 
@@ -113,11 +108,11 @@ const modelValue = defineModel<string>()
 	justify-content: center;
 
 	&::after {
-		content: "";
-		width: 12px;
-		height: 12px;
-		border-radius: 50%;
-		background-color: var(--white, #ffffff);
+		content: '';
+		width: 6px;
+		height: 6px;
+		border-radius: 2px;
+		background-color: var(--white);
 	}
 }
 </style>

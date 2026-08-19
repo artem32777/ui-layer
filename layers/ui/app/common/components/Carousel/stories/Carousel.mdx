@@ -5,24 +5,15 @@ import CarouselExampleSource from './CarouselExample.vue?raw'
 <Meta of={CarouselStories} />
 
 # Carousel
+- Основан на <font color="blue">[`Swiper`](https://swiperjs.com/get-started)</font>.
+- Данный компонент является обёрткой над либой свайпера
+- Используется как основа для создания разных каруселей.
 
-Слайдер на базе Swiper с навигацией, пагинацией и слотом для произвольного содержимого слайда.
-
-## Когда использовать
-
-- `slides` — массив строк или объектов.
-- Слот `slide` получает текущие `slide` и `index`.
-- `options.hasNav` и `options.hasPagination` управляют встроенными элементами навигации.
-- `swiperOptions` передаёт дополнительные настройки Swiper.
-- События `swiper` и `slide-change` дают доступ к экземпляру и активному индексу.
-
-Контейнер компонента должен иметь заданную ширину и высоту.
+<Controls of={CarouselStories.Base} />
 
 ## Базовый пример
 
 <Canvas of={CarouselStories.Base} />
-
-<Controls of={CarouselStories.Base} />
 
 ## Пример использования
 

@@ -14,7 +14,7 @@ defineSlots<{
 	icon: any
 }>()
 
-const modelValue = defineModel<string | string[]>({})
+const modelValue = defineModel<string | string[]>()
 </script>
 
 <template>

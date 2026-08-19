@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ConcreteComponent } from 'vue'
 import Carousel from '../Carousel.vue'
-import type { CarouselProps } from '../types'
-import carouselTypesSource from '../types.ts?raw'
+import type { CarouselProps } from '../Carousel.types.ts'
+import carouselTypesSource from '../Carousel.types.ts?raw'
 
 interface CarouselStoryItem {
 	title: string
@@ -20,9 +20,7 @@ const slides = [
 const meta = {
 	title: 'UI/Carousel',
 	component: Carousel as unknown as ConcreteComponent<CarouselStoryArgs>,
-	parameters: {
-		a11y: { test: 'error' },
-	},
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		slides: {
 			control: 'object',
@@ -63,14 +61,14 @@ const meta = {
 		components: { Carousel: Carousel as unknown as ConcreteComponent<CarouselStoryArgs> },
 		setup() { return { args } },
 		template: `
-			<div style="width: 640px; height: 260px">
+			<div style="width: 100%; height: 400px">
 				<Carousel
 					:slides="args.slides"
 					:swiper-options="args.swiperOptions"
 					:options="args.options"
 				>
 					<template #slide="{ slide }">
-						<div style="display: grid; place-content: center; height: 100%; padding: 32px; text-align: center">
+						<div style="">
 							<h3>{{ slide.title }}</h3>
 							<p>{{ slide.text }}</p>
 						</div>
@@ -85,19 +83,3 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Base: Story = {}
-export const WithoutNavigation: Story = {
-	args: {
-		options: {
-			hasNav: false,
-			hasPagination: true,
-		},
-	},
-}
-export const WithoutPagination: Story = {
-	args: {
-		options: {
-			hasNav: true,
-			hasPagination: false,
-		},
-	},
-}

@@ -16,7 +16,7 @@ export default defineNuxtConfig({
 		'@vueuse/nuxt',
 	],
 
-	css: [resolve('./app/config/styles/index.scss'), 'swiper/css'],
+	css: [resolve('./app/config/styles/index.scss')],
 
 	vite: {
 		css: {

@@ -7,6 +7,7 @@ import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
 import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import RadioGroup from '../RadioGroup.vue'
 import radioGroupTypesSource from '../RadioGroup.types.ts?raw'
+import { ref } from 'vue'
 
 type RadioGroupStoryArgs = ComponentProps<typeof RadioGroup>
 
@@ -16,7 +17,7 @@ const defaultOptions = [
 	{ label: 'Disabled', value: 'disabled', disabled: true },
 ]
 
-const radioGroupChecked = ['', 'true']
+const radioGroupChecked = ['', 'false']
 
 const meta = {
 	title: 'UI/RadioGroup',
@@ -41,7 +42,7 @@ const meta = {
 		invalid: { control: 'boolean' },
 	},
 	args: {
-		modelValue: 'true',
+		modelValue: undefined,
 		options: defaultOptions,
 		invalid: false,
 		disabled: false,
@@ -67,28 +68,28 @@ export const DocsExample: Story = {
 export const States: Story = {
 	parameters: {
 		pseudo: {
-			hover: '.radio-group-story--hovered',
-			focusWithin: '.radio-group-story--focused',
+			hover: '.radio-group-story--hovered .radio-group__item:first-child',
+			focusWithin: '.radio-group-story--focused .radio-group__item:first-child',
 		},
 	},
 	render: (args: RadioGroupStoryArgs) => ({
 		components: { RadioGroup, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
 		setup() {
-			return { args, radioGroupChecked }
+			const value = ref('false')
+			return { args, radioGroupChecked, value }
 		},
 		template: `
 			<StoryGrid>
 				<StoryGridSection
 					v-for="checked in radioGroupChecked"
-					:key="checked || 'base'"
-					:title="checked ? 'checked' : 'base'"
+					:key="checked || 'default'"
+					:title="checked ? 'checked' : 'default'"
 				>
 					<StoryGridRow>
 						<StoryGridItem title="default">
 							<RadioGroup
 								v-bind="args"
 								:model-value="checked"
-								:aria-label="(checked ? 'checked' : 'base') + ' default'"
 							/>
 						</StoryGridItem>
 						<StoryGridItem title="hover">
@@ -96,7 +97,6 @@ export const States: Story = {
 								v-bind="args"
 								:model-value="checked"
 								class="radio-group-story--hovered"
-								:aria-label="(checked ? 'checked' : 'base') + ' hover'"
 							/>
 						</StoryGridItem>
 						<StoryGridItem title="focus">
@@ -104,7 +104,6 @@ export const States: Story = {
 								v-bind="args"
 								:model-value="checked"
 								class="radio-group-story--focused"
-								:aria-label="(checked ? 'checked' : 'base') + ' focus'"
 							/>
 						</StoryGridItem>
 						<StoryGridItem title="invalid">
@@ -112,7 +111,6 @@ export const States: Story = {
 								v-bind="args"
 								:model-value="checked"
 								invalid
-								:aria-label="(checked ? 'checked' : 'base') + ' invalid'"
 							/>
 						</StoryGridItem>
 						<StoryGridItem title="disabled">
@@ -120,7 +118,6 @@ export const States: Story = {
 								v-bind="args"
 								:model-value="checked"
 								disabled
-								:aria-label="(checked ? 'checked' : 'base') + ' disabled'"
 							/>
 						</StoryGridItem>
 					</StoryGridRow>

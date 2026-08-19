@@ -1,38 +1,27 @@
 <script setup lang="ts">
+import { PaginationEllipsis, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot } from 'reka-ui'
+import type { PaginationProps } from './Pagination.types.ts'
+
 // https://reka-ui.com/docs/components/pagination
-import {
-	PaginationEllipsis,
-	PaginationList,
-	PaginationListItem,
-	PaginationNext,
-	PaginationPrev,
-	PaginationRoot,
-} from 'reka-ui'
 
-/** Номер текущей страницы. */
-const modelValue = defineModel<number>('page', { default: 1 })
-
-export interface PaginationProps {
-	/** Общее количество элементов в списке. */
-	totalPages?: number
-	/** Количество элементов на одной странице. */
-	itemsPerPage?: number
-}
-
-const props = withDefaults(defineProps<PaginationProps>(), {
+withDefaults(defineProps<PaginationProps>(), {
 	totalPages: 100,
 	itemsPerPage: 10,
 })
+
+/** Номер текущей страницы. */
+const modelValue = defineModel<number>('page', { default: 1 })
 </script>
 
 <template>
 	<PaginationRoot
 		v-model:page="modelValue"
 		class="pagination"
-		:total="props.totalPages"
-		:items-per-page="props.itemsPerPage"
+		:total="totalPages"
+		:items-per-page="itemsPerPage"
 		:sibling-count="1"
-		show-edges
+		:disabled="disabled"
+		:show-edges="true"
 	>
 		<PaginationPrev class="pagination__button">
 			‹
@@ -101,19 +90,18 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 		outline: none;
 		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
 	}
+
+	&:disabled {
+		opacity: 0.45;
+		cursor: default;
+		pointer-events: none;
+	}
 }
 
 .pagination__item {
 	&[data-selected] {
 		color: var(--white, #ffffff);
 		background-color: var(--brand, #4149f2);
-	}
-}
-
-.pagination__button {
-	&[data-disabled] {
-		opacity: 0.45;
-		pointer-events: none;
 	}
 }
 </style>

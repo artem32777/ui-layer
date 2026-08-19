@@ -15,4 +15,3 @@ export interface DropdownMenuProps {
 	/** Расстояние между триггером и выпадающим меню в пикселях. */
 	offset?: number
 }
-

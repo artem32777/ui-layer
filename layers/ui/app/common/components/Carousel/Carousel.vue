@@ -4,15 +4,20 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { shallowRef } from 'vue'
 import CarouselPagination from './pagination/CarouselPagination.vue'
-import { CarouselNavClass, type CarouselOptions, type CarouselProps, type SwiperVueOptions } from './types'
+import { CarouselNavClass, type CarouselOptions, type CarouselProps, type SwiperVueOptions } from './Carousel.types.ts'
 import CarouselNav from './navigation/CarouselNav.vue'
 
-const { slides, options, swiperOptions } = defineProps<CarouselProps<T>>()
+import 'swiper/css'
+
+const props = defineProps<CarouselProps<T>>()
 
 defineSlots<{
-	slide: (props: { slide: T, index: number }) => unknown
-	nav?: () => unknown
-	pagination?: (props: { count: number, swiper: SwiperInstance | null }) => unknown
+	/** Обязательный слот, содержащий вёрстку слайдов */
+	slide: (props: { slide: T, index: number }) => any
+	/** Кастомные стрелкии навигации */
+	nav?: any
+	/** Кастомная пагинация */
+	pagination?: any
 }>()
 
 const defaultOptions: CarouselOptions = {
@@ -20,7 +25,7 @@ const defaultOptions: CarouselOptions = {
 	hasPagination: false,
 }
 
-const mergedOptions = { ...defaultOptions, ...options }
+const mergedOptions = { ...defaultOptions, ...props.options }
 
 const defaultSwiperOptions: SwiperVueOptions = {
 	modules: [Autoplay, Navigation, Pagination],
@@ -34,7 +39,7 @@ const defaultSwiperOptions: SwiperVueOptions = {
 	},
 }
 
-const swiperMergedOptions: SwiperVueOptions = { ...defaultSwiperOptions, ...swiperOptions }
+const swiperMergedOptions: SwiperVueOptions = { ...defaultSwiperOptions, ...props.swiperOptions }
 
 const emit = defineEmits<{
 	'swiper': [swiper: SwiperInstance]
@@ -86,7 +91,6 @@ function handleSlideChange(swiper: SwiperInstance) {
 				<slot
 					v-if="mergedOptions.hasPagination"
 					name="pagination"
-					v-bind="{ count: slides.length, swiper: swiperInstance }"
 				>
 					<CarouselPagination
 						:count="slides.length"
@@ -109,12 +113,11 @@ function handleSlideChange(swiper: SwiperInstance) {
 }
 
 .carousel {
-  //position: absolute;
-  //width: 100%;
-  //overflow: hidden;
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
 }
 
 .carousel__slide {
-  background-color: red;
 }
 </style>

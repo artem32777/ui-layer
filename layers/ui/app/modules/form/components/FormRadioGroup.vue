@@ -11,12 +11,11 @@ defineProps<{
 
 <template>
 	<FormField
-		v-slot="{ value, handleChange, invalid }"
+		v-slot="{ handleChange, invalid }"
 		:name="name"
 	>
 		<RadioGroup
 			v-bind="radioGroupProps"
-			:model-value="value"
 			:invalid="invalid"
 			@update:model-value="handleChange"
 		/>

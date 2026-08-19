@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, waitFor, within } from 'storybook/test'
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
 import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
 import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
@@ -50,7 +50,7 @@ const meta = {
 		components: { Button, DropdownMenu },
 		setup: () => ({ args }),
 		template: `
-			<DropdownMenu v-bind="args" v-model="args.modelValue">
+			<DropdownMenu v-bind="args">
 				<Button text="Open menu" />
 			</DropdownMenu>
 		`,
@@ -66,48 +66,27 @@ export const DocsExample: Story = {
 }
 
 export const States: Story = {
-	parameters: {
-		pseudo: {
-			hover: '.dropdown-menu-story--hovered',
-			focusVisible: '.dropdown-menu-story--focused',
-		},
-	},
 	render: (args: DropdownMenuStoryArgs) => ({
 		components: { Button, DropdownMenu, StoryGrid, StoryGridItem, StoryGridRow },
 		setup() {
-			const models = reactive({
-				default: false,
-				hover: true,
-				focus: true,
-			})
+			const opened = ref(true)
 
-			return { args, models }
+			return { args, opened }
 		},
 		template: `
 			<StoryGrid>
 				<StoryGridRow>
-					<StoryGridItem title="default" style="min-height: 220px; padding: 24px;">
-						<DropdownMenu
-							v-bind="args"
-							v-model="models.default"
-						>
+					<StoryGridItem title="default">
+						<DropdownMenu v-bind="args">
 							<Button text="Open menu" />
 						</DropdownMenu>
 					</StoryGridItem>
-					<StoryGridItem title="hover" style="min-height: 220px; padding: 24px;">
+					<StoryGridItem title="opened">
 						<DropdownMenu
 							v-bind="args"
-							v-model="models.hover"
+							v-model="opened"
 						>
-							<Button text="Open menu" class="dropdown-menu-story--hovered" />
-						</DropdownMenu>
-					</StoryGridItem>
-					<StoryGridItem title="focus" style="min-height: 220px; padding: 24px;">
-						<DropdownMenu
-							v-bind="args"
-							v-model="models.focus"
-						>
-							<Button text="Open menu" class="dropdown-menu-story--focused" />
+							<Button text="Menu"/>
 						</DropdownMenu>
 					</StoryGridItem>
 				</StoryGridRow>

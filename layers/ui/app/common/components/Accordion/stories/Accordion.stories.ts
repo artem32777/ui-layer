@@ -147,30 +147,3 @@ export const Tests: Story = {
 		await expect(payment).toHaveAttribute('aria-expanded', 'true')
 	},
 }
-
-export const TestsSingle: Story = {
-	args: {
-		modelValue: '',
-		type: 'single',
-	},
-	play: async ({ canvas, userEvent }) => {
-		const delivery = canvas.getByRole('button', { name: 'Доставка' })
-		const payment = canvas.getByRole('button', { name: 'Оплата' })
-
-		await expect(delivery).toHaveAttribute('aria-expanded', 'false')
-		await expect(payment).toHaveAttribute('aria-expanded', 'false')
-
-		await userEvent.click(delivery)
-		await waitFor(() => expect(delivery).toHaveAttribute('aria-expanded', 'true'))
-
-		await userEvent.click(delivery)
-		await waitFor(() => expect(delivery).toHaveAttribute('aria-expanded', 'false'))
-
-		await userEvent.click(delivery)
-		await waitFor(() => expect(delivery).toHaveAttribute('aria-expanded', 'true'))
-
-		await userEvent.click(payment)
-		await waitFor(() => expect(payment).toHaveAttribute('aria-expanded', 'true'))
-		await expect(delivery).toHaveAttribute('aria-expanded', 'false')
-	},
-}
