@@ -78,7 +78,7 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 		gap: 8px;
 		min-height: 40px;
 		padding: 0 18px;
-		font-size: 16px;
+    @include font-size(button);
 		line-height: 20px;
     border-radius: 12px;
 	}
@@ -87,7 +87,7 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 		gap: 8px;
 		min-height: 54px;
 		padding: 0 24px;
-		font-size: 16px;
+		@include font-size(button);
 		line-height: 20px;
     border-radius: 16px;
 	}

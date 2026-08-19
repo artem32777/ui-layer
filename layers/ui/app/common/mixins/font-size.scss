@@ -19,27 +19,29 @@
     @error "Размер шрифта #{$name} должен содержать #{list.length($breakpoints)} или #{list.length($breakpoints) + 3} значения.";
   }
 
+  font-family: var(--font-#{$name}-family, var(--font-family, inherit));
+
   // Последний размер используется как базовый для широких экранов.
   $base-size: list.nth($sizes, list.length($breakpoints));
 
   // Числа без единиц считаются значениями в пикселях.
   @if math.is-unitless($base-size) {
-    font-size: $base-size * 1px;
+    font-size: var(--font-#{$name}-size-#{list.length($breakpoints)}, #{$base-size * 1px});
   } @else {
-    font-size: $base-size;
+    font-size: var(--font-#{$name}-size-#{list.length($breakpoints)}, #{$base-size});
   }
 
   // Если в пресете есть три дополнительных значения, задаём остальные параметры текста.
   @if list.length($sizes) == list.length($breakpoints) + 3 {
-    font-weight: list.nth($sizes, list.length($breakpoints) + 1);
-    line-height: list.nth($sizes, list.length($breakpoints) + 2);
+    font-weight: var(--font-#{$name}-weight, #{list.nth($sizes, list.length($breakpoints) + 1)});
+    line-height: var(--font-#{$name}-line-height, #{list.nth($sizes, list.length($breakpoints) + 2)});
 
     $letter-spacing: list.nth($sizes, list.length($breakpoints) + 3);
 
     @if math.is-unitless($letter-spacing) {
-      letter-spacing: $letter-spacing * 1px;
+      letter-spacing: var(--font-#{$name}-letter-spacing, #{$letter-spacing * 1px});
     } @else {
-      letter-spacing: $letter-spacing;
+      letter-spacing: var(--font-#{$name}-letter-spacing, #{$letter-spacing});
     }
   }
 
@@ -50,9 +52,9 @@
 
     @media (max-width: list.nth($breakpoints, $size-index)) {
       @if math.is-unitless($size) {
-        font-size: $size * 1px;
+        font-size: var(--font-#{$name}-size-#{$size-index}, #{$size * 1px});
       } @else {
-        font-size: $size;
+        font-size: var(--font-#{$name}-size-#{$size-index}, #{$size});
       }
     }
   }

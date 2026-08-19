@@ -33,7 +33,7 @@ const { execute } = useApiFetch('/auth/password-recovery', {
 		<Button
 			class="password-recovery-form__submit"
 			type="submit"
-			size="xl"
+			size="big"
 			:disabled="isSubmitting"
 		>
 			Восстановить пароль

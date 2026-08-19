@@ -1,6 +1,7 @@
 <script setup lang="ts" generic="T extends boolean = false">
 import FormField from './FormField.vue'
-import Select, { type SelectProps } from '#layers/ui/app/common/components/Select/Select.vue'
+import Select from '#layers/ui/app/common/components/Select/Select.vue'
+import type { SelectProps } from '#layers/ui/app/common/components/Select/Select.types.ts'
 
 defineProps<{
 	name: string
@@ -10,12 +11,11 @@ defineProps<{
 
 <template>
 	<FormField
-		v-slot="{ value, handleChange, invalid }"
+		v-slot="{ handleChange, invalid }"
 		:name="name"
 	>
 		<Select
 			v-bind="selectProps"
-			:model-value="value"
 			:invalid="invalid"
 			@update:model-value="handleChange"
 		/>

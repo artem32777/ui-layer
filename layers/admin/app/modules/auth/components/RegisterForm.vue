@@ -2,12 +2,12 @@
 import { useForm } from 'vee-validate'
 import { z } from 'zod'
 import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import { FormInput, validation } from '#layers/ui/app/modules/form'
+import { FormInput, VRule } from '#layers/ui/app/modules/form'
 import { useApiFetch } from '../../../../../../app/common/composables/useApiFetch'
 
 const { handleSubmit, isSubmitting, values } = useForm({
 	validationSchema: z.object({
-		name: validation.name(),
+		name: VRule.name(),
 		email: z.string().email('Введите корректный email'),
 		password: z.string().min(6, 'Пароль должен содержать не менее 6 символов'),
 		passwordConfirmation: z.string().min(1, 'Повторите пароль'),
@@ -59,7 +59,7 @@ const { execute } = useApiFetch('/auth/register', {
 		<Button
 			class="register-form__submit"
 			type="submit"
-			size="xl"
+			size="big"
 			:disabled="isSubmitting"
 		>
 			Зарегистрироваться

@@ -68,7 +68,7 @@ const meta = {
 					:options="args.options"
 				>
 					<template #slide="{ slide }">
-						<div style="">
+						<div style="background-color: blue">
 							<h3>{{ slide.title }}</h3>
 							<p>{{ slide.text }}</p>
 						</div>

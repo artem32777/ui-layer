@@ -58,7 +58,7 @@ const submit = handleSubmit(async (values) => {
 		<Button
 			class="login-form__submit"
 			type="submit"
-			size="xl"
+			size="big"
 			:disabled="isSubmitting"
 		>
 			Войти

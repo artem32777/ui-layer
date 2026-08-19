@@ -1,0 +1,28 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as TypographyStories from './Typography.stories'
+
+<Meta title="Design System/Типографика" />
+
+# Типографика
+
+- Для кастомного шрифта используем миксин `font-size($name)`.
+- Настройки стилей кастомных размеров шрифта находятся в `config/styles/shared/typography.scss`.
+- Кликните по пресету ниже, чтобы изменить размеры на брейкпоинтах, толщину, высоту строки и letter spacing. Изменения применяются ко всем компонентам в Storybook, использующим этот пресет.
+- Файл `.woff2`, `.woff` или `.ttf` можно загрузить для предпросмотра и применить ко всем пресетам либо только к открытому пресету.
+
+<Canvas of={TypographyStories.TypographyScale} />
+
+
+## Пример
+
+```scss
+.section__title {
+	@include font-size(h2);
+	color: var(--headers);
+}
+
+.section__description {
+	@include font-size(p2-regular);
+	color: var(--additional-2);
+}
+```

@@ -110,6 +110,10 @@ function handleSlideChange(swiper: SwiperInstance) {
   width: 100%;
   min-width: 0;
   min-height: 100px;
+
+  > * {
+    height: 100%;
+  }
 }
 
 .carousel {
@@ -119,5 +123,6 @@ function handleSlideChange(swiper: SwiperInstance) {
 }
 
 .carousel__slide {
+
 }
 </style>
