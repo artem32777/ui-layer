@@ -1,7 +1,10 @@
 @use "null";
 @use "fonts";
-@use "colors";
+@use "./colors/colors";
+@use "./variables/height";
+@use "./variables/radius";
 @use "spacing";
+@use "./shared/transitions";
 
 html {
   @include scrollbar(var(--primary), transparent, 0.5rem,  0.5rem);

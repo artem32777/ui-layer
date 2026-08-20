@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import type { TypographyItem, TypographyProperty } from './typography.types'
+import type {
+	TypographyItem,
+	TypographyProperty,
+} from '#layers/ui/app/config/docs/design-system/typography/Typography.vue'
 
 defineProps<{
 	item: TypographyItem
@@ -20,7 +23,6 @@ const emit = defineEmits<{
 		:class="{ 'typography-preset--opened': opened }"
 	>
 		<button
-			type="button"
 			class="typography-preset__summary"
 			:aria-expanded="opened"
 			@click="emit('toggle')"
@@ -97,32 +99,27 @@ const emit = defineEmits<{
 @use "../../../styles/typography" as config;
 
 .typography-preset {
-	overflow: hidden;
-	border: 1px solid var(--neutral-500);
+	border: 1px solid #000;
 	border-radius: 8px;
 	background: var(--white);
 	transition: border-color 0.2s ease;
-}
 
-.typography-preset--opened {
-	border-color: var(--primary);
+  &--opened {
+    background-color: color-mix(in srgb, var(--primary) 6%, transparent);;
+  }
 }
 
 .typography-preset__summary {
 	display: grid;
 	grid-template-columns: minmax(180px, 260px) 1fr;
-	gap: 20px;
 	align-items: center;
 	width: 100%;
 	padding: 16px;
-	border: 0;
-	color: var(--neutral-950);
-	background: transparent;
 	text-align: left;
 	cursor: pointer;
 
 	&:hover {
-		background: color-mix(in srgb, var(--primary) 6%, transparent);
+		background-color: color-mix(in srgb, var(--primary) 6%, transparent);
 	}
 
 	@media (max-width: $sm) {
@@ -132,20 +129,6 @@ const emit = defineEmits<{
 
 .typography-preset__meta {
 	display: grid;
-	gap: 4px;
-}
-
-.typography-preset__token {
-	color: var(--neutral-950);
-}
-
-.typography-preset__values {
-	color: var(--primary-50);
-	font-size: 13px;
-}
-
-.typography-preset__preview {
-	color: var(--neutral-950);
 }
 
 // Создаём preview-класс для каждого пресета из той же SCSS-карты, которую редактирует форма.
@@ -160,7 +143,7 @@ const emit = defineEmits<{
 	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	gap: 12px;
 	padding: 16px;
-	border-top: 1px solid var(--neutral-500);
+	border-top: 1px solid;
 }
 
 .typography-preset__control {
@@ -168,15 +151,10 @@ const emit = defineEmits<{
 	gap: 6px;
 }
 
-.typography-preset__label {
-	color: var(--primary-50);
-	font-size: 12px;
-}
-
 .typography-preset__input {
 	width: 100%;
 	padding: 8px 10px;
-	border: 1px solid var(--neutral-500);
+	border: 1px solid;
 	border-radius: 6px;
 	color: var(--neutral-950);
 	background: var(--white);

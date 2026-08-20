@@ -66,8 +66,9 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 
 // SIZES
 	&.button--size-small {
+    min-height: var(--ui-height-S);
 		gap: 6px;
-		min-height: 30px;
+
 		padding: 0 12px;
 		font-size: 14px;
 		line-height: 14px;
@@ -75,17 +76,18 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 	}
 
 	&.button--size-medium {
+    min-height: var(--ui-height-M);
 		gap: 8px;
-		min-height: 40px;
 		padding: 0 18px;
+
     @include font-size(button);
 		line-height: 20px;
     border-radius: 12px;
 	}
 
 	&.button--size-big {
+    min-height: var(--ui-height-L);
 		gap: 8px;
-		min-height: 54px;
 		padding: 0 24px;
 		@include font-size(button);
 		line-height: 20px;
@@ -100,20 +102,20 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 
 // VARIANTS:
 	&.button--variant-primary {
-		color: var(--white);
-		background-color: var(--Backgrounds-bg-primary);
+		color: var(--white-100);
+		background-color: var(--background-interactive-primary);
 
 		&:hover, &:active {
-			background-color: var(--primary-light);
+			background-color: var(--background-interactive-primary-hover);
 		}
 	}
 
 	&.button--variant-secondary {
 		color: var(--neutral-950);
-		background-color: var(--neutral-500);
+		background-color: var(--background-interactive-secondary);
 
 		&:hover, &:active {
-			background-color: var(--neutral-600);
+			background-color: var(--background-interactive-secondary-hover);
 		}
 	}
 

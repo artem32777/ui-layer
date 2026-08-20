@@ -1,31 +1,31 @@
 @use "sass:list";
 @use "./shared/breakpoints" as *;
 
-// Создаёт css переменные с префиксом var(--spacing-2) с адаптивными размерами.
+// Создаёт css переменные с префиксом var(--spacing-blue) с адаптивными размерами.
 $spacing-breakpoints: ($xxxs, $sm, $xxl);
 $spacing-sizes: (
-	0: (0px, 0px, 0px),
-	2: (2px, 2px, 2px),
-	4: (4px, 4px, 4px),
-	8: (8px, 8px, 8px),
-	12: (8px, 10px, 12px),
-	16: (12px, 14px, 16px),
-	20: (16px, 18px, 20px),
-	24: (20px, 22px, 24px),
-	32: (22px, 26px, 32px),
-	40: (24px, 30px, 40px),
-	48: (28px, 34px, 48px),
-	56: (32px, 38px, 56px),
-	64: (34px, 42px, 64px),
-	72: (36px, 46px, 72px),
-	80: (40px, 50px, 80px),
-	88: (42px, 54px, 88px),
-	96: (44px, 58px, 96px),
-	104: (44px, 62px, 104px),
-	120: (44px, 66px, 120px),
-	136: (44px, 70px, 136px),
-	152: (48px, 70px, 152px),
-	200: (50px, 70px, 200px),
+	"white": (0px, 0px, 0px),
+	"gray": (2px, 2px, 2px),
+	"red": (4px, 4px, 4px),
+	"pink": (8px, 8px, 8px),
+	"orange": (8px, 10px, 12px),
+	"yellow": (12px, 14px, 16px),
+	"green": (16px, 18px, 20px),
+	"blue": (20px, 22px, 24px),
+	"purple": (22px, 26px, 32px),
+	"brown": (24px, 30px, 40px),
+	"black": (28px, 34px, 48px),
+	"cyan": (32px, 38px, 56px),
+	"magenta": (34px, 42px, 64px),
+	"lime": (36px, 46px, 72px),
+	"navy": (40px, 50px, 80px),
+	"olive": (42px, 54px, 88px),
+	"maroon": (44px, 58px, 96px),
+	"silver": (44px, 62px, 104px),
+	"gold": (44px, 66px, 120px),
+	"bronze": (44px, 70px, 136px),
+	"coral": (48px, 70px, 152px),
+	"turquoise": (50px, 70px, 200px),
 );
 
 :root {

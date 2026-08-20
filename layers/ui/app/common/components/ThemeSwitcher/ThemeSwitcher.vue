@@ -53,7 +53,7 @@ const themeOptions = [
 	width: 36px;
 	height: 36px;
 	border-radius: 6px;
-	color: var(--primary-50, #6b5b72);
+	color: var(--primary);
 	background-color: transparent;
 	transition: color 0.3s ease, background-color 0.3s ease;
 
@@ -69,11 +69,11 @@ const themeOptions = [
 
   &--active {
     color: var(--white, #ffffff);
-    background-color: var(--brand, #4149f2);
+    background-color: var(--Backgrounds-bg-primary);
 
     &:hover {
       color: var(--white, #ffffff);
-      background-color: var(--brand-dark, #292fba);
+      background-color: var(--primary-dark);
     }
   }
 }

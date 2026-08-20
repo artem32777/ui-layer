@@ -5,6 +5,8 @@ import { toast } from 'vue-sonner'
 // Минимальная часть Nuxt CookieOptions, которая нужна themeStore.
 interface CookieOptions<T> {
 	default?: () => T
+	path?: string
+	sameSite?: boolean | 'lax' | 'strict' | 'none'
 }
 
 // Минимальная форма useHead, используемая темизацией UI-слоя.

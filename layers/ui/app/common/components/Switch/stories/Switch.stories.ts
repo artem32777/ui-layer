@@ -20,11 +20,13 @@ const meta = {
 			control: 'boolean',
 			table: { type: { summary: 'boolean' } },
 		},
+		text: { control: 'text' },
 		disabled: { control: 'boolean' },
 		invalid: { control: 'boolean' },
 	},
 	args: {
 		modelValue: false,
+		text: 'Текст',
 		disabled: false,
 		invalid: false,
 	} satisfies SwitchStoryArgs,

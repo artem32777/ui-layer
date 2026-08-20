@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Локальная разработка/Шрифты" />
+
+# Шрифты
+
+## Подключение
+- Файлы локальных шрифтов хранятся в `@@/public/fonts`.
+- Начертания подключаются в `config/styles/fonts.scss`.
+- Font-family и глобальный color устанавливается селектору `body` в `config/styles/index.scss`.
+- Кастомные размеры шрифтов задаются в `config/styles/typography.scss`.
+
+## Использование
+- Для кастомного размера шрифта используем миксин `font-size($name)`.
+- Миксин генерирует адаптивные значения свойств:`var(--font-h1-size-1, 116px)`, `var(--font-h1-weight, 600)` и такие же для line-height, letter-spacing;
+- Значения устанавливаются в фоллбэк, а переменные `--font` можно создавать и переопределять в сторибуке или с бэкенда.
+- Подробнее смотри в `common/mixins/font-size.scss`.
+
+## Пример
+
+```scss
+.section__title {
+	@include font-size(h2);
+}
+```

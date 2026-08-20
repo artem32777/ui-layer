@@ -8,9 +8,7 @@ const visualTestPort = 6007
 const visualTestUrl = `http://127.0.0.1:${visualTestPort}`
 
 export default defineConfig({
-	// Тест и PNG-эталоны лежат рядом в `.storybook/visual-tests`.
 	testDir: './visual-tests',
-	// Временные trace, diff и actual screenshots не коммитятся.
 	outputDir: './test-results',
 
 	// Docs regression и полный visual-обход используют один Storybook server.

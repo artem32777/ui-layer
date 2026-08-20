@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { TypographyItem, TypographyProperty } from './typography.types'
-import TypographyFontLoader from './TypographyFontLoader.vue'
+import TypographyFonts from './TypographyFonts.vue'
 import TypographyPreset from './TypographyPreset.vue'
 import typographyScss from '#layers/ui/app/config/styles/typography.scss?raw'
+
+export type TypographyProperty = 'weight' | 'lineHeight' | 'letterSpacing'
+
+export type TypographyItem = {
+	token: string
+	sizes: number[]
+	weight: number
+	lineHeight: number
+	letterSpacing: number
+}
 
 // Читаем названия брейкпоинтов прямо из SCSS, чтобы редактор не дублировал конфигурацию вручную.
 const breakpointTokens = typographyScss.match(/\$breakpoints:\s*\(([^)]+)\)/)?.[1]?.split(',').map(token => token.trim()) ?? []
@@ -57,7 +66,7 @@ function resetAll() {
 
 <template>
 	<div class="typography-editor">
-		<TypographyFontLoader
+		<TypographyFonts
 			:selected-token="selectedToken"
 			:tokens="typographyItems.map(item => item.token)"
 		/>
@@ -92,7 +101,7 @@ function resetAll() {
 .typography-editor__reset {
 	justify-self: end;
 	padding: 8px 14px;
-	border: 1px solid var(--neutral-500);
+	border: 1px solid var(--neutral-600);
 	border-radius: 6px;
 	color: var(--neutral-950);
 	background: var(--white);

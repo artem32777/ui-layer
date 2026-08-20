@@ -2,7 +2,8 @@ import type { Preview } from '@storybook/vue3-vite'
 import { setup } from '@storybook/vue3'
 import { createPinia } from 'pinia'
 import { SelectRoot } from 'reka-ui'
-import { defineComponent } from 'vue'
+import { defineComponent, watch } from 'vue'
+import { Theme, useThemeStore } from '../layers/ui/app/common/stores/themeStore'
 import breakpointsSource from '../layers/ui/app/config/styles/shared/breakpoints.scss?raw'
 import '../layers/ui/app/config/styles/index.scss'
 import { getBreakpointViewports } from './breakpoints'
@@ -23,7 +24,47 @@ setup((app) => {
 })
 
 const preview: Preview = {
-	// decorators: [() => ({ template: '<div style="padding: 50px"><story /></div>' })],
+	globalTypes: {
+		theme: {
+			description: 'Тема компонентов',
+			toolbar: {
+				title: 'Тема',
+				icon: 'paintbrush',
+				items: [
+					{ value: Theme.light, title: 'Светлая' },
+					{ value: Theme.dark, title: 'Тёмная' },
+					{ value: Theme.grey, title: 'Серая' },
+					{ value: Theme.system, title: 'Системная' },
+				],
+				dynamicTitle: true,
+			},
+		},
+	},
+	initialGlobals: {
+		theme: Theme.light,
+	},
+	decorators: [
+		(story, { globals }) => ({
+			setup() {
+				const themeStore = useThemeStore()
+
+				watch(
+					() => globals.theme,
+					(theme) => {
+						if (theme !== Theme.light && theme !== Theme.grey && theme !== Theme.dark && theme !== Theme.system) {
+							return
+						}
+
+						themeStore.setTheme(theme)
+						document.documentElement.classList.toggle('grey', theme === Theme.grey)
+						document.documentElement.classList.toggle('dark', theme !== Theme.grey && themeStore.isDark)
+					},
+					{ immediate: true, flush: 'post' },
+				)
+			},
+			template: '<story />',
+		}),
+	],
 	parameters: {
 		viewport: { options: getBreakpointViewports(breakpointsSource) },
 		controls: {
@@ -34,7 +75,23 @@ const preview: Preview = {
 			},
 		},
 		options: {
-			storySort: { order: ['Docs', 'Design System', 'UI', 'FORM', 'Example'] },
+			storySort: {
+				order: [
+					'Локальная разработка',
+					[
+						'Введение',
+						'Установка',
+						'Использование',
+						'Файлы стилей',
+						'Шрифты',
+						'Миксины',
+					],
+					'Система дизайна',
+					'UI',
+					'FORM',
+					'Example',
+				],
+			},
 		},
 	},
 }
