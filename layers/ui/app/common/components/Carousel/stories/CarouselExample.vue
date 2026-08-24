@@ -9,7 +9,7 @@ const slides = [
 
 <template>
 	<Carousel :slides="slides">
-		<template #slide="{ slide }">
+		<template #slides="{ slide }">
 			<article>
 				<h2>{{ slide.title }}</h2>
 				<p>{{ slide.text }}</p>

@@ -144,7 +144,7 @@ function applyFontToSelected() {
 	padding: 8px 14px;
 	border: 1px solid var(--primary);
 	border-radius: 6px;
-	color: var(--white);
+	color: var(--white-100);
 	background: var(--primary);
 	cursor: pointer;
 

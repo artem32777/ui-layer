@@ -4,40 +4,16 @@ import * as SpacingStories from './Spacing.stories'
 <Meta title="Система дизайна/Адаптивные расстояния" />
 
 # Адаптивные расстояния
-Локальная шкала находится в `layers/ui/app/config/styles/spacing.scss`.
-
+- Переменные расстояний формируются в файле `layers/ui/app/config/styles/spacing.scss`.
 
 ## Использование
-
-Используйте CSS-переменные `var(--spacing-*)` для `gap`, `padding`, `margin` и других размеров. Значение переменной автоматически меняется на брейкпоинтах, поэтому дополнительные медиазапросы не нужны.
+- Используйте CSS-переменные `var(--spacing-*)` для `padding`, `margin`, `gap` и других размеров.
+- Значение переменной автоматически меняется на брейкпоинтах, поэтому дополнительные медиазапросы не нужны.
 
 ```scss
 .card {
-	gap: var(--spacing-24);
-	padding: var(--spacing-40);
+	gap: var(--spacing-blue);
+	padding: var(--spacing-pink);
 }
 ```
-
-## Брейкпоинты
-
-| Режим | Ширина |
-| --- | --- |
-| Mobile | до `767px` |
-| Tablet | от `768px` (`$sm`) |
-| Desktop | от `1920px` (`$xxl`) |
-
-## Шкала
-
 <Canvas of={SpacingStories.Spacing} />
-
-## Настройка
-
-Каждая запись в `$spacing-sizes` задаёт имя CSS-переменной и три значения в порядке Mobile, Tablet, Desktop.
-
-```scss
-$spacing-sizes: (
-	24: (20px, 22px, 24px),
-);
-```
-
-Эта запись генерирует `--spacing-24`: `20px` на Mobile, `22px` на Tablet и `24px` на Desktop.

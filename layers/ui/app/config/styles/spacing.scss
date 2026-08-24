@@ -4,39 +4,39 @@
 // Создаёт css переменные с префиксом var(--spacing-blue) с адаптивными размерами.
 $spacing-breakpoints: ($xxxs, $sm, $xxl);
 $spacing-sizes: (
-	"white": (0px, 0px, 0px),
-	"gray": (2px, 2px, 2px),
-	"red": (4px, 4px, 4px),
-	"pink": (8px, 8px, 8px),
-	"orange": (8px, 10px, 12px),
-	"yellow": (12px, 14px, 16px),
-	"green": (16px, 18px, 20px),
-	"blue": (20px, 22px, 24px),
-	"purple": (22px, 26px, 32px),
-	"brown": (24px, 30px, 40px),
-	"black": (28px, 34px, 48px),
-	"cyan": (32px, 38px, 56px),
-	"magenta": (34px, 42px, 64px),
-	"lime": (36px, 46px, 72px),
-	"navy": (40px, 50px, 80px),
-	"olive": (42px, 54px, 88px),
-	"maroon": (44px, 58px, 96px),
-	"silver": (44px, 62px, 104px),
-	"gold": (44px, 66px, 120px),
-	"bronze": (44px, 70px, 136px),
-	"coral": (48px, 70px, 152px),
-	"turquoise": (50px, 70px, 200px),
+	"white": (0, 0, 0),
+	"gray": (2, 2, 2),
+	"red": (4, 4, 4),
+	"pink": (8, 8, 8),
+	"orange": (8, 10, 12),
+	"yellow": (12, 14, 16),
+	"green": (16, 18, 20),
+	"blue": (20, 22, 24),
+	"purple": (22, 26, 32),
+	"brown": (24, 30, 40),
+	"black": (28, 34, 48),
+	"cyan": (32, 38, 56),
+	"magenta": (34, 42, 64),
+	"lime": (36, 46, 72),
+	"navy": (40, 50, 80),
+	"olive": (42, 54, 88),
+	"maroon": (44, 58, 96),
+	"silver": (44, 62, 104),
+	"gold": (44, 66, 120),
+	"bronze": (44, 70, 136),
+	"coral": (48, 70, 152),
+	"turquoise": (50, 70, 200),
 );
 
 :root {
 	@each $name, $sizes in $spacing-sizes {
-		--spacing-#{$name}: #{list.nth($sizes, 1)};
+		--spacing-#{$name}: #{list.nth($sizes, 1) * 1px};
 	}
 
 	@for $index from 2 through list.length($spacing-breakpoints) {
 		@media (min-width: list.nth($spacing-breakpoints, $index)) {
 			@each $name, $sizes in $spacing-sizes {
-				--spacing-#{$name}: #{list.nth($sizes, $index)};
+				--spacing-#{$name}: #{list.nth($sizes, $index) * 1px};
 			}
 		}
 	}

@@ -24,51 +24,31 @@ const meta = {
 	argTypes: {
 		slides: {
 			control: 'object',
-			table: {
-				type: {
-					summary: 'T[]',
-					detail: carouselTypesSource.trim(),
-				},
-			},
-		},
-		swiperOptions: {
-			control: 'object',
-			table: {
-				type: {
-					summary: 'SwiperVueOptions',
-					detail: carouselTypesSource.trim(),
-				},
+			table: { type: { summary: 'T[]', detail: carouselTypesSource.trim() },
 			},
 		},
 		options: {
 			control: 'object',
-			table: {
-				type: {
-					summary: 'CarouselOptions',
-					detail: carouselTypesSource.trim(),
-				},
-			},
+			table: { type: { summary: 'SwiperVueOptions', detail: carouselTypesSource.trim() } },
 		},
 	},
 	args: {
 		slides,
 		options: {
-			hasNav: true,
-			hasPagination: true,
+			spaceBetween: 20,
 		},
 	} satisfies CarouselStoryArgs,
 	render: (args: CarouselStoryArgs) => ({
 		components: { Carousel: Carousel as unknown as ConcreteComponent<CarouselStoryArgs> },
 		setup() { return { args } },
 		template: `
-			<div style="width: 100%; height: 400px">
+			<div style="height: 400px">
 				<Carousel
 					:slides="args.slides"
-					:swiper-options="args.swiperOptions"
 					:options="args.options"
 				>
-					<template #slide="{ slide }">
-						<div style="background-color: blue">
+					<template #slides="{ slide }">
+						<div style="display: flex; opacity: 1; gap: 10px; flex-direction: column; text-align: center; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.1)" >
 							<h3>{{ slide.title }}</h3>
 							<p>{{ slide.text }}</p>
 						</div>
@@ -83,3 +63,22 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Base: Story = {}
+
+export const FourSlides: Story = {
+	args: {
+		options: {
+			spaceBetween: 20,
+			slidesPerView: 3,
+		},
+		slides: [
+			{ title: 'Первый слайд', text: 'Краткое описание первого слайда.' },
+			{ title: 'Второй слайд', text: 'Краткое описание второго слайда.' },
+			{ title: 'Третий слайд', text: 'Краткое описание третьего слайда.' },
+			{ title: 'Четвёртый слайд', text: 'Краткое описание четвёртого слайда.' },
+			{ title: 'Пятый слайд', text: 'Краткое описание пятого слайда.' },
+			{ title: 'Шестой слайд', text: 'Краткое описание шестого слайда.' },
+			{ title: 'Седьмой слайд', text: 'Краткое описание седьмого слайда.' },
+			{ title: 'Восьмой слайд', text: 'Краткое описание восьмого слайда.' },
+		],
+	},
+}

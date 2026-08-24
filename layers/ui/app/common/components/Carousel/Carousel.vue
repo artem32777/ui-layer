@@ -3,8 +3,7 @@ import type { Swiper as SwiperInstance } from 'swiper'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { shallowRef } from 'vue'
-import CarouselPagination from './pagination/CarouselPagination.vue'
-import { CarouselNavClass, type CarouselOptions, type CarouselProps, type SwiperVueOptions } from './Carousel.types.ts'
+import { CarouselNavClass, type CarouselProps, type SwiperVueOptions } from './Carousel.types.ts'
 import CarouselNav from './navigation/CarouselNav.vue'
 
 import 'swiper/css'
@@ -13,24 +12,16 @@ const props = defineProps<CarouselProps<T>>()
 
 defineSlots<{
 	/** Обязательный слот, содержащий вёрстку слайдов */
-	slide: (props: { slide: T, index: number }) => any
-	/** Кастомные стрелкии навигации */
-	nav?: any
-	/** Кастомная пагинация */
-	pagination?: any
+	slides: (props: { slide: T, index: number }) => any
+	/** По умолчанию содержит дефолтную навигацию  */
+	inner: any
 }>()
 
-const defaultOptions: CarouselOptions = {
-	hasNav: true,
-	hasPagination: false,
-}
-
-const mergedOptions = { ...defaultOptions, ...props.options }
-
-const defaultSwiperOptions: SwiperVueOptions = {
+const defaultOptions: SwiperVueOptions = {
 	modules: [Autoplay, Navigation, Pagination],
 	// autoplay: { delay: 3000 },
 	speed: 900,
+	grabCursor: true,
 	allowTouchMove: true,
 	pagination: { clickable: true },
 	navigation: {
@@ -39,7 +30,7 @@ const defaultSwiperOptions: SwiperVueOptions = {
 	},
 }
 
-const swiperMergedOptions: SwiperVueOptions = { ...defaultSwiperOptions, ...props.swiperOptions }
+const swiperMergedOptions: SwiperVueOptions = { ...defaultOptions, ...props.options }
 
 const emit = defineEmits<{
 	'swiper': [swiper: SwiperInstance]
@@ -74,28 +65,13 @@ function handleSlideChange(swiper: SwiperInstance) {
 				>
 					<!-- Содержимое слайда -->
 					<slot
-						name="slide"
+						name="slides"
 						v-bind="{ slide, index }"
 					/>
 				</SwiperSlide>
 
-				<!-- Навигация -->
-				<slot
-					v-if="mergedOptions.hasNav"
-					name="nav"
-				>
+				<slot name="inner">
 					<CarouselNav />
-				</slot>
-
-				<!-- Пагинация -->
-				<slot
-					v-if="mergedOptions.hasPagination"
-					name="pagination"
-				>
-					<CarouselPagination
-						:count="slides.length"
-						:swiper="swiperInstance"
-					/>
 				</slot>
 			</Swiper>
 		</ClientOnly>
@@ -119,10 +95,12 @@ function handleSlideChange(swiper: SwiperInstance) {
 .carousel {
   position: absolute;
   width: 100%;
+  top: 0;
+  left: 0;
   overflow: hidden;
 }
 
 .carousel__slide {
-  padding: 0 var(--spacing-120);
+  //background-color: red;
 }
 </style>

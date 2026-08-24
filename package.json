@@ -13,8 +13,8 @@
     "test:stories": "vitest run --project=storybook",
     "test:stories:watch": "vitest --project=storybook",
     "test:visual": "playwright test --config .storybook/playwright.config.ts",
-    "test:visual:story": "node .storybook/run-visual-story.mjs",
-    "test:visual:story:update": "node .storybook/run-visual-story.mjs --update-snapshots",
+    "test:visual:story": "node .storybook/visual-tests/run-visual-story.mjs",
+    "test:visual:story:update": "node .storybook/visual-tests/run-visual-story.mjs --update-snapshots",
     "test:visual:update": "playwright test --config .storybook/playwright.config.ts --update-snapshots"
   },
   "dependencies": {

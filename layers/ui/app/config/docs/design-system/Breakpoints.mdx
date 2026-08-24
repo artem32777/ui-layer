@@ -1,0 +1,26 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as DesignSystemStories from './DesignSystem.stories'
+
+<Meta title="Система дизайна/Брейкпоинты" />
+
+# Брейкпоинты
+- Значения брейкпоинтов задаются в`config/styles/shared/breakpoints.scss`.
+
+<Canvas of={DesignSystemStories.GridBreakpoints} />
+
+## Правила
+- В медиа-запросах используем только проектные брейкпоинты из файла.
+- По умолчанию, нужно использовать mobile-first `@media (min-width: $lg)`.
+- Медиа-запросы пишем внутри класса компонента.
+
+## Пример
+
+```scss
+.layout {
+	width: 50px;
+
+	@media (min-width: $lg) {
+		width: 100px;
+	}
+}
+```

@@ -8,7 +8,9 @@ const { xMargin = '40px' } = defineProps<{
 
 <template>
 	<nav class="carousel-nav">
-		<CarouselNavButton class="carousel-nav__button" />
+		<CarouselNavButton
+			class="carousel-nav__button"
+		/>
 		<CarouselNavButton
 			is-next
 			class="carousel-nav__button"
@@ -21,32 +23,22 @@ const { xMargin = '40px' } = defineProps<{
   position: absolute;
   z-index: 2;
   top: 50%;
-  width: 100%;
-  //right: v-bind(xMargin);
-  //left: v-bind(xMargin);
+  width: calc(100% - (v-bind(xMargin)* 2));
+  left: v-bind(xMargin);
+  right:v-bind(xMargin);
   display: flex;
   align-items: center;
   justify-content: space-between;
   transform: translateY(-50%);
-  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
 .carousel-nav__button {
   pointer-events: auto;
-  //display: flex;
-  //align-items: center;
-  //justify-content: center;
-  //width: 48px;
-  //height: 48px;
-  //border-radius: 50%;
-  //background-color: var(--brand, #4149f2);
-  //color: var(--white, #ffffff);
-  //transition: background-color 0.3s ease;
+  opacity: 0;
 
-  &:hover,
-  &:focus-visible {
-    background-color: var(--brand-dark, #292fba);
+  &:not(.swiper-button-disabled) {
+    opacity: 1;
   }
 }
 </style>

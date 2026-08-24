@@ -49,7 +49,7 @@ const meta = {
 export default meta
 
 type Story = StoryObj<typeof meta>
-type StylesStory = StoryObj<ButtonStylesStoryArgs>
+// type StylesStory = StoryObj<ButtonStylesStoryArgs>
 
 export const Base: Story = {
 	render: (args: ButtonStoryArgs) => {
@@ -86,8 +86,10 @@ export const Base: Story = {
 							</template>
 						</Popover>
 					</div>
-
-					<Button v-bind="args" text="Кнопка" />
+					
+					<div>
+						<Button v-bind="args" text="Кнопка" />
+					</div>
 				</div>
 			`,
 		}
