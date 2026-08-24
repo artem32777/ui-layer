@@ -4,12 +4,12 @@
         --story-text: #000;
     }
 
-    .dark {
+    .theme-dark {
         --story-background: #000;
         --story-text: #fff;
     }
 
-    .grey {
+    .theme-grey {
         --story-background: grey;
         --story-text: #fff;
     }
@@ -17,6 +17,12 @@
     html, .docs-story {
         background-color: var(--story-background);
         color: var(--story-text);
+    }
+
+    html.story-lock-background,
+    .docs-story:has(.story-lock-background) {
+        --story-background: #fff;
+        --story-text: #000;
     }
 
     .sbdocs-content {

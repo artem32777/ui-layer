@@ -1,0 +1,105 @@
+:root {
+  --bg-action-primary: var(--primary-500);
+  --bg-action-primary-hover: var(--primary-300);
+  --bg-action-secondary: var(--neutral-500);
+  --bg-action-secondary-hover: var(--neutral-600);
+  --bg-action-accent: var(--accent-500);
+  --bg-action-accent-hover: var(--accent-600);
+  --bg-action-on-media: var(--white-100);
+  --bg-action-on-media-hover: var(--neutral-600);
+  --bg-action-disabled: var(--neutral-500);
+  --bg-action-disabled-media: var(--white-100);
+  --bg-action-item-hover: var(--neutral-500);
+
+  --text-on-bg-primary: var(--white-100);
+  --text-on-bg-secondary: var(--neutral-950);
+  --text-on-bg-accent: var(--white-100);
+  --text-on-bg-media: var(--neutral-950);
+  --text-on-bg-disabled: var(--neutral-750);
+  --text-on-bg-disabled-media: var(--neutral-750);
+  --text-on-bg-selected: var(--white-100);
+
+  --text-on-surface-primary: var(--primary-500);
+  --text-on-surface-primary-hover: var(--primary-300);
+  --text-on-surface-secondary: var(--neutral-850);
+  --text-on-surface-tertiary: var(--neutral-700);
+  --text-on-surface-accent: var(--accent-500);
+  --text-on-surface-accent-hover: var(--accent-600);
+  --text-on-surface-dark: var(--neutral-950);
+  --text-on-surface-dark-hover: var(--neutral-850);
+  --text-on-surface-white: var(--white-100);
+  --text-on-surface-white-hover: var(--neutral-650);
+  --text-on-surface-error: var(--error);
+}
+
+.theme-grey {
+  --bg-action-primary: var(--primary-500);
+  --bg-action-primary-hover: var(--primary-300);
+  --bg-action-secondary: var(--white-100);
+  --bg-action-secondary-hover: var(--neutral-600);
+  --bg-action-accent: var(--accent-500);
+  --bg-action-accent-hover: var(--accent-600);
+  --bg-action-on-media: var(--white-100);
+  --bg-action-on-media-hover: var(--neutral-600);
+  --bg-action-disabled: var(--white-100);
+  --bg-action-disabled-media: var(--white-100);
+  --bg-action-item-hover: var(--neutral-500);
+
+  --text-on-bg-primary: var(--white-100);
+  --text-on-bg-secondary: var(--neutral-950);
+  --text-on-bg-accent: var(--white-100);
+  --text-on-bg-media: var(--neutral-950);
+  --text-on-bg-disabled: var(--neutral-750);
+  --text-on-bg-disabled-media: var(--neutral-750);
+  --text-on-bg-selected: var(--white-100);
+
+  --text-on-surface-primary: var(--primary-500);
+  --text-on-surface-primary-hover: var(--primary-300);
+  --text-on-surface-secondary: var(--neutral-850);
+  --text-on-surface-tertiary: var(--neutral-700);
+  --text-on-surface-accent: var(--accent-500);
+  --text-on-surface-accent-hover: var(--accent-600);
+  --text-on-surface-dark: var(--neutral-950);
+  --text-on-surface-dark-hover: var(--neutral-850);
+  --text-on-surface-white: var(--white-100);
+  --text-on-surface-white-hover: var(--neutral-650);
+  --text-on-surface-error: var(--error);
+}
+
+.theme-dark {
+  --bg-action-primary: var(--white-100);
+  --bg-action-primary-hover: var(--white-80);
+  --bg-action-secondary: var(--white-8);
+  --bg-action-secondary-hover: var(--white-10);
+  --bg-action-accent: var(--accent-500);
+  --bg-action-accent-hover: var(--accent-600);
+  --bg-action-on-media: var(--white-100);
+  --bg-action-on-media-hover: var(--neutral-600);
+  --bg-action-disabled: var(--white-8);
+  --bg-action-disabled-media: var(--white-100);
+  --bg-action-item-hover: var(--white-5);
+
+  --text-on-bg-primary: var(--primary-500);
+  --text-on-bg-secondary: var(--white-100);
+  --text-on-bg-accent: var(--white-100);
+  --text-on-bg-media: var(--neutral-950);
+  --text-on-bg-disabled: var(--white-50);
+  --text-on-bg-disabled-media: var(--neutral-750);
+  --text-on-bg-selected: var(--neutral-950);
+
+  --text-on-surface-primary: var(--white-100);
+  --text-on-surface-primary-hover: var(--white-80);
+  --text-on-surface-secondary: var(--white-80);
+  --text-on-surface-tertiary: var(--white-40);
+  --text-on-surface-accent: var(--accent-500);
+  --text-on-surface-accent-hover: var(--accent-400);
+  --text-on-surface-dark: var(--white-100);
+  --text-on-surface-dark-hover: var(--white-80);
+  --text-on-surface-white: var(--white-100);
+  --text-on-surface-white-hover: var(--neutral-650);
+  --text-on-surface-error: var(--error);
+}
+
+
+
+

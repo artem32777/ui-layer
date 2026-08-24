@@ -1,0 +1,18 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import * as ThemeStories from './Theme.stories'
+
+<Meta title="Локальная разработка/Цвета и темы" />
+
+# Цвета
+- <span style={{color: '#1ea7fd'}}>[Основные цвета](?path=/docs/система-дизайна-цвета--docs)</span> проекта локально задаются в переменных `config/styles/colors/colors.scss`.
+- Из них формируются <span style={{color: '#1ea7fd'}}>[семантические цвета](?path=/docs/система-дизайна-цвета-тем--docs)</span>, которые зависят от темы - `config/styles/сolors/theme-colors.scss`
+- В стилях указываем цвета через эти переменные: `background-color: var(--bg-action-primary);`.
+
+# Темы
+- Темы определяются в `config/theme.ts` и храняются в куки.
+- Переключаются глобально для всего сайта с установкой класса на элемент `html`.
+- Название темы также может быть передано в prop `theme` для стилизации определенного ui-компонента.
+- Клиент может переключать темы с помощью компонента <span style={{color: '#1ea7fd'}}>[ThemeSwitcher](?path=/docs/ui-themeswitcher--docs)</span>.
+
+## Текущие темы и классы:
+<Canvas of={ThemeStories.Theme} />

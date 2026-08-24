@@ -1,6 +1,39 @@
-:root {
-  --UI-L-54: 54px;
-  --UI-M-40: 40px;
-  --UI-S-30: 30px;
-  --UI-XS-26: 40px;
+.radius-0 {
+  --UI-radius-L: 0px;
+  --UI-radius-M: 0px;
+  --UI-radius-S: 0px;
+  --UI-radius-XS: 0px;
+  --UI-radius-XSS: 0px;
+}
+
+.radius-1 {
+  --UI-radius-L: 6px;
+  --UI-radius-M: 6px;
+  --UI-radius-S: 6px;
+  --UI-radius-XS: 4px;
+  --UI-radius-XSS: 2px;
+}
+
+.radius-2 {
+  --UI-radius-L: 16px;
+  --UI-radius-M: 12px;
+  --UI-radius-S: 10px;
+  --UI-radius-XS: 8px;
+  --UI-radius-XSS: 4px;
+}
+
+.radius-3 {
+  --UI-radius-L: 40px;
+  --UI-radius-M: 24px;
+  --UI-radius-S: 16px;
+  --UI-radius-XS: 14px;
+  --UI-radius-XSS: 6px;
+}
+
+.radius-0-3 {
+  --UI-radius-L: 40px;
+  --UI-radius-M: 40px;
+  --UI-radius-S: 16px;
+  --UI-radius-XS: 14px;
+  --UI-radius-XSS: 6px;
 }

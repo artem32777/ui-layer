@@ -1,8 +1,8 @@
 @use "null";
 @use "fonts";
 @use "./colors/colors";
-@use "./variables/height";
-@use "./variables/radius";
+@use "colors/theme-colors";
+@use "variables/height";
 @use "spacing";
 @use "./shared/transitions";
 

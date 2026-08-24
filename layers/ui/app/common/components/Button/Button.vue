@@ -29,9 +29,7 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 		:class="[
 			`button--variant-${variant}`,
 			`button--size-${size}`,
-			{
-				'button--icon-only': isIconOnly,
-			},
+			{ 'button--icon-only': isIconOnly },
 		]"
 	>
 		<Icon
@@ -61,14 +59,13 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	font-weight: 600;
+  @include font-size(button);
 	transition: color 0.3s ease, background-color 0.3s ease;
 
 // SIZES
 	&.button--size-small {
     min-height: var(--ui-height-S);
 		gap: 6px;
-
 		padding: 0 12px;
 		font-size: 14px;
 		line-height: 14px;
@@ -79,8 +76,6 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
     min-height: var(--ui-height-M);
 		gap: 8px;
 		padding: 0 18px;
-
-    @include font-size(button);
 		line-height: 20px;
     border-radius: 12px;
 	}
@@ -89,7 +84,6 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
     min-height: var(--ui-height-L);
 		gap: 8px;
 		padding: 0 24px;
-		@include font-size(button);
 		line-height: 20px;
     border-radius: 16px;
 	}
@@ -102,11 +96,11 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 
 // VARIANTS:
 	&.button--variant-primary {
-		color: var(--white-100);
-		background-color: var(--background-interactive-primary);
+		color: var(--text-on-bg-primary);
+		background-color: var(--bg-action-primary);
 
 		&:hover, &:active {
-			background-color: var(--background-interactive-primary-hover);
+			background-color: var(--bg-action-primary-hover);
 		}
 	}
 

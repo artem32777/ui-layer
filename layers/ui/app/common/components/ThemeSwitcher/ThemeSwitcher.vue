@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { Theme, useThemeStore } from '#layers/ui/app/common/stores/themeStore'
+import { useThemeStore } from '#layers/ui/app/common/stores/themeStore'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
+import { Theme } from '#layers/ui/app/config/theme.ts'
 
 const themeStore = useThemeStore()
 const { theme } = storeToRefs(themeStore)
@@ -11,7 +12,7 @@ const themeOptions = [
 	{ value: Theme.light, icon: iconNames.themeLight, label: 'Светлая тема' },
 	{ value: Theme.grey, icon: iconNames.themeLight, label: 'Серая тема' },
 	{ value: Theme.dark, icon: iconNames.themeDark, label: 'Тёмная тема' },
-	{ value: Theme.system, icon: iconNames.themeSystem, label: 'Системная тема' },
+	{ value: 'system' as const, icon: iconNames.themeSystem, label: 'Системная тема' },
 ]
 </script>
 

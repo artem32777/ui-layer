@@ -1,6 +1,7 @@
 import type { Ref } from 'vue'
 import { ref, watchEffect } from 'vue'
 import { toast } from 'vue-sonner'
+import { Theme } from '../layers/ui/app/config/theme'
 
 // Минимальная часть Nuxt CookieOptions, которая нужна themeStore.
 interface CookieOptions<T> {
@@ -54,7 +55,10 @@ export function useHead(input: HeadInput) {
 			? input.htmlAttrs.class()
 			: input.htmlAttrs?.class
 
-		document.documentElement.classList.toggle('dark', classValue?.split(/\s+/).includes('dark') ?? false)
-		document.documentElement.classList.toggle('grey', classValue?.split(/\s+/).includes('grey') ?? false)
+		const classes = classValue?.split(/\s+/) ?? []
+
+		document.documentElement.classList.toggle(Theme.light, classes.includes(Theme.light))
+		document.documentElement.classList.toggle(Theme.grey, classes.includes(Theme.grey))
+		document.documentElement.classList.toggle(Theme.dark, classes.includes(Theme.dark))
 	})
 }

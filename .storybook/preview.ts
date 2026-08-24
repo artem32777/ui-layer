@@ -2,10 +2,11 @@ import type { Preview } from '@storybook/vue3-vite'
 import { setup } from '@storybook/vue3'
 import { createPinia } from 'pinia'
 import { SelectRoot } from 'reka-ui'
-import { defineComponent, watch } from 'vue'
-import { Theme, useThemeStore } from '../layers/ui/app/common/stores/themeStore'
+import { defineComponent, onUnmounted, watch } from 'vue'
+import { useThemeStore } from '../layers/ui/app/common/stores/themeStore'
 import breakpointsSource from '../layers/ui/app/config/styles/shared/breakpoints.scss?raw'
 import '../layers/ui/app/config/styles/index.scss'
+import { Theme } from '../layers/ui/app/config/theme'
 import { getBreakpointViewports } from './breakpoints'
 
 const ClientOnly = defineComponent({
@@ -34,7 +35,7 @@ const preview: Preview = {
 					{ value: Theme.light, title: 'Светлая' },
 					{ value: Theme.dark, title: 'Тёмная' },
 					{ value: Theme.grey, title: 'Серая' },
-					{ value: Theme.system, title: 'Системная' },
+					{ value: 'system', title: 'Системная' },
 				],
 				dynamicTitle: true,
 			},
@@ -44,26 +45,40 @@ const preview: Preview = {
 		theme: Theme.light,
 	},
 	decorators: [
-		(story, { globals }) => ({
-			setup() {
-				const themeStore = useThemeStore()
+		(story, { globals, parameters }) => {
+			const lockBackground = Boolean(parameters.theme?.lockBackground)
 
-				watch(
-					() => globals.theme,
-					(theme) => {
-						if (theme !== Theme.light && theme !== Theme.grey && theme !== Theme.dark && theme !== Theme.system) {
-							return
-						}
+			return {
+				setup() {
+					const themeStore = useThemeStore()
 
-						themeStore.setTheme(theme)
-						document.documentElement.classList.toggle('grey', theme === Theme.grey)
-						document.documentElement.classList.toggle('dark', theme !== Theme.grey && themeStore.isDark)
-					},
-					{ immediate: true, flush: 'post' },
-				)
-			},
-			template: '<story />',
-		}),
+					const syncCanvasBackgroundLock = () => {
+						const isCanvas = !document.querySelector('.sbdocs')
+						document.documentElement.classList.toggle('story-lock-background', lockBackground && isCanvas)
+					}
+
+					syncCanvasBackgroundLock()
+					onUnmounted(() => {
+						document.documentElement.classList.remove('story-lock-background')
+					})
+
+					watch(
+						() => globals.theme,
+						(theme) => {
+							if (theme !== Theme.light && theme !== Theme.grey && theme !== Theme.dark && theme !== 'system') {
+								return
+							}
+
+							themeStore.setTheme(theme)
+						},
+						{ immediate: true, flush: 'post' },
+					)
+				},
+				template: lockBackground
+					? '<div class="story-lock-background"><story /></div>'
+					: '<story />',
+			}
+		},
 	],
 	parameters: {
 		docs: {
@@ -81,9 +96,9 @@ const preview: Preview = {
 			storySort: {
 				order: [
 					'Локальная разработка',
-					['Введение', 'Установка', 'Использование', 'Файлы стилей', 'Шрифты', 'Миксины'],
+					['Введение', 'Установка', 'Использование', 'Файлы стилей', 'Шрифты', 'Цвета и темы', 'Миксины'],
 					'Система дизайна',
-					['Цвета', 'Типографика', 'Иконки', 'Файлы стилей', 'Шрифты', 'Миксины'],
+					['Цвета', 'Цвета тем', 'Типографика', 'Иконки', 'Файлы стилей', 'Шрифты', 'Миксины'],
 					'UI',
 					'FORM',
 					'Example',
