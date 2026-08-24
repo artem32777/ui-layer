@@ -39,7 +39,7 @@ const meta = {
 		setup() {
 			return { args }
 		},
-		template: '<Button v-bind="args">{{ args.label }}</Button>',
+		template: '<Button v-bind="args" />',
 	}),
 } satisfies Meta<typeof Button>
 
@@ -85,7 +85,7 @@ export const Base: Story = {
 					</div>
 					
 					<div>
-						<Button v-bind="args" text="Кнопка" />
+						<Button v-bind="args" />
 					</div>
 				</div>
 			`,

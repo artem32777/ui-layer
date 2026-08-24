@@ -70,7 +70,7 @@ watch(() => props.activeClass, async (className) => {
 					:style="{ borderRadius: `var(${item.name})` }"
 				/>
 				<div class="radius__meta">
-					<strong class="radius__name">{{ item.name }}</strong>
+					<strong class="radius__name">{{ item.name.slice(2) }}</strong>
 					<span class="radius__value">{{ item.value }}</span>
 				</div>
 			</div>
@@ -92,29 +92,30 @@ watch(() => props.activeClass, async (className) => {
 
 .radius__switcher-button {
 	padding: 8px 14px;
-	border: 1px solid var(--neutral-600);
+	border: 1px solid var(--border-neutral);
 	border-radius: 6px;
-	color: var(--neutral-950);
-	background: var(--white);
+	color: var(--text-on-surface-dark);
+	background: var(--white-100);
 	cursor: pointer;
 
 	&:hover {
-		border-color: var(--primary);
+		background: var(--bg-action-item-hover);
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--brand, #4149f2);
+		outline: 2px solid var(--border-primary);
 		outline-offset: 2px;
 	}
 }
 
 .radius__switcher-button--active {
-	color: var(--white);
-	border-color: var(--primary);
-	background: var(--primary);
+	color: var(--text-on-bg-primary);
+	border-color: var(--bg-action-primary);
+	background: var(--bg-action-primary);
 
 	&:hover {
-		border-color: var(--primary);
+		border-color: var(--bg-action-primary-hover);
+		background: var(--bg-action-primary-hover);
 	}
 }
 
@@ -133,7 +134,7 @@ watch(() => props.activeClass, async (className) => {
 	width: 140px;
 	height: 80px;
 	flex-shrink: 0;
-	border: 1px solid var(--neutral-600);
+	border: 1px solid ;
 	background: var(--primary);
 }
 

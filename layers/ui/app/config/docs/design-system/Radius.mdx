@@ -4,8 +4,7 @@ import * as RadiusStories from './Radius.stories'
 <Meta title="Система дизайна/Скругления" />
 
 # Скругления
-- Варианты скругления задаются в `config/styles/variables/radius.scss`.
-- Переключатель вешает класс `radius-*` на элемент `html` во всём Storybook. По умолчанию используется `radius-3`.
-- В компонентах используйте переменные `var(--UI-radius-L)`, `var(--UI-radius-M)` и остальные токены выбранного варианта.
+- Варианты скругления задаются в `config/styles/variables/radius.scss` и  зависят от значально заданного глобального класса `radius-*`. По умолчанию задаётся `radius-3`.
+- Ниже можно посмотреть как.
 
 <Canvas of={RadiusStories.RadiusTokens} />
