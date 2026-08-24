@@ -66,6 +66,7 @@ const modelValue = defineModel<string>()
 	align-items: center;
 	gap: 8px;
   @include font-size(button);
+  color: var(--text-on-surface-dark);
 
 	&:hover,
 	&:focus-within {

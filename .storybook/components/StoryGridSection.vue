@@ -26,5 +26,6 @@ defineProps<{
 	margin: 0;
 	font-size: 25px;
 	font-weight: 600;
+  color: var(--story-text);
 }
 </style>
