@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
 import { usePreferredDark } from '@vueuse/core'
 import { useCookie, useHead } from '#imports'
-import { Theme } from '#layers/ui/app/config/theme.ts'
+import { Theme, type ThemeNames } from '#layers/ui/app/config/theme.ts'
+
+type Themes = ThemeNames | 'system'
 
 export const useThemeStore = defineStore('ui-theme', () => {
-	const theme = useCookie<Theme | 'system'>('ui-theme', {
+	const theme = useCookie<Themes>('ui-theme', {
 		default: () => Theme.light,
 		path: '/',
 		sameSite: 'lax',
@@ -20,7 +22,7 @@ export const useThemeStore = defineStore('ui-theme', () => {
 		},
 	})
 
-	const setTheme = (value: Theme | 'system') => {
+	const setTheme = (value: Themes) => {
 		theme.value = value
 	}
 

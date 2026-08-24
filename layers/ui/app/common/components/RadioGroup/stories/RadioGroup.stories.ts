@@ -8,6 +8,7 @@ import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import RadioGroup from '../RadioGroup.vue'
 import radioGroupTypesSource from '../RadioGroup.types.ts?raw'
 import { ref } from 'vue'
+import { ThemeNamesArray } from '#layers/ui/app/config/theme.ts'
 
 type RadioGroupStoryArgs = ComponentProps<typeof RadioGroup>
 
@@ -38,6 +39,7 @@ const meta = {
 				},
 			},
 		},
+		theme: { control: ThemeNamesArray },
 		disabled: { control: 'boolean' },
 		invalid: { control: 'boolean' },
 	},
@@ -63,6 +65,10 @@ export const DocsExample: Story = {
 	args: {
 		modelValue: '',
 	} satisfies Partial<RadioGroupStoryArgs>,
+}
+
+export const Base: Story = {
+
 }
 
 export const States: Story = {

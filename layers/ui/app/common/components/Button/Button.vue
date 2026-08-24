@@ -17,7 +17,7 @@ defineSlots<{
 
 const slots = useSlots()
 const isIconOnly = computed(() => !props.text && !slots.default && Boolean(props.iconLeft || props.iconRight))
-const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'medium' ? 18 : 20)
+const iconSize = computed(() => ({ small: 14, medium: 18, big: 20 })[props.size])
 </script>
 
 <template>
@@ -29,6 +29,7 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 		:class="[
 			`button--variant-${variant}`,
 			`button--size-${size}`,
+			theme,
 			{ 'button--icon-only': isIconOnly },
 		]"
 	>
@@ -65,27 +66,23 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 // SIZES
 	&.button--size-small {
     min-height: var(--ui-height-S);
+    border-radius: var(--UI-radius-S);
 		gap: 6px;
 		padding: 0 12px;
-		font-size: 14px;
-		line-height: 14px;
-    border-radius: 10px;
 	}
 
 	&.button--size-medium {
     min-height: var(--ui-height-M);
+    border-radius: var(--UI-radius-M);
 		gap: 8px;
 		padding: 0 18px;
-		line-height: 20px;
-    border-radius: 12px;
 	}
 
 	&.button--size-big {
     min-height: var(--ui-height-L);
+    border-radius: var(--UI-radius-L);
 		gap: 8px;
 		padding: 0 24px;
-		line-height: 20px;
-    border-radius: 16px;
 	}
 
 // ICON-ONLY
@@ -96,8 +93,8 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 
 // VARIANTS:
 	&.button--variant-primary {
+    background-color: var(--bg-action-primary);
 		color: var(--text-on-bg-primary);
-		background-color: var(--bg-action-primary);
 
 		&:hover, &:active {
 			background-color: var(--bg-action-primary-hover);
@@ -105,44 +102,41 @@ const iconSize = computed(() => props.size === 'small' ? 14 : props.size === 'me
 	}
 
 	&.button--variant-secondary {
-		color: var(--neutral-950);
-		background-color: var(--background-interactive-secondary);
+		background-color: var(--bg-action-secondary);
+    color: var(--text-on-bg-secondary);
 
 		&:hover, &:active {
-			background-color: var(--background-interactive-secondary-hover);
+			background-color: var(--bg-action-secondary-hover);
 		}
 	}
 
 	&.button--variant-accent {
-		color: var(--white);
-		background-color: var(--accent);
+    background-color: var(--bg-action-accent);
+		color: var(--text-on-bg-accent);
 
 		&:hover, &:active {
-			background-color: var(--accent-dark);
+			background-color: var(--bg-action-accent-hover);
 		}
 	}
 
-	&.button--white {
-		color: var(--neutral-950);
-		background-color: var(--white);
+	&.button--on-media {
+    background-color: var(--bg-action-on-media);
+		color: var(--text-on-bg-media);
 
 		&:hover, &:active {
-			background-color: var(--white-90);
+			background-color: var(--bg-action-on-media-hover);
 		}
 
     &:disabled {
-      background-color: var(--white-50);
+      outline: none;
+      color: var(--text-on-bg-disabled-media);
     }
 	}
 
-	&:focus-visible {
-		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 35%, transparent);
-	}
-
 	&:disabled {
-		color: var(--neutral-750);
-		background-color: var(--neutral-500);
+		color: var(--text-on-bg-disabled);
+		background-color: transparent;
+    outline: 1px solid var(--border-disabled);
 		pointer-events: none;
 		cursor: default;
 	}

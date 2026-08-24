@@ -1,3 +1,4 @@
+// Светлая тема
 :root {
   --bg-action-primary: var(--primary-500);
   --bg-action-primary-hover: var(--primary-300);
@@ -11,6 +12,17 @@
   --bg-action-disabled-media: var(--white-100);
   --bg-action-item-hover: var(--neutral-500);
 
+  --bg-controls-unchecked: var(--neutral-600);
+  --bg-controls-unchecked-hover: var(--white-100);
+  --bg-controls-checked: var(--primary-400);
+  --bg-controls-checked-hover: var(--primary-500);
+  --bg-controls-selected: var(--primary-400);
+  --bg-controls-selected-hover: var(--primary-500);
+  --bg-controls-scrollthumb: var(--neutral-600);
+  --bg-controls-scrollthumb-hover: var(--neutral-650);
+  --bg-controls-group: var(--neutral-500);
+  --bg-controls-on-group-selected: var(--primary-500);
+
   --text-on-bg-primary: var(--white-100);
   --text-on-bg-secondary: var(--neutral-950);
   --text-on-bg-accent: var(--white-100);
@@ -30,8 +42,18 @@
   --text-on-surface-white: var(--white-100);
   --text-on-surface-white-hover: var(--neutral-650);
   --text-on-surface-error: var(--error);
+
+  --border-primary: var(--primary-500);
+  --border-accent: var(--accent-500);
+  --border-expanded: var(--primary-500);
+  --border-disabled: var(--neutral-600);
+  --border-disabled-media: var(--white-30);
+  --border-neutral: var(--neutral-600);
+  --border-group: var(--neutral-500);
+  --border-error: var(--error);
 }
 
+// Серая тема
 .theme-grey {
   --bg-action-primary: var(--primary-500);
   --bg-action-primary-hover: var(--primary-300);
@@ -45,6 +67,17 @@
   --bg-action-disabled-media: var(--white-100);
   --bg-action-item-hover: var(--neutral-500);
 
+  --bg-controls-unchecked: var(--white-100);
+  --bg-controls-unchecked-hover: var(--white-100);
+  --bg-controls-checked: var(--primary-400);
+  --bg-controls-checked-hover: var(--primary-500);
+  --bg-controls-selected: var(--primary-400);
+  --bg-controls-selected-hover: var(--primary-500);
+  --bg-controls-scrollthumb: var(--neutral-600);
+  --bg-controls-scrollthumb-hover: var(--neutral-650);
+  --bg-controls-group: var(--white-100);
+  --bg-controls-on-group-selected: var(--primary-500);
+
   --text-on-bg-primary: var(--white-100);
   --text-on-bg-secondary: var(--neutral-950);
   --text-on-bg-accent: var(--white-100);
@@ -64,8 +97,18 @@
   --text-on-surface-white: var(--white-100);
   --text-on-surface-white-hover: var(--neutral-650);
   --text-on-surface-error: var(--error);
+
+  --border-primary: var(--primary-500);
+  --border-accent: var(--accent-500);
+  --border-expanded: var(--primary-500);
+  --border-disabled: var(--neutral-650);
+  --border-disabled-media: var(--white-30);
+  --border-neutral: var(--neutral-650);
+  --border-group: var(--white-100);
+  --border-error: var(--error);
 }
 
+// Тёмная тема
 .theme-dark {
   --bg-action-primary: var(--white-100);
   --bg-action-primary-hover: var(--white-80);
@@ -78,6 +121,17 @@
   --bg-action-disabled: var(--white-8);
   --bg-action-disabled-media: var(--white-100);
   --bg-action-item-hover: var(--white-5);
+
+  --bg-controls-unchecked: var(--white-10);
+  --bg-controls-unchecked-hover: var(--white-20);
+  --bg-controls-checked: var(--white-100);
+  --bg-controls-checked-hover: var(--white-80);
+  --bg-controls-selected: var(--white-100);
+  --bg-controls-selected-hover: var(--white-80);
+  --bg-controls-scrollthumb: var(--white-20);
+  --bg-controls-scrollthumb-hover: var(--white-30);
+  --bg-controls-group: var(--primary-300);
+  --bg-controls-on-group-selected: var(--white-100);
 
   --text-on-bg-primary: var(--primary-500);
   --text-on-bg-secondary: var(--white-100);
@@ -98,6 +152,15 @@
   --text-on-surface-white: var(--white-100);
   --text-on-surface-white-hover: var(--neutral-650);
   --text-on-surface-error: var(--error);
+
+  --border-primary: var(--white-100);
+  --border-accent: var(--accent-500);
+  --border-expanded: var(--white-100);
+  --border-disabled: var(--white-30);
+  --border-disabled-media: var(--white-30);
+  --border-neutral: var(--white-8);
+  --border-group: var(--primary-300);
+  --border-error: var(--error);
 }
 
 

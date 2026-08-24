@@ -1,3 +1,5 @@
+import type { ThemeNames } from '#layers/ui/app/config/theme.ts'
+
 export interface RadioOption {
 	/** Текстовая подпись рядом с радиокнопкой. */
 	label: string
@@ -14,4 +16,6 @@ export interface RadioGroupProps {
 	disabled?: boolean
 	/** Показывает состояние ошибки для всей группы. */
 	invalid?: boolean
+	/** Цветовая тема. */
+	theme?: ThemeNames
 }

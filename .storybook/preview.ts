@@ -5,9 +5,23 @@ import { SelectRoot } from 'reka-ui'
 import { defineComponent, onUnmounted, watch } from 'vue'
 import { useThemeStore } from '../layers/ui/app/common/stores/themeStore'
 import breakpointsSource from '../layers/ui/app/config/styles/shared/breakpoints.scss?raw'
+import radiusSource from '../layers/ui/app/config/styles/variables/radius.scss?raw'
 import '../layers/ui/app/config/styles/index.scss'
 import { Theme } from '../layers/ui/app/config/theme'
 import { getBreakpointViewports } from './breakpoints'
+
+const radiusClassNames = Array.from(radiusSource.matchAll(/^\.([\w-]+)\s*\{/gm), match => match[1]!)
+const defaultRadiusClass = 'radius-3'
+
+function applyRadiusClass(radius: unknown) {
+	const nextClass = typeof radius === 'string' && radiusClassNames.includes(radius)
+		? radius
+		: defaultRadiusClass
+
+	for (const className of radiusClassNames) {
+		document.documentElement.classList.toggle(className, className === nextClass)
+	}
+}
 
 const ClientOnly = defineComponent({
 	name: 'ClientOnly',
@@ -40,9 +54,19 @@ const preview: Preview = {
 				dynamicTitle: true,
 			},
 		},
+		radius: {
+			description: 'Вариант скругления',
+			toolbar: {
+				title: 'Радиус',
+				icon: 'circlehollow',
+				items: radiusClassNames.map(value => ({ value, title: value })),
+				dynamicTitle: true,
+			},
+		},
 	},
 	initialGlobals: {
 		theme: Theme.light,
+		radius: defaultRadiusClass,
 	},
 	decorators: [
 		(story, { globals, parameters }) => {
@@ -51,6 +75,12 @@ const preview: Preview = {
 			return {
 				setup() {
 					const themeStore = useThemeStore()
+
+					applyRadiusClass(globals.radius)
+					watch(
+						() => globals.radius,
+						applyRadiusClass,
+					)
 
 					const syncCanvasBackgroundLock = () => {
 						const isCanvas = !document.querySelector('.sbdocs')

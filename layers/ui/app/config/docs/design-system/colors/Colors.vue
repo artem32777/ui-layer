@@ -64,7 +64,7 @@ function resetColors() {
 				:key="group.name"
 				class="colors__group"
 			>
-				<strong class="colors__group-title">{{ group.name }}</strong>
+				<strong class="colors__group-title">{{ group.name.slice(2) }}</strong>
 				<div class="colors__list">
 					<div
 						v-for="color in group.colors"
@@ -83,7 +83,7 @@ function resetColors() {
 							>
 						</div>
 						<div class="colors__meta">
-							<strong class="colors__name">{{ color.name }}</strong>
+							<strong class="colors__name">{{ color.name.slice(2) }}</strong>
 							<span class="colors__value">{{ color.value }}</span>
 						</div>
 					</div>

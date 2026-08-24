@@ -14,6 +14,7 @@ const modelValue = defineModel<string>()
 		class="radio-group"
 		:aria-invalid="invalid"
 		:disabled="disabled"
+		:clasas="[theme]"
 	>
 		<label
 			v-for="option in options"
@@ -46,7 +47,7 @@ const modelValue = defineModel<string>()
 .radio-group {
 	display: inline-flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 8px;
 
 	&[aria-invalid='true'] {
 		.radio-group__icon {
@@ -64,17 +65,16 @@ const modelValue = defineModel<string>()
 	display: flex;
 	align-items: center;
 	gap: 8px;
-  color: var(--neutral-950);
   @include font-size(button);
 
 	&:hover,
 	&:focus-within {
 		.radio-group__icon {
-			background-color: transparent;
-			border-color: var(--primary-light);
+			background-color: var(--bg-controls-unchecked-hover);
+			border-color: var(--border-primary);
 
 			&[data-state='checked'] {
-				background-color: var(--primary-light);
+				background-color: var(--bg-controls-checked-hover);
 			}
 		}
 	}
@@ -86,19 +86,19 @@ const modelValue = defineModel<string>()
 }
 
 .radio-group__icon {
-	width: 20px;
-	height: 20px;
+  background-color: var(--bg-controls-unchecked);
+  border-radius: var(--UI-radius-L);
+	height: var(--ui-height-XXS);
+  aspect-ratio: 1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 50%;
-	background-color: var(--neutral-500);
 	border: 1px solid transparent;
 	transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
 
 	&[data-state='checked'] {
-		background-color: var(--primary);
+		background-color: var(--bg-controls-checked);
 	}
 }
 
@@ -112,7 +112,7 @@ const modelValue = defineModel<string>()
 		width: 6px;
 		height: 6px;
 		border-radius: 2px;
-		background-color: var(--white);
+		background-color: transparent;
 	}
 }
 </style>

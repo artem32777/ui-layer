@@ -1,5 +1,5 @@
 import type { IconName } from '#layers/ui/app/modules/svg-icon'
-import type { Theme } from '#layers/ui/app/config/theme.ts'
+import type { ThemeNames } from '#layers/ui/app/config/theme.ts'
 
 export interface ButtonProps {
 	/** Визуальная вариация. */
@@ -17,10 +17,10 @@ export interface ButtonProps {
 	/** Отключает кнопку. */
 	disabled?: boolean
 	/** Цветовая тема. */
-	theme?: Theme
+	theme?: ThemeNames
 }
 
-export const buttonVariants = ['primary', 'secondary', 'accent', 'white'] as const
+export const buttonVariants = ['primary', 'secondary', 'accent', 'on-media'] as const
 export const buttonSizes = ['small', 'medium', 'big'] as const
 
 export type ButtonVariant = typeof buttonVariants[number]
