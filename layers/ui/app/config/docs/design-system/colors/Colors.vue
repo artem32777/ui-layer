@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { useThemeStore } from '#layers/ui/app/common/stores/themeStore'
-import colorsScss from '#layers/ui/app/config/styles/colors/colors.scss?raw'
+import colorsScss from '#layers/ui/app/config/styles/colors.scss?raw'
 
 const { theme } = storeToRefs(useThemeStore())
 const tokenNames = Array.from(colorsScss.matchAll(/:root\s*{([^}]*)}/gs)).flatMap(block => Array.from(block[1]!.matchAll(/(--[\w-]+)\s*:/g), match => match[1]!))

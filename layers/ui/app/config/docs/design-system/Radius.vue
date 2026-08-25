@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue'
-import radiusScss from '#layers/ui/app/config/styles/variables/radius.scss?raw'
+import radiusScss from '#layers/ui/app/config/styles/radius.scss?raw'
 
 const props = withDefaults(defineProps<{
 	activeClass?: string

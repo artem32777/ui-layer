@@ -51,7 +51,7 @@ const modelValue = defineModel<string>()
 
 	&[aria-invalid='true'] {
 		.radio-group__icon {
-			border-color: var(--accent);
+			border-color: var(--error);
 		}
 	}
 
@@ -87,14 +87,14 @@ const modelValue = defineModel<string>()
 }
 
 .radio-group__icon {
-  background-color: var(--bg-controls-unchecked);
   border-radius: var(--UI-radius-L);
 	height: var(--ui-height-XXS);
+  background-color: var(--bg-controls-unchecked);
+  border: 1px solid transparent;
   aspect-ratio: 1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid transparent;
 	transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
 
@@ -107,13 +107,14 @@ const modelValue = defineModel<string>()
 	display: flex;
 	align-items: center;
 	justify-content: center;
+  background-color: var(--bg-controls-unchecked);
+  border-radius: var(--UI-radius-L);
 
 	&::after {
 		content: '';
 		width: 6px;
 		height: 6px;
-		border-radius: 2px;
-		background-color: transparent;
+		//background-color: transparent;
 	}
 }
 </style>
