@@ -11,7 +11,7 @@ defineProps<{ isNext?: boolean }>()
 		:class="isNext ? CarouselNavClass.nextEl : CarouselNavClass.prevEl"
 		:aria-label="`${isNext ? 'Следующий' : 'Предыдущий'} слайд`"
 	>
-		<Icon :name="isNext ? iconNames.chevronRight : iconNames.chevronLeft" />
+		<Icon :name="iconNames.plus" />
 	</button>
 </template>
 

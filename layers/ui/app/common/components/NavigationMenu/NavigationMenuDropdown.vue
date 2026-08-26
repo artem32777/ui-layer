@@ -39,7 +39,7 @@ const currentItem = ref('')
 					<NavigationMenuTrigger class="navigation-menu-dropdown-item__trigger">
 						{{ item.label }}
 						<Icon
-							:name="iconNames.chevronRight"
+							:name="iconNames.plus"
 							class="navigation-menu-dropdown-item__arrow"
 						/>
 					</NavigationMenuTrigger>

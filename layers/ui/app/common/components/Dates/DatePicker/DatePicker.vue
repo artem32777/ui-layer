@@ -159,7 +159,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 			>
 				<Icon
 					class="date-picker__trigger-icon"
-					:name="iconNames.chevronDown"
+					:name="iconNames.plus"
 					:size="12"
 				/>
 			</DatePickerTrigger>
@@ -195,7 +195,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 					<DatePickerPrev class="calendar__navigation">
 						<Icon
 							class="calendar__navigation-icon calendar__navigation-icon--previous"
-							:name="iconNames.chevronRight"
+							:name="iconNames.plus"
 							:size="12"
 						/>
 					</DatePickerPrev>
@@ -215,7 +215,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 					<DatePickerNext class="calendar__navigation">
 						<Icon
 							class="calendar__navigation-icon"
-							:name="iconNames.chevronRight"
+							:name="iconNames.plus"
 							:size="12"
 						/>
 					</DatePickerNext>

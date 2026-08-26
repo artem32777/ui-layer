@@ -34,7 +34,7 @@ const modelValue = defineModel<string | string[]>()
 				{{ item.trigger }}
 				<slot name="icon">
 					<Icon
-						:name="iconNames.chevronDown"
+						:name="iconNames.plus"
 						class="accordion__icon"
 					/>
 				</slot>

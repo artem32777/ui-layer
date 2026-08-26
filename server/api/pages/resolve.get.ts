@@ -20,5 +20,10 @@ export default defineEventHandler(event => {
 	return {
 		...page,
 		header: headerMock,
+		seo: {
+			htmlAttrs: {
+				class: 'radius-3',
+			},
+		},
 	}
 })

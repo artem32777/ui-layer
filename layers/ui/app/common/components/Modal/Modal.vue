@@ -73,7 +73,7 @@ defineSlots<{
 				>
 					<slot name="closeBtn">
 						<Button
-							:icon-left="iconNames.close"
+							:icon-left="iconNames.plus"
 							variant="secondary"
 						/>
 					</slot>

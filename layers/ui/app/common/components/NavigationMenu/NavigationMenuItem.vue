@@ -24,7 +24,7 @@ defineProps<{ item: NavigationMenuItem }>()
 			<NavigationMenuTrigger class="navigation-menu-item__trigger">
 				{{ item.label }}
 				<Icon
-					:name="iconNames.chevronDown"
+					:name="iconNames.plus"
 					class="navigation-menu-item__chevron"
 				/>
 			</NavigationMenuTrigger>

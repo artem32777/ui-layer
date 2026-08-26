@@ -56,7 +56,7 @@ const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelVa
 				aria-hidden="true"
 				as-child
 			>
-				<Icon :name="iconNames.selectChevron" />
+				<Icon :name="iconNames.plus" />
 			</SelectIcon>
 		</SelectTrigger>
 		<ClientOnly>

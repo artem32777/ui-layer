@@ -26,7 +26,7 @@ const modelValue = defineModel<boolean>()
 		>
 			<Icon
 				v-if="disabled"
-				:name="iconNames.disabled"
+				:name="iconNames.plus"
 				class="switch__disabled-icon"
 			/>
 			<SwitchThumb

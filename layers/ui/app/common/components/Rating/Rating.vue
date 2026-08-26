@@ -47,7 +47,7 @@ const modelValue = defineModel<number>({ default: 0 })
 		>
 			<Icon
 				class="rating__star rating__star--background"
-				:name="iconNames.star"
+				:name="iconNames.plus"
 				:size="28"
 				aria-hidden="true"
 			/>
@@ -61,7 +61,7 @@ const modelValue = defineModel<number>({ default: 0 })
 			>
 				<Icon
 					class="rating__star"
-					:name="iconNames.star"
+					:name="iconNames.plus"
 					:size="28"
 					aria-hidden="true"
 				/>

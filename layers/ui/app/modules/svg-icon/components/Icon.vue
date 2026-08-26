@@ -20,7 +20,7 @@ const icon = computed(() => svgIconData[name])
 const iconSize = computed(() => `${size}`)
 
 const iconAttrs = computed(() => ({
-	...icon.value.attrs,
+	...icon.value?.attrs,
 	width: iconSize.value,
 	height: iconSize.value,
 }))
@@ -31,7 +31,7 @@ const iconAttrs = computed(() => ({
 		v-bind="iconAttrs"
 		:style="{ color }"
 		class="svg-icon"
-		v-html="icon.body"
+		v-html="icon?.body"
 	/>
 </template>
 

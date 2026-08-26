@@ -30,7 +30,7 @@ const modelValue = defineModel<boolean>()
 		>
 			<Icon
 				v-if="disabled"
-				:name="iconNames.disabled"
+				:name="iconNames.plus"
 				:size="14"
 				class="checkbox__check"
 				aria-hidden="true"
@@ -41,7 +41,7 @@ const modelValue = defineModel<boolean>()
 				class="checkbox__indicator"
 			>
 				<Icon
-					:name="iconNames.checkbox"
+					:name="iconNames.plus"
 					:size="iconSize"
 					class="checkbox__check"
 					aria-hidden="true"

@@ -108,7 +108,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 			<CalendarPrev class="calendar__navigation">
 				<Icon
 					class="calendar__navigation-icon calendar__navigation-icon--previous"
-					:name="iconNames.chevronRight"
+					:name="iconNames.plus"
 					:size="12"
 				/>
 			</CalendarPrev>
@@ -128,7 +128,7 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 			<CalendarNext class="calendar__navigation">
 				<Icon
 					class="calendar__navigation-icon"
-					:name="iconNames.chevronRight"
+					:name="iconNames.plus"
 					:size="12"
 				/>
 			</CalendarNext>

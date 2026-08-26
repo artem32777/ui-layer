@@ -29,7 +29,7 @@ const modelValue = defineModel<string>()
 				<Icon
 					v-if="option.disabled"
 					:name="iconNames.disabled"
-					:size="14"
+					:size="8"
 					class="radio-group__disabled-icon"
 				/>
 				<RadioGroupIndicator
@@ -108,13 +108,12 @@ const modelValue = defineModel<string>()
 	align-items: center;
 	justify-content: center;
   background-color: var(--bg-controls-unchecked);
-  border-radius: var(--UI-radius-L);
+  border-radius: 2px;
 
 	&::after {
 		content: '';
 		width: 6px;
 		height: 6px;
-		//background-color: transparent;
 	}
 }
 </style>

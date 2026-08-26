@@ -57,7 +57,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 			<MonthPickerPrev class="month-picker__navigation">
 				<Icon
 					class="month-picker__navigation-icon month-picker__navigation-icon--previous"
-					:name="iconNames.chevronRight"
+					:name="iconNames.plus"
 					:size="12"
 				/>
 			</MonthPickerPrev>
@@ -65,7 +65,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 			<MonthPickerNext class="month-picker__navigation">
 				<Icon
 					class="month-picker__navigation-icon"
-					:name="iconNames.chevronRight"
+					:name="iconNames.plus"
 					:size="12"
 				/>
 			</MonthPickerNext>

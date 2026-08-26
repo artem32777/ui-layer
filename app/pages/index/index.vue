@@ -16,7 +16,7 @@ const tabItems = [
 
 <template>
 	<div>
-		<Icon name="download" />
+		<Icon name="plus" />
 		<ThemeSwitcher />
 
 		<Button @click="favoriteStore.addToFavorite('toast-example')">

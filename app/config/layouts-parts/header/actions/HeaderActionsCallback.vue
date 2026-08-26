@@ -12,7 +12,7 @@ import CallbackModal from '../../../../modules/callback/components/modal/Callbac
 		>
 			<span class="header-actions__callback-text">Заказать звонок</span>
 			<Icon
-				name="phone"
+				name="plus"
 				:size="20"
 				class="header-actions__callback-icon"
 			/>

@@ -21,7 +21,7 @@ defineProps<{
 			>
 				{{ item.label }}
 				<Icon
-					:name="iconNames.chevronRight"
+					:name="iconNames.plus"
 					class="dropdown-menu__sub-arrow"
 				/>
 			</DropdownMenuSubTrigger>

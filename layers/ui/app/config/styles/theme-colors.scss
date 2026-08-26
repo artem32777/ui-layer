@@ -51,6 +51,8 @@
   --border-neutral: var(--neutral-600);
   --border-group: var(--neutral-500);
   --border-error: var(--error);
+
+  --surface-block: var(--white-100);
 }
 
 // Серая тема
@@ -106,6 +108,8 @@
   --border-neutral: var(--neutral-650);
   --border-group: var(--white-100);
   --border-error: var(--error);
+
+  --surface-block: var(--neutral-500);
 }
 
 // Тёмная тема
@@ -161,6 +165,8 @@
   --border-neutral: var(--white-8);
   --border-group: var(--primary-300);
   --border-error: var(--error);
+
+  --surface-block: var(--primary-400);
 }
 
 

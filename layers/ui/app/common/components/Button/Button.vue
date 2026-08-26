@@ -119,7 +119,7 @@ const iconSize = computed(() => ({ small: 14, medium: 18, big: 20 })[props.size]
 		}
 	}
 
-	&.button--on-media {
+	&.button--variant-on-media {
     background-color: var(--bg-action-on-media);
 		color: var(--text-on-bg-media);
 

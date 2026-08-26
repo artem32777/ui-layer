@@ -10,7 +10,7 @@ defineProps<{
 <template>
 	<div class="favorite-toast">
 		<Icon
-			:name="action === 'add' ? 'star' : 'close'"
+			name="plus"
 			size="20"
 			class="favorite-toast__icon"
 		/>
