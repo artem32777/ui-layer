@@ -15,7 +15,7 @@ const emit = defineEmits<{
 	'update:iconRight': [value: IconName | undefined]
 }>()
 
-const icon = iconNames.plus
+const icon = iconNames.circle
 </script>
 
 <template>
@@ -41,6 +41,7 @@ const icon = iconNames.plus
 				v-for="variant in buttonVariants"
 				:key="variant"
 				:title="variant"
+				:class="{ 'theme-dark': variant === 'on-media' }"
 			>
 				<StoryGridRow>
 					<StoryGridItem title="default">

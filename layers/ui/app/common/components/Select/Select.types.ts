@@ -1,3 +1,5 @@
+import type { IconName } from '#layers/ui/app/modules/svg-icon'
+
 export interface SelectOption {
 	/** Текст варианта. */
 	label: string
@@ -14,19 +16,21 @@ export interface SelectProps<T> {
 	options: SelectOption[]
 	/** Текст, отображаемый до выбора значения. */
 	placeholder?: string
-	/** Визуальный вариант */
+	/** Визуальный вариант. */
 	variant?: SelectVariant
 	/** Размер поля выбора. */
 	size?: SelectSize
+	/** Иконка слева от текста. */
+	icon?: IconName
 	/** Разрешает выбрать несколько значений. */
 	multiple?: T
-	/** Состояние ошибки */
+	/** Состояние ошибки. */
 	invalid?: boolean
-	/** Недоступное состояние */
+	/** Недоступное состояние. */
 	disabled?: boolean
 }
 
-export const selectVariants = ['primary', 'secondary'] as const
+export const selectVariants = ['fill'] as const
 export const selectSizes = ['medium', 'big'] as const
 
 export type SelectVariant = typeof selectVariants[number]

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { BadgeProps } from './Badge.types.ts'
+import type { LabelProps } from './Label.types.ts'
 
-withDefaults(defineProps<BadgeProps>(), {
+withDefaults(defineProps<LabelProps>(), {
 	variant: 'primary',
 	size: 'medium',
 })
@@ -14,10 +14,10 @@ defineSlots<{
 
 <template>
 	<span
-		class="badge"
+		class="label"
 		:class="[
-			`badge--variant-${variant}`,
-			`badge--size-${size}`,
+			`label--variant-${variant}`,
+			`label--size-${size}`,
 		]"
 	>
 		<slot>{{ text }}</slot>
@@ -25,29 +25,26 @@ defineSlots<{
 </template>
 
 <style scoped lang="scss">
-.badge {
+.label {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-  border-radius: var(--UI-radius-XS);
-  line-height: 0 !important;
+	white-space: nowrap;
+	@include font-size(p2);
+  line-height: 0;
 
-// SIZES:
+	&--size-small {
+		height: var(--ui-height-XS);
+    border-radius: var(--UI-radius-XS);
+		padding: 0 10px;
+	}
+
 	&--size-medium {
-    @include font-size(label);
-		height: var(--ui-height-XXS);
-		min-width: var(--ui-height-XXS);
-    padding: 0 6px;
+		height: var(--ui-height-S);
+    border-radius: var(--UI-radius-S);
+		padding: 0 12px;
 	}
 
-	&--size-big {
-    @include font-size(button-small);
-    height: var(--ui-height-XS);
-		min-width: var(--ui-height-XS);
-    padding: 0 8px;
-	}
-
-// VARIANTS:
 	&--variant-primary {
 		background-color: var(--bg-action-primary);
 		color: var(--text-on-bg-primary);

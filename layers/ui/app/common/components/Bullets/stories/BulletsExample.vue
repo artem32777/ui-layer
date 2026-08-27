@@ -9,7 +9,7 @@ const activeBullet = ref(0)
 	<Bullets
 		v-model="activeBullet"
 		:bullets-length="5"
-		variant="line"
+		variant="long"
 		size="medium"
 	/>
 </template>

@@ -15,7 +15,7 @@ const emit = defineEmits<{
 	'update:iconRight': [value: IconName | undefined]
 }>()
 
-const icon = iconNames.plus
+const icon = iconNames.circle
 </script>
 
 <template>
@@ -41,8 +41,9 @@ const icon = iconNames.plus
 				v-for="variant in buttonLinkVariants"
 				:key="variant"
 				:title="variant"
+				:class="{ 'theme-dark': variant === 'on-media' }"
 			>
-				<StoryGridRow :class="{ 'button-link-states__row--on-media': variant === 'on-media' }">
+				<StoryGridRow>
 					<StoryGridItem title="default">
 						<ButtonLink
 							v-bind="props"
@@ -59,14 +60,6 @@ const icon = iconNames.plus
 							:variant="variant"
 							:icon-right="props.iconRight || icon"
 							:icon-left="undefined"
-						/>
-						<ButtonLink
-							v-bind="props"
-							:variant="variant"
-							:icon-left="props.iconLeft || icon"
-							:icon-right="undefined"
-							text=""
-							aria-label="Добавить"
 						/>
 					</StoryGridItem>
 					<StoryGridItem title="hover">
@@ -89,45 +82,6 @@ const icon = iconNames.plus
 							:icon-left="undefined"
 							class="button-link-story--hovered"
 						/>
-						<ButtonLink
-							v-bind="props"
-							:variant="variant"
-							:icon-left="props.iconLeft || icon"
-							:icon-right="undefined"
-							text=""
-							class="button-link-story--hovered"
-							aria-label="Добавить"
-						/>
-					</StoryGridItem>
-					<StoryGridItem title="disabled">
-						<ButtonLink
-							v-bind="props"
-							:variant="variant"
-							disabled
-						/>
-						<ButtonLink
-							v-bind="props"
-							:variant="variant"
-							disabled
-							:icon-left="props.iconLeft ?? icon"
-							:icon-right="undefined"
-						/>
-						<ButtonLink
-							v-bind="props"
-							:variant="variant"
-							disabled
-							:icon-right="props.iconRight ?? icon"
-							:icon-left="undefined"
-						/>
-						<ButtonLink
-							v-bind="props"
-							:variant="variant"
-							text=""
-							disabled
-							:icon-left="props.iconLeft || icon"
-							:icon-right="undefined"
-							aria-label="Добавить"
-						/>
 					</StoryGridItem>
 				</StoryGridRow>
 			</StoryGridSection>
@@ -145,11 +99,5 @@ const icon = iconNames.plus
 	display: flex;
 	gap: 12px;
 	flex-wrap: wrap;
-}
-
-.button-link-states__row--on-media {
-	padding: 16px;
-	border-radius: 8px;
-	background-color: var(--primary-500);
 }
 </style>

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
-import { badgeSizes, badgeTypes, badgeVariants } from '../Badge.types.ts'
+import { badgeSizes, badgeVariants } from '../Badge.types.ts'
 import Badge from '../Badge.vue'
 import BadgeStoryStates from './BadgeStoryStates.vue'
 
@@ -13,14 +13,12 @@ const meta = {
 	argTypes: {
 		variant: { control: 'select', options: badgeVariants },
 		size: { control: 'select', options: badgeSizes },
-		type: { control: 'select', options: badgeTypes },
 		text: { control: 'text' },
 	},
 	args: {
-		text: 'Label',
+		text: '3',
 		variant: 'primary',
 		size: 'medium',
-		type: 'circle',
 	} satisfies BadgeStoryArgs,
 	render: (args: BadgeStoryArgs) => ({
 		components: { Badge },

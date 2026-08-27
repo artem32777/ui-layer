@@ -2,20 +2,18 @@ import type { IconName } from '#layers/ui/app/modules/svg-icon'
 import type { ThemeNames } from '#layers/ui/app/config/theme.ts'
 
 export interface ButtonLinkProps {
+	/** URL ссылки. */
+	href: string
 	/** Визуальная вариация. */
 	variant?: ButtonLinkVariant
 	/** Размер. */
 	size?: ButtonLinkSize
 	/** Текст ссылки. Если не передан, используется default-слот. */
 	text?: string
-	/** URL ссылки. */
-	href?: string
 	/** Иконка слева от текста. */
 	iconLeft?: IconName
 	/** Иконка справа от текста. */
 	iconRight?: IconName
-	/** Отключает ссылку. */
-	disabled?: boolean
 	/** Цветовая тема. */
 	theme?: ThemeNames
 }

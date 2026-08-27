@@ -9,6 +9,7 @@
 
 <style scoped lang="scss">
 .story-grid-row {
+  background-color: var(--surface-block);
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;

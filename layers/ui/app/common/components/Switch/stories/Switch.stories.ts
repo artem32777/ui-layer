@@ -22,13 +22,11 @@ const meta = {
 		},
 		text: { control: 'text' },
 		disabled: { control: 'boolean' },
-		invalid: { control: 'boolean' },
 	},
 	args: {
 		modelValue: false,
 		text: 'Текст',
 		disabled: false,
-		invalid: false,
 	} satisfies SwitchStoryArgs,
 	render: (args: SwitchStoryArgs) => ({
 		components: { Switch },
@@ -41,6 +39,10 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+export const Base: Story = {
+	tags: ['!dev'],
+}
+
 export const DocsExample: Story = {
 	tags: ['!dev'],
 }
@@ -49,7 +51,6 @@ export const States: Story = {
 	parameters: {
 		pseudo: {
 			hover: '.switch-story--hovered',
-			focusVisible: '.switch-story--focused',
 		},
 	},
 	render: (args: SwitchStoryArgs) => ({
@@ -76,20 +77,6 @@ export const States: Story = {
 								v-bind="args"
 								:model-value="checked"
 								class="switch-story--hovered"
-							/>
-						</StoryGridItem>
-						<StoryGridItem title="focus">
-							<Switch
-								v-bind="args"
-								:model-value="checked"
-								class="switch-story--focused"
-							/>
-						</StoryGridItem>
-						<StoryGridItem title="invalid">
-							<Switch
-								v-bind="args"
-								:model-value="checked"
-								invalid
 							/>
 						</StoryGridItem>
 						<StoryGridItem title="disabled">

@@ -12,6 +12,7 @@ const intervals = ref([10, 30, 60, 90])
 		v-model="price"
 		label="Цена"
 		additional-text=" тыс. ₽"
+		size="big"
 	/>
 	<MultiSlider
 		v-model="intervals"

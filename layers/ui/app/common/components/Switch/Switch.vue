@@ -16,7 +16,13 @@ const modelValue = defineModel<boolean>()
 </script>
 
 <template>
-	<label class="switch">
+	<label
+		class="switch"
+		:class="{
+			'switch--checked': modelValue,
+			'switch--disabled': disabled,
+		}"
+	>
 		<SwitchRoot
 			v-model="modelValue"
 			:disabled="disabled"
@@ -25,7 +31,8 @@ const modelValue = defineModel<boolean>()
 		>
 			<Icon
 				v-if="disabled"
-				:name="iconNames.plus"
+				size="9"
+				:name="iconNames.disabled"
 				class="switch__disabled-icon"
 			/>
 			<SwitchThumb
@@ -47,10 +54,43 @@ const modelValue = defineModel<boolean>()
   @include font-size(button);
   color: var(--text-on-surface-dark);
 
-  &:has(.switch__icon[data-disabled]) {
+  &:hover {
+    .switch__icon {
+      border-color: var(--border-primary);
+      background-color: var(--bg-controls-unchecked-hover);
+    }
+
+    .switch__thumb {
+      background-color: var(--icon-on-bg-unchecked-hover);
+    }
+  }
+
+  &--checked:not(.switch--disabled) {
+    .switch__icon {
+      border-color: var(--border-primary);
+      background-color: var(--bg-controls-checked);
+    }
+
+    .switch__thumb {
+      transform: translateX(12px);
+      background-color: var(--icon-on-bg-checked);
+    }
+
+    &:hover {
+      .switch__icon {
+        border-color: var(--bg-controls-checked-hover);
+        background-color: var(--bg-controls-checked-hover);
+      }
+
+      .switch__thumb {
+        background-color: var(--icon-on-bg-checked);
+      }
+    }
+  }
+
+  &--disabled {
     pointer-events: none;
-    cursor: pointer;
-    color: var(--neutral-700);
+    color: var(--text-on-surface-tertiary);
 
     .switch__icon {
       justify-content: center;
@@ -60,48 +100,24 @@ const modelValue = defineModel<boolean>()
 
 .switch__icon {
   display: inline-flex;
-	width: 34px;
-	height: var(--ui-height-XXS);
+  width: 34px;
+  border: 1px solid transparent;
   border-radius: var(--UI-radius-L);
-	padding: 4px;
-	background-color: var(--bg-controls-unchecked);
-	transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-
-	&:hover {
-		background-color: var(--neutral-600);
-	}
-
-	&[data-state="checked"]:not([data-disabled]) {
-		background-color: var(--primary-500);
-
-		&:hover {
-			background-color: var(--primary-light);
-		}
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--brand-dark, #292fba);
-		outline-offset: 1px;
-	}
-
-	&[aria-invalid='true'] {
-		box-shadow: 0 0 0 1px var(--accent, #ff001f);
-	}
+  height: var(--ui-height-XXS);
+  padding: 4px;
+  background-color: var(--bg-controls-unchecked);
+  transition: background-color 0.3s ease, border 0.3s ease;
 }
 
 .switch__thumb {
-	width: 12px;
-	height: 12px;
-	border-radius: 50%;
-	background-color: var(--neutral-650);
-	transition: transform 0.3s ease;
-
-	&[data-state="checked"] {
-		transform: translateX(16px);
-	}
+  height: 12px;
+  aspect-ratio: 1;
+  border-radius: var(--UI-radius-XS);
+  background-color: var(--icon-on-bg-unchecked);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.switch__disabled-icon{
-  color: var(--neutral-650);
+.switch__disabled-icon {
+  color: var(--icon-on-bg-disabled);
 }
 </style>

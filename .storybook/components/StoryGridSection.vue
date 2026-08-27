@@ -19,6 +19,7 @@ defineProps<{
 	flex-direction: column;
 	gap: 16px;
 	padding-bottom: 20px;
+  background-color: var(--story-background);
 	border-bottom: 1px solid #000;
 }
 

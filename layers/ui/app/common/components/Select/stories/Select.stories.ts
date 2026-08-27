@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ConcreteComponent } from 'vue'
-import { reactive } from 'vue'
+import { watch } from 'vue'
+import { useArgs } from 'storybook/preview-api'
 import { expect, waitFor, within } from 'storybook/test'
-import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
-import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
-import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
-import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
+import IconPickerControl from '@@/.storybook/components/IconPickerControl.vue'
 import Select from '../Select.vue'
 import selectTypesSource from '../Select.types.ts?raw'
 import type { SelectProps, SelectOption } from '../Select.types.ts'
 import { selectSizes, selectVariants } from '../Select.types'
+import SelectStoryForm from './SelectStoryForm.vue'
+import SelectStoryStates from './SelectStoryStates.vue'
+import { iconNameList } from '#layers/ui/app/modules/svg-icon'
 
 type SelectStoryArgs = SelectProps<boolean> & {
 	modelValue?: string | string[]
@@ -28,6 +29,7 @@ const options: SelectOption[] = [
 const meta = {
 	title: 'UI/Select',
 	component: Select as unknown as ConcreteComponent<SelectStoryArgs>,
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		modelValue: {
 			description: 'Выбранное значение или значения',
@@ -46,6 +48,7 @@ const meta = {
 		placeholder: { control: 'text' },
 		variant: { control: 'select', options: selectVariants },
 		size: { control: 'select', options: selectSizes },
+		icon: { control: 'select', options: iconNameList },
 		multiple: { control: 'boolean' },
 		disabled: { control: 'boolean' },
 		invalid: { control: 'boolean' },
@@ -54,30 +57,33 @@ const meta = {
 		options,
 		modelValue: undefined,
 		placeholder: 'Выберите город',
-		variant: 'primary',
+		variant: 'fill',
 		size: 'medium',
 		disabled: false,
 		multiple: false,
 		invalid: false,
 	} satisfies SelectStoryArgs,
-	render: (args: SelectStoryArgs) => ({
-		components: { Select },
-		setup() {
-			return { args }
-		},
-		template: `
-      <Select
-          v-model="args.modelValue"
-          :placeholder="args.placeholder"
-          :variant="args.variant"
-          :size="args.size"
-          :options="args.options"
-          :disabled="args.disabled"
-          :multiple="args.multiple"
-          :invalid="args.invalid"
-      />
-    `,
-	}),
+	render: (args: SelectStoryArgs) => {
+		const [, updateArgs] = useArgs<SelectStoryArgs>()
+
+		return {
+			components: { Select },
+			setup() {
+				watch(() => args.multiple, (multiple) => {
+					updateArgs({ modelValue: multiple ? [] : undefined })
+				})
+
+				return { args }
+			},
+			template: `
+				<Select
+					:key="String(args.multiple)"
+					v-bind="args"
+					v-model="args.modelValue"
+				/>
+			`,
+		}
+	},
 } satisfies Meta<SelectStoryArgs>
 
 export default meta
@@ -96,6 +102,74 @@ export const DocsMultiple: Story = {
 	},
 }
 
+export const Base: Story = {
+	render: (args: SelectStoryArgs) => {
+		const [, updateArgs] = useArgs<SelectStoryArgs>()
+
+		return {
+			components: { Select, IconPickerControl },
+			setup() {
+				watch(() => args.multiple, (multiple) => {
+					updateArgs({ modelValue: multiple ? [] : undefined })
+				})
+
+				return { args, updateArgs }
+			},
+			template: `
+				<div style="display: grid; gap: 24px;">
+					<div style="display: flex; gap: 12px; flex-wrap: wrap;">
+						<IconPickerControl
+							text="Выбрать иконку"
+							side="left"
+							:model-value="args.icon"
+							@update:model-value="updateArgs({ icon: $event })"
+						/>
+					</div>
+
+					<div>
+						<Select
+							:key="String(args.multiple)"
+							v-bind="args"
+							v-model="args.modelValue"
+						/>
+					</div>
+				</div>
+			`,
+		}
+	},
+}
+
+export const Form: Story = {
+	render: (args: SelectStoryArgs) => {
+		const [, updateArgs] = useArgs<SelectStoryArgs>()
+
+		return {
+			components: { SelectStoryForm, IconPickerControl },
+			setup() {
+				return { args, updateArgs }
+			},
+			template: `
+				<div style="display: grid; gap: 24px;">
+					<div style="display: flex; gap: 12px; flex-wrap: wrap;">
+						<IconPickerControl
+							text="Выбрать иконку"
+							side="left"
+							:model-value="args.icon"
+							@update:model-value="updateArgs({ icon: $event })"
+						/>
+					</div>
+
+					<SelectStoryForm
+						v-bind="args"
+						:show-error="args.invalid"
+						label="Город"
+					/>
+				</div>
+			`,
+		}
+	},
+}
+
 export const States: Story = {
 	parameters: {
 		pseudo: {
@@ -104,70 +178,22 @@ export const States: Story = {
 		},
 	},
 	render: (args: SelectStoryArgs) => ({
-		components: { Select, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		components: { SelectStoryStates },
 		setup() {
-			const models = reactive({
-				selected: 'moscow',
-				multiple: [],
-				multipleSelected: ['moscow', 'kazan'],
-			})
-
-			return { args, models }
+			return { args }
 		},
-		template: `
-			<StoryGrid>
-				<StoryGridSection title="primary">
-					<StoryGridRow>
-						<StoryGridItem title="Default">
-							<Select v-bind="args" />
-						</StoryGridItem>
-						<StoryGridItem title="Hover" class="select-story--hovered">
-							<Select v-bind="args" />
-						</StoryGridItem>
-						<StoryGridItem title="Focus" class="select-story--focused">
-							<Select v-bind="args" />
-						</StoryGridItem>
-						<StoryGridItem title="Invalid">
-							<Select v-bind="args" invalid />
-						</StoryGridItem>
-						<StoryGridItem title="Selected">
-							<Select v-bind="args" v-model="models.selected" />
-						</StoryGridItem>
-						<StoryGridItem title="Multiple selected">
-							<Select v-bind="args" v-model="models.multipleSelected" :multiple="true" />
-						</StoryGridItem>
-						<StoryGridItem title="Disabled">
-							<Select v-bind="args" disabled />
-						</StoryGridItem>
-					</StoryGridRow>
-				</StoryGridSection>
-				<StoryGridSection title="secondary">
-					<StoryGridRow>
-						<StoryGridItem title="Default">
-							<Select v-bind="args" variant="secondary" />
-						</StoryGridItem>
-						<StoryGridItem title="Hover" class="select-story--hovered">
-							<Select v-bind="args" variant="secondary" />
-						</StoryGridItem>
-						<StoryGridItem title="Focus" class="select-story--focused">
-							<Select v-bind="args" variant="secondary" />
-						</StoryGridItem>
-						<StoryGridItem title="Invalid">
-							<Select v-bind="args" variant="secondary" invalid />
-						</StoryGridItem>
-						<StoryGridItem title="Selected">
-							<Select v-bind="args" v-model="models.selected" variant="secondary" />
-						</StoryGridItem>
-						<StoryGridItem title="Multiple selected">
-							<Select v-bind="args" v-model="models.multipleSelected"  variant="secondary"  :multiple="true"/>
-						</StoryGridItem>
-						<StoryGridItem title="Disabled">
-							<Select v-bind="args" variant="secondary" disabled />
-						</StoryGridItem>
-					</StoryGridRow>
-				</StoryGridSection>
-			</StoryGrid>
-		`,
+		template: '<SelectStoryStates v-bind="args" />',
+	}),
+}
+
+export const FormDocsExample: Story = {
+	tags: ['!dev'],
+	render: (args: SelectStoryArgs) => ({
+		components: { SelectStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<SelectStoryForm v-bind="args" label="Город" />',
 	}),
 }
 
@@ -184,5 +210,28 @@ export const Tests: Story = {
 
 		await waitFor(() => expect(trigger).toHaveTextContent('Казань'))
 		await waitFor(() => expect(body.queryByRole('listbox')).not.toBeInTheDocument())
+	},
+}
+
+export const FormTests: Story = {
+	tags: ['!dev'],
+	render: (args: SelectStoryArgs) => ({
+		components: { SelectStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<SelectStoryForm v-bind="args" label="Город" />',
+	}),
+	play: async ({ canvas, canvasElement, userEvent }) => {
+		const trigger = canvas.getByRole('combobox')
+		const body = within(canvasElement.ownerDocument.body)
+
+		await userEvent.click(trigger)
+		await userEvent.keyboard('{Escape}')
+		await expect(await canvas.findByText('Укажите город')).toBeVisible()
+
+		await userEvent.click(trigger)
+		await userEvent.click(await body.findByRole('option', { name: 'Казань' }))
+		await expect(canvas.queryByText('Укажите город')).toBeNull()
 	},
 }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Badge from '../Badge.vue'
+import Label from '../Label.vue'
 </script>
 
 <template>
-	<Badge
+	<Label
 		variant="primary"
 		size="medium"
-		text="3"
+		text="Label"
 	/>
 </template>

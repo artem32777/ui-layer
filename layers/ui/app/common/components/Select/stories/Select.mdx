@@ -1,6 +1,6 @@
 import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
 import * as SelectStories from './Select.stories'
-import SelectExampleSource from './SelectExample.vue?raw'
+import SelectDocsExampleSource from './SelectDocsExample.vue?raw'
 
 <Meta of={SelectStories} />
 
@@ -18,4 +18,16 @@ import SelectExampleSource from './SelectExample.vue?raw'
 
 ## Пример использования
 
-<Source code={SelectExampleSource} language="vue" />
+<Source code={SelectDocsExampleSource} language="vue" />
+
+## FormSelect
+
+Адаптер `Select` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`).
+
+Ошибка появляется после закрытия меню или ухода с поля: `validateOnValueUpdate` выключен, валидация на close/blur. Чтобы скрыть ошибку, нужно выбрать значение (или исправить и снова закрыть меню).
+
+<Canvas of={SelectStories.FormDocsExample} />
+
+### Состояние ошибки
+
+<Canvas of={SelectStories.FormTests} />

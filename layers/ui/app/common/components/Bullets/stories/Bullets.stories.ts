@@ -27,7 +27,7 @@ const meta = {
 	args: {
 		modelValue: 0,
 		bulletsLength: 5,
-		variant: 'line',
+		variant: 'long',
 		size: 'medium',
 	} satisfies BulletsStoryArgs,
 	render: (args: BulletsStoryArgs) => ({
@@ -49,7 +49,6 @@ export const States: Story = {
 	parameters: {
 		pseudo: {
 			hover: '.bullets-story--hovered .bullets__item:not(.bullets__item--active)',
-			focusVisible: '.bullets-story--focused .bullets__item:not(.bullets__item--active)',
 		},
 	},
 	render: (args: BulletsStoryArgs) => ({
@@ -78,16 +77,6 @@ export const States: Story = {
 						<StoryGridItem
 							title="hover"
 							class="bullets-story--hovered"
-						>
-							<Bullets
-								v-bind="args"
-								:variant="variant"
-								:size="size"
-							/>
-						</StoryGridItem>
-						<StoryGridItem
-							title="focus"
-							class="bullets-story--focused"
 						>
 							<Bullets
 								v-bind="args"

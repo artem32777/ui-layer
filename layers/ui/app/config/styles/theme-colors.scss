@@ -56,6 +56,18 @@
   --border-group: var(--neutral-500);
   --border-error: var(--error);
 
+  --icon-on-bg-primary: var(--white-100);
+  --icon-on-bg-secondary: var(--neutral-950);
+  --icon-on-bg-secondary-muted: var(--neutral-700);
+  --icon-on-bg-accent: var(--white-100);
+  --icon-on-bg-media: var(--neutral-950);
+  --icon-on-bg-disabled: var(--neutral-750);
+  --icon-on-bg-disabled-media: var(--neutral-750);
+  --icon-on-bg-unchecked: var(--neutral-650);
+  --icon-on-bg-unchecked-hover: var(--primary-500);
+  --icon-on-bg-checked: var(--white-100);
+  --icon-on-bg-selected-muted: var(--white-60);
+
   --surface-block: var(--white-100);
 
   --graphics-accent: var(--accent-500);
@@ -121,6 +133,18 @@
   --border-group: var(--white-100);
   --border-error: var(--error);
 
+  --icon-on-bg-primary: var(--white-100);
+  --icon-on-bg-secondary: var(--neutral-950);
+  --icon-on-bg-secondary-muted: var(--neutral-700);
+  --icon-on-bg-accent: var(--white-100);
+  --icon-on-bg-media: var(--neutral-950);
+  --icon-on-bg-disabled: var(--neutral-750);
+  --icon-on-bg-disabled-media: var(--neutral-750);
+  --icon-on-bg-unchecked: var(--neutral-650);
+  --icon-on-bg-unchecked-hover: var(--primary-500);
+  --icon-on-bg-checked: var(--white-100);
+  --icon-on-bg-selected-muted: var(--white-60);
+
   --surface-block: var(--neutral-500);
 
   --graphics-accent: var(--accent-500);
@@ -185,6 +209,18 @@
   --border-neutral: var(--white-8);
   --border-group: var(--primary-300);
   --border-error: var(--error);
+
+  --icon-on-bg-primary: var(--primary-500);
+  --icon-on-bg-secondary: var(--white-100);
+  --icon-on-bg-secondary-muted: var(--white-50);
+  --icon-on-bg-accent: var(--white-100);
+  --icon-on-bg-media: var(--neutral-950);
+  --icon-on-bg-disabled: var(--white-50);
+  --icon-on-bg-disabled-media: var(--neutral-750);
+  --icon-on-bg-unchecked: var(--white-30);
+  --icon-on-bg-unchecked-hover: var(--white-100);
+  --icon-on-bg-checked: var(--neutral-950);
+  --icon-on-bg-selected-muted: var(--neutral-750);
 
   --surface-block: var(--primary-400);
 

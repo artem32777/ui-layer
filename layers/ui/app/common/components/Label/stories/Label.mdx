@@ -1,0 +1,14 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as LabelStories from './Label.stories'
+import LabelExampleSource from './LabelExample.vue?raw'
+
+<Meta of={LabelStories} />
+
+# Label
+<Canvas of={LabelStories.DocsExample} />
+
+<Controls of={LabelStories.DocsExample} />
+
+## Пример использования
+
+<Source code={LabelExampleSource} language="vue" />

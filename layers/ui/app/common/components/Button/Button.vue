@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Primitive } from 'reka-ui'
 import { computed, useSlots } from 'vue'
 import { Icon } from '#layers/ui/app/modules/svg-icon'
 import type { ButtonProps } from './Button.types.ts'
@@ -21,8 +20,7 @@ const iconSize = computed(() => ({ small: 14, medium: 18, big: 20 })[props.size]
 </script>
 
 <template>
-	<Primitive
-		as="button"
+	<button
 		:type="type"
 		:disabled="disabled"
 		class="button"
@@ -52,7 +50,7 @@ const iconSize = computed(() => ({ small: 14, medium: 18, big: 20 })[props.size]
 			:size="iconSize"
 			class="button-icon"
 		/>
-	</Primitive>
+	</button>
 </template>
 
 <style scoped lang="scss">
