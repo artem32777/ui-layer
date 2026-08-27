@@ -21,7 +21,7 @@ export interface ButtonProps {
 }
 
 export const buttonVariants = ['primary', 'secondary', 'accent', 'on-media'] as const
-export const buttonSizes = ['small', 'medium', 'big'] as const
+export const buttonSizes = ['small', 'medium', 'big', 'link'] as const
 
 export type ButtonVariant = typeof buttonVariants[number]
 export type ButtonSize = typeof buttonSizes[number]

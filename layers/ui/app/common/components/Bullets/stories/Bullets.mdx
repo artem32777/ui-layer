@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as BulletsStories from './Bullets.stories'
+import BulletsExampleSource from './BulletsExample.vue?raw'
+
+<Meta of={BulletsStories} />
+
+# Bullets
+- Индикаторы слайдов / страниц с выбором активного буллета через `v-model`.
+- Вариант `line` — активный буллет вытянут по горизонтали; `dot` — активный остаётся круглым.
+
+<Canvas of={BulletsStories.DocsExample} />
+
+<Controls of={BulletsStories.DocsExample} />
+
+## Пример использования
+
+<Source code={BulletsExampleSource} language="vue" />

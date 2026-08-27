@@ -1,0 +1,17 @@
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import * as BadgeStories from './Badge.stories'
+import BadgeExampleSource from './BadgeExample.vue?raw'
+
+<Meta of={BadgeStories} />
+
+# Badge
+- Метка / счётчик с вариантами `primary`, `secondary`, `accent`.
+- Размеры `medium` и `big`, формы `circle` и `square`.
+
+<Canvas of={BadgeStories.DocsExample} />
+
+<Controls of={BadgeStories.DocsExample} />
+
+## Пример использования
+
+<Source code={BadgeExampleSource} language="vue" />

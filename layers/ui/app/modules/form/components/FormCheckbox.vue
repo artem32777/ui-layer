@@ -5,6 +5,7 @@ import Checkbox from '#layers/ui/app/common/components/Checkbox/Checkbox.vue'
 
 defineProps<{
 	name: string
+	label?: string
 	checkboxProps?: CheckboxProps
 }>()
 </script>
@@ -13,6 +14,7 @@ defineProps<{
 	<FormField
 		v-slot="{ value, handleChange, invalid }"
 		:name="name"
+		:label="label"
 	>
 		<Checkbox
 			v-bind="checkboxProps"
@@ -24,7 +26,3 @@ defineProps<{
 		</Checkbox>
 	</FormField>
 </template>
-
-<style scoped lang="scss">
-
-</style>

@@ -23,6 +23,10 @@
   --bg-controls-group: var(--neutral-500);
   --bg-controls-on-group-selected: var(--primary-500);
 
+  --bg-field-static: var(--neutral-500);
+  --bg-field-hover: var(--neutral-600);
+  --bg-field-expanded: var(--white-100);
+
   --text-on-bg-primary: var(--white-100);
   --text-on-bg-secondary: var(--neutral-950);
   --text-on-bg-accent: var(--white-100);
@@ -53,6 +57,10 @@
   --border-error: var(--error);
 
   --surface-block: var(--white-100);
+
+  --graphics-accent: var(--accent-500);
+  --graphics-white: var(--white-100);
+  --graphics-dark: var(--primary-500);
 }
 
 // Серая тема
@@ -79,6 +87,10 @@
   --bg-controls-scrollthumb-hover: var(--neutral-650);
   --bg-controls-group: var(--white-100);
   --bg-controls-on-group-selected: var(--primary-500);
+
+  --bg-field-static: var(--white-100);
+  --bg-field-hover: var(--neutral-600);
+  --bg-field-expanded: var(--white-100);
 
   --text-on-bg-primary: var(--white-100);
   --text-on-bg-secondary: var(--neutral-950);
@@ -110,6 +122,10 @@
   --border-error: var(--error);
 
   --surface-block: var(--neutral-500);
+
+  --graphics-accent: var(--accent-500);
+  --graphics-white: var(--white-100);
+  --graphics-dark: var(--primary-500);
 }
 
 // Тёмная тема
@@ -136,6 +152,10 @@
   --bg-controls-scrollthumb-hover: var(--white-30);
   --bg-controls-group: var(--primary-300);
   --bg-controls-on-group-selected: var(--white-100);
+
+  --bg-field-static: var(--white-8);
+  --bg-field-hover: var(--white-10);
+  --bg-field-expanded: var(--white-0);
 
   --text-on-bg-primary: var(--primary-500);
   --text-on-bg-secondary: var(--white-100);
@@ -167,6 +187,10 @@
   --border-error: var(--error);
 
   --surface-block: var(--primary-400);
+
+  --graphics-accent: var(--accent-500);
+  --graphics-white: var(--accent-500);
+  --graphics-dark: var(--white-90);
 }
 
 

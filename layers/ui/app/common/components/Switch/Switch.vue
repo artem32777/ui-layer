@@ -20,7 +20,6 @@ const modelValue = defineModel<boolean>()
 		<SwitchRoot
 			v-model="modelValue"
 			:disabled="disabled"
-			:aria-invalid="invalid"
 			aria-label="Переключатель"
 			class="switch__icon"
 		>
@@ -46,6 +45,7 @@ const modelValue = defineModel<boolean>()
   align-items: center;
   gap: 8px;
   @include font-size(button);
+  color: var(--text-on-surface-dark);
 
   &:has(.switch__icon[data-disabled]) {
     pointer-events: none;
@@ -60,11 +60,11 @@ const modelValue = defineModel<boolean>()
 
 .switch__icon {
   display: inline-flex;
-	width: 36px;
-	height: 20px;
+	width: 34px;
+	height: var(--ui-height-XXS);
+  border-radius: var(--UI-radius-L);
 	padding: 4px;
-	border-radius: 16px;
-	background-color: var(--neutral-500);
+	background-color: var(--bg-controls-unchecked);
 	transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 
 	&:hover {

@@ -75,7 +75,6 @@ export const States: Story = {
 	parameters: {
 		pseudo: {
 			hover: '.radio-group-story--hovered .radio-group__item:first-child',
-			focusWithin: '.radio-group-story--focused .radio-group__item:first-child',
 		},
 	},
 	render: (args: RadioGroupStoryArgs) => ({
@@ -105,11 +104,11 @@ export const States: Story = {
 								class="radio-group-story--hovered"
 							/>
 						</StoryGridItem>
-						<StoryGridItem title="focus">
+						<StoryGridItem title="disabled">
 							<RadioGroup
-								v-bind="args"
-								:model-value="checked"
-								class="radio-group-story--focused"
+									v-bind="args"
+									:model-value="checked"
+									disabled
 							/>
 						</StoryGridItem>
 						<StoryGridItem title="invalid">
@@ -117,13 +116,6 @@ export const States: Story = {
 								v-bind="args"
 								:model-value="checked"
 								invalid
-							/>
-						</StoryGridItem>
-						<StoryGridItem title="disabled">
-							<RadioGroup
-								v-bind="args"
-								:model-value="checked"
-								disabled
 							/>
 						</StoryGridItem>
 					</StoryGridRow>

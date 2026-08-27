@@ -5,21 +5,13 @@ import SliderExampleSource from './SliderExample.vue?raw'
 <Meta of={SliderStories} />
 
 # Slider
+- Основан на <font color="blue">[`Slider из Reka UI`](https://reka-ui.com/docs/components/slider)</font>.
+- Варианты: `two-points` (диапазон) и `one-point` (одно значение). Размеры: `medium`, `big`.
+- `MultiSlider` — несколько непересекающихся интервалов на одной шкале; значения передаются парами.
 
-Ползунок для выбора одного значения, диапазона или нескольких непересекающихся диапазонов.
+<Canvas of={SliderStories.DocsExample} />
 
-## Когда использовать
-
-- `type="double"` — интервал между двумя значениями.
-- `type="one-range"` — одно значение.
-- `variant="block"` — компактное блочное отображение значений.
-- `MultiSlider` — несколько интервалов на одной шкале; значения передаются парами.
-
-## Базовый пример
-
-<Canvas of={SliderStories.Double} />
-
-<Controls of={SliderStories.Double} />
+<Controls of={SliderStories.DocsExample} />
 
 ## Несколько диапазонов
 

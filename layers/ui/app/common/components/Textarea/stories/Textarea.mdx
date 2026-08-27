@@ -1,6 +1,6 @@
 import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
 import * as TextareaStories from './Textarea.stories'
-import TextareaExampleSource from './TextareaExample.vue?raw'
+import TextareaDocsExampleSource from './TextareaDocsExample.vue?raw'
 
 <Meta of={TextareaStories} />
 
@@ -12,4 +12,16 @@ import TextareaExampleSource from './TextareaExample.vue?raw'
 
 ## Пример использования
 
-<Source code={TextareaExampleSource} language="vue" />
+<Source code={TextareaDocsExampleSource} language="vue" />
+
+## FormTextarea
+
+Адаптер `Textarea` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`).
+
+Ошибка появляется после ухода с поля: `validateOnValueUpdate` выключен, валидация на blur. Чтобы скрыть ошибку, нужно исправить значение и снова уйти с поля.
+
+<Canvas of={TextareaStories.FormDocsExample} />
+
+### Состояние ошибки
+
+<Canvas of={TextareaStories.Tests} />

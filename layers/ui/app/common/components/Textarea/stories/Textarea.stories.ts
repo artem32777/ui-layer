@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
-import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
-import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
-import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
+import { expect } from 'storybook/test'
+import { textareaSizes, textareaVariants } from '../Textarea.types.ts'
 import Textarea from '../Textarea.vue'
-import { ref } from 'vue'
+import TextareaStoryForm from './TextareaStoryForm.vue'
+import TextareaStoryStates from './TextareaStoryStates.vue'
 
 type TextareaStoryArgs = ComponentProps<typeof Textarea>
 
@@ -19,21 +19,25 @@ const meta = {
 			table: { type: { summary: 'string' } },
 		},
 		placeholder: { control: 'text' },
+		variant: { control: 'select', options: textareaVariants },
 		disabled: { control: 'boolean' },
 		invalid: { control: 'boolean' },
+		size: { control: 'select', options: textareaSizes },
 	},
 	args: {
 		placeholder: 'Введите сообщение',
+		variant: 'fill',
 		disabled: false,
 		invalid: false,
+		size: 'medium',
 		modelValue: '',
 	} satisfies TextareaStoryArgs,
 	render: (args: TextareaStoryArgs) => ({
 		components: { Textarea },
 		setup() { return { args } },
-		template: '<Textarea v-bind="args" v-model="args.modelValue" aria-label="Textarea" />',
+		template: '<Textarea v-bind="args" v-model="args.modelValue" aria-label="Текстовое поле" />',
 	}),
-} satisfies Meta<typeof Textarea>
+} satisfies Meta<TextareaStoryArgs>
 
 export default meta
 
@@ -43,56 +47,82 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
+export const Base: Story = {
+	render: (args: TextareaStoryArgs) => ({
+		components: { Textarea },
+		setup() {
+			return { args }
+		},
+		template: '<Textarea v-bind="args" v-model="args.modelValue" aria-label="Текстовое поле" />',
+	}),
+}
+
+export const Form: Story = {
+	args: {
+		placeholder: 'Введите сообщение',
+	},
+	render: (args: TextareaStoryArgs) => ({
+		components: { TextareaStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<TextareaStoryForm v-bind="args" label="Сообщение" />',
+	}),
+}
+
 export const States: Story = {
 	parameters: {
 		pseudo: {
-			hover: '.textarea-story--hovered',
-			focus: '.textarea-story--focused',
+			hover: '.textarea-story--hovered .textarea',
+			focus: '.textarea-story--focused .textarea',
 		},
 	},
 	render: (args: TextareaStoryArgs) => ({
-		components: { Textarea, StoryGrid, StoryGridItem, StoryGridRow },
+		components: { TextareaStoryStates },
 		setup() {
-			const model = ref('Текст')
-			return { args, model }
+			return { args }
 		},
-		template: `
-			<StoryGrid>
-				<StoryGridRow>
-					<StoryGridItem title="default">
-						<Textarea
-							v-bind="args"
-						/>
-					</StoryGridItem>
-					<StoryGridItem title="filled">
-						<Textarea v-bind="args" v-model="model"/>
-					</StoryGridItem>
-					<StoryGridItem title="hover">
-						<Textarea
-							v-bind="args"
-							class="textarea-story--hovered"
-						/>
-					</StoryGridItem>
-					<StoryGridItem title="focus">
-						<Textarea
-							v-bind="args"
-							class="textarea-story--focused"
-						/>
-					</StoryGridItem>
-					<StoryGridItem title="invalid">
-						<Textarea
-							v-bind="args"
-							invalid
-						/>
-					</StoryGridItem>
-					<StoryGridItem title="disabled">
-						<Textarea
-							v-bind="args"
-							disabled
-						/>
-					</StoryGridItem>
-				</StoryGridRow>
-			</StoryGrid>
-		`,
+		template: '<TextareaStoryStates v-bind="args" />',
 	}),
+}
+
+export const FormDocsExample: Story = {
+	tags: ['!dev'],
+	args: {
+		placeholder: 'Введите сообщение',
+	},
+	render: (args: TextareaStoryArgs) => ({
+		components: { TextareaStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<TextareaStoryForm v-bind="args" label="Сообщение" />',
+	}),
+}
+
+export const Tests: Story = {
+	args: {
+		placeholder: 'Введите сообщение',
+	},
+	render: (args: TextareaStoryArgs) => ({
+		components: { TextareaStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<TextareaStoryForm v-bind="args" label="Сообщение" />',
+	}),
+	play: async ({ canvas, userEvent }) => {
+		const input = canvas.getByRole('textbox')
+
+		await userEvent.type(input, '   ')
+		await expect(canvas.queryByText('Минимум 5 символов')).toBeNull()
+
+		await userEvent.tab()
+		await expect(await canvas.findByText('Минимум 5 символов')).toBeVisible()
+
+		await userEvent.clear(input)
+		await userEvent.type(input, 'Текст сообщения')
+		await userEvent.tab()
+		await expect(canvas.queryByText('Минимум 5 символов')).toBeNull()
+	},
 }

@@ -1,6 +1,5 @@
-import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
 import * as InputStories from './Input.stories'
-import InputExampleSource from './InputExample.vue?raw'
 
 <Meta of={InputStories} />
 
@@ -10,7 +9,35 @@ import InputExampleSource from './InputExample.vue?raw'
 
 <Controls of={InputStories.DocsExample} />
 
-
 ## Пример использования
 
-<Source code={InputExampleSource} language="vue" />
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { iconNames } from '#layers/ui/app/modules/svg-icon'
+import Input from '#layers/ui/app/common/components/Input/Input.vue'
+
+const value = ref('')
+</script>
+
+<template>
+	<Input
+		v-model="value"
+		:icon="iconNames['search-md']"
+		placeholder="Введите запрос"
+		aria-label="Поиск"
+	/>
+</template>
+```
+
+## FormInput
+
+Адаптер `Input` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`).
+
+Ошибка появляется после ухода с поля: `validateOnValueUpdate` выключен, валидация на blur. Чтобы скрыть ошибку, нужно исправить значение и снова уйти с поля.
+
+<Canvas of={InputStories.FormDocsExample} />
+
+### Состояние ошибки
+
+<Canvas of={InputStories.Tests} />

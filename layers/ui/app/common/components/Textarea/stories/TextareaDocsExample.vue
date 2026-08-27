@@ -6,5 +6,9 @@ const message = ref('')
 </script>
 
 <template>
-	<Textarea v-model="message" />
+	<Textarea
+		v-model="message"
+		placeholder="Введите сообщение"
+		aria-label="Сообщение"
+	/>
 </template>

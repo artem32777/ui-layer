@@ -5,6 +5,7 @@ import type { RadioGroupProps } from '#layers/ui/app/common/components/RadioGrou
 
 defineProps<{
 	name: string
+	label?: string
 	radioGroupProps: RadioGroupProps
 }>()
 </script>
@@ -13,6 +14,7 @@ defineProps<{
 	<FormField
 		v-slot="{ handleChange, invalid }"
 		:name="name"
+		:label="label"
 	>
 		<RadioGroup
 			v-bind="radioGroupProps"

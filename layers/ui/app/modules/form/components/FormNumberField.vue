@@ -5,6 +5,7 @@ import NumberField from '#layers/ui/app/common/components/NumberField/NumberFiel
 
 const props = defineProps<NumberFieldProps & {
 	name: string
+	label?: string
 }>()
 </script>
 
@@ -12,6 +13,7 @@ const props = defineProps<NumberFieldProps & {
 	<FormField
 		v-slot="{ value, handleChange, invalid }"
 		:name="name"
+		:label="label"
 	>
 		<NumberField
 			v-bind="props"

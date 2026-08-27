@@ -23,8 +23,7 @@ const model = defineModel<number[]>({ required: true })
 			v-model="model"
 			:label="label"
 			:additional-text="additionalText"
-			variant="block"
-			state="touched"
+			size="big"
 			:min="range.min"
 			:max="range.max"
 			:step="range.step"
@@ -37,14 +36,9 @@ const model = defineModel<number[]>({ required: true })
 .premises-filter-range-field {
 	min-width: 0;
 
-	:deep(.ui-slider) {
+	:deep(.slider) {
 		width: 100%;
 		min-width: 0;
-	}
-
-	:deep(.ui-slider-values--block) {
-		border: 1px solid var(--neutral-500);
-		background-color: color-mix(in srgb, var(--neutral-500) 20%, var(--white));
 	}
 }
 </style>

@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ConcreteComponent } from 'vue'
+import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect, waitFor } from 'storybook/test'
 import Tabs from '../Tabs.vue'
+import { tabsSizes, tabsVariants } from '../Tabs.types.ts'
 import tabsTypesSource from '../Tabs.types.ts?raw'
-import type { ComponentProps } from 'vue-component-type-helpers'
+import TabsStoryStates from './TabsStoryStates.vue'
 
 type TabsStoryArgs = ComponentProps<typeof Tabs>
 
@@ -19,6 +21,8 @@ const meta = {
 			options: ['account', 'password'],
 			description: 'Значение активной вкладки. Нужно только если необходимо управление табами из родителя.',
 		},
+		variant: { control: 'select', options: tabsVariants },
+		size: { control: 'select', options: tabsSizes },
 		items: {
 			control: 'object',
 			table: {
@@ -28,9 +32,21 @@ const meta = {
 				},
 			},
 		},
+		// Docgen видит динамический `:name="(item.value as TabValues)"` как имя слота — подменяем для Docs/Controls.
+		'(item.value as TabValues)': {
+			name: '[value]',
+			description: 'Контент вкладки. Имя слота совпадает с `value` из `items` (например `#account`).',
+			control: false,
+			table: {
+				category: 'slots',
+				type: { summary: 'VNode' },
+			},
+		},
 	},
 	args: {
 		modelValue: 'account',
+		variant: 'button',
+		size: 'medium',
 		items: [
 			{ value: 'account', label: 'Account' },
 			{ value: 'password', label: 'Password' },
@@ -43,7 +59,8 @@ const meta = {
 			<Tabs
 				v-model="args.modelValue"
 				:items="args.items"
-				:aria-label="args.ariaLabel"
+				:variant="args.variant"
+				:size="args.size"
 			>
 				<template #account>
 					Make changes to your account here.
@@ -60,7 +77,26 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const DocsExample: Story = {
+	tags: ['!dev'],
+}
+
 export const Base: Story = {}
+
+export const States: Story = {
+	parameters: {
+		pseudo: {
+			hover: '.tabs-story--hovered .tabs__trigger:nth-child(2)',
+		},
+	},
+	render: (args: TabsStoryArgs) => ({
+		components: { TabsStoryStates },
+		setup() {
+			return { args }
+		},
+		template: '<TabsStoryStates :variant="args.variant" :size="args.size" />',
+	}),
+}
 
 export const Tests: Story = {
 	play: async ({ canvas, userEvent }) => {

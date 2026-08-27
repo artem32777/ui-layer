@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { SliderRoot, SliderThumb, SliderTrack } from 'reka-ui'
+import type { MultiSliderProps } from './Slider.types.ts'
 
-interface Props {
-	min?: number
-	max?: number
-	step?: number
-	disabled?: boolean
-}
+// https://reka-ui.com/docs/components/slider
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<MultiSliderProps>(), {
 	min: 0,
 	max: 100,
 	step: 1,
@@ -35,31 +31,32 @@ const ranges = computed(() => Array.from(
 <template>
 	<SliderRoot
 		v-model="modelValue"
-		class="ui-multi-slider"
+		class="multi-slider"
 		:min="min"
 		:max="max"
 		:step="step"
 		:disabled="disabled"
 		:min-steps-between-thumbs="1"
 	>
-		<SliderTrack class="ui-multi-slider__track">
+		<SliderTrack class="multi-slider__track">
 			<span
 				v-for="(range, index) in ranges"
 				:key="index"
-				class="ui-multi-slider__range"
+				class="multi-slider__range"
 				:style="{ left: `${range.left}%`, width: `${range.width}%` }"
 			/>
 		</SliderTrack>
 		<SliderThumb
 			v-for="(_, index) in modelValue"
 			:key="index"
-			class="ui-multi-slider__thumb"
+			class="multi-slider__thumb"
+			:aria-label="`Ползунок ${index + 1}`"
 		/>
 	</SliderRoot>
 </template>
 
 <style scoped lang="scss">
-.ui-multi-slider {
+.multi-slider {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -73,30 +70,30 @@ const ranges = computed(() => Array.from(
 	}
 }
 
-.ui-multi-slider__track {
+.multi-slider__track {
 	position: relative;
 	flex-grow: 1;
 	overflow: hidden;
 	height: 8px;
 	border-radius: 9999px;
-	background-color: var(--neutral-500, #e2e2e2);
+	background-color: var(--neutral-500);
 }
 
-.ui-multi-slider__range {
+.multi-slider__range {
 	position: absolute;
 	height: 100%;
 	border-radius: 9999px;
 	background-color: var(--brand, #4149f2);
 }
 
-.ui-multi-slider__thumb {
+.multi-slider__thumb {
 	display: block;
 	box-sizing: border-box;
 	width: 20px;
 	height: 20px;
 	border: 2px solid var(--brand, #4149f2);
 	border-radius: 50%;
-	background-color: var(--background, #ffffff);
+	background-color: var(--surface-block);
 	transition: box-shadow 0.3s ease;
 	cursor: pointer;
 

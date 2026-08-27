@@ -10,8 +10,9 @@ const items = [
 
 <template>
 	<Tabs
-		aria-label="Manage account"
 		:items="items"
+		variant="button"
+		size="medium"
 	>
 		<template #account>
 			Make changes to your account here.

@@ -15,21 +15,18 @@
         --story-text: #000;
     }
 
+    /* Только типографика MDX/Docs, не трогаем превью компонентов (.docs-story). */
     .sbdocs-content {
-        p, li, td, th, span, code {
+        :is(p, li, td, th, span, code):not(.docs-story *) {
             font-size: 16px !important;
         }
 
-        h1 {
-            span {
-                font-size: 30px !important
-            }
+        h1 :is(span):not(.docs-story *) {
+            font-size: 30px !important;
         }
 
-        h2 {
-            span {
-                font-size: 25px !important
-            }
+        h2 :is(span):not(.docs-story *) {
+            font-size: 25px !important;
         }
 
         .language-vue, .language-scss, .language-text {

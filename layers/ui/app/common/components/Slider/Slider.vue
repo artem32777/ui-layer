@@ -1,25 +1,14 @@
 <script setup lang="ts">
 import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from 'reka-ui'
+import type { SliderProps } from './Slider.types.ts'
 import SliderValues from './SliderValues.vue'
 
-interface Props {
-	label?: string
-	additionalText?: string
-	variant?: 'line' | 'block'
-	state?: 'default' | 'touched'
-	type?: 'double' | 'one-range'
-	min?: number
-	max?: number
-	step?: number
-	disabled?: boolean
-}
+// https://reka-ui.com/docs/components/slider
 
-const props = withDefaults(defineProps<Props>(), {
-	label: 'Label',
-	additionalText: '%',
-	variant: 'line',
-	state: 'default',
-	type: 'double',
+withDefaults(defineProps<SliderProps>(), {
+	additionalText: 'm²',
+	variant: 'two-points',
+	size: 'medium',
 	min: 0,
 	max: 100,
 	step: 1,
@@ -31,124 +20,185 @@ const modelValue = defineModel<number[]>({ required: true })
 
 <template>
 	<div
-		class="ui-slider"
-		:class="{
-			'ui-slider--block': variant === 'block',
-			'ui-slider--one-range': type === 'one-range',
-		}"
+		class="slider"
+		:class="[
+			`slider--variant-${variant}`,
+			`slider--size-${size}`,
+			{ 'slider--disabled': disabled },
+		]"
 	>
-		<span class="ui-slider__label">
+		<span
+			v-if="label"
+			class="slider__label"
+		>
 			{{ label }}
 		</span>
-		<SliderValues
-			:values="modelValue"
-			:additional-text="props.additionalText"
-			:variant="props.variant"
-			:state="props.state"
-			:type="props.type"
-		/>
-		<SliderRoot
-			v-model="modelValue"
-			class="ui-slider__control"
-			:min="props.min"
-			:max="props.max"
-			:step="props.step"
-			:disabled="props.disabled"
-		>
-			<SliderTrack class="ui-slider__track">
-				<SliderRange class="ui-slider__range" />
-			</SliderTrack>
-			<SliderThumb
-				v-for="(_, index) in modelValue"
-				:key="index"
-				class="ui-slider__thumb"
-				:aria-label="type === 'double' ? `${label}: ${index === 0 ? 'от' : 'до'}` : label"
+
+		<div class="slider__body">
+			<SliderValues
+				:values="modelValue"
+				:additional-text="additionalText"
+				:variant="variant"
 			/>
-		</SliderRoot>
+			<SliderRoot
+				v-model="modelValue"
+				class="slider__control"
+				:min="min"
+				:max="max"
+				:step="step"
+				:disabled="disabled"
+			>
+				<SliderTrack class="slider__track">
+					<SliderRange class="slider__range" />
+				</SliderTrack>
+				<SliderThumb
+					v-for="(_, index) in modelValue"
+					:key="index"
+					class="slider__thumb"
+					:aria-label="variant === 'two-points' ? `${label ?? 'Значение'}: ${index === 0 ? 'от' : 'до'}` : (label ?? 'Значение')"
+				/>
+			</SliderRoot>
+		</div>
 	</div>
 </template>
 
 <style scoped lang="scss">
-.ui-slider {
+.slider {
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	width: 320px;
-	color: var(--text, #000000);
+	color: var(--text-on-surface-dark);
 }
 
-.ui-slider__label {
+.slider__label {
 	margin-bottom: 4px;
-	font-size: 14px;
-	line-height: 1.5;
-	opacity: 0.7;
+	@include font-size(label);
+	color: var(--text-on-surface-tertiary);
 }
 
-.ui-slider__control {
+.slider__body {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid transparent;
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.slider__control {
 	position: relative;
 	display: flex;
 	align-items: center;
 	width: 100%;
-	height: 16px;
 	touch-action: none;
 	user-select: none;
-
-	&[data-disabled] {
-		opacity: 0.5;
-	}
 }
 
-.ui-slider__track {
+.slider__track {
 	position: relative;
 	flex-grow: 1;
 	height: 1px;
-	background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 50%, transparent);
+	background-color: var(--border-neutral);
 }
 
-.ui-slider__range {
+.slider__range {
 	position: absolute;
-	height: 2px;
-	background-color: var(--brand, #4149f2);
-	transform: translateY(-0.5px);
+	height: 1px;
+	background-color: var(--graphics-dark);
 }
 
-.ui-slider__thumb {
+.slider__thumb {
 	display: block;
 	box-sizing: border-box;
-	width: 16px;
-	height: 16px;
+	width: 12px;
+	height: 12px;
+	border: 1px solid transparent;
 	border-radius: 50%;
-	background-color: var(--brand, #4149f2);
-	transition: box-shadow 0.3s ease;
+	background-color: var(--graphics-dark);
+	transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 	cursor: pointer;
 
 	&:focus {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 30%, transparent);
+	}
+
+	&:focus-visible {
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--graphics-dark) 20%, transparent);
 	}
 }
 
-.ui-slider--one-range {
-	.ui-slider__track {
-		background-color: var(--brand, #4149f2);
+.slider--size-medium {
+	.slider__body {
+		gap: 8px;
+		padding: 4px;
+		border-radius: var(--UI-radius-M);
+
+		&:hover {
+			background-color: var(--bg-field-hover);
+		}
+
+		&:focus-within {
+			border-color: var(--border-primary);
+		}
 	}
 
-	.ui-slider__range {
-		background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 50%, transparent);
+	.slider__control {
+		height: 12px;
 	}
 }
 
-.ui-slider--block {
-	gap: 8px;
+.slider--size-big {
+	.slider__body {
+		gap: 4px;
+		padding: 12px 16px 0;
+		border-radius: var(--UI-radius-L);
+		background-color: var(--bg-field-static);
 
-	.ui-slider__label {
-		margin-bottom: 0;
-		opacity: 0.7;
+		&:hover {
+			background-color: var(--bg-field-hover);
+		}
+
+		&:focus-within {
+			border-color: var(--border-primary);
+			background-color: var(--bg-field-expanded);
+		}
 	}
 
-	.ui-slider__control {
-		width: calc(100% - 36px);
-		margin: -16px 18px 0;
+	.slider__control {
+		height: 16px;
+		margin: 0 -4px;
+	}
+
+	.slider__track,
+	.slider__range {
+		height: 2px;
+	}
+
+	.slider__thumb {
+		width: 14px;
+		height: 14px;
+	}
+}
+
+.slider--disabled {
+	pointer-events: none;
+	color: var(--text-on-bg-disabled);
+
+	.slider__label {
+		color: var(--text-on-bg-disabled);
+	}
+
+	.slider__body {
+		opacity: 0.5;
+	}
+
+	.slider__thumb {
+		background-color: var(--surface-block, var(--white-100));
+		border-color: var(--border-disabled);
+	}
+
+	.slider__range {
+		background-color: var(--border-disabled);
 	}
 }
 </style>

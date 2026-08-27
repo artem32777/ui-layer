@@ -6,6 +6,7 @@ import Input from '#layers/ui/app/common/components/Input/Input.vue'
 
 const props = defineProps<Omit<InputProps, 'placeholder'> & {
 	name: string
+	label?: string
 	placeholder?: string
 }>()
 </script>
@@ -14,6 +15,7 @@ const props = defineProps<Omit<InputProps, 'placeholder'> & {
 	<FormField
 		v-slot="{ handleChange, invalid }"
 		:name="name"
+		:label="label"
 	>
 		<Input
 			v-maska="'+7 (###) ###-##-##'"

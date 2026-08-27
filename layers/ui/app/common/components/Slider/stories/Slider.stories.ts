@@ -1,21 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
+import { ref } from 'vue'
 import MultiSlider from '../MultiSlider.vue'
 import Slider from '../Slider.vue'
+import { sliderSizes, sliderVariants } from '../Slider.types.ts'
+import SliderStoryStates from './SliderStoryStates.vue'
 
 type SliderStoryArgs = ComponentProps<typeof Slider>
 
 const meta = {
 	title: 'UI/Slider',
 	component: Slider,
+	parameters: { a11y: { test: 'error' } },
 	argTypes: {
-		modelValue: { control: 'object' },
+		modelValue: {
+			description: 'Текущие значения ползунков.',
+			control: 'object',
+			table: { type: { summary: 'number[]' } },
+		},
 		label: { control: 'text' },
 		additionalText: { control: 'text' },
-		variant: { control: 'select', options: ['line', 'block'] },
-		state: { control: 'select', options: ['default', 'touched'] },
-		type: { control: 'select', options: ['double', 'one-range'] },
+		variant: { control: 'select', options: sliderVariants },
+		size: { control: 'select', options: sliderSizes },
 		min: { control: 'number' },
 		max: { control: 'number' },
 		step: { control: 'number' },
@@ -23,11 +30,10 @@ const meta = {
 	},
 	args: {
 		modelValue: [20, 80],
-		label: 'Диапазон',
-		additionalText: '%',
-		variant: 'line',
-		state: 'default',
-		type: 'double',
+		label: 'Slider label',
+		additionalText: 'm²',
+		variant: 'two-points',
+		size: 'medium',
 		min: 0,
 		max: 100,
 		step: 1,
@@ -36,21 +42,50 @@ const meta = {
 	render: (args: SliderStoryArgs) => ({
 		components: { Slider },
 		setup() { return { args } },
-		template: '<Slider v-model="args.modelValue" v-bind="args" />',
+		template: '<Slider v-bind="args" v-model="args.modelValue" />',
 	}),
-} satisfies Meta<typeof Slider>
+} satisfies Meta<SliderStoryArgs>
 
 export default meta
+
 type Story = StoryObj<typeof meta>
 
-export const Double: Story = {}
-export const Block: Story = { args: { variant: 'block', state: 'touched' } }
-export const OneRange: Story = { args: { modelValue: [40], type: 'one-range' } }
-export const Disabled: Story = { args: { disabled: true } }
+export const DocsExample: Story = {
+	tags: ['!dev'],
+}
+
+export const Base: Story = {
+	render: (args: SliderStoryArgs) => ({
+		components: { Slider },
+		setup() {
+			return { args }
+		},
+		template: '<Slider v-bind="args" v-model="args.modelValue" />',
+	}),
+}
+
+export const States: Story = {
+	parameters: {
+		pseudo: {
+			focusWithin: '.slider-story--focused .slider__body',
+		},
+	},
+	render: (args: SliderStoryArgs) => ({
+		components: { SliderStoryStates },
+		setup() {
+			return { args }
+		},
+		template: '<SliderStoryStates v-bind="args" />',
+	}),
+}
+
 export const MultipleRanges: Story = {
 	render: () => ({
 		components: { MultiSlider },
-		data: () => ({ values: [10, 30, 60, 90] }),
+		setup() {
+			const values = ref([10, 30, 60, 90])
+			return { values }
+		},
 		template: '<MultiSlider v-model="values" :step="5" />',
 	}),
 }

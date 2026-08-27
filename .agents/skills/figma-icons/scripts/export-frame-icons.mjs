@@ -118,6 +118,9 @@ function listSymbols(session) {
 
 	const meta = parseSseJson(raw)
 	const xml = (meta.result?.content || []).map((c) => c.text).join('\n')
+	if (meta.result?.isError || /rate limit exceeded/i.test(xml)) {
+		throw new Error(`Figma MCP rate limit: ${xml.trim() || 'try again later'}`)
+	}
 	const symbols = [...xml.matchAll(/<symbol id="([^"]+)" name="([^"]+)"/g)].map((m) => ({
 		id: m[1],
 		name: nameOverrides[m[1]] || m[2],
@@ -147,6 +150,9 @@ function downloadIcon(session, icon, index) {
 
 	const parsed = parseSseJson(raw)
 	const text = (parsed.result?.content || []).map((c) => c.text).join('\n')
+	if (parsed.result?.isError || /rate limit exceeded/i.test(text)) {
+		throw new Error(`Figma MCP rate limit while exporting ${icon.name}`)
+	}
 	const urlMatch = text.match(/https?:\/\/localhost:3845\/assets\/[a-f0-9]+\.svg/)
 	if (!urlMatch) {
 		throw new Error(`No asset URL for ${icon.name} (${icon.id})`)

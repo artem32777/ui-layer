@@ -6,11 +6,14 @@ import TabsExampleSource from './TabsExample.vue?raw'
 
 # Tabs
 - Основан на <font color="blue">[`Tabs из Reka UI`](https://reka-ui.com/docs/components/tabs)</font>.
-- Автоматически формирует типизированные слоты для контента из значений value массива заголовков.
+- Варианты: `button` (сегментированные) и `text` (подчёркивание). Размеры: `medium`, `big`.
 
-<Canvas of={TabsStories.Base} />
+## Слоты
+Имена слотов = `value` из `items`. Для `{ value: 'account', label: 'Account' }` контент передаётся в `#account`.
 
-<Controls of={TabsStories.Base} />
+<Canvas of={TabsStories.DocsExample} />
+
+<Controls of={TabsStories.DocsExample} />
 
 ## Пример использования
 
