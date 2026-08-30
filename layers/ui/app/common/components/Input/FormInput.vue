@@ -11,6 +11,7 @@ const props = defineProps<InputProps & FormFieldProps>()
 		v-slot="{ value, handleChange, handleBlur, invalid }"
 		:name="name"
 		:label="label"
+		:hint="hint"
 	>
 		<Input
 			v-bind="props"

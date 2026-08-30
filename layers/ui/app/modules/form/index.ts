@@ -2,9 +2,12 @@ export { default as FormInput } from '../../common/components/Input/FormInput.vu
 export { default as FormTextarea } from '../../common/components/Textarea/FormTextarea.vue'
 export { default as FormPhoneInput } from './components/FormPhoneInput.vue'
 export { default as FormSelect } from '../../common/components/Select/FormSelect.vue'
+export { default as FormSlider } from '../../common/components/Slider/FormSlider.vue'
 export { default as FormRadioGroup } from './components/FormRadioGroup.vue'
 export { default as FormCheckbox } from './components/FormCheckbox.vue'
 export { default as FormNumberField } from './components/FormNumberField.vue'
 
 export { VRule } from './validation/rules'
 export { VMessage } from './validation/messages'
+export { formFieldArgTypes } from './components/FormField.types.ts'
+export type { FormFieldProps } from './components/FormField.types.ts'

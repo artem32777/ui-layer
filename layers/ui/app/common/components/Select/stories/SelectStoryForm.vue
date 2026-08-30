@@ -5,9 +5,9 @@ import { Form } from 'vee-validate'
 import { z } from 'zod'
 import type { SelectOption, SelectProps } from '../Select.types.ts'
 import FormSelect from '../FormSelect.vue'
+import type { FormFieldProps } from '#layers/ui/app/modules/form'
 
-const props = withDefaults(defineProps<SelectProps<boolean> & {
-	label?: string
+const props = withDefaults(defineProps<SelectProps<boolean> & FormFieldProps & {
 	/** Показать состояние ошибки при монтировании (для stories). */
 	showError?: boolean
 }>(), {
@@ -37,6 +37,7 @@ const initialValues = computed(() => ({
 		:validation-schema="validationSchema"
 		:initial-values="initialValues"
 		:validate-on-mount="showError"
+		class="form"
 	>
 		<FormSelect
 			name="city"
@@ -46,8 +47,15 @@ const initialValues = computed(() => ({
 			:variant="variant"
 			:size="size"
 			:icon="icon"
+			:hint="hint"
 			:disabled="disabled"
 			:multiple="multiple"
 		/>
 	</Form>
 </template>
+
+<style>
+.form {
+  width: 100%;
+}
+</style>

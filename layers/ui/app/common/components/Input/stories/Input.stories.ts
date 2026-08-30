@@ -7,10 +7,10 @@ import { inputSizes, inputVariants } from '../Input.types.ts'
 import Input from '../Input.vue'
 import InputStoryForm from './InputStoryForm.vue'
 import InputStoryStates from './InputStoryStates.vue'
-import { VMessage } from '#layers/ui/app/modules/form'
+import { VMessage, formFieldArgTypes, type FormFieldProps } from '#layers/ui/app/modules/form'
 import { iconNameList } from '#layers/ui/app/modules/svg-icon'
 
-type InputStoryArgs = ComponentProps<typeof Input>
+type InputStoryArgs = ComponentProps<typeof Input> & Omit<FormFieldProps, 'name'>
 
 const meta = {
 	title: 'UI/Input',
@@ -83,9 +83,14 @@ export const Base: Story = {
 }
 
 export const Form: Story = {
+	argTypes: {
+		...formFieldArgTypes,
+	},
 	args: {
 		placeholder: 'Email',
 		type: 'email',
+		label: 'Email',
+		hint: 'Подсказка',
 	},
 	render: (args: InputStoryArgs) => {
 		const [, updateArgs] = useArgs<InputStoryArgs>()
@@ -106,10 +111,7 @@ export const Form: Story = {
 						/>
 					</div>
 
-					<InputStoryForm
-						v-bind="args"
-						label="Email"
-					/>
+					<InputStoryForm v-bind="args" />
 				</div>
 			`,
 		}
@@ -137,13 +139,15 @@ export const FormDocsExample: Story = {
 	args: {
 		placeholder: 'Email',
 		type: 'email',
+		label: 'Email',
+		hint: 'Подсказка',
 	},
 	render: (args: InputStoryArgs) => ({
 		components: { InputStoryForm },
 		setup() {
 			return { args }
 		},
-		template: '<InputStoryForm v-bind="args" label="Email" />',
+		template: '<InputStoryForm v-bind="args" />',
 	}),
 }
 
@@ -151,13 +155,14 @@ export const Tests: Story = {
 	args: {
 		placeholder: 'Email',
 		type: 'email',
+		label: 'Email',
 	},
 	render: (args: InputStoryArgs) => ({
 		components: { InputStoryForm },
 		setup() {
 			return { args }
 		},
-		template: '<InputStoryForm v-bind="args" label="Email" />',
+		template: '<InputStoryForm v-bind="args" />',
 	}),
 	play: async ({ canvas, userEvent }) => {
 		const input = canvas.getByRole('textbox')

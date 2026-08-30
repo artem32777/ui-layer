@@ -12,7 +12,9 @@ withDefaults(defineProps<SliderProps>(), {
 	min: 0,
 	max: 100,
 	step: 1,
+	percent: false,
 	disabled: false,
+	invalid: false,
 })
 
 const modelValue = defineModel<number[]>({ required: true })
@@ -24,21 +26,21 @@ const modelValue = defineModel<number[]>({ required: true })
 		:class="[
 			`slider--variant-${variant}`,
 			`slider--size-${size}`,
-			{ 'slider--disabled': disabled },
+			{
+				'slider--disabled': disabled,
+				'slider--invalid': invalid,
+			},
 		]"
+		:aria-invalid="invalid || undefined"
 	>
-		<span
-			v-if="label"
-			class="slider__label"
-		>
-			{{ label }}
-		</span>
-
 		<div class="slider__body">
 			<SliderValues
 				:values="modelValue"
 				:additional-text="additionalText"
 				:variant="variant"
+				:percent="percent"
+				:min="min"
+				:max="max"
 			/>
 			<SliderRoot
 				v-model="modelValue"
@@ -55,7 +57,7 @@ const modelValue = defineModel<number[]>({ required: true })
 					v-for="(_, index) in modelValue"
 					:key="index"
 					class="slider__thumb"
-					:aria-label="variant === 'two-points' ? `${label ?? 'Значение'}: ${index === 0 ? 'от' : 'до'}` : (label ?? 'Значение')"
+					:aria-label="variant === 'two-points' ? `Значение: ${index === 0 ? 'от' : 'до'}` : 'Значение'"
 				/>
 			</SliderRoot>
 		</div>
@@ -65,31 +67,29 @@ const modelValue = defineModel<number[]>({ required: true })
 <style scoped lang="scss">
 .slider {
 	position: relative;
-	display: flex;
-	flex-direction: column;
-	width: 320px;
-	color: var(--text-on-surface-dark);
-}
-
-.slider__label {
-	margin-bottom: 4px;
-	@include font-size(label);
-	color: var(--text-on-surface-tertiary);
+	width: 100%;
 }
 
 .slider__body {
 	position: relative;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	background-color: var(--bg-field-static);
 	border: 1px solid transparent;
 	transition: background-color 0.3s ease, border-color 0.3s ease;
+
+	&:hover {
+		background-color: var(--bg-field-hover);
+	}
 }
 
 .slider__control {
-	position: relative;
+	position: absolute;
+	right: 0;
+	left: 0;
 	display: flex;
 	align-items: center;
-	width: 100%;
 	touch-action: none;
 	user-select: none;
 }
@@ -97,108 +97,138 @@ const modelValue = defineModel<number[]>({ required: true })
 .slider__track {
 	position: relative;
 	flex-grow: 1;
-	height: 1px;
-	background-color: var(--border-neutral);
+	height: 2px;
+	background-color: transparent;
 }
 
 .slider__range {
 	position: absolute;
-	height: 1px;
-	background-color: var(--graphics-dark);
+	height: 2px;
+	background-color: var(--bg-action-primary);
 }
 
 .slider__thumb {
-	display: block;
-	box-sizing: border-box;
-	width: 12px;
-	height: 12px;
-	border: 1px solid transparent;
-	border-radius: 50%;
-	background-color: var(--graphics-dark);
-	transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: visible;
+	background-color: transparent;
+	border: none;
 	cursor: pointer;
+
+	&::before {
+		content: '';
+		border-radius: 50%;
+		background-color: var(--bg-action-primary);
+		transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	&:hover::before,
+	&[data-state='active']::before {
+		background-color: var(--icon-on-bg-primary);
+	}
 
 	&:focus {
 		outline: none;
 	}
-
-	&:focus-visible {
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--graphics-dark) 20%, transparent);
-	}
 }
 
 .slider--size-medium {
+	padding-bottom: 10px;
+
 	.slider__body {
-		gap: 8px;
-		padding: 4px;
+		height: var(--ui-height-M);
+		padding: 0 16px;
 		border-radius: var(--UI-radius-M);
-
-		&:hover {
-			background-color: var(--bg-field-hover);
-		}
-
-		&:focus-within {
-			border-color: var(--border-primary);
-		}
 	}
 
 	.slider__control {
-		height: 12px;
+		bottom: -10px;
+		height: 20px;
+		padding: 0 14px;
+	}
+
+	.slider__thumb {
+		width: 20px;
+		height: 20px;
+
+		&::before {
+			width: 12px;
+			height: 12px;
+		}
+
+		&:hover::before,
+		&[data-state='active']::before {
+			box-shadow: inset 0 0 0 3px var(--bg-action-primary);
+		}
 	}
 }
 
 .slider--size-big {
+	padding-bottom: 13px;
+
 	.slider__body {
-		gap: 4px;
-		padding: 12px 16px 0;
+		height: var(--ui-height-L);
+		padding: 0 22px;
 		border-radius: var(--UI-radius-L);
-		background-color: var(--bg-field-static);
-
-		&:hover {
-			background-color: var(--bg-field-hover);
-		}
-
-		&:focus-within {
-			border-color: var(--border-primary);
-			background-color: var(--bg-field-expanded);
-		}
 	}
 
 	.slider__control {
-		height: 16px;
-		margin: 0 -4px;
-	}
-
-	.slider__track,
-	.slider__range {
-		height: 2px;
+		bottom: -13px;
+		height: 26px;
+		padding: 0 20px;
 	}
 
 	.slider__thumb {
-		width: 14px;
-		height: 14px;
+		width: 26px;
+		height: 26px;
+
+		&::before {
+			width: 18px;
+			height: 18px;
+		}
+
+		&:hover::before,
+		&[data-state='active']::before {
+			box-shadow: inset 0 0 0 5px var(--bg-action-primary);
+		}
+	}
+}
+
+.slider:focus-within {
+	.slider__body {
+		background-color: var(--bg-field-expanded);
+		border-color: var(--border-expanded);
+	}
+}
+
+.slider--invalid {
+	.slider__body {
+		border-color: var(--border-error);
 	}
 }
 
 .slider--disabled {
 	pointer-events: none;
-	color: var(--text-on-bg-disabled);
 
-	.slider__label {
+	.slider__body {
+		background-color: var(--bg-action-disabled);
+
+		&:hover {
+			background-color: var(--bg-action-disabled);
+		}
+	}
+
+	:deep(.slider-values__value),
+	:deep(.slider-values__unit),
+	:deep(.slider-values__percent),
+	:deep(.slider-values__bullet) {
 		color: var(--text-on-bg-disabled);
 	}
 
-	.slider__body {
-		opacity: 0.5;
-	}
-
-	.slider__thumb {
-		background-color: var(--surface-block, var(--white-100));
-		border-color: var(--border-disabled);
-	}
-
-	.slider__range {
-		background-color: var(--border-disabled);
+	.slider__thumb::before {
+		background-color: var(--icon-on-bg-primary);
+		box-shadow: inset 0 0 0 2px var(--bg-action-primary);
 	}
 }
 </style>

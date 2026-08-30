@@ -4,10 +4,9 @@ import { Form } from 'vee-validate'
 import { z } from 'zod'
 import type { TextareaProps } from '../Textarea.types.ts'
 import FormTextarea from '../FormTextarea.vue'
-import { VRule } from '#layers/ui/app/modules/form'
+import { VRule, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-withDefaults(defineProps<TextareaProps & {
-	label?: string
+withDefaults(defineProps<TextareaProps & Omit<FormFieldProps, 'name'> & {
 	/** Показать состояние ошибки при монтировании (для stories). */
 	showError?: boolean
 }>(), {
@@ -28,6 +27,7 @@ const validationSchema = toTypedSchema(z.object({
 		<FormTextarea
 			name="message"
 			:label="label"
+			:hint="hint"
 			:placeholder="placeholder"
 			:variant="variant"
 			:size="size"

@@ -5,8 +5,9 @@ import { textareaSizes, textareaVariants } from '../Textarea.types.ts'
 import Textarea from '../Textarea.vue'
 import TextareaStoryForm from './TextareaStoryForm.vue'
 import TextareaStoryStates from './TextareaStoryStates.vue'
+import { formFieldArgTypes, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-type TextareaStoryArgs = ComponentProps<typeof Textarea>
+type TextareaStoryArgs = ComponentProps<typeof Textarea> & Omit<FormFieldProps, 'name'>
 
 const meta = {
 	title: 'UI/Textarea',
@@ -58,15 +59,20 @@ export const Base: Story = {
 }
 
 export const Form: Story = {
+	argTypes: {
+		...formFieldArgTypes,
+	},
 	args: {
 		placeholder: 'Введите сообщение',
+		label: 'Сообщение',
+		hint: 'Подсказка',
 	},
 	render: (args: TextareaStoryArgs) => ({
 		components: { TextareaStoryForm },
 		setup() {
 			return { args }
 		},
-		template: '<TextareaStoryForm v-bind="args" label="Сообщение" />',
+		template: '<TextareaStoryForm v-bind="args" />',
 	}),
 }
 
@@ -90,26 +96,29 @@ export const FormDocsExample: Story = {
 	tags: ['!dev'],
 	args: {
 		placeholder: 'Введите сообщение',
+		label: 'Сообщение',
+		hint: 'Подсказка',
 	},
 	render: (args: TextareaStoryArgs) => ({
 		components: { TextareaStoryForm },
 		setup() {
 			return { args }
 		},
-		template: '<TextareaStoryForm v-bind="args" label="Сообщение" />',
+		template: '<TextareaStoryForm v-bind="args" />',
 	}),
 }
 
 export const Tests: Story = {
 	args: {
 		placeholder: 'Введите сообщение',
+		label: 'Сообщение',
 	},
 	render: (args: TextareaStoryArgs) => ({
 		components: { TextareaStoryForm },
 		setup() {
 			return { args }
 		},
-		template: '<TextareaStoryForm v-bind="args" label="Сообщение" />',
+		template: '<TextareaStoryForm v-bind="args" />',
 	}),
 	play: async ({ canvas, userEvent }) => {
 		const input = canvas.getByRole('textbox')

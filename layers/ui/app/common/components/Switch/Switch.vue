@@ -100,11 +100,12 @@ const modelValue = defineModel<boolean>()
 
 .switch__icon {
   display: inline-flex;
+  align-items: center;
   width: 34px;
   border: 1px solid transparent;
   border-radius: var(--UI-radius-L);
   height: var(--ui-height-XXS);
-  padding: 4px;
+  padding: 0 4px;
   background-color: var(--bg-controls-unchecked);
   transition: background-color 0.3s ease, border 0.3s ease;
 }

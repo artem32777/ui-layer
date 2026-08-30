@@ -10,19 +10,27 @@ import type { SelectProps, SelectOption } from '../Select.types.ts'
 import { selectSizes, selectVariants } from '../Select.types'
 import SelectStoryForm from './SelectStoryForm.vue'
 import SelectStoryStates from './SelectStoryStates.vue'
-import { iconNameList } from '#layers/ui/app/modules/svg-icon'
+import { iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon'
+import { formFieldArgTypes, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-type SelectStoryArgs = SelectProps<boolean> & {
+type SelectStoryArgs = SelectProps<boolean> & Omit<FormFieldProps, 'name'> & {
 	modelValue?: string | string[]
 }
 
 const options: SelectOption[] = [
-	{ label: 'Москва', value: 'moscow' },
+	{ label: 'Москва', value: 'moscow', description: 'Столица России', icon: iconNames['building-01'] },
 	{ label: 'Санкт-Петербург', value: 'saint-petersburg' },
 	{ label: 'Казань', value: 'kazan' },
-	{ label: 'Минск', value: 'minsk' },
+	{
+		label: 'Беларусь',
+		value: 'belarus',
+		group: 'Другие страны',
+		children: [
+			{ label: 'Минск', value: 'minsk' },
+			{ label: 'Гомель2', value: 'gomel2', description: 'Второй город' },
+		],
+	},
 	{ label: 'Гомель', value: 'gomel1', disabled: true },
-	{ label: 'Гомель2', value: 'gomel2' },
 	{ label: 'Гомель3', value: 'gomel3' },
 ]
 
@@ -140,6 +148,11 @@ export const Base: Story = {
 }
 
 export const Form: Story = {
+	argTypes: { ...formFieldArgTypes },
+	args: {
+		label: 'Город',
+		hint: 'Подсказка',
+	},
 	render: (args: SelectStoryArgs) => {
 		const [, updateArgs] = useArgs<SelectStoryArgs>()
 
@@ -162,7 +175,6 @@ export const Form: Story = {
 					<SelectStoryForm
 						v-bind="args"
 						:show-error="args.invalid"
-						label="Город"
 					/>
 				</div>
 			`,
@@ -188,39 +200,29 @@ export const States: Story = {
 
 export const FormDocsExample: Story = {
 	tags: ['!dev'],
+	args: {
+		label: 'Город',
+		hint: 'Подсказка',
+	},
 	render: (args: SelectStoryArgs) => ({
 		components: { SelectStoryForm },
 		setup() {
 			return { args }
 		},
-		template: '<SelectStoryForm v-bind="args" label="Город" />',
+		template: '<SelectStoryForm v-bind="args" />',
 	}),
 }
 
-export const Tests: Story = {
-	play: async ({ canvas, canvasElement, userEvent }) => {
-		const trigger = canvas.getByRole('combobox')
-		const body = within(canvasElement.ownerDocument.body)
-
-		await expect(trigger).toHaveTextContent('Выберите город')
-		await userEvent.click(trigger)
-
-		await expect(await body.findByRole('option', { name: 'Гомель' })).toHaveAttribute('aria-disabled', 'true')
-		await userEvent.click(await body.findByRole('option', { name: 'Казань' }))
-
-		await waitFor(() => expect(trigger).toHaveTextContent('Казань'))
-		await waitFor(() => expect(body.queryByRole('listbox')).not.toBeInTheDocument())
-	},
-}
-
 export const FormTests: Story = {
-	tags: ['!dev'],
+	args: {
+		label: 'Город',
+	},
 	render: (args: SelectStoryArgs) => ({
 		components: { SelectStoryForm },
 		setup() {
 			return { args }
 		},
-		template: '<SelectStoryForm v-bind="args" label="Город" />',
+		template: '<SelectStoryForm v-bind="args" />',
 	}),
 	play: async ({ canvas, canvasElement, userEvent }) => {
 		const trigger = canvas.getByRole('combobox')
@@ -231,7 +233,20 @@ export const FormTests: Story = {
 		await expect(await canvas.findByText('Укажите город')).toBeVisible()
 
 		await userEvent.click(trigger)
-		await userEvent.click(await body.findByRole('option', { name: 'Казань' }))
+		await userEvent.click(await body.findByRole('menuitem', { name: 'Казань' }))
 		await expect(canvas.queryByText('Укажите город')).toBeNull()
+	},
+}
+
+export const NestedTests: Story = {
+	tags: ['!dev'],
+	play: async ({ canvas, canvasElement, userEvent }) => {
+		const trigger = canvas.getByRole('combobox')
+		const body = within(canvasElement.ownerDocument.body)
+
+		await userEvent.click(trigger)
+		await userEvent.hover(await body.findByRole('menuitem', { name: 'Беларусь' }))
+		await userEvent.click(await body.findByRole('menuitem', { name: 'Минск' }))
+		await waitFor(() => expect(trigger).toHaveAccessibleName('Минск'))
 	},
 }

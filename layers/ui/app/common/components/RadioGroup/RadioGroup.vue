@@ -49,15 +49,9 @@ const modelValue = defineModel<string>()
 	flex-direction: column;
 	gap: 8px;
 
-	&[aria-invalid='true'] {
-		.radio-group__icon {
-			border-color: var(--error);
-		}
-	}
-
 	&[data-disabled] {
 		pointer-events: none;
-		opacity: 0.5;
+		opacity: 0.8;
 	}
 }
 
@@ -68,8 +62,7 @@ const modelValue = defineModel<string>()
   @include font-size(button);
   color: var(--text-on-surface-dark);
 
-	&:hover,
-	&:focus-within {
+	&:hover, &:focus-within {
 		.radio-group__icon {
 			background-color: var(--bg-controls-unchecked-hover);
 			border-color: var(--border-primary);
@@ -82,7 +75,7 @@ const modelValue = defineModel<string>()
 
 	&:has(.radio-group__icon[data-disabled]) {
 		pointer-events: none;
-    color: var(--neutral-700);
+    color: var(--text-on-surface-tertiary);
 	}
 }
 

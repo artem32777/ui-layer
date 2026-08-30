@@ -11,6 +11,7 @@ const props = defineProps<TextareaProps & FormFieldProps>()
 		v-slot="{ value, handleChange, handleBlur, invalid }"
 		:name="name"
 		:label="label"
+		:hint="hint"
 	>
 		<Textarea
 			v-bind="props"

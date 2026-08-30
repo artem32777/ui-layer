@@ -9,6 +9,7 @@ const selected = ref(false)
 	<Chip
 		v-model="selected"
 		type="toggle"
+		size="medium"
 		text="Chip"
 	/>
 </template>

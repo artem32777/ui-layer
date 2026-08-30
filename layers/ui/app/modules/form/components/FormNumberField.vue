@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import FormField from './FormField.vue'
+import FormField, { type FormFieldProps } from './FormField.vue'
 import type { NumberFieldProps } from '#layers/ui/app/common/components/NumberField/NumberField.types.ts'
 import NumberField from '#layers/ui/app/common/components/NumberField/NumberField.vue'
 
-const props = defineProps<NumberFieldProps & {
-	name: string
-	label?: string
-}>()
+const props = defineProps<NumberFieldProps & FormFieldProps>()
 </script>
 
 <template>
@@ -14,6 +11,7 @@ const props = defineProps<NumberFieldProps & {
 		v-slot="{ value, handleChange, invalid }"
 		:name="name"
 		:label="label"
+		:hint="hint"
 	>
 		<NumberField
 			v-bind="props"

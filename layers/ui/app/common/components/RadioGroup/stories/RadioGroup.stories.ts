@@ -1,24 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
-import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
-import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
-import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
-import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import RadioGroup from '../RadioGroup.vue'
 import radioGroupTypesSource from '../RadioGroup.types.ts?raw'
-import { ref } from 'vue'
+import RadioGroupStoryForm from './RadioGroupStoryForm.vue'
+import RadioGroupStoryStates from './RadioGroupStoryStates.vue'
 import { ThemeNamesArray } from '#layers/ui/app/config/theme.ts'
+import { formFieldArgTypes, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-type RadioGroupStoryArgs = ComponentProps<typeof RadioGroup>
+type RadioGroupStoryArgs = ComponentProps<typeof RadioGroup> & Omit<FormFieldProps, 'name'>
 
 const defaultOptions = [
 	{ label: 'False', value: 'false' },
 	{ label: 'True', value: 'true' },
 	{ label: 'Disabled', value: 'disabled', disabled: true },
 ]
-
-const radioGroupChecked = ['', 'false']
 
 const meta = {
 	title: 'UI/RadioGroup',
@@ -54,7 +50,7 @@ const meta = {
 		setup() { return { args } },
 		template: '<RadioGroup v-bind="args" v-model="args.modelValue" />',
 	}),
-} satisfies Meta<typeof RadioGroup>
+} satisfies Meta<RadioGroupStoryArgs>
 
 export default meta
 
@@ -71,6 +67,27 @@ export const Base: Story = {
 
 }
 
+export const Form: Story = {
+	argTypes: {
+		...formFieldArgTypes,
+	},
+	args: {
+		label: 'Способ получения',
+		hint: 'Подсказка',
+		options: [
+			{ label: 'Курьером', value: 'courier' },
+			{ label: 'Самовывоз', value: 'pickup' },
+		],
+	},
+	render: (args: RadioGroupStoryArgs) => ({
+		components: { RadioGroupStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<RadioGroupStoryForm v-bind="args" :show-error="args.invalid" />',
+	}),
+}
+
 export const States: Story = {
 	parameters: {
 		pseudo: {
@@ -78,70 +95,71 @@ export const States: Story = {
 		},
 	},
 	render: (args: RadioGroupStoryArgs) => ({
-		components: { RadioGroup, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		components: { RadioGroupStoryStates },
 		setup() {
-			const value = ref('false')
-			return { args, radioGroupChecked, value }
+			return { args }
 		},
-		template: `
-			<StoryGrid>
-				<StoryGridSection
-					v-for="checked in radioGroupChecked"
-					:key="checked || 'default'"
-					:title="checked ? 'checked' : 'default'"
-				>
-					<StoryGridRow>
-						<StoryGridItem title="default">
-							<RadioGroup
-								v-bind="args"
-								:model-value="checked"
-							/>
-						</StoryGridItem>
-						<StoryGridItem title="hover">
-							<RadioGroup
-								v-bind="args"
-								:model-value="checked"
-								class="radio-group-story--hovered"
-							/>
-						</StoryGridItem>
-						<StoryGridItem title="disabled">
-							<RadioGroup
-									v-bind="args"
-									:model-value="checked"
-									disabled
-							/>
-						</StoryGridItem>
-						<StoryGridItem title="invalid">
-							<RadioGroup
-								v-bind="args"
-								:model-value="checked"
-								invalid
-							/>
-						</StoryGridItem>
-					</StoryGridRow>
-				</StoryGridSection>
-			</StoryGrid>
-		`,
+		template: '<RadioGroupStoryStates v-bind="args" />',
+	}),
+}
+
+export const FormDocsExample: Story = {
+	tags: ['!dev'],
+	args: {
+		label: 'Способ получения',
+		hint: 'Подсказка',
+		options: [
+			{ label: 'Курьером', value: 'courier' },
+			{ label: 'Самовывоз', value: 'pickup' },
+		],
+	},
+	render: (args: RadioGroupStoryArgs) => ({
+		components: { RadioGroupStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<RadioGroupStoryForm v-bind="args" />',
 	}),
 }
 
 export const Tests: Story = {
+	args: {
+		label: 'Способ получения',
+		options: [
+			{ label: 'Курьером', value: 'courier' },
+			{ label: 'Самовывоз', value: 'pickup' },
+		],
+	},
+	render: (args: RadioGroupStoryArgs) => ({
+		components: { RadioGroupStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<RadioGroupStoryForm v-bind="args" />',
+	}),
 	play: async ({ canvas, userEvent }) => {
-		const falseOption = canvas.getByRole('radio', { name: 'False' })
-		const trueOption = canvas.getByRole('radio', { name: 'True' })
-		const disabledOption = canvas.getByRole('radio', { name: 'Disabled' })
+		const courier = canvas.getByRole('radio', { name: 'Курьером' })
+		const pickup = canvas.getByRole('radio', { name: 'Самовывоз' })
 
-		await expect(trueOption).toBeChecked()
-		await expect(falseOption).not.toBeChecked()
-		await expect(disabledOption).toBeDisabled()
+		await expect(courier).not.toBeChecked()
+		await expect(pickup).not.toBeChecked()
 
-		await userEvent.click(falseOption)
-		await expect(falseOption).toBeChecked()
-		await expect(trueOption).not.toBeChecked()
+		await expect(canvas.queryByText('Выберите способ получения')).toBeNull()
 
+		await userEvent.tab()
+		await userEvent.tab()
+		await expect(await canvas.findByText('Выберите способ получения')).toBeVisible()
+
+		await userEvent.click(courier)
+		await userEvent.tab()
+		await expect(canvas.queryByText('Выберите способ получения')).toBeNull()
+		await expect(courier).toBeChecked()
+		await expect(pickup).not.toBeChecked()
+
+		await userEvent.click(courier)
 		await userEvent.keyboard('{ArrowDown}')
-		await expect(trueOption).toHaveFocus()
+		await expect(pickup).toHaveFocus()
 		await userEvent.keyboard(' ')
-		await expect(trueOption).toBeChecked()
+		await expect(pickup).toBeChecked()
 	},
 }

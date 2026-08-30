@@ -8,10 +8,10 @@ import { selectVariants, type SelectProps } from '../Select.types.ts'
 import Select from '../Select.vue'
 import SelectStoryForm from './SelectStoryForm.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon'
+import type { FormFieldProps } from '#layers/ui/app/modules/form'
 
-const props = defineProps<SelectProps<boolean> & {
+const props = defineProps<SelectProps<boolean> & Omit<FormFieldProps, 'name'> & {
 	modelValue?: string | string[]
-	label?: string
 }>()
 
 const models = reactive({
@@ -101,6 +101,7 @@ const models = reactive({
 						:variant="variant"
 						:size="size"
 						:icon="icon"
+						:hint="hint"
 						:disabled="disabled"
 						:multiple="false"
 					/>
@@ -113,6 +114,7 @@ const models = reactive({
 						:variant="variant"
 						:size="size"
 						:icon="icon"
+						:hint="hint"
 						:disabled="disabled"
 						:multiple="false"
 						show-error

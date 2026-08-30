@@ -1,6 +1,4 @@
 export interface SliderProps {
-	/** Текст лейбла над слайдером. */
-	label?: string
 	/** Суффикс / единица измерения. */
 	additionalText?: string
 	/** Количество ползунков: диапазон или одно значение. */
@@ -13,8 +11,12 @@ export interface SliderProps {
 	max?: number
 	/** Шаг изменения. */
 	step?: number
+	/** Показывать процент от шкалы в варианте `one-point`. */
+	percent?: boolean
 	/** Отключает слайдер. */
 	disabled?: boolean
+	/** Отмечает поле как невалидное. */
+	invalid?: boolean
 }
 
 export interface MultiSliderProps {

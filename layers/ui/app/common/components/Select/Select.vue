@@ -1,36 +1,37 @@
 <script setup lang="ts" generic="T extends boolean = false">
 import { computed } from 'vue'
-import type { SelectProps } from './Select.types'
+import type { SelectOption, SelectProps } from './Select.types'
 import SelectMenu from './SelectMenu.vue'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
-import { SelectIcon, SelectValue, SelectTrigger } from 'reka-ui'
+import { SelectIcon, SelectRoot, SelectValue, SelectTrigger } from 'reka-ui'
+import Badge from '#layers/ui/app/common/components/Badge/Badge.vue'
 
 // https://reka-ui.com/docs/components/select
-
-defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectProps<T>>(), {
 	variant: 'fill',
 	size: 'medium',
 })
 
-const emit = defineEmits<{
-	/** Меню закрылось (для валидации формы на «уходе» с поля). */
-	close: []
-}>()
-
 const modelValue = defineModel<T extends true ? string[] : string>()
 
-const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelValue.value : [modelValue.value])
-	.flatMap(value => props.options.find(option => option.value === value)?.label ?? []))
+const emit = defineEmits<{
+	'update:open': [open: boolean]
+}>()
 
-const iconSize = computed(() => ({ medium: 18, big: 20 })[props.size])
+function findSelectOption(options: SelectOption[], value: string | undefined): SelectOption | undefined {
+	if (value == null) return undefined
 
-function onOpenChange(isOpen: boolean) {
-	if (!isOpen) {
-		emit('close')
+	for (const option of options) {
+		if (option.value === value) return option
+
+		const nested = option.children && findSelectOption(option.children, value)
+		if (nested) return nested
 	}
 }
+
+const selectedLabels = computed(() => (Array.isArray(modelValue.value) ? modelValue.value : [modelValue.value])
+	.flatMap(value => findSelectOption(props.options, value)?.label ?? []))
 </script>
 
 <template>
@@ -39,17 +40,13 @@ function onOpenChange(isOpen: boolean) {
 		v-model="modelValue"
 		:multiple="multiple"
 		:disabled="disabled"
-		@update:open="onOpenChange"
+		@update:open="emit('update:open', $event)"
 	>
 		<SelectTrigger
-			v-bind="$attrs"
 			class="select"
 			:class="[
 				`select--variant-${variant}`,
 				`select--size-${size}`,
-				{
-					'select--with-icon': icon,
-				},
 			]"
 			:aria-invalid="invalid"
 			:aria-label="selectedLabels.length ? selectedLabels.join(', ') : placeholder"
@@ -57,7 +54,7 @@ function onOpenChange(isOpen: boolean) {
 			<Icon
 				v-if="icon"
 				:name="icon"
-				:size="iconSize"
+				:size="20"
 				class="select__icon"
 				aria-hidden="true"
 			/>
@@ -68,12 +65,11 @@ function onOpenChange(isOpen: boolean) {
 			>
 				<span v-if="multiple && selectedLabels.length">
 					{{ selectedLabels[0] }}
-					<span
+					<Badge
 						v-if="selectedLabels.length > 1"
-						class="select__count"
-					>
-						+{{ selectedLabels.length - 1 }}
-					</span>
+						:text="`+${selectedLabels.length - 1}`"
+						class="select__counter"
+					/>
 				</span>
 				<span v-else>
 					{{ selectedLabels[0] ?? placeholder }}
@@ -86,11 +82,12 @@ function onOpenChange(isOpen: boolean) {
 				as-child
 			>
 				<Icon
-					:name="iconNames.plus"
-					:size="iconSize"
+					:name="iconNames['chevron-down']"
+					:size="20"
 				/>
 			</SelectIcon>
 		</SelectTrigger>
+
 		<ClientOnly>
 			<SelectMenu :options="options" />
 		</ClientOnly>
@@ -104,21 +101,15 @@ function onOpenChange(isOpen: boolean) {
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	min-width: 150px;
-	gap: 6px;
 	border: 1px solid transparent;
 	@include font-size(button);
 	color: var(--text-on-bg-secondary);
 	background-color: var(--bg-field-static);
 	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
-	cursor: pointer;
 
-	&:hover {
+	&:hover, &:focus {
 		background-color: var(--bg-field-hover);
-	}
-
-	&:focus {
-		outline: none;
+    outline: none;
 	}
 
 	&[data-state='open'],
@@ -146,64 +137,31 @@ function onOpenChange(isOpen: boolean) {
 	&--size-medium {
 		height: var(--ui-height-M);
 		border-radius: var(--UI-radius-M);
-		padding-left: 12px;
-		padding-right: 16px;
-
-		.select__icon {
-			left: 12px;
-		}
-
-		&.select--with-icon {
-			padding-left: 40px;
-		}
+    padding: 0 12px;
+    gap: 10px;
 	}
 
 	&--size-big {
 		height: var(--ui-height-L);
 		border-radius: var(--UI-radius-L);
-		padding-left: 18px;
-		padding-right: 22px;
-
-		.select__icon {
-			left: 18px;
-		}
-
-		&.select--with-icon {
-			padding-left: 50px;
-		}
+    padding: 0 18px 0 20px;
+    gap: 12px;
 	}
-}
-
-.select__icon {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	pointer-events: none;
 }
 
 .select__value {
 	flex: 1;
-	min-width: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	text-align: left;
 }
 
-.select__count {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	height: 20px;
-	padding: 0 7px;
-	border-radius: 16px;
-	@include font-size(label);
-	color: var(--white);
-	background-color: var(--primary-light);
+.select__counter {
+  margin-left: 6px;
 }
 
 .select__chevron {
-	flex-shrink: 0;
 	transition: transform 0.3s ease;
 }
 </style>

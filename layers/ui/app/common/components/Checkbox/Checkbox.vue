@@ -3,10 +3,7 @@ import { CheckboxIndicator, CheckboxRoot } from 'reka-ui'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 import type { CheckboxProps } from './Checkbox.types.ts'
 
-withDefaults(defineProps<CheckboxProps>(), {
-	size: 20,
-	iconSize: 14,
-})
+defineProps<CheckboxProps>()
 
 defineSlots<{
 	/** Текстовая подпись рядом с чекбоксом. */
@@ -21,18 +18,14 @@ const modelValue = defineModel<boolean>()
 		<CheckboxRoot
 			v-model="modelValue"
 			class="checkbox__root"
-			:style="{
-				width: typeof size === 'number' ? `${size}px` : size,
-				height: typeof size === 'number' ? `${size}px` : size,
-			}"
 			:aria-invalid="invalid"
 			:disabled="disabled"
 		>
 			<Icon
 				v-if="disabled"
-				:name="iconNames.plus"
-				:size="14"
-				class="checkbox__check"
+				:name="iconNames.disabled"
+				:size="10"
+				class="checkbox__disabled"
 				aria-hidden="true"
 			/>
 
@@ -41,8 +34,8 @@ const modelValue = defineModel<boolean>()
 				class="checkbox__indicator"
 			>
 				<Icon
-					:name="iconNames.plus"
-					:size="iconSize"
+					:name="iconNames.check"
+					:size="14"
 					class="checkbox__check"
 					aria-hidden="true"
 				/>
@@ -63,18 +56,17 @@ const modelValue = defineModel<boolean>()
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	color: var(--neutral-950);
-  font-weight: 600;
-  line-height: 20px;
+  @include font-size(button);
+	color: var(--text-on-surface-dark);
 
-  &:hover,
-  &:focus-within {
+  &:hover, &:focus-within {
     .checkbox__root {
-      background-color: var(--white);
-      border-color: var(--primary-light);
+      background-color: var(--bg-controls-unchecked-hover);
+      border-color: var(--border-primary);
 
       &[data-state="checked"] {
-        background-color: var(--primary-light);
+        background-color: var(--bg-controls-checked-hover);
+        border-color: var(--bg-controls-checked-hover);
       }
     }
   }
@@ -83,17 +75,13 @@ const modelValue = defineModel<boolean>()
     pointer-events: none;
 
 		.checkbox__root {
-			color: var(--neutral-700);
-			background-color: var(--neutral-500);
-			border-color: var(--neutral-500);
-
-			.checkbox__indicator {
-				color: var(--neutral-700);
-			}
+			color: var(--icon-on-bg-disabled);
+			background-color: var(--bg-action-disabled);
+			border-color: var(--bg-action-disabled);
 		}
 
 		.checkbox__label {
-			color: var(--neutral-700);
+			color: var(--text-on-surface-tertiary);
 		}
 	}
 }
@@ -102,26 +90,31 @@ const modelValue = defineModel<boolean>()
 	display: flex;
 	align-items: center;
 	justify-content: center;
+  height: var(--ui-height-XXS) !important;
+  aspect-ratio: 1;
 	border: 1px solid transparent;
-	border-radius: 4px;
-	background-color: var(--neutral-500);
+	border-radius: var(--UI-radius-XSS);
+	background-color: var(--bg-controls-unchecked);
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-	cursor: pointer;
 
   &[aria-invalid="true"]{
     box-shadow: 0 0 0 1px var(--accent);
   }
 
 	&[data-state="checked"]{
-		border-color: var(--primary);
-		background-color: var(--primary);
+		border-color: var(--bg-controls-checked);
+    background-color: var(--bg-controls-checked);
 	}
 }
 
 .checkbox__indicator {
-	color: var(--white);
+  color: var(--icon-on-bg-checked);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.checkbox__disabled {
+  color: var(--icon-on-bg-disabled);
 }
 </style>

@@ -9,6 +9,12 @@ export interface SelectOption {
 	disabled?: boolean
 	/** Название группы вариантов. */
 	group?: string
+	/** Описание под текстом варианта. */
+	description?: string
+	/** Иконка слева от текста варианта. */
+	icon?: IconName
+	/** Вложенные варианты, которые открываются в подменю. */
+	children?: SelectOption[]
 }
 
 export interface SelectProps<T> {

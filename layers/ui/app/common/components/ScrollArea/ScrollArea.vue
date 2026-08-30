@@ -1,14 +1,16 @@
 <script setup lang="ts">
+import type { Component } from 'vue'
+import { ScrollAreaCorner, ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from 'reka-ui'
+
 // https://reka-ui.com/docs/components/scroll-area
-import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from 'reka-ui'
 
 interface ScrollAreaProps {
 	orientation?: 'vertical' | 'horizontal'
+	/** Оборачивает viewport через as-child, например SelectViewport */
+	viewportAsChild?: Component
 }
 
-withDefaults(defineProps<ScrollAreaProps>(), {
-	orientation: 'horizontal',
-})
+defineProps<ScrollAreaProps>()
 
 defineSlots<{
 	/** Скролящийся контент */
@@ -21,63 +23,85 @@ defineSlots<{
 		class="custom-scroll-area"
 		type="auto"
 	>
-		<ScrollAreaViewport class="custom-scroll-area__viewport">
+		<component
+			:is="viewportAsChild"
+			v-if="viewportAsChild"
+			as-child
+		>
+			<ScrollAreaViewport class="custom-scroll-area__viewport">
+				<slot />
+			</ScrollAreaViewport>
+		</component>
+		<ScrollAreaViewport
+			v-else
+			class="custom-scroll-area__viewport"
+		>
 			<slot />
 		</ScrollAreaViewport>
 		<ScrollAreaScrollbar
-			:orientation="orientation"
+			v-if="!orientation || orientation === 'vertical'"
+			orientation="vertical"
 			class="custom-scroll-area__scrollbar"
 		>
 			<ScrollAreaThumb class="custom-scroll-area__thumb" />
 		</ScrollAreaScrollbar>
+		<ScrollAreaScrollbar
+			v-if="!orientation || orientation === 'horizontal'"
+			orientation="horizontal"
+			class="custom-scroll-area__scrollbar"
+		>
+			<ScrollAreaThumb class="custom-scroll-area__thumb" />
+		</ScrollAreaScrollbar>
+		<ScrollAreaCorner
+			v-if="!orientation"
+			class="custom-scroll-area__corner"
+		/>
 	</ScrollAreaRoot>
 </template>
 
 <style scoped lang="scss">
 .custom-scroll-area {
+  --scrollbar-size: 4px;
   height: inherit;
   max-height: inherit;
+  overflow: hidden;
+  padding-right: 12px;
+
+  &:hover {
+    .custom-scroll-area__thumb {
+      background-color: var(--bg-controls-scrollthumb-hover);
+    }
+  }
 }
 
 :deep(.custom-scroll-area__viewport) {
   width: 100%;
   height: 100%;
   border-radius: inherit;
-
-  &[data-orientation="vertical"] {
-    padding-right: var(--scrollbar-size);
-  }
-
-  &[data-orientation="horizontal"] {
-    padding-bottom: var(--scrollbar-size);
-  }
 }
 
 :deep(.custom-scroll-area__scrollbar) {
-	display: flex;
-	touch-action: none;
-	user-select: none;
-	transition: background-color 0.3s ease;
-  background-color: var(--neutral-500, #e2e2e2);
+  display: flex;
+  touch-action: none;
+  user-select: none;
+  transition: background-color 0.3s ease;
 
-	&:hover {
-		background-color: color-mix(in srgb, var(--text, #000000) 6%, transparent);
-	}
-
-	&[data-orientation="vertical"] {
+  &[data-orientation="vertical"] {
     width: var(--scrollbar-size);
-	}
+  }
 
   &[data-orientation="horizontal"] {
     flex-direction: column;
     height: var(--scrollbar-size);
-	}
+  }
 }
 
 :deep(.custom-scroll-area__thumb) {
-	flex: 1;
-	border-radius: 999px;
-	background-color: var(--brand, #4149f2);
+  position: relative;
+  flex: 1;
+  border-radius: var(--scrollbar-size);
+  background-color: var(--bg-controls-scrollthumb);
+  transition: background-color 0.3s ease 0s;
 
   /* increase target size for touch devices https://www.w3.org/WAI/WCAG21/Understanding/target-size.html */
   &::before {
@@ -91,5 +115,9 @@ defineSlots<{
     min-width: 44px;
     min-height: 44px;
   }
+}
+
+:deep(.custom-scroll-area__corner) {
+  background-color: var(--neutral-500, #e2e2e2);
 }
 </style>

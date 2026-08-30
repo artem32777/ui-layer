@@ -10,4 +10,7 @@ export const VRule = {
 
 	phone: (message: string = VMessage.phone) =>
 		z.string({ required_error: message }).regex(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, message),
+
+	checkbox: (message: string = VMessage.checkbox) =>
+		z.boolean().refine((value) => value, { message }),
 }

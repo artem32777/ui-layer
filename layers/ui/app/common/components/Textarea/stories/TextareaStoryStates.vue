@@ -6,10 +6,10 @@ import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import { textareaVariants, type TextareaProps } from '../Textarea.types.ts'
 import Textarea from '../Textarea.vue'
 import TextareaStoryForm from './TextareaStoryForm.vue'
+import type { FormFieldProps } from '#layers/ui/app/modules/form'
 
-const props = defineProps<TextareaProps & {
+const props = defineProps<TextareaProps & Omit<FormFieldProps, 'name'> & {
 	modelValue?: string
-	label?: string
 }>()
 </script>
 
@@ -62,14 +62,6 @@ const props = defineProps<TextareaProps & {
 						v-bind="props"
 						:variant="variant"
 						disabled
-						aria-label="Текстовое поле"
-					/>
-				</StoryGridItem>
-				<StoryGridItem title="invalid">
-					<Textarea
-						v-bind="props"
-						:variant="variant"
-						invalid
 						aria-label="Текстовое поле"
 					/>
 				</StoryGridItem>

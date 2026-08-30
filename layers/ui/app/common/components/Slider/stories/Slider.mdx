@@ -1,6 +1,7 @@
 import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
 import * as SliderStories from './Slider.stories'
 import SliderExampleSource from './SliderExample.vue?raw'
+import SliderExampleFormSource from './SliderExampleForm.vue?raw'
 
 <Meta of={SliderStories} />
 
@@ -8,6 +9,7 @@ import SliderExampleSource from './SliderExample.vue?raw'
 - Основан на <font color="blue">[`Slider из Reka UI`](https://reka-ui.com/docs/components/slider)</font>.
 - Варианты: `two-points` (диапазон) и `one-point` (одно значение). Размеры: `medium`, `big`.
 - `MultiSlider` — несколько непересекающихся интервалов на одной шкале; значения передаются парами.
+- Лейбл, подсказка и ошибка — через `FormSlider` (`FormFieldProps`: `name`, `label`, `hint`).
 
 <Canvas of={SliderStories.DocsExample} />
 
@@ -20,3 +22,17 @@ import SliderExampleSource from './SliderExample.vue?raw'
 ## Пример использования
 
 <Source code={SliderExampleSource} language="vue" />
+
+## FormSlider
+
+Адаптер `Slider` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`, `hint`).
+
+Ошибка появляется после ухода с поля: `validateOnValueUpdate` выключен, валидация на blur. Чтобы скрыть ошибку, нужно исправить значение и снова уйти с поля.
+
+<Canvas of={SliderStories.FormDocsExample} />
+
+<Source code={SliderExampleFormSource} language="vue" />
+
+### Состояние ошибки
+
+<Canvas of={SliderStories.FormTests} />

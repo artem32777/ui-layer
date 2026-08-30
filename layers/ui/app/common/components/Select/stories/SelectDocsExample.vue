@@ -7,8 +7,16 @@ import type { SelectOption } from '../Select.types.ts'
 const city = ref('')
 
 const options: SelectOption[] = [
-	{ label: 'Москва', value: 'moscow' },
+	{ label: 'Москва', value: 'moscow', description: 'Столица России', icon: iconNames['building-01'] },
 	{ label: 'Казань', value: 'kazan' },
+	{
+		label: 'Беларусь',
+		value: 'belarus',
+		children: [
+			{ label: 'Минск', value: 'minsk' },
+			{ label: 'Гомель', value: 'gomel' },
+		],
+	},
 ]
 </script>
 

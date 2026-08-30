@@ -40,7 +40,6 @@ const iconAttrs = computed(() => ({
 	display: inline-block;
 	flex: 0 0 auto;
 	color: currentColor;
-	line-height: 1;
 	vertical-align: middle;
 
 	:deep([fill]:not([fill="none"])) {

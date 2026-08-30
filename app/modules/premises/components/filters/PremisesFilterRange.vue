@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Slider from '#layers/ui/app/common/components/Slider/Slider.vue'
+import FormFieldLabel from '#layers/ui/app/modules/form/components/FormFieldLabel.vue'
 
 export interface PremisesFilterRangeProps {
 	label: string
@@ -19,16 +20,17 @@ const model = defineModel<number[]>({ required: true })
 
 <template>
 	<div class="premises-filter-range-field">
-		<Slider
-			v-model="model"
-			:label="label"
-			:additional-text="additionalText"
-			size="big"
-			:min="range.min"
-			:max="range.max"
-			:step="range.step"
-			:disabled="disabled"
-		/>
+		<FormFieldLabel :label="label">
+			<Slider
+				v-model="model"
+				:additional-text="additionalText"
+				size="big"
+				:min="range.min"
+				:max="range.max"
+				:step="range.step"
+				:disabled="disabled"
+			/>
+		</FormFieldLabel>
 	</div>
 </template>
 

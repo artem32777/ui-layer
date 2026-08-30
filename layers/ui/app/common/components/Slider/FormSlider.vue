@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import FormField, { type FormFieldProps } from './FormField.vue'
-import RadioGroup from '#layers/ui/app/common/components/RadioGroup/RadioGroup.vue'
-import type { RadioGroupProps } from '#layers/ui/app/common/components/RadioGroup/RadioGroup.types.ts'
+import FormField, { type FormFieldProps } from '#layers/ui/app/modules/form/components/FormField.vue'
+import type { SliderProps } from './Slider.types.ts'
+import Slider from './Slider.vue'
 
-defineProps<FormFieldProps & {
-	radioGroupProps: RadioGroupProps
-}>()
+const props = defineProps<SliderProps & FormFieldProps>()
 
 function onFocusOut(event: FocusEvent, handleBlur: (e?: Event, shouldValidate?: boolean) => void) {
 	const root = event.currentTarget
@@ -21,9 +19,9 @@ function onFocusOut(event: FocusEvent, handleBlur: (e?: Event, shouldValidate?: 
 		:label="label"
 		:hint="hint"
 	>
-		<RadioGroup
-			v-bind="radioGroupProps"
-			:model-value="value as string"
+		<Slider
+			v-bind="props"
+			:model-value="value as number[]"
 			:invalid="invalid"
 			@update:model-value="handleChange"
 			@focusout="(event: FocusEvent) => onFocusOut(event, handleBlur)"

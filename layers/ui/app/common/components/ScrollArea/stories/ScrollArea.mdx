@@ -7,6 +7,8 @@ import ScrollAreaExampleSource from './ScrollAreaExample.vue?raw'
 # ScrollArea
 - Компонент используется для создания сложных скроллбаров, когда невозможно стилизовать нативный.
 - Для всех остальных ситуаций нужно использовать миксин `layers/ui/app/common/mixins/scrollbar.scss`
+- Родителю нужна ограниченная высота (`height` / `max-height`), иначе контент растянет область и скроллбар не появится.
+- Для Select передай `SelectViewport` в `viewport-as-child`, чтобы склеить viewport’ы через `as-child`.
 
 ## Базовый пример
 

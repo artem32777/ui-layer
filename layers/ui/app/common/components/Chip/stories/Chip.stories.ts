@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
-import { chipTypes } from '../Chip.types.ts'
+import { chipSizes, chipTypes } from '../Chip.types.ts'
 import Chip from '../Chip.vue'
 import ChipStoryStates from './ChipStoryStates.vue'
 
@@ -13,6 +13,7 @@ const meta = {
 	parameters: { a11y: { test: 'error' } },
 	argTypes: {
 		type: { control: 'select', options: chipTypes },
+		size: { control: 'select', options: chipSizes },
 		text: { control: 'text' },
 		modelValue: { control: 'boolean' },
 		disabled: { control: 'boolean' },
@@ -20,6 +21,7 @@ const meta = {
 	args: {
 		text: 'Chip',
 		type: 'toggle',
+		size: 'medium',
 		modelValue: false,
 		disabled: false,
 	} satisfies ChipStoryArgs,
@@ -56,13 +58,15 @@ export const States: Story = {
 }
 
 export const Tests: Story = {
-	play: async ({ canvas, userEvent }) => {
+	play: async ({ args, canvas, userEvent }) => {
 		const chip = canvas.getByRole('button', { name: 'Chip' })
 
 		await expect(chip).toHaveAttribute('aria-pressed', 'false')
 		await userEvent.click(chip)
 		await expect(chip).toHaveAttribute('aria-pressed', 'true')
+		await expect(args.modelValue).toBe(true)
 		await userEvent.click(chip)
 		await expect(chip).toHaveAttribute('aria-pressed', 'false')
+		await expect(args.modelValue).toBe(false)
 	},
 }

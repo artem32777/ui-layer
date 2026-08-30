@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { ComponentProps } from 'vue-component-type-helpers'
 import { expect } from 'storybook/test'
-import StoryGrid from '@@/.storybook/components/StoryGrid.vue'
-import StoryGridItem from '@@/.storybook/components/StoryGridItem.vue'
-import StoryGridRow from '@@/.storybook/components/StoryGridRow.vue'
-import StoryGridSection from '@@/.storybook/components/StoryGridSection.vue'
 import Checkbox from '../Checkbox.vue'
+import CheckboxStoryForm from './CheckboxStoryForm.vue'
+import CheckboxStoryStates from './CheckboxStoryStates.vue'
+import { VMessage, formFieldArgTypes, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-type CheckboxStoryArgs = ComponentProps<typeof Checkbox>
-const checkboxChecked = [false, true]
+type CheckboxStoryArgs = ComponentProps<typeof Checkbox> & Omit<FormFieldProps, 'name'>
 
 const meta = {
 	title: 'UI/Checkbox',
@@ -22,13 +20,9 @@ const meta = {
 		},
 		disabled: { control: 'boolean' },
 		invalid: { control: 'boolean' },
-		size: { control: 'number' },
-		iconSize: { control: 'number' },
 	},
 	args: {
 		modelValue: false,
-		size: 20,
-		iconSize: 14,
 		disabled: false,
 		invalid: false,
 	} satisfies CheckboxStoryArgs,
@@ -39,7 +33,7 @@ const meta = {
 		},
 		template: '<Checkbox v-bind="args" v-model="args.modelValue">Текст чекбокса</Checkbox>',
 	}),
-} satisfies Meta<typeof Checkbox>
+} satisfies Meta<CheckboxStoryArgs>
 
 export default meta
 
@@ -49,66 +43,65 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
-export const States: Story = {
-	parameters: {
-		pseudo: {
-			hover: '.checkbox-story--hovered',
-			focusWithin: '.checkbox-story--focused',
-		},
+export const Base: Story = {}
+
+export const Form: Story = {
+	argTypes: {
+		...formFieldArgTypes,
+	},
+	args: {
+		label: 'Согласие',
+		hint: 'Подсказка',
 	},
 	render: (args: CheckboxStoryArgs) => ({
-		components: { Checkbox, StoryGrid, StoryGridItem, StoryGridRow, StoryGridSection },
+		components: { CheckboxStoryForm },
 		setup() {
-			return { args, checkboxChecked }
+			return { args }
 		},
-		template: `
-			<StoryGrid>
-				<StoryGridSection
-					v-for="checked in checkboxChecked"
-					:key="String(checked)"
-					:title="checked ? 'checked' : 'default'"
-				>
-					<StoryGridRow>
-						<StoryGridItem title="default">
-							<Checkbox v-bind="args" :model-value="checked" >
-								Checkbox
-							</Checkbox>
-						</StoryGridItem>
-						<StoryGridItem title="hover">
-							<Checkbox v-bind="args" :model-value="checked"  class="checkbox-story--hovered">
-								Checkbox
-							</Checkbox>
-						</StoryGridItem>
-						<StoryGridItem title="focus">
-							<Checkbox v-bind="args" :model-value="checked"  class="checkbox-story--focused">
-								Checkbox
-							</Checkbox>
-						</StoryGridItem>
-						<StoryGridItem title="disabled">
-							<Checkbox v-bind="args" :model-value="checked" :disabled="true" >
-								Checkbox
-							</Checkbox>
-						</StoryGridItem>
-						<StoryGridItem title="invalid">
-							<Checkbox v-bind="args" :model-value="checked" :invalid="true">
-								Checkbox
-							</Checkbox>
-						</StoryGridItem>
-					</StoryGridRow>
-				</StoryGridSection>
-			</StoryGrid>
-		`,
+		template: '<CheckboxStoryForm v-bind="args" :show-error="args.invalid" />',
+	}),
+}
+
+export const States: Story = {
+	parameters: {
+		pseudo: { hover: '.checkbox-story--hovered' },
+	},
+	render: (args: CheckboxStoryArgs) => ({
+		components: { CheckboxStoryStates },
+		setup() {
+			return { args }
+		},
+		template: '<CheckboxStoryStates v-bind="args" />',
 	}),
 }
 
 export const Tests: Story = {
+	args: {
+		label: 'Согласие',
+	},
+	render: (args: CheckboxStoryArgs) => ({
+		components: { CheckboxStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<CheckboxStoryForm v-bind="args" />',
+	}),
 	play: async ({ canvas, userEvent }) => {
-		const checkbox = canvas.getByRole('checkbox', { name: 'Текст чекбокса' })
+		const checkbox = canvas.getByRole('checkbox', { name: /Согласен с условиями/ })
 
 		await expect(checkbox).not.toBeChecked()
 		await userEvent.click(checkbox)
 		await expect(checkbox).toBeChecked()
 		await userEvent.keyboard(' ')
 		await expect(checkbox).not.toBeChecked()
+
+		await expect(canvas.queryByText(VMessage.checkbox)).toBeNull()
+
+		await userEvent.tab()
+		await expect(await canvas.findByText(VMessage.checkbox)).toBeVisible()
+
+		await userEvent.click(checkbox)
+		await userEvent.tab()
+		await expect(canvas.queryByText(VMessage.checkbox)).toBeNull()
 	},
 }

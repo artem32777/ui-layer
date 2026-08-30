@@ -16,13 +16,15 @@ import SelectDocsExampleSource from './SelectDocsExample.vue?raw'
 
 <Canvas of={SelectStories.DocsMultiple} />
 
+У варианта можно передать `description`, `icon` и вложенные `children` — они открываются в подменю справа.
+
 ## Пример использования
 
 <Source code={SelectDocsExampleSource} language="vue" />
 
 ## FormSelect
 
-Адаптер `Select` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`).
+Адаптер `Select` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`, `hint`).
 
 Ошибка появляется после закрытия меню или ухода с поля: `validateOnValueUpdate` выключен, валидация на close/blur. Чтобы скрыть ошибку, нужно выбрать значение (или исправить и снова закрыть меню).
 

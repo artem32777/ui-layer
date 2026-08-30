@@ -7,6 +7,7 @@ import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 
 withDefaults(defineProps<ChipProps>(), {
 	type: 'toggle',
+	size: 'medium',
 })
 
 defineSlots<{
@@ -22,22 +23,25 @@ const modelValue = defineModel<boolean>({ default: false })
 		v-model="modelValue"
 		:disabled="disabled"
 		class="chip"
-		:class="[`chip--type-${type}`]"
+		:class="[
+			`chip--type-${type}`,
+			`chip--size-${size}`,
+		]"
 	>
 		<slot>{{ text }}</slot>
 
 		<Icon
 			v-if="type === 'dropdown'"
 			:name="modelValue ? iconNames['chevron-up'] : iconNames['chevron-down']"
-			:size="14"
+			:size="16"
 			class="chip__icon"
 			aria-hidden="true"
 		/>
 
 		<Icon
-			v-else-if="type === 'dismissible'"
+			v-else-if="type === 'dismissible' && modelValue"
 			:name="iconNames['x-close']"
-			:size="14"
+			:size="16"
 			class="chip__icon"
 			aria-hidden="true"
 		/>
@@ -50,24 +54,15 @@ const modelValue = defineModel<boolean>({ default: false })
 	align-items: center;
 	justify-content: center;
 	gap: 4px;
-	height: var(--ui-height-S);
-	padding: 0 12px;
-	border: 1px solid var(--border-neutral);
-	border-radius: var(--UI-radius-L);
 	white-space: nowrap;
-	@include font-size(button-small);
-	color: var(--text-on-surface-dark);
+	color: var(--text-on-bg-secondary);
 	background-color: var(--surface-block);
-	transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-	cursor: pointer;
+  @include font-size(button-small);
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 
-	&:hover {
-		background-color: var(--bg-field-hover);
-	}
-
-	&:focus-visible {
-		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-primary) 35%, transparent);
+	&:hover, &:focus-visible {
+		background-color: var(--bg-action-secondary-hover);
+    outline: none;
 	}
 
 	&[data-state='on'] {
@@ -82,9 +77,20 @@ const modelValue = defineModel<boolean>({ default: false })
 
 	&[data-disabled] {
 		pointer-events: none;
-		border-color: transparent;
 		color: var(--text-on-bg-disabled);
 		background-color: var(--bg-action-disabled);
+	}
+
+  &--size-small {
+    height: var(--ui-height-XS);
+    border-radius: var(--UI-radius-XS);
+    padding: 0 10px;
+  }
+
+	&--size-medium {
+		height: var(--ui-height-S);
+		border-radius: var(--UI-radius-S);
+    padding: 0 12px;
 	}
 }
 

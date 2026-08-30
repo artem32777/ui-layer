@@ -4,10 +4,9 @@ import { Form } from 'vee-validate'
 import { z } from 'zod'
 import type { InputProps } from '../Input.types.ts'
 import FormInput from '../FormInput.vue'
-import { VRule } from '#layers/ui/app/modules/form'
+import { VRule, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-withDefaults(defineProps<InputProps & {
-	label?: string
+withDefaults(defineProps<InputProps & Omit<FormFieldProps, 'name'> & {
 	/** Показать состояние ошибки при монтировании (для stories). */
 	showError?: boolean
 }>(), {
@@ -29,6 +28,7 @@ const validationSchema = toTypedSchema(z.object({
 		<FormInput
 			name="email"
 			:label="label"
+			:hint="hint"
 			:placeholder="placeholder"
 			:variant="variant"
 			:size="size"

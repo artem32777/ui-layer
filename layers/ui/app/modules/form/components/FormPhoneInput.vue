@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { vMaska } from 'maska/vue'
-import FormField from './FormField.vue'
+import FormField, { type FormFieldProps } from './FormField.vue'
 import type { InputProps } from '#layers/ui/app/common/components/Input/Input.types.ts'
 import Input from '#layers/ui/app/common/components/Input/Input.vue'
 
-const props = defineProps<Omit<InputProps, 'placeholder'> & {
-	name: string
-	label?: string
+const props = defineProps<Omit<InputProps, 'placeholder'> & FormFieldProps & {
 	placeholder?: string
 }>()
 </script>
@@ -16,6 +14,7 @@ const props = defineProps<Omit<InputProps, 'placeholder'> & {
 		v-slot="{ handleChange, invalid }"
 		:name="name"
 		:label="label"
+		:hint="hint"
 	>
 		<Input
 			v-maska="'+7 (###) ###-##-##'"

@@ -7,10 +7,10 @@ import { inputVariants, type InputProps } from '../Input.types.ts'
 import Input from '../Input.vue'
 import InputStoryForm from './InputStoryForm.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon'
+import type { FormFieldProps } from '#layers/ui/app/modules/form'
 
-const props = defineProps<InputProps & {
+const props = defineProps<InputProps & Omit<FormFieldProps, 'name'> & {
 	modelValue?: string
-	label?: string
 }>()
 </script>
 
@@ -66,14 +66,6 @@ const props = defineProps<InputProps & {
 						aria-label="Поле ввода"
 					/>
 				</StoryGridItem>
-				<StoryGridItem title="invalid">
-					<Input
-						v-bind="props"
-						:variant="variant"
-						invalid
-						aria-label="Поле ввода"
-					/>
-				</StoryGridItem>
 			</StoryGridRow>
 		</StoryGridSection>
 
@@ -83,12 +75,14 @@ const props = defineProps<InputProps & {
 					<InputStoryForm
 						v-bind="props"
 						:label="label || 'Email'"
+						:hint="hint"
 					/>
 				</StoryGridItem>
 				<StoryGridItem title="invalid">
 					<InputStoryForm
 						v-bind="props"
 						:label="label || 'Email'"
+						:hint="hint"
 						show-error
 					/>
 				</StoryGridItem>

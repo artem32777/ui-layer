@@ -5,9 +5,11 @@ import { ref } from 'vue'
 import MultiSlider from '../MultiSlider.vue'
 import Slider from '../Slider.vue'
 import { sliderSizes, sliderVariants } from '../Slider.types.ts'
+import SliderStoryForm from './SliderStoryForm.vue'
 import SliderStoryStates from './SliderStoryStates.vue'
+import { formFieldArgTypes, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-type SliderStoryArgs = ComponentProps<typeof Slider>
+type SliderStoryArgs = ComponentProps<typeof Slider> & Omit<FormFieldProps, 'name'>
 
 const meta = {
 	title: 'UI/Slider',
@@ -19,25 +21,27 @@ const meta = {
 			control: 'object',
 			table: { type: { summary: 'number[]' } },
 		},
-		label: { control: 'text' },
 		additionalText: { control: 'text' },
 		variant: { control: 'select', options: sliderVariants },
 		size: { control: 'select', options: sliderSizes },
 		min: { control: 'number' },
 		max: { control: 'number' },
 		step: { control: 'number' },
+		percent: { control: 'boolean' },
 		disabled: { control: 'boolean' },
+		invalid: { control: 'boolean' },
 	},
 	args: {
 		modelValue: [20, 80],
-		label: 'Slider label',
 		additionalText: 'm²',
 		variant: 'two-points',
 		size: 'medium',
 		min: 0,
 		max: 100,
 		step: 1,
+		percent: false,
 		disabled: false,
+		invalid: false,
 	} satisfies SliderStoryArgs,
 	render: (args: SliderStoryArgs) => ({
 		components: { Slider },
@@ -64,10 +68,28 @@ export const Base: Story = {
 	}),
 }
 
+export const Form: Story = {
+	argTypes: {
+		...formFieldArgTypes,
+	},
+	args: {
+		label: 'Площадь',
+		hint: 'Подсказка',
+	},
+	render: (args: SliderStoryArgs) => ({
+		components: { SliderStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<SliderStoryForm v-bind="args" :show-error="args.invalid" />',
+	}),
+}
+
 export const States: Story = {
 	parameters: {
 		pseudo: {
-			focusWithin: '.slider-story--focused .slider__body',
+			hover: '.slider-story--hovered .slider__body',
+			focusWithin: '.slider-story--focused .slider',
 		},
 	},
 	render: (args: SliderStoryArgs) => ({
@@ -90,6 +112,21 @@ export const MultipleRanges: Story = {
 	}),
 }
 
+export const FormDocsExample: Story = {
+	tags: ['!dev'],
+	args: {
+		label: 'Площадь',
+		hint: 'Подсказка',
+	},
+	render: (args: SliderStoryArgs) => ({
+		components: { SliderStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<SliderStoryForm v-bind="args" />',
+	}),
+}
+
 export const Tests: Story = {
 	play: async ({ canvas, userEvent }) => {
 		const [minimum, maximum] = canvas.getAllByRole('slider') as [HTMLElement, HTMLElement]
@@ -104,5 +141,34 @@ export const Tests: Story = {
 		await userEvent.click(maximum)
 		await userEvent.keyboard('{ArrowLeft}')
 		await expect(maximum).toHaveAttribute('aria-valuenow', '79')
+	},
+}
+
+export const FormTests: Story = {
+	args: {
+		label: 'Площадь',
+	},
+	render: (args: SliderStoryArgs) => ({
+		components: { SliderStoryForm },
+		setup() {
+			return { args }
+		},
+		template: '<SliderStoryForm v-bind="args" />',
+	}),
+	play: async ({ canvas, userEvent }) => {
+		const [minimum] = canvas.getAllByRole('slider') as [HTMLElement]
+
+		await expect(canvas.queryByText('Минимальное значение — 25')).toBeNull()
+
+		await userEvent.click(minimum)
+		await userEvent.tab()
+		await userEvent.tab()
+		await expect(await canvas.findByText('Минимальное значение — 25')).toBeVisible()
+
+		await userEvent.click(minimum)
+		await userEvent.keyboard('{ArrowRight}{ArrowRight}{ArrowRight}{ArrowRight}{ArrowRight}')
+		await userEvent.tab()
+		await userEvent.tab()
+		await expect(canvas.queryByText('Минимальное значение — 25')).toBeNull()
 	},
 }

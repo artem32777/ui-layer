@@ -10,7 +10,6 @@ const intervals = ref([10, 30, 60, 90])
 <template>
 	<Slider
 		v-model="price"
-		label="Цена"
 		additional-text=" тыс. ₽"
 		size="big"
 	/>

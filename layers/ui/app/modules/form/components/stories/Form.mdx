@@ -7,9 +7,11 @@ import * as FormStories from './Form.stories.ts'
 
 Адаптеры компонентов дизайн-системы для `vee-validate`. Они связывают значение, состояние ошибки и сообщение валидации по имени поля.
 
+`FormField` принимает `name`, `label` и `hint` (подсказка под полем, в том же стиле что лейбл).
+
 Ошибка поля появляется после ухода с него: `validateOnValueUpdate` выключен, валидация на blur. Чтобы скрыть ошибку, нужно исправить значение и снова уйти с поля.
 
-`FormInput`, `FormTextarea` и `FormSelect` перенесены в **UI/Input**, **UI/Textarea** и **UI/Select**.
+`FormInput`, `FormTextarea`, `FormSelect`, `FormCheckbox`, `FormSlider` и `FormRadioGroup` перенесены в **UI/Input**, **UI/Textarea**, **UI/Select**, **UI/Checkbox**, **UI/Slider** и **UI/RadioGroup**.
 
 ## FormPhoneInput
 
@@ -18,11 +20,3 @@ import * as FormStories from './Form.stories.ts'
 ## FormNumberField
 
 <Canvas of={FormStories.NumberField} />
-
-## FormRadioGroup
-
-<Canvas of={FormStories.RadioGroup} />
-
-## FormCheckbox
-
-<Canvas of={FormStories.Checkbox} />
