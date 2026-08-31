@@ -13,7 +13,7 @@ export interface SelectOption {
 	description?: string
 	/** Иконка слева от текста варианта. */
 	icon?: IconName
-	/** Вложенные варианты, которые открываются в подменю. */
+	/** Вложенные варианты, которые открываются в подменю справа. */
 	children?: SelectOption[]
 }
 

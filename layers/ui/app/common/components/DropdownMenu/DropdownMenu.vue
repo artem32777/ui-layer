@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DropdownMenuContent, DropdownMenuPortal, DropdownMenuRoot, DropdownMenuTrigger } from 'reka-ui'
 import DropdownMenuItems from './DropdownMenuItems.vue'
-import type { DropdownMenuProps } from './DropdownMenu.types.ts'
+import type { DropdownMenuItem, DropdownMenuProps } from './DropdownMenu.types.ts'
 
 withDefaults(defineProps<DropdownMenuProps>(), {
 	offset: 6,
@@ -15,6 +15,15 @@ defineSlots<{
 }>()
 
 const modelValue = defineModel<boolean>({ default: false })
+
+const emit = defineEmits<{
+	/** Вызывается при клике по пункту меню. */
+	onItemClick: [item: DropdownMenuItem, event: Event]
+}>()
+
+function onClick(item: DropdownMenuItem, event: Event) {
+	emit('onItemClick', item, event)
+}
 </script>
 
 <template>
@@ -32,6 +41,7 @@ const modelValue = defineModel<boolean>({ default: false })
 					<DropdownMenuItems
 						v-if="items"
 						:items="items"
+						@click="onClick"
 					/>
 				</slot>
 			</DropdownMenuContent>

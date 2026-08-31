@@ -9,9 +9,16 @@ import DropdownMenuExampleSource from './DropdownMenuExample.vue?raw'
 - Основан на <font color="blue">[`DropdownMenu из Reka UI`](https://reka-ui.com/docs/components/dropdown-menu)</font>.
 - Семантически используется для создания выпадающего меню. Если нужен другой контент - используй компонент `Popover`.
 - Принимает либо массив `items`, либо можно сделать кастомный выпадающий список через слот `content`.
+- Пункт меню может содержать `icon`, `description`, `group`, `value`, `variant`, `selected` и вложенные `children`.
+- `variant`: `simple` и `icon` показывают красную галочку у выбранного пункта; `checkbox`, `radio` и `switch` — соответствующий контрол.
+- При клике по пункту эмитится `onItemClick` с пунктом и событием. `event.preventDefault()` оставляет меню открытым.
 
 <Canvas of={DropdownMenuStories.DocsExample} />
 
 <Controls of={DropdownMenuStories.DocsExample} />
 
 <Source code={DropdownMenuExampleSource} language="vue" />
+
+### Варианты пункта
+
+<Canvas of={DropdownMenuStories.Variants} />

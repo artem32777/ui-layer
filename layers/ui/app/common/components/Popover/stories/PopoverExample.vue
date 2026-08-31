@@ -27,7 +27,6 @@ const link = ref('https://example.com/docs/share/abc123')
 						Ссылка
 						<Input
 							v-model="link"
-							size="small"
 						/>
 					</label>
 				</div>

@@ -9,6 +9,7 @@ import Button from '../../Button/Button.vue'
 import DropdownMenu from '../DropdownMenu.vue'
 import dropdownMenuTypesSource from '../DropdownMenu.types.ts?raw'
 import type { DropdownMenuItem } from '../DropdownMenu.types.ts'
+import { iconNames } from '#layers/ui/app/modules/svg-icon'
 
 type DropdownMenuStoryArgs = ComponentProps<typeof DropdownMenu>
 
@@ -93,6 +94,31 @@ export const States: Story = {
 			</StoryGrid>
 		`,
 	}),
+}
+
+export const Variants: Story = {
+	args: {
+		modelValue: true,
+		items: [
+			{ label: 'Simple', description: 'Description', variant: 'simple' },
+			{ label: 'Simple selected', variant: 'simple', selected: true },
+			{ label: 'Icon', description: 'Description', variant: 'icon', icon: iconNames['building-01'] },
+			{ label: 'Icon selected', variant: 'icon', icon: iconNames['building-01'], selected: true },
+			{ label: 'Checkbox', variant: 'checkbox' },
+			{ label: 'Checkbox selected', variant: 'checkbox', selected: true },
+			{ label: 'Radio', variant: 'radio' },
+			{ label: 'Radio selected', variant: 'radio', selected: true },
+			{ label: 'Switch', variant: 'switch' },
+			{ label: 'Switch selected', variant: 'switch', selected: true },
+			{ label: 'Disabled', variant: 'checkbox', disabled: true },
+			{
+				label: 'Nested',
+				children: [
+					{ label: 'Child', selected: true },
+				],
+			},
+		],
+	},
 }
 
 export const Tests: Story = {

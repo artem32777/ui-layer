@@ -37,7 +37,6 @@ watch(modelValue, (value) => {
 			v-model="modelValue"
 			class="ui-data-table-filter__input"
 			type="search"
-			size="small"
 			:placeholder="placeholder"
 		/>
 	</label>

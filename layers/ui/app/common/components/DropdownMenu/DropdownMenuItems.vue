@@ -1,29 +1,41 @@
 <script setup lang="ts">
 import { DropdownMenuItem as RekaDropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger } from 'reka-ui'
-import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
-import type { DropdownMenuItem } from './DropdownMenu.types'
+import DropdownMenuItem from './DropdownMenuItem.vue'
+import type { DropdownMenuItem as DropdownMenuItemType } from './DropdownMenu.types'
 
 defineProps<{
 	/** Пункты меню, включая вложенные подменю. */
-	items: DropdownMenuItem[]
+	items: DropdownMenuItemType[]
 }>()
+
+const emit = defineEmits<{
+	/** Вызывается при клике по пункту меню. */
+	click: [item: DropdownMenuItemType, event: Event]
+}>()
+
+function onClick(item: DropdownMenuItemType, event: Event) {
+	emit('click', item, event)
+}
 </script>
 
 <template>
 	<template
 		v-for="(item, index) in items"
-		:key="index"
+		:key="item.value ?? index"
 	>
+		<div
+			v-if="item.group && item.group !== items[index - 1]?.group"
+			class="dropdown-menu__group-label"
+		>
+			{{ item.group }}
+		</div>
+
 		<DropdownMenuSub v-if="item.children">
 			<DropdownMenuSubTrigger
-				class="dropdown-menu__item dropdown-menu__sub-trigger"
+				class="dropdown-menu__item"
 				:disabled="item.disabled"
 			>
-				{{ item.label }}
-				<Icon
-					:name="iconNames.plus"
-					class="dropdown-menu__sub-arrow"
-				/>
+				<DropdownMenuItem :item="item" />
 			</DropdownMenuSubTrigger>
 
 			<DropdownMenuPortal>
@@ -31,7 +43,10 @@ defineProps<{
 					class="sub-dropdown-menu"
 					:side-offset="6"
 				>
-					<DropdownMenuItems :items="item.children" />
+					<DropdownMenuItems
+						:items="item.children"
+						@click="onClick"
+					/>
 				</DropdownMenuSubContent>
 			</DropdownMenuPortal>
 		</DropdownMenuSub>
@@ -40,9 +55,15 @@ defineProps<{
 			v-else
 			class="dropdown-menu__item"
 			:disabled="item.disabled"
+			@select="onClick(item, $event)"
 		>
-			{{ item.label }}
+			<DropdownMenuItem :item="item" />
 		</RekaDropdownMenuItem>
+
+		<div
+			v-if="item.group && items[index + 1] && item.group !== items[index + 1]?.group"
+			class="dropdown-menu__separator"
+		/>
 	</template>
 </template>
 
@@ -50,30 +71,38 @@ defineProps<{
 .dropdown-menu__item {
   display: flex;
   align-items: center;
-  min-height: 36px;
+  width: 100%;
   padding: 8px 10px;
+  border: none;
   border-radius: 6px;
-  white-space: nowrap;
+  background: transparent;
+  @include font-size(button);
+  color: inherit;
+  text-align: left;
   user-select: none;
   cursor: pointer;
 
   &[data-highlighted] {
-    background: color-mix(in srgb, var(--neutral-500, #e2e2e2) 55%, transparent);
-    outline: var(--primary);
+    background-color: var(--bg-action-item-hover);
+    outline: none;
   }
 
   &[data-disabled] {
-    opacity: 0.45;
+    color: var(--text-on-surface-tertiary);
     pointer-events: none;
   }
 }
 
-.dropdown-menu__sub-trigger {
-  justify-content: space-between;
+.dropdown-menu__group-label {
+  padding: 8px 10px;
+  color: var(--text-on-surface-tertiary);
+  @include font-size(label);
 }
 
-.dropdown-menu__sub-arrow {
-  margin-left: 16px;
+.dropdown-menu__separator {
+  height: 1px;
+  margin: 8px 10px;
+  background-color: var(--border-neutral);
 }
 
 :deep(.sub-dropdown-menu) {

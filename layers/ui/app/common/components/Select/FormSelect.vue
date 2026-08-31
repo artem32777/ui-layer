@@ -17,7 +17,7 @@ const props = defineProps<SelectProps<T> & FormFieldProps>()
 		<Select
 			v-bind="props"
 			@update:model-value="handleChange"
-			@update:open="(open) => { if (!open) nextTick(() => handleBlur(undefined, true)) }"
+			@update:open="(open: boolean) => { if (!open) nextTick(() => handleBlur(undefined, true)) }"
 		/>
 	</FormField>
 </template>

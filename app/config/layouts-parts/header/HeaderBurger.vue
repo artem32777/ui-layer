@@ -51,7 +51,7 @@ watch(isMobileMenuOpen, (isOpen) => {
 		<span class="header-burger__line" />
 		<span class="header-burger__line" />
 	</button>
-	<Teleport to=".header">
+	<Teleport defer to=".header">
 		<nav
 			id="header-mobile-menu"
 			class="header-mobile-menu"

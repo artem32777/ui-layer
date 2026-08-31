@@ -19,7 +19,6 @@ const meta = {
 		variant: { control: 'select', options: buttonLinkVariants },
 		theme: { control: 'select', options: ThemeNamesArray },
 		size: { control: 'select', options: buttonLinkSizes },
-		disabled: { control: 'boolean' },
 		href: { control: 'text' },
 		iconLeft: { control: 'select', options: iconNameList },
 		iconRight: { control: 'select', options: iconNameList },
@@ -29,7 +28,6 @@ const meta = {
 		href: '#',
 		variant: 'dark',
 		theme: Theme.light,
-		disabled: false,
 		size: 'medium',
 	} satisfies ButtonLinkStoryArgs,
 	render: (args: ButtonLinkStoryArgs) => ({
