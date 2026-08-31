@@ -14,16 +14,17 @@ import { iconNames } from '#layers/ui/app/modules/svg-icon'
 type DropdownMenuStoryArgs = ComponentProps<typeof DropdownMenu>
 
 const items: DropdownMenuItem[] = [
-	{ label: 'Edit' },
-	{ label: 'Duplicate' },
+	{ label: 'Edit', value: 'edit' },
+	{ label: 'Duplicate', value: 'duplicate' },
 	{
 		label: 'More',
+		value: 'more',
 		children: [
-			{ label: 'Save page' },
-			{ label: 'Create shortcut' },
+			{ label: 'Save page', value: 'save-page' },
+			{ label: 'Create shortcut', value: 'create-shortcut' },
 		],
 	},
-	{ label: 'Delete', disabled: true },
+	{ label: 'Delete', value: 'delete', disabled: true },
 ]
 
 const meta = {
@@ -41,10 +42,14 @@ const meta = {
 			},
 		},
 		offset: { control: 'number' },
+		matchTrigger: { control: 'boolean' },
+		closeOnSelect: { control: 'boolean' },
 	},
 	args: {
 		items,
 		offset: 6,
+		matchTrigger: false,
+		closeOnSelect: true,
 		modelValue: false,
 	} satisfies DropdownMenuStoryArgs,
 	render: (args: DropdownMenuStoryArgs) => ({
@@ -100,21 +105,22 @@ export const Variants: Story = {
 	args: {
 		modelValue: true,
 		items: [
-			{ label: 'Simple', description: 'Description', variant: 'simple' },
-			{ label: 'Simple selected', variant: 'simple', selected: true },
-			{ label: 'Icon', description: 'Description', variant: 'icon', icon: iconNames['building-01'] },
-			{ label: 'Icon selected', variant: 'icon', icon: iconNames['building-01'], selected: true },
-			{ label: 'Checkbox', variant: 'checkbox' },
-			{ label: 'Checkbox selected', variant: 'checkbox', selected: true },
-			{ label: 'Radio', variant: 'radio' },
-			{ label: 'Radio selected', variant: 'radio', selected: true },
-			{ label: 'Switch', variant: 'switch' },
-			{ label: 'Switch selected', variant: 'switch', selected: true },
-			{ label: 'Disabled', variant: 'checkbox', disabled: true },
+			{ label: 'Simple', value: 'simple', description: 'Description', variant: 'simple' },
+			{ label: 'Simple selected', value: 'simple-selected', variant: 'simple', selected: true },
+			{ label: 'Icon', value: 'icon', description: 'Description', variant: 'icon', icon: iconNames['building-01'] },
+			{ label: 'Icon selected', value: 'icon-selected', variant: 'icon', icon: iconNames['building-01'], selected: true },
+			{ label: 'Checkbox', value: 'checkbox', variant: 'checkbox' },
+			{ label: 'Checkbox selected', value: 'checkbox-selected', variant: 'checkbox', selected: true },
+			{ label: 'Radio', value: 'radio', variant: 'radio' },
+			{ label: 'Radio selected', value: 'radio-selected', variant: 'radio', selected: true },
+			{ label: 'Switch', value: 'switch', variant: 'switch' },
+			{ label: 'Switch selected', value: 'switch-selected', variant: 'switch', selected: true },
+			{ label: 'Disabled', value: 'disabled', variant: 'checkbox', disabled: true },
 			{
 				label: 'Nested',
+				value: 'nested',
 				children: [
-					{ label: 'Child', selected: true },
+					{ label: 'Child', value: 'child', selected: true },
 				],
 			},
 		],

@@ -5,13 +5,17 @@ export interface DropdownMenuProps {
 	items?: DropdownMenuItem[]
 	/** Расстояние между триггером и выпадающим меню в пикселях. */
 	offset?: number
+	/** Ширина меню равна ширине триггера. */
+	matchTrigger?: boolean
+	/** Закрывать меню после клика по пункту. */
+	closeOnSelect?: boolean
 }
 
 export interface DropdownMenuItem {
 	/** Текст пункта меню. */
 	label: string
 	/** Значение пункта. */
-	value?: string
+	value: string
 	/** Вариант отображения пункта. */
 	variant?: DropdownMenuItemVariant
 	/** Пункт выбран. */

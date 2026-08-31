@@ -7,6 +7,9 @@ import SelectDocsExampleSource from './SelectDocsExample.vue?raw'
 # Select
 
 - Выпадающий список основан на [`DropdownMenu`](?path=/docs/ui-dropdownmenu--docs);
+- `v-model` имеет тип `string`, при `multiple` — `string[]`.
+- Пока ничего не выбрано, в поле показывается `placeholder`. При множественном выборе меню остаётся открытым после клика по пункту.
+- Ширина выпадающего меню всегда равна ширине триггера.
 
 <Canvas of={SelectStories.DocsExample} />
 
@@ -16,7 +19,7 @@ import SelectDocsExampleSource from './SelectDocsExample.vue?raw'
 
 <Canvas of={SelectStories.DocsMultiple} />
 
-У варианта можно передать `description`, `icon` и вложенные `children` — они открываются в подменю справа.
+У варианта обязателен `value`. Также можно передать `description`, `icon` и вложенные `children` — они открываются в подменю справа.
 
 ## Пример использования
 

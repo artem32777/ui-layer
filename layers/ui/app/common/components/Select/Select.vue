@@ -1,17 +1,17 @@
-<script setup lang="ts" generic="T extends boolean = false">
+<script setup lang="ts">
 import { computed } from 'vue'
-import type { SelectOption, SelectProps } from './Select.types'
-import type { DropdownMenuItem } from '../DropdownMenu/DropdownMenu.types'
+import type { SelectModelValue, SelectOption, SelectProps } from './Select.types'
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
 import Badge from '#layers/ui/app/common/components/Badge/Badge.vue'
 import DropdownMenu from '../DropdownMenu/DropdownMenu.vue'
 
-const props = withDefaults(defineProps<SelectProps<T>>(), {
+const props = withDefaults(defineProps<SelectProps>(), {
 	variant: 'fill',
 	size: 'medium',
+	multiple: false,
 })
 
-const modelValue = defineModel<T extends true ? string[] : string>()
+const modelValue = defineModel<SelectModelValue<typeof props.multiple>>()
 const isDropdownOpen = defineModel<boolean>('open', { default: false })
 
 /** Ищет вариант по value, в том числе во вложенных children. */
@@ -30,14 +30,18 @@ function findOption(options: SelectOption[], value: string): SelectOption | unde
 	}
 }
 
-const selectedValues = computed(() => (props.multiple
-	? modelValue.value ?? []
-	: modelValue.value ? [modelValue.value] : []) as string[])
+const selectedValues = computed((): string[] => {
+	const value = modelValue.value
+	if (Array.isArray(value)) {
+		return value
+	}
+	return value ? [value] : []
+})
 
 /** В модели лежит value, в триггере показываем label. */
 const selectedLabels = computed(() => selectedValues.value.map(value => findOption(props.options, value)?.label ?? value))
 
-function withSelected(options: SelectOption[]): DropdownMenuItem[] {
+function withSelected(options: SelectOption[]): SelectOption[] {
 	return options.map(option => ({
 		...option,
 		selected: selectedValues.value.includes(option.value),
@@ -48,21 +52,21 @@ function withSelected(options: SelectOption[]): DropdownMenuItem[] {
 const menuItems = computed(() => withSelected(props.options))
 
 /** Пишет выбранный пункт в v-model. При multiple переключает значение в массиве и оставляет меню открытым. */
-function onItemClick(item: DropdownMenuItem, event: Event) {
+function onItemClick(item: SelectOption, event: Event) {
 	if (props.multiple) {
 		event.preventDefault()
-		const current = [...(modelValue.value ?? [])] as string[]
-		const index = current.indexOf(item.value!)
+		const current = Array.isArray(modelValue.value) ? [...modelValue.value] : []
+		const index = current.indexOf(item.value)
 
 		if (index === -1) {
-			current.push(item.value!)
+			current.push(item.value)
 		} else {
 			current.splice(index, 1)
 		}
 
-		modelValue.value = current as typeof modelValue.value
+		modelValue.value = current
 	} else {
-		modelValue.value = item.value as typeof modelValue.value
+		modelValue.value = item.value
 	}
 }
 </script>
@@ -72,6 +76,8 @@ function onItemClick(item: DropdownMenuItem, event: Event) {
 		v-model="isDropdownOpen"
 		:items="menuItems"
 		:offset="8"
+		:match-trigger="true"
+		:close-on-select="!multiple"
 		@on-item-click="onItemClick"
 	>
 		<button

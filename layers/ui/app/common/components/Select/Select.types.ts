@@ -1,23 +1,9 @@
 import type { IconName } from '#layers/ui/app/modules/svg-icon'
+import type { DropdownMenuItem } from '#layers/ui/app/common/components/DropdownMenu/DropdownMenu.types.ts'
 
-export interface SelectOption {
-	/** Текст варианта. */
-	label: string
-	/** Значение варианта. */
-	value: string
-	/** Запрещает выбор варианта. */
-	disabled?: boolean
-	/** Название группы вариантов. */
-	group?: string
-	/** Описание под текстом варианта. */
-	description?: string
-	/** Иконка слева от текста варианта. */
-	icon?: IconName
-	/** Вложенные варианты, которые открываются в подменю справа. */
-	children?: SelectOption[]
-}
+export type SelectOption = DropdownMenuItem
 
-export interface SelectProps<T> {
+export interface SelectProps {
 	/** Доступные варианты выбора. */
 	options: SelectOption[]
 	/** Текст, отображаемый до выбора значения. */
@@ -29,12 +15,15 @@ export interface SelectProps<T> {
 	/** Иконка слева от текста. */
 	icon?: IconName
 	/** Разрешает выбрать несколько значений. */
-	multiple?: T
+	multiple?: boolean
 	/** Состояние ошибки. */
 	invalid?: boolean
 	/** Недоступное состояние. */
 	disabled?: boolean
 }
+
+/** `string[]` при `multiple`, иначе `string`. */
+export type SelectModelValue<Multiple extends SelectProps['multiple'] = false> = Multiple extends true ? string[] : string
 
 export const selectVariants = ['fill'] as const
 export const selectSizes = ['medium', 'big'] as const

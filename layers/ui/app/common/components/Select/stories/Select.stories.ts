@@ -13,7 +13,7 @@ import SelectStoryStates from './SelectStoryStates.vue'
 import { iconNameList, iconNames } from '#layers/ui/app/modules/svg-icon'
 import { formFieldArgTypes, type FormFieldProps } from '#layers/ui/app/modules/form'
 
-type SelectStoryArgs = SelectProps<boolean> & Omit<FormFieldProps, 'name'> & {
+type SelectStoryArgs = SelectProps & Omit<FormFieldProps, 'name'> & {
 	modelValue?: string | string[]
 }
 
@@ -234,7 +234,7 @@ export const FormTests: Story = {
 
 		await userEvent.click(trigger)
 		await userEvent.click(await body.findByRole('menuitem', { name: 'Казань' }))
-		await expect(canvas.queryByText('Укажите город')).toBeNull()
+		await waitFor(() => expect(canvas.queryByText('Укажите город')).toBeNull())
 	},
 }
 
@@ -248,5 +248,25 @@ export const NestedTests: Story = {
 		await userEvent.hover(await body.findByRole('menuitem', { name: 'Беларусь' }))
 		await userEvent.click(await body.findByRole('menuitem', { name: 'Минск' }))
 		await waitFor(() => expect(trigger).toHaveAccessibleName('Минск'))
+	},
+}
+
+export const MultipleTests: Story = {
+	tags: ['!dev'],
+	args: {
+		multiple: true,
+		modelValue: [],
+		placeholder: 'Выберите город',
+	},
+	play: async ({ canvas, canvasElement, userEvent }) => {
+		const trigger = canvas.getByRole('combobox')
+		const body = within(canvasElement.ownerDocument.body)
+
+		await expect(trigger).toHaveAccessibleName('Выберите город')
+
+		await userEvent.click(trigger)
+		await userEvent.click(await body.findByRole('menuitem', { name: 'Казань' }))
+		await waitFor(() => expect(body.getByRole('menu')).toBeVisible())
+		await waitFor(() => expect(trigger).toHaveAccessibleName('Казань'))
 	},
 }

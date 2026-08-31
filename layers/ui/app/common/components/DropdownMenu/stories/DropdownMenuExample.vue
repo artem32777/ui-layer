@@ -5,17 +5,18 @@ import type { DropdownMenuItem } from '../DropdownMenu.types'
 import { iconNames } from '#layers/ui/app/modules/svg-icon'
 
 const items: DropdownMenuItem[] = [
-	{ label: 'Редактировать', variant: 'simple' },
+	{ label: 'Редактировать', value: 'edit', variant: 'simple' },
 	{
 		label: 'Дополнительно',
+		value: 'more',
 		children: [
-			{ label: 'Сохранить', selected: true },
-			{ label: 'Создать копию' },
+			{ label: 'Сохранить', value: 'save', selected: true },
+			{ label: 'Создать копию', value: 'duplicate' },
 		],
 	},
-	{ label: 'С уведомлением', variant: 'switch', selected: true },
-	{ label: 'Избранное', variant: 'icon', icon: iconNames['building-01'] },
-	{ label: 'Удалить', disabled: true },
+	{ label: 'С уведомлением', value: 'notify', variant: 'switch', selected: true },
+	{ label: 'Избранное', value: 'favorite', variant: 'icon', icon: iconNames['building-01'] },
+	{ label: 'Удалить', value: 'delete', disabled: true },
 ]
 </script>
 

@@ -10,7 +10,7 @@ import SelectStoryForm from './SelectStoryForm.vue'
 import { iconNames } from '#layers/ui/app/modules/svg-icon'
 import type { FormFieldProps } from '#layers/ui/app/modules/form'
 
-const props = defineProps<SelectProps<boolean> & Omit<FormFieldProps, 'name'> & {
+const props = defineProps<SelectProps & Omit<FormFieldProps, 'name'> & {
 	modelValue?: string | string[]
 }>()
 

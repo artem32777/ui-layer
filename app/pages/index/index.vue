@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
-import Button from '#layers/ui/app/common/components/Button/Button.vue'
-import Tabs from '#layers/ui/app/common/components/Tabs/Tabs.vue'
-import Tooltip from '#layers/ui/app/common/components/Tooltip/Tooltip.vue'
-import { useFavoriteStore } from '~/modules/premises'
-import ThemeSwitcher from '#layers/ui/app/common/components/ThemeSwitcher/ThemeSwitcher.vue'
+import { iconNames } from '#layers/ui/app/modules/svg-icon'
 import Select from '#layers/ui/app/common/components/Select/Select.vue'
-import type { SelectOption } from '#layers/ui/app/common/components/Select/Select.types.ts'
 import { ref } from 'vue'
+import type { SelectOption } from '#layers/ui/app/common/components/Select/Select.types.ts'
 
-const selectOptions = [
+const selectOptions: SelectOption[] = [
+	{ label: '1111', value: '1111' },
+	{ label: '2222', value: '2222' },
+	{ label: '3333', value: '3333' },
 	{ label: 'Simple', value: 'simple', description: 'Description', variant: 'simple' },
 	{ label: 'Icon', value: 'icon', description: 'Description', variant: 'icon', icon: iconNames['building-01'] },
 	{ label: 'Checkbox', value: 'checkbox', variant: 'checkbox', group: 'Контролы' },
@@ -26,7 +24,7 @@ const selectOptions = [
 			{ label: 'Child checkbox', value: 'child-checkbox', variant: 'checkbox' },
 		],
 	},
-] as unknown as SelectOption[]
+]
 
 const selectValue = ref('')
 const selectValueMultiple = ref<string[]>([])
@@ -43,7 +41,7 @@ const selectValueMultiple = ref<string[]>([])
 			v-model="selectValueMultiple"
 			placeholder="несколько"
 			:options="selectOptions"
-			multiple
+			:multiple="true"
 		/>
 	</div>
 </template>

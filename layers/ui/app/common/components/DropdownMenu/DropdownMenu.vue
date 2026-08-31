@@ -1,10 +1,21 @@
 <script setup lang="ts">
 import { DropdownMenuContent, DropdownMenuPortal, DropdownMenuRoot, DropdownMenuTrigger } from 'reka-ui'
 import DropdownMenuItems from './DropdownMenuItems.vue'
-import type { DropdownMenuItem, DropdownMenuProps } from './DropdownMenu.types.ts'
+import type { DropdownMenuItem } from './DropdownMenu.types.ts'
 
-withDefaults(defineProps<DropdownMenuProps>(), {
+withDefaults(defineProps<{
+	/** Пункты меню для стандартного отображения через DropdownMenuItems. */
+	items?: DropdownMenuItem[]
+	/** Расстояние между триггером и выпадающим меню в пикселях. */
+	offset?: number
+	/** Ширина меню равна ширине триггера. */
+	matchTrigger?: boolean
+	/** Закрывать меню после клика по пункту. */
+	closeOnSelect?: boolean
+}>(), {
 	offset: 6,
+	closeOnSelect: true,
+	matchTrigger: false,
 })
 
 defineSlots<{
@@ -35,13 +46,15 @@ function onClick(item: DropdownMenuItem, event: Event) {
 		<DropdownMenuPortal>
 			<DropdownMenuContent
 				align="start"
+				:class="{ 'dropdown-menu-content--match-trigger': matchTrigger }"
 				:side-offset="offset"
 			>
 				<slot name="content">
 					<DropdownMenuItems
 						v-if="items"
 						:items="items"
-						@click="onClick"
+						:close-on-select="closeOnSelect"
+						@select="onClick"
 					/>
 				</slot>
 			</DropdownMenuContent>
@@ -59,5 +72,9 @@ function onClick(item: DropdownMenuItem, event: Event) {
   color: var(--text, #000000);
   background: var(--background, #ffffff);
   box-shadow: 0 10px 24px color-mix(in srgb, var(--neutral-950, #000000) 12%, transparent);
+
+  &.dropdown-menu-content--match-trigger {
+    width: var(--reka-dropdown-menu-trigger-width);
+  }
 }
 </style>

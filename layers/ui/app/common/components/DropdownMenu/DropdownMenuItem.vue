@@ -28,8 +28,8 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
 
 				<RadioGroup
 					v-else-if="variant === 'radio'"
-					:model-value="item.selected ? item.value ?? 'on' : undefined"
-					:options="[{ value: item.value ?? 'on', label: item.label, disabled: item.disabled }]"
+					:model-value="item.selected ? item.value : undefined"
+					:options="[{ value: item.value, label: item.label, disabled: item.disabled }]"
 					:disabled="item.disabled"
 					@click.prevent
 				/>
@@ -87,6 +87,13 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
   align-items: center;
   width: 100%;
   gap: 8px;
+  padding: 8px 10px;
+}
+
+.dropdown-menu-item:has(.checkbox),
+.dropdown-menu-item:has(.switch),
+.dropdown-menu-item:has(.radio-group) {
+  padding: 0;
 }
 
 .dropdown-menu-item__content {
@@ -103,16 +110,27 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
   gap: 10px;
 
   :deep(.checkbox),
-  :deep(.switch),
-  :deep(.radio-group) {
+  :deep(.switch) {
+    display: flex;
     flex: 1;
+    width: 100%;
     min-width: 0;
+    padding: 8px 10px;
+  }
+
+  :deep(.radio-group) {
+    display: flex;
+    flex: 1;
+    width: 100%;
+  }
+
+  :deep(.radio-group__item) {
+    width: 100%;
+    padding: 8px 10px;
   }
 }
 
 .dropdown-menu-item__label {
-  flex: 1;
-  min-width: 0;
   @include font-size(button);
   color: var(--text-on-surface-dark);
 }
@@ -120,16 +138,6 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
 .dropdown-menu-item__description {
   @include font-size(p2);
   color: var(--text-on-surface-tertiary);
-}
-
-.dropdown-menu-item__description--icon,
-.dropdown-menu-item__description--checkbox,
-.dropdown-menu-item__description--radio {
-  padding-left: 28px;
-}
-
-.dropdown-menu-item__description--switch {
-  padding-left: 42px;
 }
 
 .dropdown-menu-item__check {

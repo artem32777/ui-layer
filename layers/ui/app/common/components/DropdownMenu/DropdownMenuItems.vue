@@ -3,25 +3,33 @@ import { DropdownMenuItem as RekaDropdownMenuItem, DropdownMenuPortal, DropdownM
 import DropdownMenuItem from './DropdownMenuItem.vue'
 import type { DropdownMenuItem as DropdownMenuItemType } from './DropdownMenu.types'
 
-defineProps<{
+const props = withDefaults(defineProps<{
 	/** Пункты меню, включая вложенные подменю. */
 	items: DropdownMenuItemType[]
-}>()
+	/** Закрывать меню после клика по пункту. */
+	closeOnSelect?: boolean
+}>(), {
+	closeOnSelect: true,
+})
 
 const emit = defineEmits<{
 	/** Вызывается при клике по пункту меню. */
-	click: [item: DropdownMenuItemType, event: Event]
+	select: [item: DropdownMenuItemType, event: Event]
 }>()
 
-function onClick(item: DropdownMenuItemType, event: Event) {
-	emit('click', item, event)
+function onSelect(item: DropdownMenuItemType, event: Event) {
+	if (!props.closeOnSelect) {
+		event.preventDefault()
+	}
+
+	emit('select', item, event)
 }
 </script>
 
 <template>
 	<template
 		v-for="(item, index) in items"
-		:key="item.value ?? index"
+		:key="item.value"
 	>
 		<div
 			v-if="item.group && item.group !== items[index - 1]?.group"
@@ -45,7 +53,8 @@ function onClick(item: DropdownMenuItemType, event: Event) {
 				>
 					<DropdownMenuItems
 						:items="item.children"
-						@click="onClick"
+						:close-on-select="closeOnSelect"
+						@select="onSelect"
 					/>
 				</DropdownMenuSubContent>
 			</DropdownMenuPortal>
@@ -55,7 +64,7 @@ function onClick(item: DropdownMenuItemType, event: Event) {
 			v-else
 			class="dropdown-menu__item"
 			:disabled="item.disabled"
-			@select="onClick(item, $event)"
+			@select="onSelect(item, $event)"
 		>
 			<DropdownMenuItem :item="item" />
 		</RekaDropdownMenuItem>
@@ -72,7 +81,7 @@ function onClick(item: DropdownMenuItemType, event: Event) {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 8px 10px;
+  padding: 0;
   border: none;
   border-radius: 6px;
   background: transparent;

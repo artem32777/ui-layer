@@ -7,7 +7,7 @@ import type { SelectOption, SelectProps } from '../Select.types.ts'
 import FormSelect from '../FormSelect.vue'
 import type { FormFieldProps } from '#layers/ui/app/modules/form'
 
-const props = withDefaults(defineProps<SelectProps<boolean> & Omit<FormFieldProps, 'name'> & {
+const props = withDefaults(defineProps<SelectProps & Omit<FormFieldProps, 'name'> & {
 	/** Показать состояние ошибки при монтировании (для stories). */
 	showError?: boolean
 }>(), {
