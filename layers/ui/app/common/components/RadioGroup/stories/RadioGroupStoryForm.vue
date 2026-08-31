@@ -3,7 +3,8 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { Form } from 'vee-validate'
 import { z } from 'zod'
 import type { RadioGroupProps } from '../RadioGroup.types.ts'
-import { FormRadioGroup, type FormFieldProps } from '#layers/ui/app/modules/form'
+import FormRadioGroup from '../FormRadioGroup.vue'
+import { type FormFieldProps } from '#layers/ui/app/modules/form'
 
 withDefaults(defineProps<RadioGroupProps & Omit<FormFieldProps, 'name'> & {
 	/** Показать состояние ошибки при монтировании (для stories). */
@@ -31,7 +32,9 @@ const validationSchema = toTypedSchema(z.object({
 			name="delivery"
 			:label="label"
 			:hint="hint"
-			:radio-group-props="{ options, disabled, theme }"
+			:options="options"
+			:disabled="disabled"
+			:theme="theme"
 		/>
 	</Form>
 </template>

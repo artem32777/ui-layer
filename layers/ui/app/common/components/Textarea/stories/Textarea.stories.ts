@@ -59,9 +59,7 @@ export const Base: Story = {
 }
 
 export const Form: Story = {
-	argTypes: {
-		...formFieldArgTypes,
-	},
+	argTypes: { ...formFieldArgTypes },
 	args: {
 		placeholder: 'Введите сообщение',
 		label: 'Сообщение',

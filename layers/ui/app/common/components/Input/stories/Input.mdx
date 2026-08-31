@@ -1,5 +1,6 @@
-import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
 import * as InputStories from './Input.stories'
+import InputExampleFormSource from './InputExampleForm.vue?raw'
 
 <Meta of={InputStories} />
 
@@ -30,14 +31,6 @@ const value = ref('')
 </template>
 ```
 
-## FormInput
+## Пример использования в форме
 
-Адаптер `Input` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`, `hint`).
-
-Ошибка появляется после ухода с поля: `validateOnValueUpdate` выключен, валидация на blur. Чтобы скрыть ошибку, нужно исправить значение и снова уйти с поля.
-
-<Canvas of={InputStories.FormDocsExample} />
-
-### Состояние ошибки
-
-<Canvas of={InputStories.Tests} />
+<Source code={InputExampleFormSource} language="vue" />

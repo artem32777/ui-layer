@@ -9,15 +9,13 @@ const props = defineProps<SelectProps<T> & FormFieldProps>()
 
 <template>
 	<FormField
-		v-slot="{ value, handleChange, handleBlur, invalid }"
+		v-slot="{ handleChange, handleBlur }"
 		:name="name"
 		:label="label"
 		:hint="hint"
 	>
 		<Select
 			v-bind="props"
-			:model-value="value as T extends true ? string[] : string"
-			:invalid="invalid"
 			@update:model-value="handleChange"
 			@update:open="(open) => { if (!open) nextTick(() => handleBlur(undefined, true)) }"
 		/>

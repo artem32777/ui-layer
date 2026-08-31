@@ -11,6 +11,5 @@ const value = ref('')
 		v-model="value"
 		:icon="iconNames['search-md']"
 		placeholder="Введите запрос"
-		aria-label="Поиск"
 	/>
 </template>

@@ -3,24 +3,20 @@ import FormField, { type FormFieldProps } from './FormField.vue'
 import type { CheckboxProps } from '#layers/ui/app/common/components/Checkbox/Checkbox.types.ts'
 import Checkbox from '#layers/ui/app/common/components/Checkbox/Checkbox.vue'
 
-defineProps<FormFieldProps & {
-	checkboxProps?: CheckboxProps
-}>()
+defineProps<FormFieldProps & CheckboxProps>()
 </script>
 
 <template>
 	<FormField
-		v-slot="{ value, handleChange, handleBlur, invalid }"
+		v-slot="{ handleChange }"
 		:name="name"
 		:label="label"
 		:hint="hint"
 	>
 		<Checkbox
-			v-bind="checkboxProps"
-			:model-value="value as boolean"
+			:disabled="disabled"
 			:invalid="invalid"
 			@update:model-value="handleChange"
-			@focusout="() => handleBlur(undefined, true)"
 		>
 			<slot />
 		</Checkbox>

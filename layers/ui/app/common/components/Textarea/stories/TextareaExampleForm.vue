@@ -2,20 +2,19 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { Form } from 'vee-validate'
 import { z } from 'zod'
-import { FormCheckbox, VRule } from '#layers/ui/app/modules/form'
+import { FormTextarea, VRule } from '#layers/ui/app/modules/form'
 
 const validationSchema = toTypedSchema(z.object({
-	agreement: VRule.checkbox(),
+	message: VRule.name(5, 'Минимум 5 символов'),
 }))
 </script>
 
 <template>
 	<Form :validation-schema="validationSchema">
-		<FormCheckbox
-			name="agreement"
-			label="Согласие"
-		>
-			Согласен с условиями
-		</FormCheckbox>
+		<FormTextarea
+			name="message"
+			label="Сообщение"
+			placeholder="Введите сообщение"
+		/>
 	</Form>
 </template>

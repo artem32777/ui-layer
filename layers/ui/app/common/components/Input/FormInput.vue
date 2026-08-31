@@ -8,17 +8,14 @@ const props = defineProps<InputProps & FormFieldProps>()
 
 <template>
 	<FormField
-		v-slot="{ value, handleChange, handleBlur, invalid }"
+		v-slot="{ handleChange }"
 		:name="name"
 		:label="label"
 		:hint="hint"
 	>
 		<Input
 			v-bind="props"
-			:model-value="value as string"
-			:invalid="invalid"
 			@update:model-value="handleChange"
-			@blur="handleBlur"
 		/>
 	</FormField>
 </template>

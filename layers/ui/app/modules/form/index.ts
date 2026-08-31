@@ -3,7 +3,7 @@ export { default as FormTextarea } from '../../common/components/Textarea/FormTe
 export { default as FormPhoneInput } from './components/FormPhoneInput.vue'
 export { default as FormSelect } from '../../common/components/Select/FormSelect.vue'
 export { default as FormSlider } from '../../common/components/Slider/FormSlider.vue'
-export { default as FormRadioGroup } from './components/FormRadioGroup.vue'
+export { default as FormRadioGroup } from '../../common/components/RadioGroup/FormRadioGroup.vue'
 export { default as FormCheckbox } from './components/FormCheckbox.vue'
 export { default as FormNumberField } from './components/FormNumberField.vue'
 

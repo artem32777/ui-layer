@@ -2,20 +2,20 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { Form } from 'vee-validate'
 import { z } from 'zod'
-import { FormCheckbox, VRule } from '#layers/ui/app/modules/form'
+import { FormInput, VRule } from '#layers/ui/app/modules/form'
 
 const validationSchema = toTypedSchema(z.object({
-	agreement: VRule.checkbox(),
+	email: VRule.email(),
 }))
 </script>
 
 <template>
 	<Form :validation-schema="validationSchema">
-		<FormCheckbox
-			name="agreement"
-			label="Согласие"
-		>
-			Согласен с условиями
-		</FormCheckbox>
+		<FormInput
+			name="email"
+			label="Email"
+			placeholder="Введите почту"
+			type="email"
+		/>
 	</Form>
 </template>

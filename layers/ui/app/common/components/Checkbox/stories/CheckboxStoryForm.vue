@@ -17,7 +17,6 @@ const validationSchema = toTypedSchema(z.object({
 
 <template>
 	<Form
-		:key="String(showError)"
 		:validation-schema="validationSchema"
 		:initial-values="{ agreement: false }"
 		:validate-on-mount="showError"
@@ -26,7 +25,8 @@ const validationSchema = toTypedSchema(z.object({
 			name="agreement"
 			:label="label"
 			:hint="hint"
-			:checkbox-props="{ disabled }"
+			:invalid="invalid"
+			:disabled="disabled"
 		>
 			Согласен с условиями
 		</FormCheckbox>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import FormField, { type FormFieldProps } from '#layers/ui/app/modules/form/components/FormField.vue'
-import type { TextareaProps } from './Textarea.types.ts'
-import Textarea from './Textarea.vue'
+import type { RadioGroupProps } from './RadioGroup.types.ts'
+import RadioGroup from './RadioGroup.vue'
 
-const props = defineProps<TextareaProps & FormFieldProps>()
+const props = defineProps<RadioGroupProps & FormFieldProps>()
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const props = defineProps<TextareaProps & FormFieldProps>()
 		:label="label"
 		:hint="hint"
 	>
-		<Textarea
+		<RadioGroup
 			v-bind="props"
 			@update:model-value="handleChange"
 		/>

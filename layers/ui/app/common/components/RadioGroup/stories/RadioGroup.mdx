@@ -1,6 +1,7 @@
 import { Canvas, Controls, Meta, Source } from '@storybook/addon-docs/blocks'
 import * as RadioGroupStories from './RadioGroup.stories'
 import RadioGroupExampleSource from './RadioGroupExample.vue?raw'
+import RadioGroupExampleFormSource from './RadioGroupExampleForm.vue?raw'
 
 <Meta of={RadioGroupStories} />
 
@@ -15,14 +16,6 @@ import RadioGroupExampleSource from './RadioGroupExample.vue?raw'
 
 <Source code={RadioGroupExampleSource} language="vue" />
 
-## FormRadioGroup
+## Пример использования в форме
 
-Адаптер `RadioGroup` для `vee-validate`: значение, ошибка и лейбл по имени поля (`FormFieldProps`: `name`, `label`, `hint`).
-
-Ошибка появляется после ухода с поля: `validateOnValueUpdate` выключен, валидация на blur. Чтобы скрыть ошибку, нужно выбрать значение и снова уйти с поля.
-
-<Canvas of={RadioGroupStories.FormDocsExample} />
-
-### Состояние ошибки
-
-<Canvas of={RadioGroupStories.Tests} />
+<Source code={RadioGroupExampleFormSource} language="vue" />
