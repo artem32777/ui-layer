@@ -86,15 +86,33 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 8px;
+  @include font-size(button);
+  user-select: none;
+  cursor: pointer;
   padding: 8px 10px;
+  gap: 8px;
+  border-radius: var(--radius-content);
+
+  &[data-highlighted] {
+    background-color: var(--bg-action-item-hover);
+    outline: none;
+  }
+
+  &[data-disabled] {
+    color: var(--text-on-surface-tertiary);
+    pointer-events: none;
+  }
 }
 
-.dropdown-menu-item:has(.checkbox),
-.dropdown-menu-item:has(.switch),
-.dropdown-menu-item:has(.radio-group) {
-  padding: 0;
+.dropdown-menu-item__content {
+  height: 100%;
 }
+
+//.dropdown-menu-item:has(.checkbox),
+//.dropdown-menu-item:has(.switch),
+//.dropdown-menu-item:has(.radio-group) {
+//  padding: 0;
+//}
 
 .dropdown-menu-item__content {
   display: flex;
@@ -109,14 +127,14 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
   align-items: center;
   gap: 10px;
 
-  :deep(.checkbox),
-  :deep(.switch) {
-    display: flex;
-    flex: 1;
-    width: 100%;
-    min-width: 0;
-    padding: 8px 10px;
-  }
+  //:deep(.checkbox),
+  //:deep(.switch) {
+  //  display: flex;
+  //  flex: 1;
+  //  width: 100%;
+  //  min-width: 0;
+  //  padding: 8px 10px;
+  //}
 
   :deep(.radio-group) {
     display: flex;
@@ -124,10 +142,10 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
     width: 100%;
   }
 
-  :deep(.radio-group__item) {
-    width: 100%;
-    padding: 8px 10px;
-  }
+  //:deep(.radio-group__item) {
+  //  width: 100%;
+  //  padding: 8px 10px;
+  //}
 }
 
 .dropdown-menu-item__label {

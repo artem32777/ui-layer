@@ -24,6 +24,45 @@ function onSelect(item: DropdownMenuItemType, event: Event) {
 
 	emit('select', item, event)
 }
+
+const subTriggers = new Map<string, HTMLElement>()
+const subAnchors = new Map<string, { getBoundingClientRect: () => DOMRect, contextElement?: Element }>()
+
+function setSubTrigger(value: string, el: { $el?: unknown } | Element | null) {
+	const node = el && typeof el === 'object' && '$el' in el ? el.$el : el
+	if (node instanceof HTMLElement)
+		subTriggers.set(value, node)
+	else
+		subTriggers.delete(value)
+}
+
+function getSubmenuAnchor(value: string) {
+	const existing = subAnchors.get(value)
+	if (existing)
+		return existing
+
+	const anchor = {
+		get contextElement() {
+			return subTriggers.get(value)
+		},
+		getBoundingClientRect() {
+			const trigger = subTriggers.get(value)
+			if (!trigger)
+				return new DOMRect()
+
+			const menu = trigger.closest('[data-reka-menu-content]')
+			const triggerRect = trigger.getBoundingClientRect()
+			if (!(menu instanceof HTMLElement))
+				return triggerRect
+
+			const menuRect = menu.getBoundingClientRect()
+			return new DOMRect(menuRect.x, triggerRect.y, menuRect.width, triggerRect.height)
+		},
+	}
+
+	subAnchors.set(value, anchor)
+	return anchor
+}
 </script>
 
 <template>
@@ -38,18 +77,24 @@ function onSelect(item: DropdownMenuItemType, event: Event) {
 			{{ item.group }}
 		</div>
 
-		<DropdownMenuSub v-if="item.children">
+		<DropdownMenuSub
+			v-if="item.children"
+		>
 			<DropdownMenuSubTrigger
-				class="dropdown-menu__item"
 				:disabled="item.disabled"
+				as-child
 			>
-				<DropdownMenuItem :item="item" />
+				<DropdownMenuItem
+					:ref="(el) => setSubTrigger(item.value, el)"
+					:item="item"
+				/>
 			</DropdownMenuSubTrigger>
 
 			<DropdownMenuPortal>
 				<DropdownMenuSubContent
 					class="sub-dropdown-menu"
-					:side-offset="6"
+					:side-offset="8"
+					:reference="getSubmenuAnchor(item.value)"
 				>
 					<DropdownMenuItems
 						:items="item.children"
@@ -62,7 +107,7 @@ function onSelect(item: DropdownMenuItemType, event: Event) {
 
 		<RekaDropdownMenuItem
 			v-else
-			class="dropdown-menu__item"
+			as-child
 			:disabled="item.disabled"
 			@select="onSelect(item, $event)"
 		>
@@ -77,31 +122,6 @@ function onSelect(item: DropdownMenuItemType, event: Event) {
 </template>
 
 <style lang="scss" scoped>
-.dropdown-menu__item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 0;
-  border: none;
-  border-radius: 6px;
-  background: transparent;
-  @include font-size(button);
-  color: inherit;
-  text-align: left;
-  user-select: none;
-  cursor: pointer;
-
-  &[data-highlighted] {
-    background-color: var(--bg-action-item-hover);
-    outline: none;
-  }
-
-  &[data-disabled] {
-    color: var(--text-on-surface-tertiary);
-    pointer-events: none;
-  }
-}
-
 .dropdown-menu__group-label {
   padding: 8px 10px;
   color: var(--text-on-surface-tertiary);
@@ -115,12 +135,12 @@ function onSelect(item: DropdownMenuItemType, event: Event) {
 }
 
 :deep(.sub-dropdown-menu) {
-  z-index: $z-dropdown;
-  min-width: 200px;
-  padding: 4px;
-  border: 1px solid var(--neutral-500, #e2e2e2);
-  border-radius: 8px;
-  color: var(--text, #000000);
+  //z-index: $z-dropdown;
+  //min-width: 200px;
+  //padding: 4px;
+  //border: 1px solid var(--neutral-500, #e2e2e2);
+  //border-radius: 8px;
+  //color: var(--text, #000000);
   background: var(--background, #ffffff);
   box-shadow: 0 10px 24px color-mix(in srgb, var(--neutral-950, #000000) 12%, transparent);
 }

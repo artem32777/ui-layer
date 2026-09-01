@@ -8,6 +8,22 @@ const selectOptions: SelectOption[] = [
 	{ label: '1111', value: '1111' },
 	{ label: '2222', value: '2222' },
 	{ label: '3333', value: '3333' },
+	{
+		label: 'Nested',
+		value: 'nested',
+		group: 'Вложенные',
+		children: [
+			{ label: 'Child simple', value: 'child-simple', variant: 'simple' },
+			{ label: 'Child icon', value: 'child-icon', variant: 'icon', icon: iconNames['star-01'] },
+			{ label: 'Child checkbox', value: 'child-checkbox', variant: 'checkbox' },
+		],
+	},
+]
+
+const selectOptions2: SelectOption[] = [
+	{ label: '1111', value: '1111' },
+	{ label: '2222', value: '2222' },
+	{ label: '3333', value: '3333' },
 	{ label: 'Simple', value: 'simple', description: 'Description', variant: 'simple' },
 	{ label: 'Icon', value: 'icon', description: 'Description', variant: 'icon', icon: iconNames['building-01'] },
 	{ label: 'Checkbox', value: 'checkbox', variant: 'checkbox', group: 'Контролы' },
@@ -31,7 +47,7 @@ const selectValueMultiple = ref<string[]>([])
 </script>
 
 <template>
-	<div>
+	<div style="width: 300px">
 		<Select
 			v-model="selectValue"
 			placeholder="один выбор"
@@ -40,7 +56,7 @@ const selectValueMultiple = ref<string[]>([])
 		<Select
 			v-model="selectValueMultiple"
 			placeholder="несколько"
-			:options="selectOptions"
+			:options="selectOptions2"
 			:multiple="true"
 		/>
 	</div>

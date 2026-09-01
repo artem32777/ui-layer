@@ -15,15 +15,27 @@ type DropdownMenuStoryArgs = ComponentProps<typeof DropdownMenu>
 
 const items: DropdownMenuItem[] = [
 	{ label: 'Edit', value: 'edit' },
-	{ label: 'Duplicate', value: 'duplicate' },
+	{ label: 'Duplicate', value: 'duplicate', description: 'Create a copy' },
 	{
 		label: 'More',
 		value: 'more',
 		children: [
 			{ label: 'Save page', value: 'save-page' },
-			{ label: 'Create shortcut', value: 'create-shortcut' },
+			{ label: 'Create shortcut', value: 'create-shortcut', selected: true },
+			{ label: 'Child with icon', value: 'child-icon', variant: 'icon', icon: iconNames['building-01'] },
 		],
 	},
+	{ label: 'Simple', value: 'simple', description: 'Description', variant: 'simple' },
+	{ label: 'Simple selected', value: 'simple-selected', variant: 'simple', selected: true },
+	{ label: 'Icon', value: 'icon', description: 'Description', variant: 'icon', icon: iconNames['building-01'] },
+	{ label: 'Icon selected', value: 'icon-selected', variant: 'icon', icon: iconNames['building-01'], selected: true },
+	{ label: 'Checkbox', value: 'checkbox', variant: 'checkbox', group: 'Controls' },
+	{ label: 'Checkbox selected', value: 'checkbox-selected', variant: 'checkbox', selected: true, group: 'Controls' },
+	{ label: 'Radio', value: 'radio', variant: 'radio', group: 'Controls' },
+	{ label: 'Radio selected', value: 'radio-selected', variant: 'radio', selected: true, group: 'Controls' },
+	{ label: 'Switch', value: 'switch', variant: 'switch', group: 'Controls' },
+	{ label: 'Switch selected', value: 'switch-selected', variant: 'switch', selected: true, group: 'Controls' },
+	{ label: 'Disabled checkbox', value: 'disabled-checkbox', variant: 'checkbox', disabled: true, group: 'Controls' },
 	{ label: 'Delete', value: 'delete', disabled: true },
 ]
 
@@ -71,6 +83,8 @@ export const DocsExample: Story = {
 	tags: ['!dev'],
 }
 
+export const Base: Story = {}
+
 export const States: Story = {
 	render: (args: DropdownMenuStoryArgs) => ({
 		components: { Button, DropdownMenu, StoryGrid, StoryGridItem, StoryGridRow },
@@ -99,32 +113,6 @@ export const States: Story = {
 			</StoryGrid>
 		`,
 	}),
-}
-
-export const Variants: Story = {
-	args: {
-		modelValue: true,
-		items: [
-			{ label: 'Simple', value: 'simple', description: 'Description', variant: 'simple' },
-			{ label: 'Simple selected', value: 'simple-selected', variant: 'simple', selected: true },
-			{ label: 'Icon', value: 'icon', description: 'Description', variant: 'icon', icon: iconNames['building-01'] },
-			{ label: 'Icon selected', value: 'icon-selected', variant: 'icon', icon: iconNames['building-01'], selected: true },
-			{ label: 'Checkbox', value: 'checkbox', variant: 'checkbox' },
-			{ label: 'Checkbox selected', value: 'checkbox-selected', variant: 'checkbox', selected: true },
-			{ label: 'Radio', value: 'radio', variant: 'radio' },
-			{ label: 'Radio selected', value: 'radio-selected', variant: 'radio', selected: true },
-			{ label: 'Switch', value: 'switch', variant: 'switch' },
-			{ label: 'Switch selected', value: 'switch-selected', variant: 'switch', selected: true },
-			{ label: 'Disabled', value: 'disabled', variant: 'checkbox', disabled: true },
-			{
-				label: 'Nested',
-				value: 'nested',
-				children: [
-					{ label: 'Child', value: 'child', selected: true },
-				],
-			},
-		],
-	},
 }
 
 export const Tests: Story = {

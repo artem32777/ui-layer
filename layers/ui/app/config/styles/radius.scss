@@ -6,6 +6,8 @@
   --UI-radius-S: 0px;
   --UI-radius-XS: 0px;
   --UI-radius-XSS: 0px;
+
+  --radius-content: 0px;
 }
 
 .radius-1 {
@@ -14,6 +16,8 @@
   --UI-radius-S: 6px;
   --UI-radius-XS: 4px;
   --UI-radius-XSS: 2px;
+
+  --radius-content: 4px;
 }
 
 .radius-2 {
@@ -22,6 +26,8 @@
   --UI-radius-S: 10px;
   --UI-radius-XS: 8px;
   --UI-radius-XSS: 4px;
+
+  --radius-content: 10px;
 }
 
 .radius-3 {
@@ -30,6 +36,8 @@
   --UI-radius-S: 16px;
   --UI-radius-XS: 14px;
   --UI-radius-XSS: 6px;
+
+  --radius-content: 14px;
 }
 
 .radius-0-3 {
@@ -38,4 +46,6 @@
   --UI-radius-S: 16px;
   --UI-radius-XS: 14px;
   --UI-radius-XSS: 6px;
+
+  --radius-content: 0px;
 }

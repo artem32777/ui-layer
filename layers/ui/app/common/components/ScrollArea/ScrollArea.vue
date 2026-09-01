@@ -65,7 +65,10 @@ defineSlots<{
   height: inherit;
   max-height: inherit;
   overflow: hidden;
-  padding-right: 12px;
+
+  &:has(:deep(.custom-scroll-area__scrollbar[data-orientation="vertical"])) {
+    padding-right: 12px;
+  }
 
   &:hover {
     .custom-scroll-area__thumb {
@@ -77,6 +80,7 @@ defineSlots<{
 :deep(.custom-scroll-area__viewport) {
   width: 100%;
   height: 100%;
+  max-height: inherit;
   border-radius: inherit;
 }
 
@@ -117,7 +121,7 @@ defineSlots<{
   }
 }
 
-:deep(.custom-scroll-area__corner) {
-  background-color: var(--neutral-500, #e2e2e2);
-}
+//:deep(.custom-scroll-area__corner) {
+//  background-color: var(--neutral-500, #e2e2e2);
+//}
 </style>

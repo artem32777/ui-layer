@@ -2,6 +2,7 @@
 import { DropdownMenuContent, DropdownMenuPortal, DropdownMenuRoot, DropdownMenuTrigger } from 'reka-ui'
 import DropdownMenuItems from './DropdownMenuItems.vue'
 import type { DropdownMenuItem } from './DropdownMenu.types.ts'
+import ScrollArea from '#layers/ui/app/common/components/ScrollArea/ScrollArea.vue'
 
 withDefaults(defineProps<{
 	/** Пункты меню для стандартного отображения через DropdownMenuItems. */
@@ -46,16 +47,22 @@ function onClick(item: DropdownMenuItem, event: Event) {
 		<DropdownMenuPortal>
 			<DropdownMenuContent
 				align="start"
+				class="dropdown-menu-content"
 				:class="{ 'dropdown-menu-content--match-trigger': matchTrigger }"
 				:side-offset="offset"
 			>
 				<slot name="content">
-					<DropdownMenuItems
-						v-if="items"
-						:items="items"
-						:close-on-select="closeOnSelect"
-						@select="onClick"
-					/>
+					<ScrollArea
+						orientation="vertical"
+						class="dropdown-menu-content__scroll-area"
+					>
+						<DropdownMenuItems
+							v-if="items"
+							:items="items"
+							:close-on-select="closeOnSelect"
+							@select="onClick"
+						/>
+					</ScrollArea>
 				</slot>
 			</DropdownMenuContent>
 		</DropdownMenuPortal>
@@ -65,8 +72,8 @@ function onClick(item: DropdownMenuItem, event: Event) {
 <style lang="scss" scoped>
 :deep([data-reka-menu-content]) {
   z-index: $z-dropdown;
-  min-width: 200px;
-  padding: 4px;
+  min-width: 100px;
+  padding: 8px;
   border: 1px solid var(--neutral-500, #e2e2e2);
   border-radius: 8px;
   color: var(--text, #000000);
@@ -76,5 +83,9 @@ function onClick(item: DropdownMenuItem, event: Event) {
   &.dropdown-menu-content--match-trigger {
     width: var(--reka-dropdown-menu-trigger-width);
   }
+}
+
+.dropdown-menu-content__scroll-area {
+  max-height: 311px;
 }
 </style>
