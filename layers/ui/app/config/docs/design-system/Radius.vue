@@ -92,30 +92,30 @@ watch(() => props.activeClass, async (className) => {
 
 .radius__switcher-button {
 	padding: 8px 14px;
-	border: 1px solid var(--border-neutral);
+	border: 1px solid var(--border);
 	border-radius: 6px;
-	color: var(--text-on-surface-dark);
-	background: var(--white-100);
+	color: var(--text);
+	background: var(--text-on-media);
 	cursor: pointer;
 
 	&:hover {
-		background: var(--bg-action-item-hover);
+		background: var(--surface-hover);
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--border-primary);
+		outline: 2px solid var(--focus);
 		outline-offset: 2px;
 	}
 }
 
 .radius__switcher-button--active {
-	color: var(--text-on-bg-primary);
-	border-color: var(--bg-action-primary);
-	background: var(--bg-action-primary);
+	color: var(--on-primary);
+	border-color: var(--primary);
+	background: var(--primary);
 
 	&:hover {
-		border-color: var(--bg-action-primary-hover);
-		background: var(--bg-action-primary-hover);
+		border-color: var(--primary-hover);
+		background: var(--primary-hover);
 	}
 }
 
@@ -149,6 +149,6 @@ watch(() => props.activeClass, async (className) => {
 }
 
 .radius__value {
-	color: var(--neutral-800);
+	color: var(--text-muted);
 }
 </style>

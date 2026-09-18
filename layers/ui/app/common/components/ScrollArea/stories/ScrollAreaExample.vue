@@ -30,8 +30,8 @@ withDefaults(defineProps<{
 .scroll-area-example__item {
   margin: 0;
   padding: 8px 0;
-  border-bottom: 1px solid var(--grey);
-  color: var(--additional-2);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
   font-size: 14px;
 }
 </style>

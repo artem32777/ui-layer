@@ -42,37 +42,37 @@ const modelValue = defineModel<number | null>()
 	height: 56px;
 	border: 1px solid transparent;
 	border-radius: 8px;
-	color: var(--text, #000000);
-	background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 40%, transparent);
+	color: var(--text);
+	background-color: color-mix(in srgb, var(--surface-muted) 40%, transparent);
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 
 // VARIANTS:
 	&--variant-secondary {
-		border-color: var(--neutral-500, #e2e2e2);
-		background-color: var(--background, #ffffff);
+		border-color: var(--border-muted);
+		background-color: var(--surface);
 	}
 
 	&:hover {
-		background-color: color-mix(in srgb, var(--brand, #4149f2) 3%, transparent);
+		background-color: color-mix(in srgb, var(--primary) 3%, transparent);
 	}
 
 	&:focus-within {
-		border-color: var(--brand-dark, #292fba);
-		box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand, #4149f2) 25%, transparent);
+		border-color: var(--focus);
+		box-shadow: 0 0 0 2px color-mix(in srgb, var(--focus) 25%, transparent);
 	}
 
 	&[aria-invalid='true'] {
-		border-color: var(--accent, #ff001f);
+		border-color: var(--error);
 
 		&:focus-within {
-			box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent, #ff001f) 20%, transparent);
+			box-shadow: 0 0 0 2px color-mix(in srgb, var(--error) 20%, transparent);
 		}
 	}
 
 	&[data-disabled] {
-		border-color: var(--neutral-500, #e2e2e2);
-		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
-		background-color: var(--background, #ffffff);
+		border-color: var(--border-muted);
+		color: color-mix(in srgb, var(--text) 50%, transparent);
+		background-color: var(--surface);
 	}
 
 // SIZES:
@@ -104,11 +104,11 @@ const modelValue = defineModel<number | null>()
 	transition: background-color 0.2s ease, opacity 0.2s ease;
 
 	&:hover {
-		background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 55%, transparent);
+		background-color: color-mix(in srgb, var(--surface-muted) 55%, transparent);
 	}
 
 	&:active {
-		background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 80%, transparent);
+		background-color: color-mix(in srgb, var(--surface-muted) 80%, transparent);
 	}
 
 	&[data-disabled] {
@@ -123,11 +123,11 @@ const modelValue = defineModel<number | null>()
 }
 
 .number-field__button--decrement {
-	border-right: 1px solid color-mix(in srgb, var(--neutral-500, #e2e2e2) 70%, transparent);
+	border-right: 1px solid color-mix(in srgb, var(--border-muted) 70%, transparent);
 }
 
 .number-field__button--increment {
-	border-left: 1px solid color-mix(in srgb, var(--neutral-500, #e2e2e2) 70%, transparent);
+	border-left: 1px solid color-mix(in srgb, var(--border-muted) 70%, transparent);
 }
 
 .number-field__input {

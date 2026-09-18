@@ -99,13 +99,13 @@ watch(isMobileMenuOpen, (isOpen) => {
   padding: 0;
   border: 0;
   border-radius: 50%;
-  color: var(--neutral-950);
-  background: color-mix(in srgb, var(--neutral-500) 35%, var(--white));
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface-muted) 35%, var(--surface));
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    color: var(--white);
+    color: var(--on-primary);
     background: var(--primary);
   }
 
@@ -147,7 +147,7 @@ watch(isMobileMenuOpen, (isOpen) => {
   overflow: hidden;
   width: 100%;
   height: 100dvh;
-  background: var(--white);
+  background: var(--surface);
   opacity: 0;
   visibility: hidden;
   transform: translateX(100%);
@@ -172,7 +172,7 @@ watch(isMobileMenuOpen, (isOpen) => {
   position: absolute;
   inset: 72px 0 0;
   overflow-y: auto;
-  background: var(--white);
+  background: var(--surface);
 }
 
 .header-mobile-menu__back {
@@ -182,8 +182,8 @@ watch(isMobileMenuOpen, (isOpen) => {
   width: 100%;
   padding: 16px;
   border: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--neutral-950) 8%, transparent);
-  color: var(--neutral-950);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  color: var(--text);
   background: transparent;
   font: inherit;
   font-size: 16px;

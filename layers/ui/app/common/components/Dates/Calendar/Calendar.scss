@@ -6,10 +6,10 @@
 	box-sizing: border-box;
 	width: fit-content;
 	padding: 16px;
-	border: 1px solid var(--neutral-500, #e2e2e2);
+	border: 1px solid var(--border-muted);
 	border-radius: var(--radius, 8px);
-	color: var(--text, #000000);
-	background-color: var(--background, #ffffff);
+	color: var(--text);
+	background-color: var(--surface);
 
 	&[data-disabled] {
 		pointer-events: none;
@@ -30,7 +30,7 @@
 }
 
 .calendar__heading {
-	color: var(--headers, #000000);
+	color: var(--text);
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 24px;
@@ -49,7 +49,7 @@
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 }
 
@@ -62,7 +62,7 @@
 	padding: 16px;
 	border: 0;
 	border-radius: inherit;
-	background-color: var(--background, #ffffff);
+	background-color: var(--surface);
 }
 
 .calendar .calendar__month-picker :deep(.month-picker__grid) {
@@ -84,19 +84,19 @@
 	padding: 0;
 	border: 0;
 	border-radius: 6px;
-	color: var(--text, #000000);
+	color: var(--text);
 	background-color: transparent;
 	transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 	cursor: pointer;
 
 	&:hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&[data-disabled] {
@@ -130,7 +130,7 @@
 	width: 36px;
 	height: 32px;
 	padding: 0;
-	color: var(--primary-50, #888888);
+	color: var(--text-muted);
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 16px;
@@ -155,7 +155,7 @@
 	height: 32px;
 	margin: 2px;
 	border-radius: 6px;
-	color: var(--text, #000000);
+	color: var(--text);
 	font-size: 14px;
 	line-height: 20px;
 	transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
@@ -163,38 +163,38 @@
 	user-select: none;
 
 	&:not([data-selected]):not([data-disabled]):not([data-unavailable]):hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&[data-selected] {
-		color: var(--white, #ffffff);
-		background-color: var(--brand, #4149f2);
+		color: var(--on-primary);
+		background-color: var(--primary);
 
 		&:hover {
-			background-color: var(--brand-dark, #3037c9);
+			background-color: var(--primary-hover);
 		}
 	}
 
 	&[data-today] {
-		box-shadow: inset 0 0 0 1px var(--brand, #4149f2);
+		box-shadow: inset 0 0 0 1px var(--focus);
 	}
 
 	&[data-selected][data-today] {
-		box-shadow: inset 0 0 0 1px var(--white, #ffffff);
+		box-shadow: inset 0 0 0 1px var(--on-primary);
 	}
 
 	&[data-outside-view]:not([data-selected]) {
-		color: var(--primary-50, #6b5b72);
+		color: var(--text-muted);
 	}
 
 	&[data-unavailable] {
-		color: var(--primary-50, #888888);
+		color: var(--text-muted);
 		text-decoration: line-through;
 		cursor: not-allowed;
 	}

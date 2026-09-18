@@ -1,13 +1,12 @@
 @use "null";
 @use "fonts";
 @use "colors";
-@use "theme-colors";
 @use "height";
 @use "radius";
 @use "spacing";
 
 html {
-  @include scrollbar(var(--primary), transparent, 0.5rem,  0.5rem);
+  @include scrollbar(var(--scrollbar), transparent, 0.5rem,  0.5rem);
 }
 
 body * {
@@ -16,11 +15,11 @@ body * {
 
 body {
   font-family: "PtRoot", monospace;
-  color: var(--neutral-950);
-  background-color: var(--white);
+  color: var(--text);
+  background-color: var(--background);
 }
 
 * {
-  border-color: var(--neutral-500);
-  outline-color: color-mix(in srgb, var(--primary) 50%, transparent);
+  border-color: var(--border-muted);
+  outline-color: color-mix(in srgb, var(--focus) 50%, transparent);
 }

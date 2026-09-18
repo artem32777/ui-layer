@@ -31,14 +31,14 @@ withDefaults(defineProps<SkeletonProps>(), {
 .skeleton {
 	flex-shrink: 0;
 	overflow: hidden;
-	background-color: var(--neutral-500, #e2e2e2);
+	background-color: var(--surface-muted);
 }
 
 .skeleton--animated {
 	background-image: linear-gradient(
 		90deg,
 		transparent 25%,
-		color-mix(in srgb, var(--background, #ffffff) 55%, transparent) 50%,
+		color-mix(in srgb, var(--surface) 55%, transparent) 50%,
 		transparent 75%
 	);
 	background-size: 200% 100%;

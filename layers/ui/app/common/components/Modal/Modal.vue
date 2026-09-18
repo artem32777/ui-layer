@@ -92,7 +92,7 @@ defineSlots<{
   position: fixed;
   z-index: $z-modal-overlay;
   inset: 0;
-  background-color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
+  background-color: color-mix(in srgb, var(--text) 50%, transparent);
   animation: modal-fade-in 0.3s ease;
 }
 
@@ -107,8 +107,8 @@ defineSlots<{
   max-height: calc(100vh - 48px);
   padding: 22px;
   border-radius: 8px;
-  background-color: var(--background, #ffffff);
-  box-shadow: 0 20px 25px -5px color-mix(in srgb, var(--text, #000000) 10%, transparent), 0 8px 10px -6px color-mix(in srgb, var(--text, #000000) 10%, transparent);
+  background-color: var(--surface);
+  box-shadow: 0 20px 25px -5px color-mix(in srgb, var(--text) 10%, transparent), 0 8px 10px -6px color-mix(in srgb, var(--text) 10%, transparent);
   animation: modal-content-show 0.3s ease;
   width: 600px;
 
@@ -131,14 +131,14 @@ defineSlots<{
 }
 
 .modal__title {
-  color: var(--text, #000000);
+  color: var(--text);
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .modal__subtitle {
-  color: var(--primary-50, #6b5b72);
+  color: var(--text-muted);
   margin-bottom: 10px;
 }
 
@@ -148,8 +148,8 @@ defineSlots<{
   right: 14px;
 
   &:hover, &:focus-visible  {
-    color: var(--text, #000000);
-    background-color: var(--neutral-500, #e2e2e2);
+    color: var(--text);
+    background-color: var(--surface-muted);
   }
 }
 

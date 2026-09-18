@@ -33,7 +33,7 @@ const { favoriteSet } = storeToRefs(store)
   transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    color: var(--white);
+    color: var(--on-primary);
     background: var(--primary);
   }
 
@@ -61,7 +61,7 @@ const { favoriteSet } = storeToRefs(store)
   height: 18px;
   padding: 0 5px;
   border-radius: 9px;
-  color: var(--white);
+  color: var(--on-primary);
   background: var(--primary);
   font-size: 12px;
   line-height: 1;

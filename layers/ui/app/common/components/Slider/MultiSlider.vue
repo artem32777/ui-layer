@@ -76,14 +76,14 @@ const ranges = computed(() => Array.from(
 	overflow: hidden;
 	height: 8px;
 	border-radius: 9999px;
-	background-color: var(--neutral-500);
+	background-color: var(--surface-muted);
 }
 
 .multi-slider__range {
 	position: absolute;
 	height: 100%;
 	border-radius: 9999px;
-	background-color: var(--brand, #4149f2);
+	background-color: var(--primary);
 }
 
 .multi-slider__thumb {
@@ -91,15 +91,15 @@ const ranges = computed(() => Array.from(
 	box-sizing: border-box;
 	width: 20px;
 	height: 20px;
-	border: 2px solid var(--brand, #4149f2);
+	border: 2px solid var(--primary);
 	border-radius: 50%;
-	background-color: var(--surface-block);
+	background-color: var(--surface);
 	transition: box-shadow 0.3s ease;
 	cursor: pointer;
 
 	&:focus {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 }
 </style>

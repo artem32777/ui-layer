@@ -73,10 +73,10 @@ const emit = defineEmits<{
 	box-sizing: border-box;
 	width: 20px;
 	height: 20px;
-	border: 2px solid var(--white, #ffffff);
+	border: 2px solid var(--text-on-media);
 	border-radius: 50%;
-	background-color: var(--white, #ffffff);
-	box-shadow: 0 0 0 1px color-mix(in srgb, var(--text, #000000) 65%, transparent), 0 1px 3px color-mix(in srgb, var(--text, #000000) 35%, transparent);
+	background-color: var(--text-on-media);
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--shadow) 65%, transparent), 0 1px 3px color-mix(in srgb, var(--shadow) 35%, transparent);
 	transition: box-shadow 0.2s ease;
 
 	&:focus {
@@ -84,7 +84,7 @@ const emit = defineEmits<{
 	}
 
 	&:focus-visible {
-		box-shadow: 0 0 0 2px var(--white, #ffffff), 0 0 0 5px var(--brand, #4149f2);
+		box-shadow: 0 0 0 2px var(--text-on-media), 0 0 0 5px var(--focus);
 	}
 }
 </style>

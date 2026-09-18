@@ -74,11 +74,11 @@ function onClick(item: DropdownMenuItem, event: Event) {
   z-index: $z-dropdown;
   min-width: 100px;
   padding: 8px;
-  border: 1px solid var(--neutral-500, #e2e2e2);
+  border: 1px solid var(--border-muted);
   border-radius: 8px;
-  color: var(--text, #000000);
-  background: var(--background, #ffffff);
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--neutral-950, #000000) 12%, transparent);
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--shadow) 12%, transparent);
 
   &.dropdown-menu-content--match-trigger {
     width: var(--reka-dropdown-menu-trigger-width);

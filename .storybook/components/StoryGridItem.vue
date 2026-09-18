@@ -22,6 +22,6 @@ defineProps<{
 
 .story-grid-item__title {
   font-size: 20px;
-  color: var(--text-on-surface-dark);
+  color: var(--text);
 }
 </style>

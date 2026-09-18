@@ -19,7 +19,7 @@ defineProps<{
 <style scoped lang="scss">
 .v-error {
   @include font-size(p2);
-	color: var(--text-on-surface-error);
+	color: var(--error);
   display: flex;
   align-items: center;
   gap: 6px;

@@ -44,6 +44,6 @@ const { value, handleChange, handleBlur, errorMessage } = useField(() => props.n
 
 .v-field__hint {
 	@include font-size(label);
-	color: var(--text-on-surface-tertiary);
+	color: var(--text-subtle);
 }
 </style>

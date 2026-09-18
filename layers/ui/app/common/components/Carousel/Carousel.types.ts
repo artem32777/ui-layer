@@ -8,8 +8,3 @@ export interface CarouselProps<T extends Record<string, any> = Record<string, an
 }
 
 export type SwiperVueOptions = InstanceType<typeof Swiper>['$props']
-
-export const enum CarouselNavClass {
-	nextEl = 'carousel-nav-next',
-	prevEl = 'carousel-nav-prev',
-}

@@ -48,14 +48,14 @@ const isOpenModel = defineModel<boolean>()
 	z-index: $z-tooltip;
 	padding: 6px 10px;
 	border-radius: 6px;
-	color: var(--white, #ffffff);
-	background-color: var(--brand, #4149f2);
-	box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--text, #000000) 10%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--text, #000000) 10%, transparent);
+	color: var(--on-primary);
+	background-color: var(--primary);
+	box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--shadow) 10%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--shadow) 10%, transparent);
 	animation: tooltip-fade-in 0.3s ease;
 }
 
 :deep(.tooltip-arrow) {
-	fill: var(--brand, #4149f2);
+	fill: var(--primary);
 }
 
 @keyframes tooltip-fade-in {

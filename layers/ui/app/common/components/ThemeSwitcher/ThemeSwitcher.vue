@@ -10,7 +10,6 @@ const { setTheme } = themeStore
 
 const themeOptions = [
 	{ value: Theme.light, icon: iconNames.themeLight, label: 'Светлая тема' },
-	{ value: Theme.grey, icon: iconNames.themeLight, label: 'Серая тема' },
 	{ value: Theme.dark, icon: iconNames.themeDark, label: 'Тёмная тема' },
 	{ value: 'system' as const, icon: iconNames.themeSystem, label: 'Системная тема' },
 ]
@@ -42,9 +41,9 @@ const themeOptions = [
 .theme-switcher {
 	display: inline-flex;
 	padding: 3px;
-	border: 1px solid var(--neutral-500, #e2e2e2);
+	border: 1px solid var(--border-muted);
 	border-radius: 8px;
-	background-color: var(--background, #ffffff);
+	background-color: var(--surface);
 }
 
 .theme-switcher__button {
@@ -54,28 +53,28 @@ const themeOptions = [
 	width: 36px;
 	height: 36px;
 	border-radius: 6px;
-	color: var(--primary);
+	color: var(--text);
 	background-color: transparent;
 	transition: color 0.3s ease, background-color 0.3s ease;
 
 	&:hover {
-		color: var(--text, #000000);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--brand, #4149f2);
+		outline: 2px solid var(--focus);
 		outline-offset: -2px;
 	}
+}
 
-  &--active {
-    color: var(--white, #ffffff);
-    background-color: var(--Backgrounds-bg-primary);
+.theme-switcher__button--active {
+	color: var(--on-primary);
+	background-color: var(--primary);
 
-    &:hover {
-      color: var(--white, #ffffff);
-      background-color: var(--primary-dark);
-    }
-  }
+	&:hover {
+		color: var(--on-primary);
+		background-color: var(--primary-hover);
+	}
 }
 </style>

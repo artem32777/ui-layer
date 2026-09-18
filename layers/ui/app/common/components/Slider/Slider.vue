@@ -75,12 +75,12 @@ const modelValue = defineModel<number[]>({ required: true })
 	display: flex;
 	align-items: center;
 	width: 100%;
-	background-color: var(--bg-field-static);
+	background-color: var(--surface-muted);
 	border: 1px solid transparent;
 	transition: background-color 0.3s ease, border-color 0.3s ease;
 
 	&:hover {
-		background-color: var(--bg-field-hover);
+		background-color: var(--surface-muted-hover);
 	}
 }
 
@@ -104,7 +104,7 @@ const modelValue = defineModel<number[]>({ required: true })
 .slider__range {
 	position: absolute;
 	height: 2px;
-	background-color: var(--bg-action-primary);
+	background-color: var(--primary);
 }
 
 .slider__thumb {
@@ -119,13 +119,13 @@ const modelValue = defineModel<number[]>({ required: true })
 	&::before {
 		content: '';
 		border-radius: 50%;
-		background-color: var(--bg-action-primary);
+		background-color: var(--primary);
 		transition: background-color 0.3s ease, box-shadow 0.3s ease;
 	}
 
 	&:hover::before,
 	&[data-state='active']::before {
-		background-color: var(--icon-on-bg-primary);
+		background-color: var(--on-primary);
 	}
 
 	&:focus {
@@ -159,7 +159,7 @@ const modelValue = defineModel<number[]>({ required: true })
 
 		&:hover::before,
 		&[data-state='active']::before {
-			box-shadow: inset 0 0 0 3px var(--bg-action-primary);
+			box-shadow: inset 0 0 0 3px var(--primary);
 		}
 	}
 }
@@ -190,21 +190,21 @@ const modelValue = defineModel<number[]>({ required: true })
 
 		&:hover::before,
 		&[data-state='active']::before {
-			box-shadow: inset 0 0 0 5px var(--bg-action-primary);
+			box-shadow: inset 0 0 0 5px var(--primary);
 		}
 	}
 }
 
 .slider:focus-within {
 	.slider__body {
-		background-color: var(--bg-field-expanded);
-		border-color: var(--border-expanded);
+		background-color: var(--field-focus-background);
+		border-color: var(--focus);
 	}
 }
 
 .slider--invalid {
 	.slider__body {
-		border-color: var(--border-error);
+		border-color: var(--error);
 	}
 }
 
@@ -212,10 +212,10 @@ const modelValue = defineModel<number[]>({ required: true })
 	pointer-events: none;
 
 	.slider__body {
-		background-color: var(--bg-action-disabled);
+		background-color: var(--surface-muted);
 
 		&:hover {
-			background-color: var(--bg-action-disabled);
+			background-color: var(--surface-muted);
 		}
 	}
 
@@ -223,12 +223,12 @@ const modelValue = defineModel<number[]>({ required: true })
 	:deep(.slider-values__unit),
 	:deep(.slider-values__percent),
 	:deep(.slider-values__bullet) {
-		color: var(--text-on-bg-disabled);
+		color: var(--text-disabled);
 	}
 
 	.slider__thumb::before {
-		background-color: var(--icon-on-bg-primary);
-		box-shadow: inset 0 0 0 2px var(--bg-action-primary);
+		background-color: var(--on-primary);
+		box-shadow: inset 0 0 0 2px var(--primary);
 	}
 }
 </style>

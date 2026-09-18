@@ -88,12 +88,12 @@ const modelValue = defineModel<number>({ default: 0 })
     transition: color 0.2s ease, opacity 0.2s ease;
 
     &:focus-visible {
-      outline: 2px solid var(--brand-dark, #292fba);
+      outline: 2px solid var(--focus);
       outline-offset: 2px;
     }
 
     &[data-state="active"] {
-      color: var(--brand, #4149f2);
+      color: var(--primary);
     }
 
     &[data-disabled] {
@@ -103,7 +103,7 @@ const modelValue = defineModel<number>({ default: 0 })
   }
 
   &--invalid {
-    border-bottom: 1px solid var(--accent, #ff001f);
+    border-bottom: 1px solid var(--error);
   }
 }
 
@@ -120,7 +120,7 @@ const modelValue = defineModel<number>({ default: 0 })
   color: currentColor;
 
   &--background {
-    color: var(--neutral-500, #e2e2e2);
+    color: var(--surface-muted);
     transition: color 0.2s ease;
   }
 }

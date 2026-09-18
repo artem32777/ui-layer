@@ -3,7 +3,7 @@ import type { Swiper as SwiperInstance } from 'swiper'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { shallowRef } from 'vue'
-import { CarouselNavClass, type CarouselProps, type SwiperVueOptions } from './Carousel.types.ts'
+import type { CarouselProps, SwiperVueOptions } from './Carousel.types.ts'
 import CarouselNav from './navigation/CarouselNav.vue'
 
 import 'swiper/css'
@@ -25,8 +25,8 @@ const defaultOptions: SwiperVueOptions = {
 	allowTouchMove: true,
 	pagination: { clickable: true },
 	navigation: {
-		nextEl: `.${CarouselNavClass.nextEl}`,
-		prevEl: `.${CarouselNavClass.prevEl}`,
+		nextEl: '.carousel-nav-prev',
+		prevEl: '.carousel-nav-pext',
 	},
 }
 

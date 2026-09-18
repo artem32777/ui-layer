@@ -95,29 +95,29 @@ const modelValue = defineModel<TabValues>()
   align-self: flex-start;
 
   &--variant-button {
-    background-color: var(--bg-controls-group);
+    background-color: var(--surface-group);
     border-radius: var(--UI-radius-L);
 
     .tabs__trigger {
       @include font-size(button);
-      color: var(--text-on-bg-secondary);
+      color: var(--text);
 
       &:hover {
-        background-color: var(--bg-action-secondary-hover);
+        background-color: var(--surface-muted-hover);
       }
 
       &[data-state="active"] {
-        color: var(--text-on-bg-selected);
-        background-color: var(--bg-controls-on-group-selected);
+        color: var(--on-primary);
+        background-color: var(--primary);
 
         &:hover {
-          background-color: var(--bg-controls-on-group-selected);
+          background-color: var(--primary);
         }
       }
 
       &:disabled,
       &[data-disabled] {
-        color: var(--text-on-bg-disabled);
+        color: var(--text-disabled);
         background-color: transparent;
       }
     }
@@ -153,23 +153,23 @@ const modelValue = defineModel<TabValues>()
     border-radius: var(--UI-radius-L);
 
     .tabs__trigger {
-      color: var(--text-on-surface-dark);
+      color: var(--text);
       background-color: transparent;
       margin-bottom: -1px;
       border-bottom: 2px solid transparent;
 
       &:hover {
-        color: var(--text-on-surface-dark-hover);
+        color: var(--text-hover);
       }
 
       &[data-state="active"] {
-        color: var(--text-on-surface-accent);
-        border-bottom-color: var(--border-accent);
+        color: var(--accent);
+        border-bottom-color: var(--accent);
       }
 
       &:disabled,
       &[data-disabled] {
-        color: var(--text-on-bg-disabled);
+        color: var(--text-disabled);
       }
     }
 

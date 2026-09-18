@@ -25,7 +25,7 @@ export const GridBreakpoints: Story = {
 					<div
 						v-for="breakpoint in breakpoints"
 						:key="breakpoint.name"
-						style="display: flex; align-items: center; gap: 20px; border: 1px solid var(--grey); border-radius: 8px; background: var(--background);"
+						style="display: flex; align-items: center; gap: 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--background);"
 					>
 						<strong style="font-size: 25px;">{{ breakpoint.name }}</strong>
 						<span style="font-size: 25px !important">{{ breakpoint.value }}</span>

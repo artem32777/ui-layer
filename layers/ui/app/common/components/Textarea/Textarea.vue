@@ -29,30 +29,30 @@ const modelValue = defineModel<string>()
 .textarea {
 	width: 100%;
 	resize: vertical;
-	color: var(--text-on-bg-secondary);
-	background-color: var(--bg-field-static);
+	color: var(--text);
+	background-color: var(--surface-muted);
   border-radius: var(--UI-radius-M);
 	border: 1px solid transparent;
 	@include font-size(button);
 	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
 
 	&:hover, &:focus  {
-		background-color: var(--bg-field-hover);
+		background-color: var(--surface-muted-hover);
     outline: none;
 	}
 
 	&:focus:not(:placeholder-shown) {
-		background-color: var(--bg-field-expanded);
-		border-color: var(--border-expanded);
+		background-color: var(--field-focus-background);
+		border-color: var(--focus);
 	}
 
 	&[aria-invalid='true'] {
-		border-color: var(--border-error);
+		border-color: var(--error);
 	}
 
 	&:disabled {
-		color: var(--text-on-bg-disabled);
-		background-color: var(--bg-action-disabled);
+		color: var(--text-disabled);
+		background-color: var(--surface-muted);
 	}
 
 // SIZES

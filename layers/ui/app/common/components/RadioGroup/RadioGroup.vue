@@ -60,29 +60,29 @@ const modelValue = defineModel<string>()
 	align-items: center;
 	gap: 8px;
   @include font-size(button);
-  color: var(--text-on-surface-dark);
+  color: var(--text);
 
 	&:hover, &:focus-within {
 		.radio-group__icon {
-			background-color: var(--bg-controls-unchecked-hover);
-			border-color: var(--border-primary);
+			background-color: var(--control-hover);
+			border-color: var(--focus);
 
 			&[data-state='checked'] {
-				background-color: var(--bg-controls-checked-hover);
+				background-color: var(--primary-hover);
 			}
 		}
 	}
 
 	&:has(.radio-group__icon[data-disabled]) {
 		pointer-events: none;
-    color: var(--text-on-surface-tertiary);
+    color: var(--text-subtle);
 	}
 }
 
 .radio-group__icon {
   border-radius: var(--UI-radius-L);
 	height: var(--ui-height-XXS);
-  background-color: var(--bg-controls-unchecked);
+  background-color: var(--control);
   border: 1px solid transparent;
   aspect-ratio: 1;
 	display: flex;
@@ -92,7 +92,7 @@ const modelValue = defineModel<string>()
 	cursor: pointer;
 
 	&[data-state='checked'] {
-		background-color: var(--bg-controls-checked);
+		background-color: var(--primary);
 	}
 }
 
@@ -100,7 +100,7 @@ const modelValue = defineModel<string>()
 	display: flex;
 	align-items: center;
 	justify-content: center;
-  background-color: var(--bg-controls-unchecked);
+  background-color: var(--on-primary);
   border-radius: 2px;
 
 	&::after {

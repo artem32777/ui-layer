@@ -48,7 +48,6 @@ const preview: Preview = {
 				items: [
 					{ value: Theme.light, title: 'Светлая' },
 					{ value: Theme.dark, title: 'Тёмная' },
-					{ value: Theme.grey, title: 'Серая' },
 					{ value: 'system', title: 'Системная' },
 				],
 				dynamicTitle: true,
@@ -95,7 +94,7 @@ const preview: Preview = {
 					watch(
 						() => globals.theme,
 						(theme) => {
-							if (theme !== Theme.light && theme !== Theme.grey && theme !== Theme.dark && theme !== 'system') {
+							if (theme !== Theme.light && theme !== Theme.dark && theme !== 'system') {
 								return
 							}
 

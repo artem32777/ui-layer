@@ -51,7 +51,7 @@ watch(modelValue, (value) => {
 }
 
 .ui-data-table-filter__label {
-	color: var(--primary-50, #6b5b72);
+	color: var(--text-muted);
 	font-size: 13px;
 	font-weight: 500;
 }

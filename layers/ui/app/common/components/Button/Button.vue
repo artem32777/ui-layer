@@ -91,48 +91,48 @@ const iconSize = computed(() => ({ small: 14, medium: 18, big: 20 })[props.size]
 
 // VARIANTS:
 	&.button--variant-primary {
-    background-color: var(--bg-action-primary);
-		color: var(--text-on-bg-primary);
+    background-color: var(--primary);
+		color: var(--on-primary);
 
 		&:hover, &:active {
-			background-color: var(--bg-action-primary-hover);
+			background-color: var(--primary-hover);
 		}
 	}
 
 	&.button--variant-secondary {
-		background-color: var(--bg-action-secondary);
-    color: var(--text-on-bg-secondary);
+		background-color: var(--surface-muted);
+    color: var(--text);
 
 		&:hover, &:active {
-			background-color: var(--bg-action-secondary-hover);
+			background-color: var(--surface-muted-hover);
 		}
 	}
 
 	&.button--variant-accent {
-    background-color: var(--bg-action-accent);
-		color: var(--text-on-bg-accent);
+    background-color: var(--accent);
+		color: var(--on-accent);
 
 		&:hover, &:active {
-			background-color: var(--bg-action-accent-hover);
+			background-color: var(--accent-hover);
 		}
 	}
 
 	&.button--variant-on-media {
-    background-color: var(--bg-action-on-media);
-		color: var(--text-on-bg-media);
+    background-color: var(--media-button);
+		color: var(--on-media-button);
 
 		&:hover, &:active {
-			background-color: var(--bg-action-on-media-hover);
+			background-color: var(--media-button-hover);
 		}
 
     &:disabled {
       outline: none;
-      color: var(--text-on-bg-disabled-media);
+      color: var(--text-disabled-on-media);
     }
 	}
 
 	&:disabled {
-		color: var(--text-on-bg-disabled);
+		color: var(--text-disabled);
 		background-color: transparent;
     outline: 1px solid var(--border-disabled);
 		pointer-events: none;

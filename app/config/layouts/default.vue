@@ -29,7 +29,8 @@ useHead(() => data.value?.seo ?? {})
 </script>
 
 <template>
-	<div>
+	<slot v-if="route.path === '/'" />
+	<div v-else>
 		<Header
 			v-if="data?.header"
 			:logo-src="data.header.logoSrc"

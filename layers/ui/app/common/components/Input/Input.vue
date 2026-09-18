@@ -52,10 +52,10 @@ const iconSize = computed(() => ({ medium: 18, big: 20 })[props.size])
 .input {
 	position: relative;
 	width: 100%;
-	color: var(--text-on-bg-secondary);
+	color: var(--text);
 
 	&--disabled {
-		color: var(--text-on-bg-disabled);
+		color: var(--text-disabled);
 	}
 
 	&--size-medium {
@@ -106,13 +106,13 @@ const iconSize = computed(() => ({ medium: 18, big: 20 })[props.size])
 
 .input__field {
 	width: 100%;
-	background-color: var(--bg-field-static);
+	background-color: var(--surface-muted);
 	border: 1px solid transparent;
 	@include font-size(button);
 	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
 
 	&:hover {
-		background-color: var(--bg-field-hover);
+		background-color: var(--surface-muted-hover);
 	}
 
 	&:focus {
@@ -120,16 +120,16 @@ const iconSize = computed(() => ({ medium: 18, big: 20 })[props.size])
 	}
 
 	&:focus:not(:placeholder-shown) {
-		background-color: var(--bg-field-expanded);
-		border-color: var(--border-expanded);
+		background-color: var(--field-focus-background);
+		border-color: var(--focus);
 	}
 
 	&[aria-invalid='true'] {
-		border-color: var(--border-error);
+		border-color: var(--error);
 	}
 
 	&:disabled {
-		background-color: var(--bg-action-disabled);
+		background-color: var(--surface-muted);
 	}
 }
 </style>

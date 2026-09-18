@@ -119,7 +119,7 @@ function resetColors() {
 .colors__group-title {
   font-size: 20px;
 	padding-bottom: 6px;
-	border-bottom: 1px solid var(--neutral-600);
+	border-bottom: 1px solid var(--border);
 }
 
 .colors__list {
@@ -140,7 +140,7 @@ function resetColors() {
 	height: 75px;
 	flex-shrink: 0;
 	overflow: hidden;
-	border: 1px solid var(--neutral-600);
+	border: 1px solid var(--border);
 	border-radius: 4px;
 }
 
@@ -170,6 +170,6 @@ function resetColors() {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 6px;
-	color: var(--neutral-800);
+	color: var(--text-muted);
 }
 </style>

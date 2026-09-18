@@ -18,6 +18,8 @@ export default defineNuxtConfig({
 
 	css: [resolve('./app/config/styles/index.scss')],
 
+	plugins: [resolve('./app/modules/animation/plugins/gsap.client')],
+
 	vite: {
 		css: {
 			preprocessorOptions: {

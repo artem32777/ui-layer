@@ -88,18 +88,18 @@ watch(() => swiper, (instance, _previousInstance, onCleanup) => {
 
   &::before {
     right: 0;
-    background: color-mix(in srgb, var(--white, #ffffff) 50%, transparent);
+    background: color-mix(in srgb, var(--text-on-media) 50%, transparent);
     content: '';
     transition: background 0.2s ease;
   }
 
   .project-hero-slider__bullet-progress {
     width: 0;
-    background: var(--white, #ffffff);
+    background: var(--text-on-media);
   }
 
   &:hover::before {
-    background: color-mix(in srgb, var(--white, #ffffff) 75%, transparent);
+    background: color-mix(in srgb, var(--text-on-media) 75%, transparent);
   }
 
   &.is-active .project-hero-slider__bullet-progress {

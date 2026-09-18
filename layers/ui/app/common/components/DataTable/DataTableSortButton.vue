@@ -62,12 +62,12 @@ const sortLabel = computed(() => {
 	cursor: pointer;
 
 	&:hover {
-		color: var(--text, #000000);
+		color: var(--text);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 30%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent);
 	}
 }
 
@@ -76,7 +76,7 @@ const sortLabel = computed(() => {
 	align-items: center;
 	justify-content: center;
 	width: 16px;
-	color: var(--brand, #4149f2);
+	color: var(--primary);
 	font-size: 14px;
 	line-height: 1;
 }

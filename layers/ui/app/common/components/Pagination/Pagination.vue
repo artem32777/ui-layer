@@ -76,19 +76,19 @@ const modelValue = defineModel<number>('page', { default: 1 })
 	min-width: 36px;
 	height: 36px;
 	border-radius: 6px;
-	color: var(--text, #000000);
-	background-color: var(--background, #ffffff);
+	color: var(--text);
+	background-color: var(--surface);
 	transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
 	cursor: pointer;
 
 	&:hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&:disabled {
@@ -100,8 +100,8 @@ const modelValue = defineModel<number>('page', { default: 1 })
 
 .pagination__item {
 	&[data-selected] {
-		color: var(--white, #ffffff);
-		background-color: var(--brand, #4149f2);
+		color: var(--on-primary);
+		background-color: var(--primary);
 	}
 }
 </style>

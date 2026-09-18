@@ -12,12 +12,12 @@
 	padding: 0 12px 0 16px;
 	border: 1px solid transparent;
 	border-radius: 8px;
-	color: var(--text, #000000);
-	background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 40%, transparent);
+	color: var(--text);
+	background-color: color-mix(in srgb, var(--surface-muted) 40%, transparent);
 	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
 
 	&:focus-within {
-		border-color: color-mix(in srgb, var(--brand, #4149f2) 50%, transparent);
+		border-color: color-mix(in srgb, var(--focus) 50%, transparent);
 	}
 
 	&[data-disabled] {
@@ -26,13 +26,13 @@
 	}
 
 	&[data-invalid] {
-		border-color: var(--red, #ff001f);
+		border-color: var(--error);
 	}
 }
 
 .date-picker__field--secondary {
-	border-color: var(--neutral-500, #e2e2e2);
-	background-color: var(--background, #ffffff);
+	border-color: var(--border-muted);
+	background-color: var(--surface);
 }
 
 .date-picker__field--sm {
@@ -55,7 +55,7 @@
 
 .date-picker__range-separator {
 	margin: 0 8px;
-	color: var(--primary-50, #888888);
+	color: var(--text-muted);
 }
 
 .date-picker__segment {
@@ -68,12 +68,12 @@
 	}
 
 	&[data-placeholder] {
-		color: color-mix(in srgb, var(--text, #000000) 65%, transparent);
+		color: color-mix(in srgb, var(--text) 65%, transparent);
 	}
 
 	&:focus {
-		color: var(--white, #ffffff);
-		background-color: var(--brand, #4149f2);
+		color: var(--on-primary);
+		background-color: var(--primary);
 	}
 }
 
@@ -87,19 +87,19 @@
 	padding: 0;
 	border: 0;
 	border-radius: 6px;
-	color: var(--text, #000000);
+	color: var(--text);
 	background-color: transparent;
 	transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 	cursor: pointer;
 
 	&:hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&[data-state='open'] .date-picker__trigger-icon {

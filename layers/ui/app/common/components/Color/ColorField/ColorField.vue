@@ -60,29 +60,29 @@ const modelValue = defineModel<string>({ default: '#3b82f6' })
 	padding: 0 14px;
 	border: 1px solid transparent;
 	border-radius: 8px;
-	color: var(--text, #000000);
-	background-color: color-mix(in srgb, var(--neutral-500, #e2e2e2) 40%, transparent);
+	color: var(--text);
+	background-color: color-mix(in srgb, var(--surface-muted) 40%, transparent);
 	transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
 
 	&::placeholder {
-		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
+		color: color-mix(in srgb, var(--text) 50%, transparent);
 	}
 
 	&:focus {
 		outline: none;
-		border-color: var(--brand, #4149f2);
+		border-color: var(--focus);
 	}
 
 	&[data-readonly] {
-		border-color: var(--neutral-500, #e2e2e2);
-		background-color: var(--background, #ffffff);
+		border-color: var(--border-muted);
+		background-color: var(--surface);
 		cursor: default;
 	}
 
 	&[data-disabled] {
-		border-color: var(--neutral-500, #e2e2e2);
-		color: color-mix(in srgb, var(--text, #000000) 50%, transparent);
-		background-color: var(--background, #ffffff);
+		border-color: var(--border-muted);
+		color: color-mix(in srgb, var(--text) 50%, transparent);
+		background-color: var(--surface);
 		cursor: default;
 		opacity: 0.6;
 	}

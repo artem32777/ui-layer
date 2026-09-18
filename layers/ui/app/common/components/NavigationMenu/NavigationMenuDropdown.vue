@@ -77,8 +77,8 @@ const currentItem = ref('')
 :deep(.navigation-menu-dropdown__list) {
 	padding: 8px;
 	border-radius: 8px;
-	background: var(--background, #ffffff);
-	box-shadow: 0 16px 40px color-mix(in srgb, var(--neutral-950, #000000) 14%, transparent);
+	background: var(--surface);
+	box-shadow: 0 16px 40px color-mix(in srgb, var(--shadow) 14%, transparent);
 }
 
 :deep(.navigation-menu-dropdown-item__trigger),
@@ -89,15 +89,15 @@ const currentItem = ref('')
 	width: 100%;
 	padding: 12px 16px;
 	border-radius: 8px;
-	color: var(--text, #000000);
+	color: var(--text);
 	transition: color 0.3s ease, background-color 0.3s ease;
   white-space: nowrap;
 
   &:hover,
   &:focus-visible,
   &[data-state='open'] {
-    background: color-mix(in srgb, var(--neutral-500, #e2e2e2) 35%, var(--background, #ffffff));
-    color: var(--brand, #4149f2);
+    background: color-mix(in srgb, var(--surface-muted) 35%, var(--surface));
+    color: var(--primary);
   }
 
   &[data-state='open'] {

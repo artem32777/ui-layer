@@ -102,10 +102,10 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	box-sizing: border-box;
 	width: fit-content;
 	padding: 16px;
-	border: 1px solid var(--neutral-500, #e2e2e2);
+	border: 1px solid var(--border-muted);
 	border-radius: var(--radius, 8px);
-	color: var(--text, #000000);
-	background-color: var(--background, #ffffff);
+	color: var(--text);
+	background-color: var(--surface);
 
 	&[data-disabled] {
 		pointer-events: none;
@@ -126,7 +126,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 }
 
 .month-picker__heading {
-	color: var(--neutral-950);
+	color: var(--text);
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 24px;
@@ -143,7 +143,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	padding: 0;
 	border: 0;
 	border-radius: 6px;
-	color: var(--text, #000000);
+	color: var(--text);
 	background-color: transparent;
 	transition:
 		color 0.3s ease,
@@ -153,13 +153,13 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	cursor: pointer;
 
 	&:hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&[data-disabled] {
@@ -198,7 +198,7 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	width: 100%;
 	height: 40px;
 	border-radius: 6px;
-	color: var(--text, #000000);
+	color: var(--text);
 	font-size: 14px;
 	line-height: 20px;
 	text-transform: capitalize;
@@ -211,34 +211,34 @@ const modelValue = defineModel<DateValue | DateValue[]>()
 	user-select: none;
 
 	&:not([data-selected]):not([data-disabled]):not([data-unavailable]):hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&[data-selected] {
-		color: var(--white, #ffffff);
-		background-color: var(--brand, #4149f2);
+		color: var(--on-primary);
+		background-color: var(--primary);
 
 		&:hover {
-			background-color: var(--brand-dark, #3037c9);
+			background-color: var(--primary-hover);
 		}
 	}
 
 	&[data-today] {
-		box-shadow: inset 0 0 0 1px var(--brand, #4149f2);
+		box-shadow: inset 0 0 0 1px var(--focus);
 	}
 
 	&[data-selected][data-today] {
-		box-shadow: inset 0 0 0 1px var(--white, #ffffff);
+		box-shadow: inset 0 0 0 1px var(--on-primary);
 	}
 
 	&[data-unavailable] {
-		color: var(--primary-50, #888888);
+		color: var(--text-muted);
 		text-decoration: line-through;
 		cursor: not-allowed;
 	}

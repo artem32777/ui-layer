@@ -69,18 +69,18 @@ const isSeparatorVisible = (index: number) =>
 
 <style scoped lang="scss">
 .breadcrumb {
-	color: var(--primary-50, #6b5b72);
+	color: var(--text-muted);
 
 	&:hover {
 		.breadcrumb__link {
-			color: var(--brand, #4149f2);
+			color: var(--primary);
 		}
 	}
 
 	&:focus-within {
 		.breadcrumb__link {
 			outline: none;
-			box-shadow: 0 0 0 2px var(--brand, #4149f2);
+			box-shadow: 0 0 0 2px var(--focus);
 		}
 	}
 }
@@ -99,29 +99,29 @@ const isSeparatorVisible = (index: number) =>
 }
 
 .breadcrumb__link {
-	color: var(--primary-50, #6b5b72);
+	color: var(--text-muted);
 	transition: color 0.3s ease;
 
 	&:hover {
-		color: var(--brand, #4149f2);
+		color: var(--primary);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 2px var(--brand, #4149f2);
+		box-shadow: 0 0 0 2px var(--focus);
 	}
 }
 
 .breadcrumb__page {
-	color: var(--text, #000000);
+	color: var(--text);
 }
 
 .breadcrumb__separator {
-	color: var(--primary-50, #6b5b72);
+	color: var(--text-muted);
 }
 
 .breadcrumb__ellipsis {
 	display: inline-flex;
-	color: var(--primary-50, #6b5b72);
+	color: var(--text-muted);
 }
 </style>

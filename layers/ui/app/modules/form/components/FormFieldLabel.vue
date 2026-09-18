@@ -26,7 +26,7 @@ defineProps<{
 
 .field-label__text {
   @include font-size(label);
-  color: var(--text-on-surface-tertiary);
+  color: var(--text-subtle);
   justify-self: start;
 }
 </style>

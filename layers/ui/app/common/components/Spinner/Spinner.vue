@@ -28,7 +28,7 @@ withDefaults(defineProps<SpinnerProps>(), {
 	border: 2px solid color-mix(in srgb, currentColor 25%, transparent);
 	border-top-color: currentColor;
 	border-radius: 50%;
-	color: var(--brand, #4149f2);
+	color: var(--primary);
 	animation: spinner-rotate 0.8s linear infinite;
 
 	@media (prefers-reduced-motion: reduce) {

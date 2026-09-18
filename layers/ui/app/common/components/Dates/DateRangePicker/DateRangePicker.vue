@@ -314,31 +314,31 @@ function selectMonth(value: DateValue | DateValue[] | undefined) {
 .calendar__day {
 	&[data-highlighted],
 	&[data-selected] {
-		color: var(--text, #000000);
-		background-color: color-mix(in srgb, var(--brand, #4149f2) 16%, transparent);
+		color: var(--text);
+		background-color: color-mix(in srgb, var(--primary) 16%, transparent);
 
 		&:hover {
-			background-color: color-mix(in srgb, var(--brand, #4149f2) 24%, transparent);
+			background-color: color-mix(in srgb, var(--primary) 24%, transparent);
 		}
 	}
 
 	&[data-selected][data-today] {
-		box-shadow: inset 0 0 0 1px var(--brand, #4149f2);
+		box-shadow: inset 0 0 0 1px var(--focus);
 	}
 
 	&[data-selection-start],
 	&[data-selection-end],
 	&[data-highlighted-start],
 	&[data-highlighted-end] {
-		color: var(--white, #ffffff);
-		background-color: var(--brand, #4149f2);
+		color: var(--on-primary);
+		background-color: var(--primary);
 
 		&:hover {
-			background-color: var(--brand-dark, #3037c9);
+			background-color: var(--primary-hover);
 		}
 
 		&[data-today] {
-			box-shadow: inset 0 0 0 1px var(--white, #ffffff);
+			box-shadow: inset 0 0 0 1px var(--on-primary);
 		}
 	}
 }

@@ -59,12 +59,12 @@ defineProps<{ item: NavigationMenuItem }>()
 
   @media (any-hover: hover) {
     &:hover {
-      color: var(--brand, #4149f2);
+      color: var(--primary);
     }
   }
 
   &:focus-visible {
-    color: var(--brand, #4149f2);
+    color: var(--primary);
   }
 
   &[data-state='open'] {

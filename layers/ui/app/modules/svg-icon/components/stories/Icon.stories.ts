@@ -80,7 +80,7 @@ export const Icons: Story = {
 							type="search"
 							placeholder="download"
 							autocomplete="off"
-							style="width: 100%; height: 42px; padding: 0 14px; border: 1px solid #000; border-radius: 8px; background: var(--white); "
+							style="width: 100%; height: 42px; padding: 0 14px; border: 1px solid #000; border-radius: 8px; background: var(--surface); "
 						>
 					</label>
 				</div>
@@ -98,7 +98,7 @@ export const Icons: Story = {
 								:key="iconName"
 								type="button"
 								:title="copied && text === iconName ? 'Скопировано' : 'Скопировать название'"
-								style="display: grid; gap: 10px; justify-items: center; padding: 18px 12px; border: 1px solid #000; border-radius: 8px; background: var(--white)"
+								style="display: grid; gap: 10px; justify-items: center; padding: 18px 12px; border: 1px solid #000; border-radius: 8px; background: var(--surface)"
 								@click="copy(iconName)"
 							>
 								<Icon v-bind="args" :name="iconName" :size="40" />

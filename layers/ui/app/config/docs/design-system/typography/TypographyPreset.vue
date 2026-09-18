@@ -101,7 +101,7 @@ const emit = defineEmits<{
 .typography-preset {
 	border: 1px solid #000;
 	border-radius: 8px;
-	background: var(--white);
+	background: var(--surface);
 	transition: border-color 0.2s ease;
 
   &--opened {
@@ -156,7 +156,7 @@ const emit = defineEmits<{
 	padding: 8px 10px;
 	border: 1px solid;
 	border-radius: 6px;
-	color: var(--neutral-950);
-	background: var(--white);
+	color: var(--text);
+	background: var(--surface);
 }
 </style>

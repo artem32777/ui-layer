@@ -31,7 +31,7 @@ import CallbackModal from '../../../../modules/callback/components/modal/Callbac
     background-color: color-mix(in srgb, var(--primary) 10%, transparent);
 
     &:hover {
-      color: var(--white);
+      color: var(--on-primary);
       background-color: var(--primary);
     }
   }

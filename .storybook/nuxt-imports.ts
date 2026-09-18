@@ -58,7 +58,6 @@ export function useHead(input: HeadInput) {
 		const classes = classValue?.split(/\s+/) ?? []
 
 		document.documentElement.classList.toggle(Theme.light, classes.includes(Theme.light))
-		document.documentElement.classList.toggle(Theme.grey, classes.includes(Theme.grey))
 		document.documentElement.classList.toggle(Theme.dark, classes.includes(Theme.dark))
 	})
 }

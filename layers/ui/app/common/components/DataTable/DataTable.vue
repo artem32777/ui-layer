@@ -185,7 +185,7 @@ defineExpose({ table })
 
 .ui-data-table__container {
   overflow: auto;
-  border: 1px solid var(--neutral-500, #e2e2e2);
+  border: 1px solid var(--border-muted);
   border-radius: 8px;
 }
 
@@ -195,7 +195,7 @@ defineExpose({ table })
 }
 
 .ui-data-table__head {
-  background-color: var(--neutral-500, #e2e2e2);
+  background-color: var(--surface-muted);
 }
 
 th,
@@ -207,30 +207,30 @@ td {
 
 th {
   height: 40px;
-  color: var(--primary-50, #6b5b72);
+  color: var(--text-muted);
   font-weight: 500;
   white-space: nowrap;
 }
 
 td {
-  color: var(--text, #000000);
+  color: var(--text);
 }
 
 tr {
-  border-bottom: 1px solid var(--neutral-500, #e2e2e2);
+  border-bottom: 1px solid var(--border-muted);
 
   &:last-child {
     border-bottom: 0;
   }
 
   &[data-state='selected'] {
-    background-color: color-mix(in srgb, var(--brand, #4149f2) 8%, transparent);
+    background-color: color-mix(in srgb, var(--primary) 8%, transparent);
   }
 }
 
 .ui-data-table__state {
   height: 72px;
-  color: var(--primary-50, #6b5b72);
+  color: var(--text-muted);
   text-align: center;
 }
 </style>

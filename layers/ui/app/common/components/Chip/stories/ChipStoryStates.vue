@@ -74,6 +74,6 @@ const chipStates = [
 
 .chip-story-states__label {
 	font-size: 20px;
-	color: var(--text-on-surface-dark);
+	color: var(--text);
 }
 </style>

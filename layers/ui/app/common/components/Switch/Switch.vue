@@ -52,45 +52,45 @@ const modelValue = defineModel<boolean>()
   align-items: center;
   gap: 8px;
   @include font-size(button);
-  color: var(--text-on-surface-dark);
+  color: var(--text);
 
   &:hover {
     .switch__icon {
-      border-color: var(--border-primary);
-      background-color: var(--bg-controls-unchecked-hover);
+      border-color: var(--focus);
+      background-color: var(--control-hover);
     }
 
     .switch__thumb {
-      background-color: var(--icon-on-bg-unchecked-hover);
+      background-color: var(--primary);
     }
   }
 
   &--checked:not(.switch--disabled) {
     .switch__icon {
-      border-color: var(--border-primary);
-      background-color: var(--bg-controls-checked);
+      border-color: var(--focus);
+      background-color: var(--primary);
     }
 
     .switch__thumb {
       transform: translateX(12px);
-      background-color: var(--icon-on-bg-checked);
+      background-color: var(--on-primary);
     }
 
     &:hover {
       .switch__icon {
-        border-color: var(--bg-controls-checked-hover);
-        background-color: var(--bg-controls-checked-hover);
+        border-color: var(--primary-hover);
+        background-color: var(--primary-hover);
       }
 
       .switch__thumb {
-        background-color: var(--icon-on-bg-checked);
+        background-color: var(--on-primary);
       }
     }
   }
 
   &--disabled {
     pointer-events: none;
-    color: var(--text-on-surface-tertiary);
+    color: var(--text-subtle);
 
     .switch__icon {
       justify-content: center;
@@ -106,7 +106,7 @@ const modelValue = defineModel<boolean>()
   border-radius: var(--UI-radius-L);
   height: var(--ui-height-XXS);
   padding: 0 4px;
-  background-color: var(--bg-controls-unchecked);
+  background-color: var(--control);
   transition: background-color 0.3s ease, border 0.3s ease;
 }
 
@@ -114,11 +114,11 @@ const modelValue = defineModel<boolean>()
   height: 12px;
   aspect-ratio: 1;
   border-radius: var(--UI-radius-XS);
-  background-color: var(--icon-on-bg-unchecked);
+  background-color: var(--control-thumb);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .switch__disabled-icon {
-  color: var(--icon-on-bg-disabled);
+  color: var(--text-disabled);
 }
 </style>

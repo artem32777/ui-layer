@@ -101,14 +101,14 @@ function resetAll() {
 .typography-editor__reset {
 	justify-self: end;
 	padding: 8px 14px;
-	border: 1px solid var(--neutral-600);
+	border: 1px solid var(--border);
 	border-radius: 6px;
-	color: var(--neutral-950);
-	background: var(--white);
+	color: var(--text);
+	background: var(--surface);
 	cursor: pointer;
 
 	&:hover {
-		border-color: var(--primary);
+		border-color: var(--focus);
 	}
 }
 </style>

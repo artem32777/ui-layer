@@ -136,29 +136,29 @@ function onItemClick(item: SelectOption, event: Event) {
   width: 100%;
   border: 1px solid transparent;
   @include font-size(button);
-  color: var(--text-on-bg-secondary);
-  background-color: var(--bg-field-static);
+  color: var(--text);
+  background-color: var(--surface-muted);
   transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   &:hover, &:focus {
-    background-color: var(--bg-field-hover);
+    background-color: var(--surface-muted-hover);
     outline: none;
   }
 
   &[data-state='open'],
   &:focus:not([data-placeholder]) {
-    background-color: var(--bg-field-expanded);
-    border-color: var(--border-expanded);
+    background-color: var(--field-focus-background);
+    border-color: var(--focus);
   }
 
   &[aria-invalid='true'] {
-    border-color: var(--border-error);
+    border-color: var(--error);
   }
 
   &[data-disabled],
   &:disabled {
-    color: var(--text-on-bg-disabled);
-    background-color: var(--bg-action-disabled);
+    color: var(--text-disabled);
+    background-color: var(--surface-muted);
     pointer-events: none;
   }
 

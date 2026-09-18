@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { useThemeStore } from '#layers/ui/app/common/stores/themeStore'
-import themeColorsScss from '#layers/ui/app/config/styles/theme-colors.scss?raw'
+import themeColorsScss from '#layers/ui/app/config/styles/colors.scss?raw'
 
 const { theme } = storeToRefs(useThemeStore())
 const tokenNames = Array.from(themeColorsScss.matchAll(/:root\s*{([^}]*)}/gs)).flatMap(block => Array.from(block[1]!.matchAll(/(--[\w-]+)\s*:/g), match => match[1]!))
@@ -83,7 +83,7 @@ watch([theme], readColors)
 .colors__group-title {
   font-size: 20px;
 	padding-bottom: 6px;
-	border-bottom: 1px solid var(--neutral-600);
+	border-bottom: 1px solid var(--border);
 }
 
 .colors__list {
@@ -104,7 +104,7 @@ watch([theme], readColors)
 	height: 75px;
 	flex-shrink: 0;
 	overflow: hidden;
-	border: 1px solid var(--neutral-600);
+	border: 1px solid var(--border);
 	border-radius: 4px;
 }
 
@@ -123,6 +123,6 @@ watch([theme], readColors)
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 6px;
-	color: var(--neutral-800);
+	color: var(--text-muted);
 }
 </style>

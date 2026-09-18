@@ -49,18 +49,18 @@ defineSlots<{
 
 // VARIANTS:
 	&--variant-primary {
-		background-color: var(--bg-action-primary);
-		color: var(--text-on-bg-primary);
+		background-color: var(--primary);
+		color: var(--on-primary);
 	}
 
 	&--variant-secondary {
-		background-color: var(--bg-action-secondary);
-		color: var(--text-on-bg-secondary);
+		background-color: var(--surface-muted);
+		color: var(--text);
 	}
 
 	&--variant-accent {
-		background-color: var(--bg-action-accent);
-		color: var(--text-on-bg-accent);
+		background-color: var(--accent);
+		color: var(--on-accent);
 	}
 }
 </style>

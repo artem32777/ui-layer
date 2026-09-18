@@ -72,7 +72,7 @@ defineSlots<{
 
   &:hover {
     .custom-scroll-area__thumb {
-      background-color: var(--bg-controls-scrollthumb-hover);
+      background-color: var(--scrollbar-hover);
     }
   }
 }
@@ -104,7 +104,7 @@ defineSlots<{
   position: relative;
   flex: 1;
   border-radius: var(--scrollbar-size);
-  background-color: var(--bg-controls-scrollthumb);
+  background-color: var(--scrollbar);
   transition: background-color 0.3s ease 0s;
 
   /* increase target size for touch devices https://www.w3.org/WAI/WCAG21/Understanding/target-size.html */
@@ -122,6 +122,6 @@ defineSlots<{
 }
 
 //:deep(.custom-scroll-area__corner) {
-//  background-color: var(--neutral-500, #e2e2e2);
+//  background-color: var(--surface-muted);
 //}
 </style>

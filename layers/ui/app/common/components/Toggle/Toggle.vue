@@ -37,27 +37,27 @@ const modelValue = defineModel<boolean>({ default: false })
 	align-items: center;
 	justify-content: center;
 	border-radius: 6px;
-	color: var(--text, #000000);
+	color: var(--text);
 	cursor: pointer;
 
   &.toggle--variant-outline {
-    border: 1px solid var(--neutral-500, #e2e2e2);
+    border: 1px solid var(--border-muted);
     background-color: transparent;
   }
 
 	&:hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&[data-state="on"] {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&[data-disabled] {

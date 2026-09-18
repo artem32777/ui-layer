@@ -1,6 +1,5 @@
 export const Theme = {
 	light: 'theme-light',
-	grey: 'theme-grey',
 	dark: 'theme-dark',
 } as const
 

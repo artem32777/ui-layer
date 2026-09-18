@@ -99,17 +99,17 @@ const percentLabel = computed(() => {
 
 .slider-values__value,
 .slider-values__percent {
-	color: var(--text-on-bg-secondary);
+	color: var(--text);
 	font-weight: 600;
 }
 
 .slider-values__unit {
-	color: var(--text-on-bg-disabled);
+	color: var(--text-disabled);
 	font-weight: 400;
 }
 
 .slider-values__bullet {
 	@include font-size(label);
-	color: var(--text-on-bg-disabled);
+	color: var(--text-disabled);
 }
 </style>

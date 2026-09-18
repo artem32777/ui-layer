@@ -94,12 +94,12 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
   border-radius: var(--radius-content);
 
   &[data-highlighted] {
-    background-color: var(--bg-action-item-hover);
+    background-color: var(--surface-hover);
     outline: none;
   }
 
   &[data-disabled] {
-    color: var(--text-on-surface-tertiary);
+    color: var(--text-subtle);
     pointer-events: none;
   }
 }
@@ -150,19 +150,19 @@ const variant = computed(() => props.item.variant ?? (props.item.icon ? 'icon' :
 
 .dropdown-menu-item__label {
   @include font-size(button);
-  color: var(--text-on-surface-dark);
+  color: var(--text);
 }
 
 .dropdown-menu-item__description {
   @include font-size(p2);
-  color: var(--text-on-surface-tertiary);
+  color: var(--text-subtle);
 }
 
 .dropdown-menu-item__check {
-  color: var(--graphics-accent);
+  color: var(--accent);
 }
 
 .dropdown-menu-item__chevron {
-  color: var(--icon-on-bg-secondary-muted);
+  color: var(--text-subtle);
 }
 </style>

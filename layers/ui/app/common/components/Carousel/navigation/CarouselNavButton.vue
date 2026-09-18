@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon, iconNames } from '#layers/ui/app/modules/svg-icon'
-import { CarouselNavClass } from '../Carousel.types.ts'
 
 defineProps<{ isNext?: boolean }>()
 </script>
@@ -8,7 +7,7 @@ defineProps<{ isNext?: boolean }>()
 <template>
 	<button
 		class="carousel-nav-button"
-		:class="isNext ? CarouselNavClass.nextEl : CarouselNavClass.prevEl"
+		:class="isNext ? '.carousel-nav-next' : '.carousel-nav-prev'"
 		:aria-label="`${isNext ? 'Следующий' : 'Предыдущий'} слайд`"
 	>
 		<Icon :name="iconNames.plus" />
@@ -22,8 +21,8 @@ defineProps<{ isNext?: boolean }>()
   justify-content: center;
   width: 30px;
   height: 30px;
-  background-color: var(--primary-dark);
-  color: var(--white-100);
+  background-color: var(--primary-hover);
+  color: var(--on-primary);
   border-radius: 50px;
   transition: background-color 0.3s ease 0s, color 0.3s ease 0s, opacity 0.3s ease 0s;
 

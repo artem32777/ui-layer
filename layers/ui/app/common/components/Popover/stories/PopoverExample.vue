@@ -69,7 +69,7 @@ const link = ref('https://example.com/docs/share/abc123')
 	margin: 0;
 	font-size: 14px;
 	line-height: 1.4;
-	color: color-mix(in srgb, var(--text, #000000) 65%, transparent);
+	color: color-mix(in srgb, var(--text) 65%, transparent);
 }
 
 .popover-example__field {

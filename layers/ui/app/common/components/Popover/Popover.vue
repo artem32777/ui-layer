@@ -60,17 +60,17 @@ const modelValue = defineModel<boolean>({ default: false })
 	min-width: 200px;
 	padding: 16px;
 	border-radius: 8px;
-	color: var(--text, #000000);
-	background: var(--background, #ffffff);
-	border: 1px solid color-mix(in srgb, var(--neutral-950, #000000) 15%, transparent);
+	color: var(--text);
+	background: var(--surface);
+	border: 1px solid color-mix(in srgb, var(--shadow) 15%, transparent);
 	animation: popover-fade-in 0.2s ease;
 	z-index: $z-dropdown;
 }
 
 :deep(.popover__arrow) {
-	fill: var(--background, #ffffff);
+	fill: var(--surface);
 	transform: translateY(-1px);
-	filter: drop-shadow(0 1px 0 color-mix(in srgb, var(--neutral-950, #000000) 15%, transparent));
+	filter: drop-shadow(0 1px 0 color-mix(in srgb, var(--shadow) 15%, transparent));
 }
 
 @keyframes popover-fade-in {

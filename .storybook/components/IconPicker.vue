@@ -59,9 +59,9 @@ const filteredIconNames = computed(() => iconNameList.filter(iconName => iconNam
 	gap: 12px;
 	min-width: 280px;
 	padding: 16px;
-	border: 1px solid var(--neutral-600);
+	border: 1px solid var(--border);
 	border-radius: 12px;
-	background: var(--white);
+	background: var(--surface);
 }
 
 .icon-picker__header {
@@ -94,8 +94,8 @@ const filteredIconNames = computed(() => iconNameList.filter(iconName => iconNam
 	min-height: 52px;
 	padding: 10px 12px;
 	border-radius: 8px;
-	color: var(--neutral-950);
-	background: var(--neutral-500);
+	color: var(--text);
+	background: var(--surface-muted);
 }
 
 .icon-picker__search {
@@ -112,12 +112,12 @@ const filteredIconNames = computed(() => iconNameList.filter(iconName => iconNam
 	width: 100%;
 	height: 38px;
 	padding: 0 12px;
-	border: 1px solid var(--neutral-700);
+	border: 1px solid var(--text-subtle);
 	border-radius: 8px;
-	background: var(--white);
+	background: var(--surface);
 
 	&:focus-visible {
-		outline: 2px solid var(--primary);
+		outline: 2px solid var(--focus);
 		outline-offset: 1px;
 	}
 }
@@ -136,25 +136,25 @@ const filteredIconNames = computed(() => iconNameList.filter(iconName => iconNam
 	justify-items: center;
 	min-width: 0;
 	padding: 10px 6px;
-	border: 1px solid var(--neutral-600);
+	border: 1px solid var(--border);
 	border-radius: 8px;
-	color: var(--neutral-950);
-	background: var(--white);
+	color: var(--text);
+	background: var(--surface);
 	cursor: pointer;
 
 	&:hover {
-		border-color: var(--primary);
+		border-color: var(--focus);
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--primary);
+		outline: 2px solid var(--focus);
 		outline-offset: 1px;
 	}
 }
 
 .icon-picker__option--selected {
-	border-color: var(--primary);
-	box-shadow: inset 0 0 0 1px var(--primary);
+	border-color: var(--focus);
+	box-shadow: inset 0 0 0 1px var(--focus);
 }
 
 .icon-picker__option-name {
@@ -168,7 +168,7 @@ const filteredIconNames = computed(() => iconNameList.filter(iconName => iconNam
 .icon-picker__empty {
 	margin: 0;
 	padding: 20px;
-	border: 1px dashed var(--neutral-700);
+	border: 1px dashed var(--text-subtle);
 	border-radius: 8px;
 	text-align: center;
 }

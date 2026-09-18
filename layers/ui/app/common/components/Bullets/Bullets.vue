@@ -39,7 +39,7 @@ const activeBullet = defineModel<number>({ default: 0 })
 
 .bullets__item {
 	border-radius: 20px;
-	background-color: var(--graphics-dark);
+	background-color: var(--primary);
   opacity: 0.3;
 	transition: width 0.2s ease, background-color 0.2s ease;
 

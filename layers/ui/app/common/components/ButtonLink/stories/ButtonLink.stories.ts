@@ -70,7 +70,7 @@ export const Base: Story = {
 						/>
 					</div>
 
-					<div :style="args.variant === 'on-media' ? { padding: '16px', borderRadius: '8px', backgroundColor: 'var(--primary-500)' } : undefined">
+					<div :style="args.variant === 'on-media' ? { padding: '16px', borderRadius: '8px', backgroundColor: 'var(--media-background)' } : undefined">
 						<ButtonLink v-bind="args" :icon-right="args.text ? args.iconRight : undefined" />
 					</div>
 				</div>

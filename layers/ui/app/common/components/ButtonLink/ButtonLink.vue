@@ -63,30 +63,30 @@ defineSlots<{
 
 // VARIANTS
 	&--variant-dark {
-		color: var(--text-on-surface-dark);
+		color: var(--text);
 
 		&:hover, &:active {
-			color: var(--text-on-surface-dark-hover);
+			color: var(--text-hover);
 		}
 	}
 
 	&--variant-accent {
-		color: var(--text-on-surface-accent);
+		color: var(--accent);
 
 		&:hover, &:active {
-			color: var(--text-on-surface-accent-hover);
+			color: var(--text-accent-hover);
 		}
 	}
 
 	&--variant-on-media {
-		color: var(--text-on-surface-white);
+		color: var(--text-on-media);
 
 		&:hover, &:active {
-			color: var(--text-on-surface-white-hover);
+			color: var(--text-on-media-hover);
 		}
 
 		&[aria-disabled='true'] {
-			color: var(--text-on-bg-disabled-media);
+			color: var(--text-disabled-on-media);
 		}
 	}
 }

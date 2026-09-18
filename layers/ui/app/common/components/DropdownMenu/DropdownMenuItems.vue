@@ -124,24 +124,24 @@ function getSubmenuAnchor(value: string) {
 <style lang="scss" scoped>
 .dropdown-menu__group-label {
   padding: 8px 10px;
-  color: var(--text-on-surface-tertiary);
+  color: var(--text-subtle);
   @include font-size(label);
 }
 
 .dropdown-menu__separator {
   height: 1px;
   margin: 8px 10px;
-  background-color: var(--border-neutral);
+  background-color: var(--border);
 }
 
 :deep(.sub-dropdown-menu) {
   //z-index: $z-dropdown;
   //min-width: 200px;
   //padding: 4px;
-  //border: 1px solid var(--neutral-500, #e2e2e2);
+  //border: 1px solid var(--border-muted);
   //border-radius: 8px;
-  //color: var(--text, #000000);
-  background: var(--background, #ffffff);
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--neutral-950, #000000) 12%, transparent);
+  //color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--shadow) 12%, transparent);
 }
 </style>

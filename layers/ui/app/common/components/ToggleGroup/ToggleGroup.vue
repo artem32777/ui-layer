@@ -33,21 +33,21 @@ const modelValue = defineModel<string | string[]>()
 <style scoped lang="scss">
 .toggle-group {
 	display: inline-flex;
-	border: 1px solid var(--neutral-500, #e2e2e2);
+	border: 1px solid var(--border-muted);
 	border-radius: 6px;
-	background-color: var(--background, #ffffff);
+	background-color: var(--surface);
 
 	&:hover {
 		.toggle-group__item {
-			color: var(--primary-dark, #21223c);
-			background-color: var(--neutral-500, #e2e2e2);
+			color: var(--text-hover);
+			background-color: var(--surface-muted);
 		}
 	}
 
 	&:focus-within {
 		.toggle-group__item {
 			outline: none;
-			box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+			box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--focus) 35%, transparent);
 		}
 	}
 }
@@ -58,23 +58,23 @@ const modelValue = defineModel<string | string[]>()
 	justify-content: center;
 	width: 36px;
 	height: 36px;
-	color: var(--text, #000000);
-	background-color: var(--background, #ffffff);
+	color: var(--text);
+	background-color: var(--surface);
 	transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
 
 	&:hover {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&[data-state="on"] {
-		color: var(--primary-dark, #21223c);
-		background-color: var(--neutral-500, #e2e2e2);
+		color: var(--text-hover);
+		background-color: var(--surface-muted);
 	}
 
 	&:focus-visible {
 		outline: none;
-		box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--brand, #4149f2) 35%, transparent);
+		box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--focus) 35%, transparent);
 	}
 
 	&[data-disabled] {

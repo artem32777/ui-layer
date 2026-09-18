@@ -12,6 +12,10 @@ export const useThemeStore = defineStore('ui-theme', () => {
 		sameSite: 'lax',
 	})
 
+	if (theme.value !== Theme.light && theme.value !== Theme.dark && theme.value !== 'system') {
+		theme.value = Theme.light
+	}
+
 	const isSystemDark = usePreferredDark()
 
 	useHead({

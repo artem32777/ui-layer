@@ -57,16 +57,16 @@ const modelValue = defineModel<boolean>()
 	align-items: center;
 	gap: 8px;
   @include font-size(button);
-	color: var(--text-on-surface-dark);
+	color: var(--text);
 
   &:hover, &:focus-within {
     .checkbox__root {
-      background-color: var(--bg-controls-unchecked-hover);
-      border-color: var(--border-primary);
+      background-color: var(--control-hover);
+      border-color: var(--focus);
 
       &[data-state="checked"] {
-        background-color: var(--bg-controls-checked-hover);
-        border-color: var(--bg-controls-checked-hover);
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
       }
     }
   }
@@ -75,13 +75,13 @@ const modelValue = defineModel<boolean>()
     pointer-events: none;
 
 		.checkbox__root {
-			color: var(--icon-on-bg-disabled);
-			background-color: var(--bg-action-disabled);
-			border-color: var(--bg-action-disabled);
+			color: var(--text-disabled);
+			background-color: var(--surface-muted);
+			border-color: var(--surface-muted);
 		}
 
 		.checkbox__label {
-			color: var(--text-on-surface-tertiary);
+			color: var(--text-subtle);
 		}
 	}
 }
@@ -94,27 +94,27 @@ const modelValue = defineModel<boolean>()
   aspect-ratio: 1;
 	border: 1px solid transparent;
 	border-radius: var(--UI-radius-XSS);
-	background-color: var(--bg-controls-unchecked);
+	background-color: var(--control);
 	transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 
   &[aria-invalid="true"]{
-    box-shadow: 0 0 0 1px var(--accent);
+    box-shadow: 0 0 0 1px var(--error);
   }
 
 	&[data-state="checked"]{
-		border-color: var(--bg-controls-checked);
-    background-color: var(--bg-controls-checked);
+		border-color: var(--primary);
+    background-color: var(--primary);
 	}
 }
 
 .checkbox__indicator {
-  color: var(--icon-on-bg-checked);
+  color: var(--on-primary);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .checkbox__disabled {
-  color: var(--icon-on-bg-disabled);
+  color: var(--text-disabled);
 }
 </style>

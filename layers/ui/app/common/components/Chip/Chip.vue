@@ -55,30 +55,30 @@ const modelValue = defineModel<boolean>({ default: false })
 	justify-content: center;
 	gap: 4px;
 	white-space: nowrap;
-	color: var(--text-on-bg-secondary);
-	background-color: var(--surface-block);
+	color: var(--text);
+	background-color: var(--surface);
   @include font-size(button-small);
   transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 
 	&:hover, &:focus-visible {
-		background-color: var(--bg-action-secondary-hover);
+		background-color: var(--surface-muted-hover);
     outline: none;
 	}
 
 	&[data-state='on'] {
 		border-color: transparent;
-		color: var(--text-on-bg-selected);
-		background-color: var(--bg-controls-selected);
+		color: var(--on-primary);
+		background-color: var(--primary);
 
 		&:hover {
-			background-color: var(--bg-controls-selected-hover);
+			background-color: var(--primary-hover);
 		}
 	}
 
 	&[data-disabled] {
 		pointer-events: none;
-		color: var(--text-on-bg-disabled);
-		background-color: var(--bg-action-disabled);
+		color: var(--text-disabled);
+		background-color: var(--surface-muted);
 	}
 
   &--size-small {
