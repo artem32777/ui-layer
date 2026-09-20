@@ -1,8 +1,8 @@
 $scrollbar-width: 0.5rem;
 
 @mixin scrollbar(
-  $thumb-color: var(black),
-  $scrollbar-color: var(black),
+  $thumb-color: black,
+  $scrollbar-color: black,
   $width: $scrollbar-width,
   $thumb-radius: 10px
 ) {
