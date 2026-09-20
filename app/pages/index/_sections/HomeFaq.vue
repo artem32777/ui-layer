@@ -1,12 +1,15 @@
 <script setup lang="ts"></script>
 
 <template>
-	<section class="valley__section valley__faq">
+	<section
+		id="faq"
+		class="valley__section valley__faq"
+	>
 		<div class="valley__faq-heading">
 			<span class="valley__label">05 / Есть вопросы?</span>
 			<h2 class="valley__heading">
 				Отвечаем
-				<br />
+				<br>
 				<span class="valley__muted">по делу.</span>
 			</h2>
 		</div>
@@ -88,7 +91,7 @@
 .valley__section {
 	padding: 105px 5%;
 	scroll-margin-top: calc(var(--valley-header-height) + 30px);
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 68px 6%;
 	}
 }
@@ -102,7 +105,7 @@
 	line-height: 1.08;
 	letter-spacing: -2.7px;
 	margin: 0;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 42px;
 		letter-spacing: -1.6px;
 	}
@@ -115,7 +118,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1.4fr;
 	gap: 65px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		grid-template-columns: 1fr;
 		gap: 38px;
 	}
@@ -133,7 +136,7 @@
 	&[open] {
 		.valley__question-plus {
 			transform: rotate(45deg);
-			color: var(--valley-yellow);
+			color: var(--brand);
 		}
 	}
 }
@@ -149,7 +152,7 @@
 	&::-webkit-details-marker {
 		display: none;
 	}
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 18px;
 	}
 }

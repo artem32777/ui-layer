@@ -1,14 +1,17 @@
 <script setup lang="ts"></script>
 
 <template>
-	<section id="studio" class="valley__section valley__studio">
+	<section
+		id="studio"
+		class="valley__section valley__studio"
+	>
 		<div class="valley__section-top">
 			<span class="valley__label">02 / О студии</span>
 			<span class="valley__section-note">Небольшая команда. Большие возможности.</span>
 		</div>
 		<h2 class="valley__studio-heading">
 			Не просто красиво.
-			<br />
+			<br>
 			Красиво
 			<span class="valley__accent">и с результатом.</span>
 		</h2>
@@ -44,18 +47,20 @@
 				<span class="valley__stat-description">сокращение расходов на содержание сайта*</span>
 			</div>
 		</div>
-		<p class="valley__footnote">* По оценке студии. Показатели зависят от задачи и ниши.</p>
+		<p class="valley__footnote">
+			* По оценке студии. Показатели зависят от задачи и ниши.
+		</p>
 	</section>
 </template>
 
 <style scoped lang="scss">
 .valley__accent {
-	color: var(--valley-yellow);
+	color: var(--brand);
 }
 .valley__section {
 	padding: 105px 5%;
 	scroll-margin-top: calc(var(--valley-header-height) + 30px);
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 68px 6%;
 	}
 }
@@ -72,7 +77,7 @@
 .valley__section-note {
 	font-size: 12px;
 	color: #9a9d95;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		display: none;
 	}
 }
@@ -82,7 +87,7 @@
 	color: #bcbfb6;
 	max-width: 380px;
 	margin: 0 0 5px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		margin-top: 25px;
 		font-size: 16px;
 	}
@@ -97,7 +102,7 @@
 	letter-spacing: -2.8px;
 	font-weight: 500;
 	margin: 0 0 40px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 42px;
 		letter-spacing: -1.6px;
 	}
@@ -107,7 +112,7 @@
 	justify-content: flex-end;
 	gap: 65px;
 	margin-bottom: 74px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		display: block;
 		margin-bottom: 45px;
 	}
@@ -116,7 +121,7 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	border-top: 1px solid #42453c;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		grid-template-columns: 1fr 1fr;
 		gap: 35px 20px;
 	}
@@ -131,14 +136,14 @@
 	font-weight: 450;
 	letter-spacing: -5px;
 	line-height: 1.12;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 65px;
 		letter-spacing: -3px;
 	}
 }
 .valley__stat-plus {
 	font-size: 0.48em;
-	color: var(--valley-yellow);
+	color: var(--brand);
 	vertical-align: top;
 	line-height: 1.8;
 }

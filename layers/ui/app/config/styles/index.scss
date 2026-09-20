@@ -6,11 +6,17 @@
 @use "spacing";
 
 html {
-  @include scrollbar(var(--scrollbar), transparent, 0.5rem,  0.5rem);
+  --scrollbar-width: #{$scrollbar-width};
+  @include scrollbar(var(--scrollbar), black, $scrollbar-width, $scrollbar-width);
+  background-color: black;
+}
+
+html.is-scroll-locked {
+  @include scroll-compensation();
 }
 
 body * {
-  @include scrollbar();
+  @include scrollbar($width: 4px);
 }
 
 body {
@@ -19,7 +25,43 @@ body {
   background-color: var(--background);
 }
 
+.valley {
+  --valley-header-height: 94px;
+
+  @media (max-width: $sm) {
+    --valley-header-height: 78px;
+  }
+}
+
 * {
   border-color: var(--border-muted);
   outline-color: color-mix(in srgb, var(--focus) 50%, transparent);
+}
+
+.page-navigation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: $z-page-transition;
+  display: flex;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.page-navigation-overlay__bar {
+  position: relative;
+  flex: 1;
+  background: black;
+
+  //&::after {
+  //  content: "";
+  //  position: absolute;
+  //  inset: 0 -2px;
+  //  background: var(--brand);
+  //  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  //}
+  //
+  //&:nth-child(odd)::after {
+  //  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  //}
 }

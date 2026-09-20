@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 		css: {
 			preprocessorOptions: {
 				scss: {
-					additionalData: `${getSharedScssAdditionalData(resolve('../..'))}\n`,
+					additionalData: (content: string) => `${getSharedScssAdditionalData(resolve('../..'))}\n${content}`,
 				},
 			},
 		},

@@ -1,48 +1,96 @@
 <script setup lang="ts">
-import type { HeaderProps } from './Header.types'
-import HeaderBurger from './HeaderBurger.vue'
-import HeaderLogo from './HeaderLogo.vue'
-import HeaderMenu from './menu/HeaderMenu.vue'
-import HeaderActions from './actions/HeaderActions.vue'
+import { ref } from 'vue'
+import HomeHeaderBrand from './HomeHeaderBrand.vue'
+import HomeHeaderContact from './HomeHeaderContact.vue'
+import HomeHeaderMenu from './HomeHeaderMenu.vue'
+import HomeHeaderNav from './HomeHeaderNav.vue'
 
-defineProps<HeaderProps>()
+const brand = {
+	href: '#',
+	name: 'SMART',
+	studio: 'studio',
+	ariaLabel: 'WebValley Studio — главная',
+}
+
+const navLinks = [
+	{ href: '#projects', label: 'Проекты' },
+	{ href: '#services', label: 'Услуги' },
+	{ href: '#studio', label: 'Студия' },
+]
+
+const contactLink = {
+	href: '#contact',
+	label: 'Обсудить проект',
+}
+
+const menuLinks = [
+	{ href: '#', label: 'Главная' },
+	{ href: '#studio', label: 'О студии' },
+	{ href: '#services', label: 'Услуги' },
+	{ href: '#projects', label: 'Проекты' },
+	{ href: '#academy', label: 'Обучение' },
+	{ href: '#contact', label: 'Контакты' },
+	{ href: '#process', label: 'Этапы работ' },
+	{ href: '#reviews', label: 'Отзывы' },
+	{ href: '#faq', label: 'FAQ' },
+	{ href: 'https://web-valley.ru/partnerskie-programmy-veb-studij', label: 'Партнёрка' },
+	{ href: '#blog', label: 'Блог' },
+	{ href: 'https://web-valley.ru/o-studii/vakansii-veb-studii', label: 'Вакансии' },
+	{ href: 'https://web-valley.ru/brif', label: 'Бриф' },
+]
+
+const menuOpen = ref(false)
 </script>
 
 <template>
-	<header class="header">
-		<div class="header__inner">
-			<HeaderLogo :src="logoSrc" />
-			<HeaderMenu :items="menuItems" />
-			<HeaderActions />
-			<HeaderBurger :items="menuItems" />
-		</div>
+	<header
+		class="valley__header"
+		:class="{ 'valley__header--menu-open': menuOpen }"
+	>
+		<HomeHeaderBrand :brand="brand" />
+		<HomeHeaderNav :links="navLinks" />
+		<HomeHeaderContact
+			:link="contactLink"
+			@click="menuOpen = false"
+		/>
+		<HomeHeaderMenu
+			v-model:open="menuOpen"
+			:links="menuLinks"
+		/>
 	</header>
 </template>
 
 <style scoped lang="scss">
-.header {
-  z-index: $z-header;
-  position: relative;
-  background: var(--surface);
+.valley__header {
+	--valley-header-height: 94px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: $z-header;
+	height: var(--valley-header-height);
+	display: flex;
+	align-items: center;
+	gap: 48px;
+	padding: 0 5%;
+	background: #111211;
+	transition: background-color 0.35s ease;
+
+	@media (max-width: $sm) {
+		--valley-header-height: 78px;
+		padding: 0 6%;
+		gap: 20px;
+	}
+
+	html.is-scroll-locked & {
+		padding-inline-end: calc(5% + var(--scrollbar-width));
+
+		@media (max-width: $sm) {
+			padding-inline-end: calc(6% + var(--scrollbar-width));
+		}
+	}
 }
-
-.header__inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  @media (max-width: $lg) {
-    min-height: 80px;
-    padding: 10px 30px;
-    gap: 32px;
-  }
-
-  @media (max-width: $sm) {
-    min-height: 72px;
-    padding: 8px 16px;
-    gap: 12px;
-  }
+.valley__header--menu-open {
+	background: transparent;
 }
 </style>

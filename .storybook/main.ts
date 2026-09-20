@@ -50,7 +50,7 @@ const config: StorybookConfig = {
 		viteConfig.css.preprocessorOptions ??= {}
 		viteConfig.css.preprocessorOptions.scss = {
 			...viteConfig.css.preprocessorOptions.scss,
-			additionalData: `${getSharedScssAdditionalData(rootDir)}\n`,
+			additionalData: (content: string) => `${getSharedScssAdditionalData(rootDir)}\n${content}`,
 		}
 
 		return viteConfig

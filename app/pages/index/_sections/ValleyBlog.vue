@@ -25,15 +25,27 @@ const articles = [
 </script>
 
 <template>
-	<section id="blog" class="valley-blog">
+	<section
+		id="blog"
+		class="valley-blog"
+	>
 		<div class="valley-blog__intro">
-			<span class="valley-blog__label" data-reveal>Делимся опытом</span>
-			<h2 class="valley-blog__title" data-reveal>
+			<span
+				class="valley-blog__label"
+				data-reveal
+			>Делимся опытом</span>
+			<h2
+				class="valley-blog__title"
+				data-reveal
+			>
 				3 последних поста
-				<br />
+				<br>
 				из блога
 			</h2>
-			<p class="valley-blog__copy" data-reveal>
+			<p
+				class="valley-blog__copy"
+				data-reveal
+			>
 				Пишем о дизайне, разработке и продвижении сайтов. Делимся практикой студии с предпринимателями и будущими дизайнерами.
 			</p>
 		</div>
@@ -48,7 +60,12 @@ const articles = [
 				data-reveal
 			>
 				<div class="valley-blog__image-wrap">
-					<img class="valley-blog__image" :src="article.image" :alt="article.title" loading="lazy" />
+					<img
+						class="valley-blog__image"
+						:src="article.image"
+						:alt="article.title"
+						loading="lazy"
+					>
 				</div>
 				<div class="valley-blog__meta">
 					<span>{{ article.category }}</span>
@@ -58,7 +75,12 @@ const articles = [
 				<span class="valley-blog__read">Читать статью ↗</span>
 			</a>
 		</div>
-		<a class="valley-blog__all" href="https://web-valley.ru/articles" target="_blank" rel="noopener noreferrer">
+		<a
+			class="valley-blog__all"
+			href="https://web-valley.ru/articles"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
 			Читать все статьи
 			<span>↗</span>
 		</a>
@@ -69,7 +91,7 @@ const articles = [
 .valley-blog {
 	padding: 110px 5%;
 	background: #1a1c19;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 70px 6%;
 	}
 }
@@ -91,7 +113,7 @@ const articles = [
 	font-size: 20px;
 	line-height: 1.45;
 	color: #c1c3ba;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		margin-left: 0;
 	}
 }
@@ -99,7 +121,7 @@ const articles = [
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 28px;
-	@media (max-width: 850px) {
+	@media (max-width: $sm) {
 		grid-template-columns: 1fr;
 		gap: 50px;
 	}
@@ -113,7 +135,7 @@ const articles = [
 		transform: scale(1.035);
 	}
 	&:hover .valley-blog__name {
-		color: var(--valley-yellow);
+		color: var(--brand);
 	}
 }
 .valley-blog__image-wrap {
@@ -150,7 +172,7 @@ const articles = [
 	margin-top: auto;
 	font-size: 12px;
 	text-transform: uppercase;
-	color: var(--valley-yellow);
+	color: var(--brand);
 }
 .valley-blog__all {
 	margin-top: 65px;
@@ -163,7 +185,7 @@ const articles = [
 	font-size: 13px;
 	text-transform: uppercase;
 	&:hover {
-		color: var(--valley-yellow);
+		color: var(--brand);
 	}
 }
 </style>

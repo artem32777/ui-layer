@@ -8,7 +8,10 @@ const mailReady = ref(false)
 </script>
 
 <template>
-	<section id="contact" class="valley__section valley__contact">
+	<section
+		id="contact"
+		class="valley__section valley__contact"
+	>
 		<div class="valley__section-top">
 			<span class="valley__label">06 / Начнём с разговора</span>
 			<span class="valley__contact-status">
@@ -20,24 +23,41 @@ const mailReady = ref(false)
 			<div>
 				<h2 class="valley__contact-heading">
 					Есть идея?
-					<br />
+					<br>
 					<span class="valley__accent">
 						Давайте
-						<br />
+						<br>
 						создадим.
 					</span>
 					<span class="valley__contact-arrow">↗</span>
 				</h2>
 				<p class="valley__contact-copy">
 					Расскажите о своей задаче.
-					<br />
+					<br>
 					А мы предложим, как её решить.
 				</p>
 			</div>
-			<form class="valley__form" @submit.prevent="mailReady = true">
-				<label class="valley__field-label" for="valley-name">Как вас зовут?</label>
-				<input id="valley-name" v-model="name" class="valley__input" name="name" autocomplete="name" placeholder="Ваше имя" required />
-				<label class="valley__field-label" for="valley-email">Куда написать?</label>
+			<form
+				class="valley__form"
+				@submit.prevent="mailReady = true"
+			>
+				<label
+					class="valley__field-label"
+					for="valley-name"
+				>Как вас зовут?</label>
+				<input
+					id="valley-name"
+					v-model="name"
+					class="valley__input"
+					name="name"
+					autocomplete="name"
+					placeholder="Ваше имя"
+					required
+				>
+				<label
+					class="valley__field-label"
+					for="valley-email"
+				>Куда написать?</label>
 				<input
 					id="valley-email"
 					v-model="email"
@@ -47,8 +67,11 @@ const mailReady = ref(false)
 					autocomplete="email"
 					placeholder="Электронная почта"
 					required
-				/>
-				<label class="valley__field-label" for="valley-message">Пара слов о проекте</label>
+				>
+				<label
+					class="valley__field-label"
+					for="valley-message"
+				>Пара слов о проекте</label>
 				<textarea
 					id="valley-message"
 					v-model="message"
@@ -57,16 +80,23 @@ const mailReady = ref(false)
 					placeholder="Что хотите сделать?"
 					required
 				/>
-				<button class="valley__submit" type="submit">
+				<button
+					class="valley__submit"
+					type="submit"
+				>
 					Подготовить письмо
 					<span>↗</span>
 				</button>
 				<p class="valley__form-note">
 					Форма подготовит письмо в вашей почте.
-					<br />
+					<br>
 					Данные не отправляются на сервер.
 				</p>
-				<div v-if="mailReady" class="valley__form-result" role="status">
+				<div
+					v-if="mailReady"
+					class="valley__form-result"
+					role="status"
+				>
 					Всё готово. Откройте письмо, проверьте данные и отправьте его из своей почты.
 					<a
 						class="valley__mail-link"
@@ -84,17 +114,17 @@ const mailReady = ref(false)
 .valley__status-dot {
 	width: 6px;
 	height: 6px;
-	background: var(--valley-yellow);
+	background: var(--brand);
 	border-radius: 50%;
 	flex-shrink: 0;
 }
 .valley__accent {
-	color: var(--valley-yellow);
+	color: var(--brand);
 }
 .valley__section {
 	padding: 105px 5%;
 	scroll-margin-top: calc(var(--valley-header-height) + 30px);
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 68px 6%;
 	}
 }
@@ -116,7 +146,7 @@ const mailReady = ref(false)
 	gap: 8px;
 	align-items: center;
 	font-size: 12px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		display: none;
 	}
 }
@@ -124,7 +154,7 @@ const mailReady = ref(false)
 	display: grid;
 	grid-template-columns: 1.15fr 1fr;
 	gap: 100px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		grid-template-columns: 1fr;
 		gap: 45px;
 	}
@@ -136,7 +166,7 @@ const mailReady = ref(false)
 	letter-spacing: -4px;
 	position: relative;
 	margin: 0 0 32px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 63px;
 		letter-spacing: -2px;
 	}
@@ -147,8 +177,8 @@ const mailReady = ref(false)
 	bottom: 0;
 	font-size: 115px;
 	font-weight: 300;
-	color: var(--valley-yellow);
-	@media (max-width: 1100px) {
+	color: var(--brand);
+	@media (max-width: $md) {
 		display: none;
 	}
 }
@@ -183,7 +213,7 @@ const mailReady = ref(false)
 		color: #7f8775;
 	}
 	&:focus {
-		border-bottom-color: var(--valley-yellow);
+		border-bottom-color: var(--brand);
 	}
 }
 .valley__input--textarea {
@@ -195,8 +225,8 @@ const mailReady = ref(false)
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: var(--valley-yellow);
-	border: 1px solid var(--valley-yellow);
+	background: var(--brand);
+	border: 1px solid var(--brand);
 	color: #111211;
 	font-family: inherit;
 	font-size: 18px;
@@ -207,7 +237,7 @@ const mailReady = ref(false)
 		color 0.2s;
 	&:hover {
 		background: transparent;
-		color: var(--valley-yellow);
+		color: var(--brand);
 	}
 	&:focus-visible {
 		outline: 2px solid #fff;
@@ -227,7 +257,7 @@ const mailReady = ref(false)
 	color: #d5ddca;
 }
 .valley__mail-link {
-	color: var(--valley-yellow);
+	color: var(--brand);
 	display: block;
 	margin-top: 8px;
 }

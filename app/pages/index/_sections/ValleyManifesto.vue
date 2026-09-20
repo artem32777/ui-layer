@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { navigateOnPage } from '#layers/ui/app/modules/animation/utils/pageNavigation'
+</script>
 
 <template>
 	<section class="valley-manifesto">
@@ -8,17 +10,31 @@
 			src="https://static.tildacdn.com/tild6536-3838-4230-b638-363763643063/web-valley-mountains.png"
 			alt=""
 			loading="lazy"
-		/>
-		<div class="valley-manifesto__content">
-			<span class="valley-manifesto__label" data-reveal>Больше, чем просто сайт</span>
-			<h2 class="valley-manifesto__title" data-reveal>
+		>
+		<div
+			class="valley-manifesto__content"
+		>
+			<span
+				class="valley-manifesto__label"
+			>Больше, чем просто сайт</span>
+			<h2
+				class="valley-manifesto__title"
+			>
 				Не продаём сайт,
-				<br />
+				<br>
 				а продаём
 				<span class="valley-manifesto__accent">экспертность.</span>
 			</h2>
-			<p class="valley-manifesto__copy" data-reveal>Упаковку бизнеса, которая будет работать и приносить результат.</p>
-			<a class="valley-manifesto__link" data-reveal href="#projects">
+			<p
+				class="valley-manifesto__copy"
+			>
+				Упаковку бизнеса, которая будет работать и приносить результат.
+			</p>
+			<a
+				class="valley-manifesto__link"
+				href="#projects"
+				@click="navigateOnPage('#projects', $event)"
+			>
 				Посмотрите проекты
 				<span>↗</span>
 			</a>
@@ -30,12 +46,16 @@
 .valley-manifesto {
 	position: relative;
 	overflow: hidden;
-	min-height: 760px;
+	height: 100svh;
 	display: flex;
 	align-items: center;
 	background: #242725;
-	@media (max-width: 760px) {
-		min-height: 600px;
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: rgb(0 0 0 / 64%);
+		pointer-events: none;
 	}
 }
 .valley-manifesto__mountain {
@@ -44,17 +64,19 @@
 	height: 125%;
 	top: -12%;
 	object-fit: cover;
-	filter: brightness(0.36);
+	will-change: transform;
 }
 .valley-manifesto__content {
 	position: relative;
+	z-index: 1;
 	width: 100%;
 	padding: 100px 5%;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 75px 6%;
 	}
 }
 .valley-manifesto__label {
+	display: inline-block;
 	font-size: 12px;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
@@ -67,14 +89,14 @@
 	letter-spacing: -0.055em;
 }
 .valley-manifesto__accent {
-	color: var(--valley-yellow);
+	color: var(--brand);
 }
 .valley-manifesto__copy {
 	max-width: 520px;
 	margin: 0 0 48px auto;
 	font-size: 24px;
 	line-height: 1.35;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		margin-left: 0;
 		font-size: 20px;
 	}
@@ -93,9 +115,9 @@
 	text-transform: uppercase;
 	transition: color 0.2s;
 	&:hover {
-		color: var(--valley-yellow);
+		color: var(--brand);
 	}
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		margin-left: 0;
 	}
 }

@@ -25,9 +25,15 @@ const reviews = [
 </script>
 
 <template>
-	<section id="reviews" class="valley-reviews">
+	<section
+		id="reviews"
+		class="valley-reviews"
+	>
 		<div class="valley-reviews__top">
-			<span class="valley-reviews__label" data-reveal>Отзывы клиентов</span>
+			<span
+				class="valley-reviews__label"
+				data-reveal
+			>Отзывы клиентов</span>
 			<a
 				class="valley-reviews__all"
 				href="https://web-valley.ru/o-studii/otzyvy-o-webvalley-studio"
@@ -37,17 +43,40 @@ const reviews = [
 				Читать все отзывы ↗
 			</a>
 		</div>
-		<h2 class="valley-reviews__title" data-reveal>
+		<h2
+			class="valley-reviews__title"
+			data-reveal
+		>
 			Что о нас говорят
-			<br />
+			<br>
 			после сотрудничества
 		</h2>
-		<div class="valley-reviews__review" aria-live="polite" data-reveal>
-			<span class="valley-reviews__quote" aria-hidden="true">“</span>
-			<Transition name="valley-review" mode="out-in">
-				<div :key="activeReview" class="valley-reviews__content">
-					<p class="valley-reviews__text">{{ reviews[activeReview]?.text }}</p>
-					<a class="valley-reviews__author" :href="reviews[activeReview]?.href" target="_blank" rel="noopener noreferrer">
+		<div
+			class="valley-reviews__review"
+			aria-live="polite"
+			data-reveal
+		>
+			<span
+				class="valley-reviews__quote"
+				aria-hidden="true"
+			>“</span>
+			<Transition
+				name="valley-review"
+				mode="out-in"
+			>
+				<div
+					:key="activeReview"
+					class="valley-reviews__content"
+				>
+					<p class="valley-reviews__text">
+						{{ reviews[activeReview]?.text }}
+					</p>
+					<a
+						class="valley-reviews__author"
+						:href="reviews[activeReview]?.href"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						{{ reviews[activeReview]?.name }} ↗
 					</a>
 					<span class="valley-reviews__role">{{ reviews[activeReview]?.role }}</span>
@@ -65,7 +94,11 @@ const reviews = [
 					←
 				</button>
 				<span class="valley-reviews__count">{{ activeReview + 1 }} / {{ reviews.length }}</span>
-				<button class="valley-reviews__button" aria-label="Следующий отзыв" @click="activeReview = (activeReview + 1) % reviews.length">
+				<button
+					class="valley-reviews__button"
+					aria-label="Следующий отзыв"
+					@click="activeReview = (activeReview + 1) % reviews.length"
+				>
 					→
 				</button>
 			</div>
@@ -76,7 +109,7 @@ const reviews = [
 <style scoped lang="scss">
 .valley-reviews {
 	padding: 110px 5%;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 70px 6%;
 	}
 }
@@ -97,7 +130,7 @@ const reviews = [
 	text-decoration: none;
 	text-transform: uppercase;
 	&:hover {
-		color: var(--valley-yellow);
+		color: var(--brand);
 	}
 }
 .valley-reviews__title {
@@ -111,7 +144,7 @@ const reviews = [
 	display: grid;
 	grid-template-columns: 1fr 3fr;
 	min-height: 320px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		grid-template-columns: 1fr;
 		min-height: 380px;
 	}
@@ -119,8 +152,8 @@ const reviews = [
 .valley-reviews__quote {
 	font-size: 200px;
 	line-height: 1;
-	color: var(--valley-yellow);
-	@media (max-width: 760px) {
+	color: var(--brand);
+	@media (max-width: $sm) {
 		font-size: 90px;
 		height: 60px;
 	}
@@ -133,7 +166,7 @@ const reviews = [
 }
 .valley-reviews__author {
 	display: block;
-	color: var(--valley-yellow);
+	color: var(--brand);
 	font-size: 18px;
 	text-decoration: none;
 	margin-bottom: 7px;
@@ -153,7 +186,7 @@ const reviews = [
 	justify-content: space-between;
 	align-items: center;
 	gap: 25px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		flex-direction: column-reverse;
 		align-items: flex-start;
 	}
@@ -181,11 +214,11 @@ const reviews = [
 		background 0.2s,
 		color 0.2s;
 	&:hover {
-		background: var(--valley-yellow);
+		background: var(--brand);
 		color: #111211;
 	}
 	&:focus-visible {
-		outline: 2px solid var(--valley-yellow);
+		outline: 2px solid var(--brand);
 		outline-offset: 4px;
 	}
 }

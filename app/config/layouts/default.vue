@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import Footer from '../layouts-parts/footer/Footer.vue'
-import type { HeaderProps } from '../layouts-parts/header/Header.types'
 import Header from '../layouts-parts/header/Header.vue'
-import PageBlocks, { type PageBlock } from '~/common/components/page-blocks/PageBlocks.vue'
 import type { SerializableHead } from 'unhead/types'
 import { RequestNames } from '~/config/constants'
 import { computed } from 'vue'
@@ -12,9 +10,6 @@ import { useApiFetch } from '~/common/composables/useApiFetch'
 
 interface PageData {
 	seo?: SerializableHead
-	header?: HeaderProps
-	footer?: PageBlock
-	blocks?: PageBlock[]
 }
 
 const route = useRoute()
@@ -29,33 +24,16 @@ useHead(() => data.value?.seo ?? {})
 </script>
 
 <template>
-	<slot v-if="route.path === '/'" />
-	<div v-else>
-		<Header
-			v-if="data?.header"
-			:logo-src="data.header.logoSrc"
-			:menu-items="data.header.menuItems"
-		/>
-		<main class="layout">
-			<PageBlocks
-				v-if="data && data.blocks"
-				:blocks="data.blocks"
-			/>
-			<slot />
-		</main>
+	<div class="layout">
+		<Header />
+		<slot />
 		<Footer />
 	</div>
 </template>
 
 <style scoped lang="scss">
 .layout {
-  @include dvh(min-height, 100);
-  width: 100%;
-  padding-top: 20px;
-
-  > * {
-    max-width: 1900px;
-    margin: 0 auto;
-  }
+	@include dvh(min-height, 100);
+	width: 100%;
 }
 </style>

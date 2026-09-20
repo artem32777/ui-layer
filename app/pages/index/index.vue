@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useHead, useNuxtApp } from '#imports'
 import { onMounted, onBeforeUnmount, useTemplateRef } from 'vue'
-import type { ScrollSmoother } from 'gsap/ScrollSmoother'
+import { useAnimations } from '#layers/ui/app/modules/animation/composables/useAnimations'
 import { useEventListener } from '@vueuse/core'
-import HomeHeader from './_components/HomeHeader.vue'
-import HomeFooter from './_components/HomeFooter.vue'
 import HomeHero from './_sections/HomeHero.vue'
 import HomeProjects from './_sections/HomeProjects.vue'
 import HomeStudio from './_sections/HomeStudio.vue'
@@ -23,138 +21,131 @@ useHead({ title: 'WebValley Studio — сайты, которые работаю
 const page = useTemplateRef<HTMLDivElement>('page')
 const wrapper = useTemplateRef<HTMLDivElement>('wrapper')
 const content = useTemplateRef<HTMLDivElement>('content')
-const { $gsap, $ScrollTrigger } = useNuxtApp()
-let animations: ReturnType<typeof $gsap.matchMedia> | undefined
-let smoother: ScrollSmoother | undefined
+const { $gsap, $ScrollTrigger, $ScrollSmoother } = useNuxtApp()
+let smoother: ReturnType<typeof $ScrollSmoother.create> | undefined
 useEventListener(page, 'toggle', () => $ScrollTrigger.refresh(), {
 	capture: true,
 })
 
-useEventListener(page, 'click', (event) => {
-	if (!smoother || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-	const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
-	if (!link) return
-	const target = link.hash ? document.getElementById(link.hash.slice(1)) : 0
-	if (target === null) return
-	event.preventDefault()
-	smoother.scrollTo(target, true, `top ${page.value?.querySelector('header')?.offsetHeight ?? 0}px`)
-	window.history.replaceState(null, '', link.hash || window.location.pathname + window.location.search)
+onMounted(() => {
+	// if (!wrapper.value || !content.value) return
+	// // $ScrollTrigger.config({ ignoreMobileResize: true })
+	// smoother = $ScrollSmoother.create({ wrapper: wrapper.value, content: content.value, smooth: 1, smoothTouch: 0.1 })
 })
 
-onMounted(async () => {
-	const { ScrollSmoother } = await import('gsap/ScrollSmoother')
-	if (!page.value) return
-	$gsap.registerPlugin(ScrollSmoother)
-	animations = $gsap.matchMedia()
-	animations.add(
-		'(prefers-reduced-motion: no-preference)',
-		() => {
-			smoother = ScrollSmoother.create({ wrapper: wrapper.value!, content: content.value!, smooth: 1.2, smoothTouch: 0.15 })
-			$gsap.from('.valley__eyebrow, .valley__hero-title, .valley__hero-bottom, .valley__scroll', {
-				y: 25,
-				autoAlpha: 0,
-				duration: 1.8,
-				stagger: 0.2,
-				ease: 'power2.out',
-			})
+useAnimations(() => {
+	$gsap
+		.timeline({
+			defaults: { ease: 'none', lazy: false, duration: 1 },
+			scrollTrigger: {
+				trigger: '.valley-manifesto',
+				start: 'top top',
+				end: () => `+=${window.innerHeight * 4.8}`,
+				pin: true,
+				scrub: true,
+				anticipatePin: 1,
+				invalidateOnRefresh: true,
+			},
+		})
+		.fromTo(
+			'.valley-manifesto__label, .valley-manifesto__title, .valley-manifesto__copy, .valley-manifesto__link',
+			{ y: (_index: number, target: HTMLElement) => window.innerHeight - target.offsetTop - (target.parentElement?.offsetTop ?? 0) },
+			{
+				y: (_index: number, target: HTMLElement) => -target.offsetTop - (target.parentElement?.offsetTop ?? 0) - target.offsetHeight - 1,
+				duration: (index: number) => 1.8 + Math.min(index, 2) * 0.4,
+				stagger: (index: number) => [0, 0.2, 0.8, 1.1][index] ?? 0,
+			},
+			0.4,
+		)
+		.to('.valley-manifesto', { opacity: 0, duration: 0.6 }, 4.2)
 
-			page.value?.querySelectorAll('section:not(.valley__hero)').forEach((section) => {
-				const elements = section.querySelectorAll(
-					'.valley__section-top, .valley__heading-row, .valley__heading, .valley__studio-heading, .valley__studio-text, .valley__project, .valley__stat, .valley__service, .valley__step, .valley__question, .valley__contact-grid, [data-reveal]',
-				)
-				elements.forEach((element, index) => {
-					if (element.parentElement?.closest('.valley__heading-row, [data-reveal]')) return
-					$gsap.from(element, {
-						y: 30,
-						autoAlpha: 0,
-						duration: 1.4,
-						delay: (index % 4) * 0.12,
-						ease: 'power2.out',
-						scrollTrigger: { trigger: element, start: 'top 88%', once: true },
-					})
-				})
-			})
+	const revealElements = [
+		...(page.value?.querySelectorAll(
+			'.valley__section-top, .valley__heading-row, .valley__heading, .valley__studio-heading, .valley__studio-text, .valley__project, .valley__stat, .valley__service, .valley__step, .valley__question, .valley__contact-grid, [data-reveal]',
+		) ?? []),
+	].filter((element) => !element.parentElement?.closest('.valley__heading-row, [data-reveal]'))
+	revealElements.forEach((element) => {
+		$gsap.from(element, {
+			y: 30,
+			autoAlpha: 0,
+			duration: 1.1,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: element,
+				start: 'top 88%',
+				toggleActions: 'play reverse play reverse',
+			},
+		})
+	})
 
-			$gsap.fromTo(
-				'.valley__hero-video',
-				{ yPercent: -5, scale: 1.15 },
-				{
-					yPercent: 5,
-					ease: 'none',
-					scrollTrigger: { trigger: '.valley__hero', start: 'top top', end: 'bottom top', scrub: true },
-				},
-			)
-			$gsap.fromTo(
-				'.valley-manifesto__mountain',
-				{ yPercent: -8 },
-				{
-					yPercent: 8,
-					ease: 'none',
-					scrollTrigger: { trigger: '.valley-manifesto', start: 'top bottom', end: 'bottom top', scrub: true },
-				},
-			)
-			$gsap.to('.valley-manifesto__content', {
-				yPercent: -8,
-				ease: 'none',
-				scrollTrigger: { trigger: '.valley-manifesto', start: 'top bottom', end: 'bottom top', scrub: true },
-			})
-			$gsap
-				.timeline({
-					scrollTrigger: {
-						trigger: '.valley-reasons',
-						start: () => `top ${page.value?.querySelector('header')?.offsetHeight ?? 0}px`,
-						end: '+=800',
-						scrub: true,
-						pin: '.valley-reasons__background',
-						pinSpacing: false,
-					},
-				})
-				.to('.valley-reasons__mountain', { scale: 1.01, duration: 200, ease: 'none' })
-				.to('.valley-reasons__mountain', { scale: 1.05, opacity: 0, duration: 600, ease: 'none' })
+	$gsap
+		.timeline({
+			defaults: { ease: 'none', lazy: false },
+			scrollTrigger: {
+				trigger: '.valley-reasons',
+				end: '+=800',
+				scrub: true,
+				pin: '.valley-reasons__background',
+				pinSpacing: false,
+				anticipatePin: 1,
+			},
+		})
+		.to('.valley-reasons__mountain', { scale: 1.01, duration: 200 })
+		.to('.valley-reasons__mountain', { scale: 1.05, duration: 600 })
+		.to('.valley-reasons__background', { opacity: 0, duration: 600 }, '<')
 
-			page.value?.querySelectorAll('[data-line]').forEach((element) => {
-				$gsap.from(element, {
-					scaleX: 0,
-					transformOrigin: 'left center',
-					duration: 1.8,
-					ease: 'power2.out',
-					scrollTrigger: { trigger: element, start: 'top 90%', once: true },
-				})
-			})
+	page.value?.querySelectorAll('[data-line]').forEach((element) => {
+		$gsap.from(element, {
+			scaleX: 0,
+			transformOrigin: 'left center',
+			duration: 1.8,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: element,
+				start: 'top 90%',
+				toggleActions: 'play reverse play reverse',
+			},
+		})
+	})
 
-			$ScrollTrigger.refresh()
-			return () => {
-				smoother?.kill()
-				smoother = undefined
-			}
-		},
-		page.value ?? undefined,
-	)
+	$ScrollTrigger.refresh()
+}, page)
+
+onBeforeUnmount(() => {
+	smoother?.kill()
+	smoother = undefined
 })
-
-onBeforeUnmount(() => animations?.revert())
 </script>
 
 <template>
-	<div ref="page" class="valley">
-		<HomeHeader />
-		<div ref="wrapper" class="valley__smooth-wrapper">
-			<div ref="content" class="valley__smooth-content">
+	<div
+		ref="page"
+		class="valley"
+	>
+		<div
+			ref="wrapper"
+			class="valley__smooth-wrapper"
+		>
+			<div
+				ref="content"
+				class="valley__smooth-content"
+			>
 				<main class="valley__main">
 					<HomeHero />
-					<HomeStudio />
-					<HomeProjects />
-					<ValleyManifesto />
-					<HomeServices />
-					<ValleyReasons />
-					<HomeProcess />
-					<ValleyReviews />
-					<ValleyBlog />
-					<ValleyAcademy />
-					<HomeFaq />
-					<HomeContact />
+					<div class="valley__rest">
+						<HomeStudio />
+						<HomeProjects />
+						<ValleyManifesto />
+						<HomeServices />
+						<ValleyReasons />
+						<HomeProcess />
+						<ValleyReviews />
+						<ValleyBlog />
+						<ValleyAcademy />
+						<HomeFaq />
+						<HomeContact />
+					</div>
 				</main>
-				<HomeFooter />
 			</div>
 		</div>
 	</div>
@@ -162,26 +153,25 @@ onBeforeUnmount(() => animations?.revert())
 
 <style scoped lang="scss">
 .valley {
-	--valley-yellow: #f3ff00;
-	--valley-header-height: 94px;
 	width: 100%;
 	min-height: 100svh;
 	background: #111211;
 	color: #f7f7f0;
-	font-family: 'PtRoot', sans-serif;
-	@media (max-width: 760px) {
-		--valley-header-height: 78px;
-	}
 }
 .valley__main {
 	width: 100%;
-	overflow: clip;
 }
 .valley__smooth-wrapper {
 	width: 100%;
+	z-index: $z-main;
 }
 .valley__smooth-content {
 	padding-top: var(--valley-header-height);
+	background: #111211;
+}
+.valley__rest {
+	position: relative;
+	z-index: $z-main;
 	background: #111211;
 }
 </style>

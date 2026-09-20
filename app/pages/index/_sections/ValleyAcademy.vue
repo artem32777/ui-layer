@@ -1,25 +1,52 @@
 <script setup lang="ts"></script>
 
 <template>
-	<section id="academy" class="valley-academy">
+	<section
+		id="academy"
+		class="valley-academy"
+	>
 		<div class="valley-academy__heading">
-			<span class="valley-academy__label" data-reveal>WebValley Academy</span>
-			<h2 class="valley-academy__title" data-reveal>
+			<span
+				class="valley-academy__label"
+				data-reveal
+			>WebValley Academy</span>
+			<h2
+				class="valley-academy__title"
+				data-reveal
+			>
 				Онлайн-обучение
-				<br />
+				<br>
 				<span class="valley-academy__accent">Digital-профессиям</span>
 			</h2>
 		</div>
 		<div class="valley-academy__body">
-			<video class="valley-academy__video" controls playsinline preload="metadata" poster="https://static.tildacdn.com/tild6332-3532-4832-b763-393330396163/Group_1_2.jpg" aria-label="Знакомство с WebValley Academy">
-				<source src="https://attachment.web-valley.ru/academy/INTRO_WVA_NEW.mp4" type="video/mp4" />
+			<video
+				class="valley-academy__video"
+				controls
+				playsinline
+				preload="metadata"
+				poster="https://static.tildacdn.com/tild6332-3532-4832-b763-393330396163/Group_1_2.jpg"
+				aria-label="Знакомство с WebValley Academy"
+			>
+				<source
+					src="https://attachment.web-valley.ru/academy/INTRO_WVA_NEW.mp4"
+					type="video/mp4"
+				>
 			</video>
-			<div class="valley-academy__info" data-reveal>
+			<div
+				class="valley-academy__info"
+				data-reveal
+			>
 				<p class="valley-academy__copy">
 					Объединили опыт студии и работы на фрилансе в онлайн-школу для дизайнеров. Учим создавать сайты, работать с клиентами и осваивать
 					Digital-профессии на студийном уровне.
 				</p>
-				<a class="valley-academy__link" href="https://web-valley.ru/academy" target="_blank" rel="noopener noreferrer">
+				<a
+					class="valley-academy__link"
+					href="https://web-valley.ru/academy"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					Подробнее о школе
 					<span>↗</span>
 				</a>
@@ -31,7 +58,7 @@
 <style scoped lang="scss">
 .valley-academy {
 	padding: 110px 5%;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 70px 6%;
 	}
 }
@@ -49,14 +76,14 @@
 	margin: 35px 0 65px;
 }
 .valley-academy__accent {
-	color: var(--valley-yellow);
+	color: var(--brand);
 }
 .valley-academy__body {
 	display: grid;
 	grid-template-columns: 1.5fr 1fr;
 	gap: 7%;
 	align-items: center;
-	@media (max-width: 900px) {
+	@media (max-width: $md) {
 		grid-template-columns: 1fr;
 		gap: 35px;
 	}
@@ -72,7 +99,7 @@
 	font-size: 22px;
 	line-height: 1.45;
 	margin: 0 0 55px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 19px;
 		margin-bottom: 35px;
 	}
@@ -88,7 +115,7 @@
 	text-decoration: none;
 	transition: color 0.2s;
 	&:hover {
-		color: var(--valley-yellow);
+		color: var(--brand);
 	}
 }
 </style>

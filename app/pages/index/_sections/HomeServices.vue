@@ -1,56 +1,79 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { navigateOnPage } from '#layers/ui/app/modules/animation/utils/pageNavigation'
+</script>
 
 <template>
-	<section id="services" class="valley__section valley__services">
-		<div class="valley__section-top"><span class="valley__label">03 / Что мы делаем</span></div>
+	<section
+		id="services"
+		class="valley__section valley__services"
+	>
+		<div class="valley__section-top">
+			<span class="valley__label">03 / Что мы делаем</span>
+		</div>
 		<div class="valley__heading-row">
 			<h2 class="valley__heading">
 				Всё, что нужно
-				<br />
+				<br>
 				<span class="valley__muted">для роста.</span>
 			</h2>
 			<p class="valley__section-copy">
 				От идеи до запуска.
-				<br />
+				<br>
 				И ещё дальше.
 			</p>
 		</div>
-		<a class="valley__service" href="#contact">
+		<a
+			class="valley__service"
+			href="#contact"
+			@click="navigateOnPage('#contact', $event)"
+		>
 			<span class="valley__service-number">01</span>
 			<h3 class="valley__service-title">Стратегия</h3>
 			<p class="valley__service-copy">
 				Исследуем бизнес и аудиторию.
-				<br />
+				<br>
 				Определяем цели и структуру сайта.
 			</p>
 			<span class="valley__service-arrow">↗</span>
 		</a>
-		<a class="valley__service" href="#contact">
+		<a
+			class="valley__service"
+			href="#contact"
+			@click="navigateOnPage('#contact', $event)"
+		>
 			<span class="valley__service-number">02</span>
 			<h3 class="valley__service-title">Контент</h3>
 			<p class="valley__service-copy">
 				Тексты, фотографии и видео.
-				<br />
+				<br>
 				Рассказываем о вашем бизнесе.
 			</p>
 			<span class="valley__service-arrow">↗</span>
 		</a>
-		<a class="valley__service" href="#contact">
+		<a
+			class="valley__service"
+			href="#contact"
+			@click="navigateOnPage('#contact', $event)"
+		>
 			<span class="valley__service-number">03</span>
 			<h3 class="valley__service-title">Дизайн</h3>
 			<p class="valley__service-copy">
 				UX/UI и визуальная концепция.
-				<br />
+				<br>
 				Ваш характер в каждом пикселе.
 			</p>
 			<span class="valley__service-arrow">↗</span>
 		</a>
-		<a class="valley__service" href="#contact">
+		<a
+			class="valley__service"
+			href="#contact"
+			@click="navigateOnPage('#contact', $event)"
+		>
 			<span class="valley__service-number">04</span>
 			<h3 class="valley__service-title">Технологии</h3>
 			<p class="valley__service-copy">
 				Tilda, индивидуальная разработка
-				<br />
+				<br>
 				и интеграции для ваших задач.
 			</p>
 			<span class="valley__service-arrow">↗</span>
@@ -62,7 +85,7 @@
 .valley__section {
 	padding: 105px 5%;
 	scroll-margin-top: calc(var(--valley-header-height) + 30px);
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		padding: 68px 6%;
 	}
 }
@@ -82,7 +105,7 @@
 	justify-content: space-between;
 	gap: 40px;
 	margin-bottom: 55px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		display: block;
 		margin-bottom: 35px;
 	}
@@ -93,7 +116,7 @@
 	line-height: 1.08;
 	letter-spacing: -2.7px;
 	margin: 0;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 42px;
 		letter-spacing: -1.6px;
 	}
@@ -107,7 +130,7 @@
 	color: #bcbfb6;
 	max-width: 380px;
 	margin: 0 0 5px;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		margin-top: 25px;
 		font-size: 16px;
 	}
@@ -126,12 +149,12 @@
 		border-bottom: 1px solid #383b32;
 	}
 	&:hover {
-		color: var(--valley-yellow);
+		color: var(--brand);
 		.valley__service-arrow {
 			transform: translate(3px, -3px);
 		}
 	}
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		grid-template-columns: 28px 1fr 25px;
 		gap: 12px;
 		padding: 27px 0;
@@ -146,7 +169,7 @@
 	font-weight: 450;
 	letter-spacing: -1.2px;
 	margin: 0;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		font-size: 28px;
 	}
 }
@@ -155,7 +178,7 @@
 	color: #b1b6a7;
 	line-height: 1.55;
 	margin: 0;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		grid-column: 2;
 		font-size: 13px;
 		margin-top: 6px;
@@ -164,7 +187,7 @@
 .valley__service-arrow {
 	font-size: 40px;
 	transition: transform 0.2s;
-	@media (max-width: 760px) {
+	@media (max-width: $sm) {
 		grid-column: 3;
 		grid-row: 1;
 		font-size: 28px;

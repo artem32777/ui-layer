@@ -1,0 +1,5 @@
+@use "./scrollbar" as *;
+
+@mixin scroll-compensation {
+  padding-inline-end: $scrollbar-width;
+}
